@@ -22,8 +22,9 @@ await press(page, '#lobby-go');
 await page.waitForSelector('#hud:not([hidden])', { state: 'attached', timeout: 60000 });
 await page.waitForFunction(() => globalThis.stem?.me?.name);
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+const mode = process.argv[2] || 'all';
 // islands, by day
-for (const isl of ['force', 'life', 'earth', 'maker', 'data']) {
+for (const isl of (mode === 'stages' ? [] : ['force', 'life', 'earth', 'maker', 'data'])) {
   await page.evaluate((id) => globalThis.stem.travel(id), isl);
   await page.waitForFunction((id) => globalThis.stem.world.current === id, isl);
   await wait(2500);
@@ -31,12 +32,13 @@ for (const isl of ['force', 'life', 'earth', 'maker', 'data']) {
   console.log('shot', isl);
 }
 // one station per island, after the prediction so the scene is running
-const stations = [['force', 'swing-frame', 'pendulum'], ['force', 'seesaw', 'lever'], ['life', 'rabbit-meadow', 'meadow'], ['life', 'track', 'heart'], ['earth', 'seismo-house', 'quake'], ['earth', 'weather-tower', 'cloud'], ['maker', 'bridge-yard', 'bridge'], ['maker', 'gear-mill', 'gears'], ['data', 'dice-table', 'dice'], ['data', 'sorting-machine', 'classify']];
+const ALL = [['cosmos', 'phase-hill', 'moon'], ['cosmos', 'launch-pad', 'orbit'], ['cosmos', 'observatory', 'exoplanet'], ['lab', 'dissolving-bench', 'solubility'], ['lab', 'indicator-shelf', 'acid-base'], ['lab', 'burning-corner', 'candle'], ['force', 'swing-frame', 'pendulum'], ['force', 'slide-ramp', 'ramp'], ['force', 'seesaw', 'lever'], ['life', 'rabbit-meadow', 'meadow'], ['life', 'windowsill', 'plant'], ['life', 'track', 'heart'], ['earth', 'seismo-house', 'quake'], ['earth', 'harbour-wall', 'tsunami'], ['earth', 'weather-tower', 'cloud'], ['maker', 'bridge-yard', 'bridge'], ['maker', 'circuit-shed', 'circuit'], ['maker', 'gear-mill', 'gears'], ['data', 'dice-table', 'dice'], ['data', 'counting-pond', 'pond'], ['data', 'sorting-machine', 'classify']];
+const stations = mode === 'stages' ? ALL : ALL.filter(([, , n]) => ['pendulum', 'lever', 'meadow', 'heart', 'quake', 'cloud', 'bridge', 'gears', 'dice', 'classify'].includes(n));
 for (const [isl, sp, name] of stations) {
   if (globalThis.cur !== isl) { await page.evaluate((id) => globalThis.stem.travel(id), isl); await page.waitForFunction((id) => globalThis.stem.world.current === id, isl); globalThis.cur = isl; }
   const en = await page.evaluate((id) => globalThis.stem.world.island.spots.find((s) => s.id === id).en, sp);
   await page.evaluate((id) => globalThis.stem.walkTo(id), sp);
-  await page.waitForFunction((n) => !document.querySelector('#near').hidden && document.querySelector('#interact-text').textContent.includes(n), en, { timeout: 60000 });
+  await page.waitForFunction((n) => !document.querySelector('#near').hidden && document.querySelector('#area').textContent === n, en, { timeout: 60000 });
   await press(page, '#interact');
   await page.waitForSelector('#lab[open]', { state: 'attached', timeout: 60000 });
   await press(page, '#lab-next');

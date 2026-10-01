@@ -293,6 +293,7 @@ export function createPanels({ net, toast, me, onDone = () => {} }) {
     stage?.start();
   }
   $('#lab-close').onclick = () => dlg.close();
+  dlg.addEventListener('close', () => stage?.stop()); // the stage sleeps while the panel is shut
   $('#lab-replay').onclick = () => stage?.replay();
   dlg.addEventListener('close', () => stage?.stop());
   $('#lab-lang').onclick = toggleLang; // the HUD is inert while the modal is open

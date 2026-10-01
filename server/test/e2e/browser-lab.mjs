@@ -14,6 +14,9 @@ const url = `http://localhost:${PORT}/`;
 let fails = 0;
 const ok = (cond, msg) => { console.log(`${cond ? 'PASS' : 'FAIL'} ${msg}`); if (!cond) fails++; };
 const press = (page, sel) => page.evaluate((s) => { const el = document.querySelector(s); if (!el) throw new Error(`no ${s}`); el.click(); }, sel);
+// Real typing waits for the element to paint, which a WebGL stage inside a dialog can
+// stall for seconds on a software renderer; set the value in the page instead.
+const type = (page, sel, value) => page.evaluate(([s, v]) => { const el = document.querySelector(s); if (!el) throw new Error(`no ${s}`); el.value = v; el.dispatchEvent(new Event('input', { bubbles: true })); el.dispatchEvent(new Event('change', { bubbles: true })); }, [sel, String(value)]);
 
 const server = spawn(process.execPath, ['src/index.js'], { cwd: path.resolve(here, '../..'), env: { ...process.env, PORT: String(PORT), TEACHER_KEY: 'e2e-teacher-key-123', DATA_DIR: mkdtempSync(path.join(tmpdir(), 'stem-e2e-')) }, stdio: ['ignore', 'pipe', 'pipe'] });
 server.stderr.on('data', (d) => process.stderr.write(d));
@@ -62,8 +65,8 @@ try {
   const period = await a.evaluate(() => Number(document.querySelector('#lab-readout').textContent.match(/orbit:\s*([\d.]+)/)?.[1]));
   ok(period > 85 && period < 100, `period shown ${period} min`);
   await press(a, '#lab-next'); // measure
-  await a.selectOption('[data-m=outcome]', 'orbit');
-  await a.fill('[data-m=period]', String(period));
+  await type(a, '[data-m=outcome]', 'orbit');
+  await type(a, '[data-m=period]', period);
   await press(a, '#measure-send');
   await a.waitForSelector('#lab-measure .verdict.ok', { state: 'attached', timeout: 60000 });
   ok(true, 'measurement matched the server');
@@ -74,7 +77,7 @@ try {
   const n = await b.evaluate(() => { const c = document.querySelector('#class-canvas'); return c && c.width > 0; });
   ok(n, 'class plot drawn for the second child');
   await press(a, '#lab-next'); // explain
-  await a.fill('#explain-text', 'Gravity pulls it down and it falls but the ground curves away so it goes around');
+  await type(a, '#explain-text', 'Gravity pulls it down and it falls but the ground curves away so it goes around');
   await press(a, '#explain-send');
   await a.waitForSelector('.aims li.met', { state: 'attached', timeout: 60000 });
   const met = await a.$$eval('.aims li.met', (els) => els.length);
@@ -105,7 +108,7 @@ try {
   await a.$eval('#lab-params input[data-param=grams]', (el) => { el.value = '60'; el.dispatchEvent(new Event('input', { bubbles: true })); });
   await a.$eval('#lab-params input[data-param=tempC]', (el) => { el.value = '40'; el.dispatchEvent(new Event('input', { bubbles: true })); });
   await press(a, '#lab-next');
-  await a.fill('#predict-number', '36');
+  await type(a, '#predict-number', '36');
   await press(a, '#predict-lock');
   await a.waitForSelector('#lab-readout .verdict', { state: 'attached', timeout: 60000 });
   ok((await a.textContent('#lab-readout')).includes('36.2'), 'alum at 40°C: 36.2 g left, prediction within tolerance');

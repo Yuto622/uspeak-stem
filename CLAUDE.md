@@ -17,7 +17,8 @@
 | `client/islands-build.js` | 7つの島の `build` 関数（島ごとに建物と道具）と `animateIslands`（月・ふりこ・シーソー・歯車・雲が動く） |
 | `client/world-clock.js` | 世界の時計。英語版と同じ 705 秒の1日。`phaseAt()` は壁時計の純粋関数（サーバー不要で全員同じ空） |
 | `client/islands.json` | 島のデータ（英語版の `school.json` と同じ形）。座標の定義元 |
-| `client/stage.js` | **実験の 3D の舞台。** 実験（`sim`）ごとに builder が1つ。`show({exp, params, result})` で建て直す。結果は計算しない（描くだけ）。最初の6本はここ、残り15本は `stage-more.js`（`moreBuilders`） |
+| `client/stage.js` | **実験の 3D の舞台。** 実験（`sim`）ごとに builder が1つ。`show({exp, params, result})` で建て直す。結果は計算しない（描くだけ）。最初の6本はここ、残り15本は `stage-more.js`（`moreBuilders`）。影・ACES・ビネット・入場ズーム・放置時のゆっくりした首ふりは `createStage` が持つ |
+| `client/stage-look.js` | **舞台の見た目の部品。** 空のドーム（`dome`）、光だまりのある床（`ground`）、影つきの3灯（`studioLights`）、グロー（`glow`）、漂う粒（`motes`）、噴き出す粒（`emitter`）、手描きテクスチャ（木・石・惑星・クレーター・太陽・サイコロ）、角丸の箱・歯車・ハート・チューブ、木・丘・太陽。`THEMES.space/lab/sky/night` で1行で雰囲気が決まる。`anim(scene, fn)` に登録した関数は毎フレーム呼ばれる |
 | `client/app.js` / `panels.js` / `draw.js` / `i18n.js` / `style.css` | 起動・実験の画面・クラスの散布図と力のレーダー（この2つだけ 2D）・英日・HUD（英語版 `style.css` の値そのまま） |
 
 ## 守ること
@@ -35,6 +36,9 @@
   だから e2e は **DOM の有無で待つ**（`state: 'attached'`）し、クリックは英語版と同じく `press()`（ページの中で `el.click()`）。
   Playwright の本物のクリックは30秒止まることがある（実際に止まった）。実機の GPU では問題にならない。
 - 舞台の時計は1コマ 0.25 秒まで。遅い端末でも実時間で進む。
+- **パネルを閉じたら舞台は止める**（`dlg` の `close` で `stage.stop()`）。止めないと、閉じた後も裏で 30 fps 描きつづけ、島の歩きが飢える（このコンテナで実際に止まった）。
+- **月の舞台だけ太陽が唯一の光**（`THEMES.space(scene, { lights: false })`）。スタジオの3灯を足すと、満ち欠けが嘘になる。
+- 舞台の上のラベルは y ≤ 2.4 まで。それより上は 720×420 の枠から出る。
 - **同じ名前の測定項目が島ごとに別の意味になることがある**（`period` は軌道では分、ふりこでは秒。`bucket`・`faster` も）。
   `panels.js` の `SIM_LABELS` / `SIM_QUESTIONS` に sim ごとの言葉を置く。共通の表に同じキーを2回書くと後ろが勝って静かに壊れる（実際に起きた）。
 
