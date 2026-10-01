@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "note": "The STEM islands, in the same shape as U-Speak Web's school.json. The client builds the island from these coordinates; the server knows the station ids through the experiments' `station` field. Nothing here is an answer.",
+  "islands": [
+    {
+      "id": "cosmos",
+      "name": "そらの しま",
+      "en": "COSMOS",
+      "x": 0,
+      "z": 0,
+      "radius": 5.0,
+      "grass": 9347947,
+      "grassTop": 10269806,
+      "spawn": { "x": 0, "z": 19 },
+      "spots": [
+        { "id": "phase-hill", "exp": "cosmos.moon.phases", "kind": "hill", "name": "つきの おか", "en": "Phase Hill", "ja": "つきの みちかけ", "character": "Luna", "x": -17, "z": -4, "color": 10276730, "path": { "x": 0, "z": 12 } },
+        { "id": "launch-pad", "exp": "cosmos.orbit.launch", "kind": "pad", "name": "うちあげだい", "en": "Launch Pad", "ja": "ロケットの うちあげ", "character": "Rio", "x": 0, "z": -8, "color": 15254634, "path": { "x": 0, "z": 12 } },
+        { "id": "observatory", "exp": "cosmos.exoplanet.hunter", "kind": "dome", "name": "てんもんだい", "en": "Observatory", "ja": "ほしを 見る", "character": "Kepler", "x": 17, "z": -4, "color": 6724095, "path": { "x": 0, "z": 12 } }
+      ]
+    },
+    {
+      "id": "lab",
+      "name": "かがくの しま",
+      "en": "LAB",
+      "x": 135,
+      "z": 0,
+      "radius": 5.0,
+      "grass": 10075478,
+      "grassTop": 11131238,
+      "spawn": { "x": 0, "z": 19 },
+      "spots": [
+        { "id": "dissolving-bench", "exp": "lab.solubility", "kind": "bench", "name": "とかす だい", "en": "Dissolving Bench", "ja": "とかす・けっしょう", "character": "Mia", "x": -17, "z": -4, "color": 8900331, "path": { "x": 0, "z": 12 } },
+        { "id": "indicator-shelf", "exp": "lab.acid-base", "kind": "shelf", "name": "しらべる たな", "en": "Indicator Shelf", "ja": "さんせい・アルカリせい", "character": "Finn", "x": 0, "z": -8, "color": 15254634, "path": { "x": 0, "z": 12 } },
+        { "id": "burning-corner", "exp": "lab.candle", "kind": "corner", "name": "もえる コーナー", "en": "Burning Corner", "ja": "ろうそくと びん", "character": "Oliver", "x": 17, "z": -4, "color": 14263349, "path": { "x": 0, "z": 12 } }
+      ]
+    }
+  ]
+}

@@ -146,3 +146,84 @@ export function drawPowers(canvas, powers, labels) {
   ids.forEach((k, i) => { const a = -Math.PI / 2 + (i * 2 * Math.PI) / 5; const x = cx + Math.cos(a) * (R + 22); const y = cy + Math.sin(a) * (R + 22) + 4; ctx.fillText(`${t(labels[k])} ${powers[k] || 0}`, x, y); });
   ctx.textAlign = 'start';
 }
+
+// LAB — the dissolving bench: a beaker with what dissolved and what stayed, beside the
+// solubility curve with this trial marked on it.
+export function drawSolubility(canvas, { solute, table, tempC, grams, result }) {
+  const ctx = canvas.getContext('2d'); const w = canvas.width; const h = canvas.height;
+  clear(ctx, w, h, '#1a2a3a');
+  // beaker
+  const bx = 110; const by = 70; const bw = 150; const bh = 260;
+  ctx.strokeStyle = '#dfe8ee'; ctx.lineWidth = 4; ctx.strokeRect(bx, by, bw, bh);
+  const level = by + 40;
+  ctx.fillStyle = result ? '#7fd1ff88' : '#7fd1ff44'; ctx.fillRect(bx + 2, level, bw - 4, by + bh - level - 2);
+  if (result) {
+    const left = result.left; const pile = Math.min(60, (left / Math.max(grams, 1)) * 90);
+    ctx.fillStyle = solute.color; ctx.beginPath(); ctx.ellipse(bx + bw / 2, by + bh - 6, bw / 2 - 12, pile / 2, 0, Math.PI, 0); ctx.fill();
+    ctx.fillStyle = '#fff'; ctx.font = '13px system-ui';
+    ctx.fillText(`${t({ en: 'dissolved', ja: 'とけた' })} ${result.dissolved} g`, bx, by + bh + 22);
+    ctx.fillText(`${t({ en: 'left', ja: 'のこった' })} ${result.left} g`, bx, by + bh + 40);
+  }
+  ctx.fillStyle = '#ffb347'; ctx.fillRect(bx - 30, by + bh - 20, 20, 20); ctx.fillStyle = '#fff'; ctx.font = '12px system-ui'; ctx.fillText(`${tempC}°C`, bx - 40, by + bh - 28);
+  ctx.fillText(`${grams} g ${t(solute)}`, bx, by - 14);
+  // curve
+  const gx = 330; const gy = 40; const gw = w - gx - 30; const gh = h - gy - 50;
+  const maxS = Math.max(...table.map(([, v]) => v), grams) * 1.1;
+  const X = (tc) => gx + (tc / 100) * gw; const Y = (v) => gy + gh - (v / maxS) * gh;
+  ctx.strokeStyle = '#ffffff33'; ctx.strokeRect(gx, gy, gw, gh);
+  ctx.strokeStyle = '#f2b134'; ctx.lineWidth = 3; ctx.beginPath();
+  table.forEach(([tc, v], i) => { if (i) ctx.lineTo(X(tc), Y(v)); else ctx.moveTo(X(tc), Y(v)); }); ctx.stroke();
+  ctx.setLineDash([4, 4]); ctx.strokeStyle = '#7fd1ff'; ctx.beginPath(); ctx.moveTo(gx, Y(grams)); ctx.lineTo(gx + gw, Y(grams)); ctx.stroke(); ctx.setLineDash([]);
+  if (result) { ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(X(tempC), Y(result.limit), 6, 0, Math.PI * 2); ctx.fill(); }
+  ctx.fillStyle = '#fff'; ctx.font = '11px system-ui';
+  ctx.fillText(t({ en: 'g in 100 g water', ja: '100 g の みずに とける g' }), gx, gy - 8);
+  for (const tc of [0, 20, 40, 60, 80, 100]) ctx.fillText(String(tc), X(tc) - 6, gy + gh + 14);
+  ctx.fillText('°C', gx + gw + 4, gy + gh + 14);
+  ctx.fillText(`${t({ en: 'you put in', ja: 'いれた りょう' })}: ${grams} g`, gx + 6, Y(grams) - 4);
+}
+
+// LAB — the indicator shelf: a test tube that takes the indicator's colour.
+export function drawAcidBase(canvas, { liquid, indicator, result, colorHex }) {
+  const ctx = canvas.getContext('2d'); const w = canvas.width; const h = canvas.height;
+  clear(ctx, w, h, '#1a2a3a');
+  const tx = w / 2 - 40; const ty = 40; const tw = 80; const th = 300;
+  ctx.fillStyle = result ? (colorHex[result.color] || '#cfd8dc') : '#cfd8dc55';
+  ctx.beginPath(); ctx.roundRect(tx, ty + 40, tw, th - 40, [0, 0, 40, 40]); ctx.fill();
+  ctx.strokeStyle = '#dfe8ee'; ctx.lineWidth = 4; ctx.beginPath(); ctx.roundRect(tx, ty, tw, th, [6, 6, 40, 40]); ctx.stroke();
+  ctx.fillStyle = '#fff'; ctx.font = '15px system-ui'; ctx.textAlign = 'center';
+  ctx.fillText(t(liquid), w / 2, ty + th + 30);
+  ctx.font = '12px system-ui'; ctx.fillText(`+ ${t(indicator)}`, w / 2, ty + th + 50);
+  if (result) { ctx.font = 'bold 20px system-ui'; ctx.fillText(result.color, w / 2, ty - 10); }
+  ctx.textAlign = 'start';
+  // pH scale
+  const sx = 40; const sy = h - 30; const sw = w - 80;
+  for (let i = 0; i <= 14; i++) { const hue = 0 + (i / 14) * 270; ctx.fillStyle = `hsl(${hue} 60% 55%)`; ctx.fillRect(sx + (i / 14) * sw, sy, sw / 14, 10); }
+  ctx.fillStyle = '#fff'; ctx.font = '10px system-ui'; ctx.fillText('pH 0', sx, sy - 4); ctx.fillText('7', sx + sw / 2 - 3, sy - 4); ctx.fillText('14', sx + sw - 12, sy - 4);
+  if (result && result.pH !== undefined && result.pH !== null) { ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.moveTo(sx + (result.pH / 14) * sw, sy - 2); ctx.lineTo(sx + (result.pH / 14) * sw - 6, sy - 12); ctx.lineTo(sx + (result.pH / 14) * sw + 6, sy - 12); ctx.fill(); }
+}
+
+// LAB — the burning corner: a candle under a jar, with the seconds and the lime water.
+export function drawCandle(canvas, { litres, candles, o2, result }) {
+  const ctx = canvas.getContext('2d'); const w = canvas.width; const h = canvas.height;
+  clear(ctx, w, h, '#1a2a3a');
+  const jw = 120 + litres * 24; const jh = 200 + litres * 14; const jx = w / 2 - jw / 2; const jy = h - 60 - jh;
+  ctx.fillStyle = '#d8ecf222'; ctx.fillRect(jx, jy, jw, jh);
+  ctx.strokeStyle = '#dfe8ee'; ctx.lineWidth = 4; ctx.beginPath(); ctx.roundRect(jx, jy, jw, jh, [30, 30, 0, 0]); ctx.stroke();
+  for (let i = 0; i < candles; i++) {
+    const cx = w / 2 + (i - (candles - 1) / 2) * 40; const cy = h - 60;
+    ctx.fillStyle = '#fff4d7'; ctx.fillRect(cx - 8, cy - 50, 16, 50);
+    const lit = !result || result.seconds > 0;
+    ctx.fillStyle = lit ? '#ffc66a' : '#777'; ctx.beginPath(); ctx.ellipse(cx, cy - 62, 7, 14, 0, 0, Math.PI * 2); ctx.fill();
+  }
+  ctx.fillStyle = '#8c917c'; ctx.fillRect(jx - 40, h - 60, jw + 80, 12);
+  ctx.fillStyle = '#fff'; ctx.font = '13px system-ui';
+  ctx.fillText(`${litres} L · ${t({ en: 'in the jar', ja: 'びんの なか' })}: ${o2 === '1' ? t({ en: 'pure oxygen', ja: 'さんそだけ' }) : o2 === '0.16' ? t({ en: 'used air (16% O2)', ja: 'つかった くうき（さんそ 16%）' }) : t({ en: 'air (21% O2)', ja: 'くうき（さんそ 21%）' })}`, 20, 30);
+  if (result) {
+    ctx.font = 'bold 28px system-ui'; ctx.fillText(`${result.seconds} s`, 20, 70);
+    ctx.font = '13px system-ui'; ctx.fillText(t({ en: 'until the flame goes out', ja: 'ひが きえるまで' }), 20, 90);
+    // lime water
+    const lx = w - 110; ctx.strokeStyle = '#dfe8ee'; ctx.lineWidth = 3; ctx.strokeRect(lx, h - 170, 60, 110);
+    ctx.fillStyle = result.limewater === 'cloudy' ? '#f4f4f4cc' : '#cfe8f044'; ctx.fillRect(lx + 2, h - 120, 56, 58);
+    ctx.fillStyle = '#fff'; ctx.font = '11px system-ui'; ctx.fillText(t({ en: 'lime water', ja: 'せっかいすい' }), lx - 8, h - 180); ctx.fillText(result.limewater, lx + 8, h - 48);
+  } else { ctx.font = '13px system-ui'; ctx.fillText(t({ en: 'Lock your prediction, then watch the flame.', ja: 'よそうを きめてから、ひを 見よう。' }), 20, 70); }
+}

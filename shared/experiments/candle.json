@@ -1,0 +1,55 @@
+{
+  "id": "lab.candle",
+  "region": "lab",
+  "station": "burning-corner",
+  "title": { "en": "The Burning Corner", "ja": "もえる コーナー" },
+  "sim": "candle",
+  "intro": {
+    "en": "Light a candle and put a jar over it. Count the seconds until it goes out. A bigger jar? More candles? Pure oxygen?",
+    "ja": "ろうそくに ひを つけて、びんを かぶせよう。きえるまで なんびょう？ 大きい びんなら？ ろうそくを ふやしたら？ さんそだけなら？"
+  },
+  "params": {
+    "litres": { "min": 0.5, "max": 5, "step": 0.5, "unit": "L", "en": "Jar size", "ja": "びんの 大きさ" },
+    "o2": { "choices": ["0.21", "0.16", "1"], "en": "What is in the jar", "ja": "びんの なかの くうき" },
+    "candles": { "min": 1, "max": 3, "step": 1, "unit": "", "en": "Candles", "ja": "ろうそくの かず" }
+  },
+  "levels": {
+    "explore": {
+      "ages": "4-7",
+      "fixed": { "o2": "0.21", "candles": 1 },
+      "predict": { "kind": "choice", "field": "longer", "choices": ["shorter", "longer"] },
+      "measure": ["seconds"]
+    },
+    "investigate": {
+      "ages": "8-11",
+      "fixed": { "candles": 1 },
+      "predict": { "kind": "number", "field": "seconds", "unit": "s", "tolerance": 0.25 },
+      "measure": ["seconds", "limewater"],
+      "record": ["litres", "seconds"]
+    },
+    "engineer": {
+      "ages": "12-15",
+      "predict": { "kind": "number", "field": "co2ml", "unit": "mL", "tolerance": 0.2 },
+      "measure": ["seconds", "limewater", "o2After", "co2ml"],
+      "record": ["litres", "seconds"],
+      "challenge": { "en": "Work out the oxygen a candle uses per second from two jar sizes.", "ja": "びんの 大きさ 2つから、ろうそくが 1びょうに つかう さんその りょうを もとめよう。" }
+    }
+  },
+  "explain": {
+    "en": "Why does the candle go out, and what is left in the jar?",
+    "ja": "どうして ろうそくは きえるの？ びんの なかには なにが のこる？",
+    "aims": [
+      { "id": "needs-oxygen", "en": "Burning needs oxygen", "ja": "もえるには さんそが いる", "keys": [["oxygen", "air"], ["need", "needs", "use", "uses", "used", "run out", "runs out", "gone", "no more"]] },
+      { "id": "makes-co2", "en": "Burning makes carbon dioxide (the lime water goes cloudy)", "ja": "もえると にさんかたんそが できる（せっかいすいが しろく にごる）", "keys": [["carbon", "co2", "dioxide", "cloudy", "white", "milky"]] },
+      { "id": "more-jar-longer", "en": "A bigger jar holds more oxygen, so it burns longer", "ja": "大きい びんには さんそが おおいから、ながく もえる", "keys": [["bigger", "big", "larger", "more", "small", "smaller"], ["longer", "long", "time", "seconds", "shorter"]] }
+    ]
+  },
+  "classPlot": { "x": "litres", "y": "seconds", "xLabel": { "en": "Jar size (L)", "ja": "びんの 大きさ（L）" }, "yLabel": { "en": "Seconds until it goes out", "ja": "きえるまでの びょう" } },
+  "real": {
+    "en": "With a grown-up: a tea light, a glass, a timer. How many seconds?",
+    "ja": "おとなと いっしょに：ティーライト、コップ、タイマー。なんびょう？",
+    "kit": ["a tea light", "a glass jar", "a timer", "a grown-up"]
+  },
+  "standards": { "jp": ["小6 燃焼のしくみ", "中1 気体の性質"], "ngss": ["5-PS1-4", "MS-PS1-2"], "cambridge": ["Materials: changes"], "pisa": ["explain", "interpret"] },
+  "powers": { "predict": 1, "measure": 1, "data": 1, "explain": 1, "build": 1 }
+}

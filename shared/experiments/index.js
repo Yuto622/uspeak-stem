@@ -10,6 +10,9 @@
 import moonPhases from './moon-phases.json' with { type: 'json' };
 import orbitLaunch from './orbit-launch.json' with { type: 'json' };
 import exoplanetHunter from './exoplanet-hunter.json' with { type: 'json' };
+import solubility from './solubility.json' with { type: 'json' };
+import acidBase from './acid-base.json' with { type: 'json' };
+import candle from './candle.json' with { type: 'json' };
 
 export const LEVELS = ['explore', 'investigate', 'engineer'];
 export const POWERS = [
@@ -19,7 +22,7 @@ export const POWERS = [
   { id: 'explain', en: 'Explain', ja: 'せつめいする' },
   { id: 'build', en: 'Build', ja: 'つくる' },
 ];
-const SIMS = new Set(['moon', 'gravity', 'transit']);
+const SIMS = new Set(['moon', 'gravity', 'transit', 'solubility', 'acidbase', 'candle']);
 
 function check(e) {
   const bad = (why) => { throw new Error(`experiment ${e?.id || '?'}: ${why}`); };
@@ -51,7 +54,11 @@ function check(e) {
   return e;
 }
 
-export const EXPERIMENTS = [moonPhases, orbitLaunch, exoplanetHunter].map(check);
+export const EXPERIMENTS = [moonPhases, orbitLaunch, exoplanetHunter, solubility, acidBase, candle].map(check);
+export const REGIONS = [
+  { id: 'cosmos', en: 'COSMOS', ja: 'そらの しま' },
+  { id: 'lab', en: 'LAB', ja: 'かがくの しま' },
+];
 export const EXPERIMENT_BY_ID = Object.fromEntries(EXPERIMENTS.map((e) => [e.id, e]));
 
 // The parameters a given level actually lets a child change (fixed ones are hidden).

@@ -60,3 +60,6 @@ export const UI = {
   outcomes: { crash: { en: 'Crash', ja: 'おちる' }, orbit: { en: 'Orbit', ja: 'まわる' }, escape: { en: 'Escape', ja: 'とんでいく' } },
   dipsLabel: { en: 'How many dips?', ja: 'なんかい くらくなる？' },
 };
+
+// island-kit.js（U-Speak Web から持ってきた島の部品）が使う名前。
+export const onLangChange = onLang;

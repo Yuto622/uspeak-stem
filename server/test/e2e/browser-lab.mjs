@@ -33,7 +33,7 @@ async function join(name, classCode, key = '') {
 try {
   const a = await join('Hikari', 'E2E');
   const b = await join('Sora', 'E2E');
-  await a.waitForFunction(() => document.querySelector('#hud-online').textContent.startsWith('2'));
+  await a.waitForFunction(() => document.querySelector('#online-pill').textContent.startsWith('2'));
   ok(true, 'two children in one class');
   // teacher sets investigate
   const tch = await join('Ms. Sato', 'E2E', 'e2e-teacher-key-123');
@@ -44,7 +44,7 @@ try {
   // walk to the launch pad
   await a.evaluate(() => globalThis.stem.walkTo('launch-pad'));
   await a.waitForSelector('#near:not([hidden])', { timeout: 8000 });
-  await a.click('#near-btn');
+  await a.click('#interact');
   await a.waitForSelector('#lab[open]');
   ok((await a.textContent('#lab-title')).includes('Launch Pad'), 'launch pad panel opened in English');
   ok(await a.evaluate(() => !globalThis.stem.panels.isOpen ? false : document.querySelector('#lab-readout').textContent === ''), 'no result shown before predicting');
@@ -88,6 +88,29 @@ try {
   await a.waitForSelector('#powers[open]');
   const pw = await a.evaluate(() => globalThis.stem.me.powers);
   ok(pw.predict >= 1 && pw.measure >= 1 && pw.explain > 0, `powers earned ${JSON.stringify(pw)}`);
+  await a.click('#powers-close');
+  // LAB: fly over, walk to the dissolving bench, and run the whole explore flow there.
+  await a.evaluate(() => globalThis.stem.travel('lab'));
+  await a.waitForFunction(() => document.querySelector('#location .en').textContent === 'LAB');
+  ok(true, 'flew to LAB and the location pill changed');
+  await a.evaluate(() => globalThis.stem.walkTo('dissolving-bench'));
+  await a.waitForSelector('#near:not([hidden])', { timeout: 8000 });
+  await a.click('#interact');
+  await a.waitForSelector('#lab[open]');
+  ok((await a.textContent('#lab-title')).includes('Dissolving Bench'), 'dissolving bench panel opened');
+  await a.$eval('#lab-params select[data-param=solute]', (el) => { el.value = 'alum'; el.dispatchEvent(new Event('input', { bubbles: true })); });
+  await a.$eval('#lab-params input[data-param=grams]', (el) => { el.value = '60'; el.dispatchEvent(new Event('input', { bubbles: true })); });
+  await a.$eval('#lab-params input[data-param=tempC]', (el) => { el.value = '40'; el.dispatchEvent(new Event('input', { bubbles: true })); });
+  await a.click('#lab-next');
+  await a.fill('#predict-number', '36');
+  await a.click('#predict-lock');
+  await a.waitForSelector('#lab-readout .verdict');
+  ok((await a.textContent('#lab-readout')).includes('36.2'), 'alum at 40°C: 36.2 g left, prediction within tolerance');
+  ok(await a.evaluate(() => document.querySelector('#lab-readout .verdict').classList.contains('ok')), 'prediction judged right');
+  // the island's own signs are U-Speak Web signs: canvas sprites with both languages
+  const signs = await a.evaluate(() => globalThis.stem.signs());
+  ok(signs.includes('COSMOS') && signs.includes('LAB') && signs.includes('Launch Pad'), `island signs baked: ${signs.length}`);
+  await a.click('#lab-close');
   await a.screenshot({ path: path.join(here, 'lab.png') });
 } catch (e) { console.log('FAIL', e.message); fails++; }
 await browser.close(); server.kill();

@@ -7,6 +7,7 @@
 import * as gravity from './gravity.js';
 import * as moon from './moon.js';
 import * as transit from './transit.js';
+import * as chem from './chem.js';
 import { seedOf } from './rng.js';
 
 export function runExperiment(exp, params, { seed = 0 } = {}) {
@@ -44,6 +45,20 @@ export function runExperiment(exp, params, { seed = 0 } = {}) {
         orbitAU: found.period === null ? null : Math.round(transit.orbitRadiusAU(found.period, t.starMassSolar) * 1e4) / 1e4,
         curve: { t: curve.t, flux: curve.flux },
       };
+    }
+    case 'solubility': {
+      const r = chem.dissolve({ solute: params.solute, grams: params.grams, tempC: params.tempC });
+      return { dissolved: r.dissolved, left: r.left, saturated: String(r.saturated), limit: r.limit };
+    }
+    case 'acidbase': {
+      const r = chem.testLiquid({ liquid: params.liquid, indicator: params.indicator });
+      return { pH: r.pH, kind: r.kind, color: r.color, kindNumber: r.kind === 'acid' ? -1 : r.kind === 'base' ? 1 : 0 };
+    }
+    case 'candle': {
+      const r = chem.candle({ litres: params.litres, o2: Number(params.o2), candles: params.candles });
+      // Explore asks "longer or shorter than the 1-litre jar in air (20 s)?"
+      const base = chem.candle({ litres: 1, o2: chem.O2_AIR, candles: 1 }).seconds;
+      return { ...r, longer: r.seconds > base ? 'longer' : 'shorter' };
     }
     default:
       throw new Error(`unknown sim ${exp.sim}`);

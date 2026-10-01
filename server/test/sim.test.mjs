@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { gravity, moon, transit, rng, seedOf } from '../../shared/sim/index.js';
+import * as chem from '../../shared/sim/chem.js';
 import { runExperiment, measurementsOnly } from '../../shared/sim/run.js';
 import { EXPERIMENTS, LEVELS, sanitizeParams } from '../../shared/experiments/index.js';
 
@@ -66,4 +67,26 @@ test('sanitizeParams clamps, snaps and ignores unknown or fixed knobs', () => {
   assert.deepEqual(p, { body: 'earth', altitude: 400, speed: 12 });
   const q = sanitizeParams(e, 'engineer', { speed: 7.734, altitude: 999, body: 'mars' });
   assert.deepEqual(q, { body: 'mars', altitude: 1000, speed: 7.7 });
+});
+
+test('chemistry: solubility interpolates the table, saturation and recrystallisation follow', () => {
+  assert.equal(chem.solubility('salt', 20), 35.9);
+  assert.ok(Math.abs(chem.solubility('saltpetre', 50) - 86.45) < 0.01, 'midpoint of 40 and 60');
+  const d = chem.dissolve({ solute: 'alum', grams: 40, tempC: 20 });
+  assert.deepEqual(d, { dissolved: 11.4, left: 28.6, saturated: true, limit: 11.4 });
+  assert.equal(chem.dissolve({ solute: 'sugar', grams: 100, tempC: 20 }).saturated, false);
+  assert.equal(chem.recrystallize({ solute: 'alum', grams: 60, fromC: 60, toC: 20 }).crystals, 46);
+});
+
+test('chemistry: indicators follow pH, and the candle follows the oxygen', () => {
+  assert.deepEqual(chem.testLiquid({ liquid: 'lemon', indicator: 'btb' }), { pH: 2.3, kind: 'acid', color: 'yellow' });
+  assert.equal(chem.testLiquid({ liquid: 'water', indicator: 'cabbage' }).color, 'purple');
+  assert.equal(chem.testLiquid({ liquid: 'naoh', indicator: 'phenol' }).color, 'pink');
+  assert.equal(chem.testLiquid({ liquid: 'sea', indicator: 'litmus' }).color, 'blue');
+  const air1 = chem.candle({ litres: 1 });
+  assert.equal(air1.seconds, 20); assert.equal(air1.limewater, 'cloudy');
+  assert.equal(chem.candle({ litres: 2 }).seconds, 40, 'twice the jar, twice the time');
+  assert.equal(chem.candle({ litres: 1, candles: 2 }).seconds, 10, 'two candles, half the time');
+  assert.equal(chem.candle({ litres: 1, o2: 0.16 }).seconds, 0, 'used air: it goes straight out');
+  assert.equal(chem.neutralise({ cA: 0.1, vA: 10, cB: 0.2 }).vB, 5);
 });

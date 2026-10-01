@@ -1,0 +1,54 @@
+{
+  "id": "lab.solubility",
+  "region": "lab",
+  "station": "dissolving-bench",
+  "title": { "en": "The Dissolving Bench", "ja": "とかす だい" },
+  "sim": "solubility",
+  "intro": {
+    "en": "Stir something into warm water. Does it all disappear? Warm the water and watch. Cool it, and the crystals come back.",
+    "ja": "あたたかい みずに なにかを いれて まぜよう。ぜんぶ きえる？ あたためて 見てみよう。ひやすと、けっしょうが もどってくる。"
+  },
+  "params": {
+    "solute": { "choices": ["salt", "sugar", "alum", "boric", "saltpetre"], "en": "What to dissolve", "ja": "なにを とかす" },
+    "grams": { "min": 5, "max": 120, "step": 5, "unit": "g", "en": "How much", "ja": "どれだけ" },
+    "tempC": { "min": 0, "max": 80, "step": 10, "unit": "°C", "en": "Water temperature", "ja": "みずの おんど" }
+  },
+  "levels": {
+    "explore": {
+      "ages": "4-7",
+      "fixed": { "grams": 40, "tempC": 20 },
+      "predict": { "kind": "choice", "field": "saturated", "choices": ["false", "true"] },
+      "measure": ["saturated"]
+    },
+    "investigate": {
+      "ages": "8-11",
+      "predict": { "kind": "number", "field": "left", "unit": "g", "tolerance": 0.25 },
+      "measure": ["dissolved", "left", "saturated"],
+      "record": ["tempC", "limit"]
+    },
+    "engineer": {
+      "ages": "12-15",
+      "predict": { "kind": "number", "field": "limit", "unit": "g per 100 g water", "tolerance": 0.1 },
+      "measure": ["dissolved", "left", "limit"],
+      "record": ["tempC", "limit"],
+      "challenge": { "en": "Find the temperature where 50 g of alum just dissolves in 100 g of water.", "ja": "ミョウバン 50 g が ちょうど とける おんどを さがそう。" }
+    }
+  },
+  "explain": {
+    "en": "Why does more dissolve in warmer water, and where does it go when the water cools?",
+    "ja": "どうして あたたかい みずのほうが たくさん とけるの？ ひやすと どこへ いくの？",
+    "aims": [
+      { "id": "limit", "en": "There is a limit to how much dissolves", "ja": "とける りょうには かぎりが ある", "keys": [["limit", "most", "max", "maximum", "only", "cannot", "can't", "no more"]] },
+      { "id": "warm-more", "en": "Warm water dissolves more", "ja": "あたたかい みずは たくさん とかす", "keys": [["warm", "warmer", "hot", "hotter", "heat", "temperature"], ["more", "dissolve", "dissolves", "melt", "melts"]] },
+      { "id": "cool-crystals", "en": "Cooling brings the solid back as crystals", "ja": "ひやすと けっしょうに なって もどる", "keys": [["cool", "cold", "cooler", "cools"], ["crystal", "crystals", "solid", "back", "comes out", "appear", "appears"]] }
+    ]
+  },
+  "classPlot": { "x": "tempC", "y": "limit", "xLabel": { "en": "Water temperature (°C)", "ja": "みずの おんど（°C）" }, "yLabel": { "en": "g that dissolve in 100 g water", "ja": "100 g の みずに とける g" } },
+  "real": {
+    "en": "At home: stir sugar into cold water, then warm water. Count the spoons that disappear.",
+    "ja": "おうちで：つめたい みずと あたたかい みずに さとうを まぜて、きえる スプーンの かずを かぞえよう。",
+    "kit": ["sugar", "two cups", "a spoon"]
+  },
+  "standards": { "jp": ["小5 もののとけ方", "中1 水溶液"], "ngss": ["5-PS1-2", "5-PS1-4", "MS-PS1-4"], "cambridge": ["Materials: solutions"], "pisa": ["explain", "interpret"] },
+  "powers": { "predict": 1, "measure": 1, "data": 1, "explain": 1, "build": 1 }
+}

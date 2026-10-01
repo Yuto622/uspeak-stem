@@ -1,0 +1,53 @@
+{
+  "id": "lab.acid-base",
+  "region": "lab",
+  "station": "indicator-shelf",
+  "title": { "en": "The Indicator Shelf", "ja": "しらべる たな" },
+  "sim": "acidbase",
+  "intro": {
+    "en": "Dip an indicator into an everyday liquid and the colour tells you a secret: acid, base, or neither.",
+    "ja": "みぢかな えきたいに しらべる かみを つけると、いろが ひみつを おしえてくれる。さんせい、アルカリせい、どちらでもない。"
+  },
+  "params": {
+    "liquid": { "choices": ["lemon", "vinegar", "cola", "orange", "rain", "milk", "water", "saltwater", "sea", "soda", "soap", "ammonia", "limewater", "hcl", "naoh"], "en": "Liquid", "ja": "えきたい" },
+    "indicator": { "choices": ["litmus", "btb", "cabbage", "phenol"], "en": "Indicator", "ja": "しらべる もの" }
+  },
+  "levels": {
+    "explore": {
+      "ages": "4-7",
+      "fixed": { "indicator": "cabbage" },
+      "predict": { "kind": "choice", "field": "kind", "choices": ["acid", "neutral", "base"] },
+      "measure": ["color", "kind"]
+    },
+    "investigate": {
+      "ages": "8-11",
+      "predict": { "kind": "choice", "field": "color", "choices": ["red", "pink", "purple", "blue", "green", "yellow", "colorless"] },
+      "measure": ["color", "kind"],
+      "record": ["pH", "kindNumber"]
+    },
+    "engineer": {
+      "ages": "12-15",
+      "predict": { "kind": "number", "field": "pH", "unit": "pH", "tolerance": 0.15 },
+      "measure": ["color", "kind", "pH"],
+      "record": ["pH", "kindNumber"],
+      "challenge": { "en": "Order five liquids from most acidic to most basic before you test them.", "ja": "ためす まえに、5つの えきたいを さんせいの つよい じゅんに ならべよう。" }
+    }
+  },
+  "explain": {
+    "en": "What does the colour tell you, and how do you know?",
+    "ja": "いろは なにを おしえてくれる？ どうして わかる？",
+    "aims": [
+      { "id": "acid-or-base", "en": "The liquid is an acid, a base, or neutral", "ja": "えきたいは さんせい・アルカリせい・ちゅうせい の どれか", "keys": [["acid", "acidic", "base", "basic", "alkali", "alkaline", "neutral"]] },
+      { "id": "indicator-changes", "en": "The indicator changes colour depending on the liquid", "ja": "しらべる ものの いろが、えきたいで かわる", "keys": [["colour", "color", "turn", "turns", "turned", "changes", "change"], ["indicator", "paper", "cabbage", "litmus", "btb", "juice"]] },
+      { "id": "ph-scale", "en": "A smaller pH number means a stronger acid", "ja": "pH の かずが ちいさいほど つよい さんせい", "keys": [["ph", "number", "scale"], ["small", "smaller", "low", "lower", "big", "bigger", "high", "higher", "strong", "stronger"]] }
+    ]
+  },
+  "classPlot": { "x": "pH", "y": "kindNumber", "xLabel": { "en": "pH", "ja": "pH" }, "yLabel": { "en": "acid (−1) · neutral (0) · base (+1)", "ja": "さんせい（−1）・ちゅうせい（0）・アルカリせい（+1）" } },
+  "real": {
+    "en": "Make red cabbage juice at home and test lemon, soap and water. Say the colours.",
+    "ja": "おうちで むらさきキャベツの しるを つくって、レモン・せっけん・みずを しらべよう。いろを いってみよう。",
+    "kit": ["red cabbage", "hot water", "three cups"]
+  },
+  "standards": { "jp": ["小6 水溶液の性質", "中3 酸・アルカリとイオン"], "ngss": ["5-PS1-3", "MS-PS1-2"], "cambridge": ["Materials: acids and alkalis"], "pisa": ["explain", "evaluate"] },
+  "powers": { "predict": 1, "measure": 1, "data": 1, "explain": 1, "build": 0 }
+}

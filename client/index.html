@@ -3,62 +3,92 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>U-Speak STEM — COSMOS</title>
+<meta name="theme-color" content="#173f38">
+<title>U-Speak STEM — the science islands</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div id="loading"><div class="brand">U-Speak <span>STEM</span></div><p><b class="en">Building the island…</b><i class="ja">しまを つくっています…</i></p></div>
-
-<dialog id="lobby">
-  <div class="brand">U-Speak <span>STEM</span> · COSMOS</div>
-  <h1><b class="en">Welcome, explorer.</b><i class="ja">ようこそ、たんけんか。</i></h1>
-  <p class="lead"><b class="en">Three stations are waiting: the Phase Hill, the Launch Pad and the Observatory. Predict, run, measure, explain — in English.</b><i class="ja">3つの ばしょが まっている。つきの おか、うちあげだい、てんもんだい。よそうして、やって、はかって、せつめいする。</i></p>
-  <label><b class="en">Your name</b><i class="ja">なまえ</i><input id="lobby-name" maxlength="24" autocomplete="off" placeholder="Hikari"></label>
-  <label><b class="en">Class code</b><i class="ja">クラスの コード</i><input id="lobby-class" maxlength="32" autocomplete="off" placeholder="demo"></label>
-  <details><summary><b class="en">Teacher</b><i class="ja">せんせい</i></summary>
-    <label><b class="en">Teacher key</b><i class="ja">せんせいの キー</i><input id="lobby-key" type="password" maxlength="64" autocomplete="off"></label>
-  </details>
-  <button id="lobby-go" class="primary"><b class="en">Enter the island</b><i class="ja">しまに はいる</i></button>
-  <p class="fine"><b class="en">Server-judged science. Nothing you type is a score until the server has run the experiment too.</b><i class="ja">はんていは サーバーが します。じぶんで かいた すうじは、サーバーが おなじ じっけんを してから はじめて てんに なります。</i></p>
-</dialog>
+<canvas id="world" aria-label="3D science world"></canvas>
+<div class="vignette"></div>
 
 <header id="hud" hidden>
-  <div class="brand">U-Speak <span>STEM</span></div>
-  <div class="where"><b class="en">COSMOS · Island of the Sky</b><i class="ja">COSMOS · そらの しま</i></div>
-  <div class="right">
-    <span id="hud-level" class="pill"></span>
-    <span id="hud-online" class="pill"></span>
-    <button id="hud-powers" class="pill" title="My science powers"><b class="en">✦ Powers</b><i class="ja">✦ ちから</i></button>
-    <button id="lang" class="pill" aria-label="Switch language">あ / A</button>
+  <a class="brand" href="./"><span class="brand-icon">u<span>•</span></span><div>U-Speak<span class="edition">STEM · ROBLOX WEB</span></div></a>
+  <div class="location" id="location"><span>✦</span><b class="en">COSMOS</b><i class="ja">そらの しま</i></div>
+  <div class="stats">
+    <button type="button" id="hud-powers" class="record-button" aria-label="My science powers"><span class="level"><b class="en">POWERS</b><i class="ja">ちから</i> <b id="powers-total">0</b></span><span id="hud-level" class="pill-level"></span></button>
+    <button type="button" id="hud-name" aria-label="Name">◉</button>
+    <button type="button" id="lang" class="lang-toggle" aria-label="Switch language"><b class="en">あ</b><i class="ja">A</i></button>
   </div>
 </header>
 
-<div id="near" hidden><button id="near-btn" class="primary"></button></div>
+<main>
+  <aside class="quest-panel" id="notebook" hidden>
+    <div class="eyebrow">YOUR LAB NOTEBOOK <span id="notebook-no">01</span></div>
+    <h1><b class="en">Predict. Try. Explain.</b><i class="ja">よそう。やる。せつめい。</i></h1>
+    <p class="intro"><b class="en">Three stations on every island. Walk up to one.</b><i class="ja">どの しまにも 3つの ばしょ。あるいて いこう。</i></p>
+    <div class="progress-row"><span><b class="en">Stations on this island</b><i class="ja">この しまの ばしょ</i></span><b id="count">0 / 3</b></div>
+    <div class="progress"><i id="progress"></i></div>
+    <div id="quests"></div>
+    <div class="daily"><span>✧</span><div><span><b class="en">Science word of the day</b><i class="ja">きょうの ことば</i></span><strong id="daily-word">“I predict…”</strong><small><b class="en">Say it before you press Run.</b><i class="ja">やる まえに いってみよう。</i></small></div></div>
+  </aside>
 
-<div id="pad" hidden>
-  <button data-key="w">▲</button>
-  <div><button data-key="a">◀</button><button data-key="s">▼</button><button data-key="d">▶</button></div>
-</div>
-
-<aside id="teacher" hidden>
-  <h3><b class="en">Teacher</b><i class="ja">せんせい</i></h3>
-  <p><b class="en">Depth for the whole class:</b><i class="ja">クラスの ふかさ：</i></p>
-  <div class="levels">
-    <button data-level="explore"><b class="en">Explore (4–7)</b><i class="ja">Explore（4〜7さい）</i></button>
-    <button data-level="investigate"><b class="en">Investigate (8–11)</b><i class="ja">Investigate（8〜11さい）</i></button>
-    <button data-level="engineer"><b class="en">Engineer (12–15)</b><i class="ja">Engineer（12〜15さい）</i></button>
+  <div class="right-rail" id="rail" hidden>
+    <aside class="map-panel"><div><b id="map-title">COSMOS</b><span>N ↑</span></div><canvas id="map" width="180" height="140" aria-label="Island map"></canvas><p><span class="dot"></span> <span id="area">Jetty</span><span id="online-pill">1 ✦</span></p></aside>
+    <div class="scenery-controls">
+      <button id="flight-button" class="flight-button"><b class="en">✈ Islands</b><i class="ja">しまの ちず</i></button>
+      <button id="powers-button" class="powers-button"><b class="en">✦ Powers</b><i class="ja">かがくの ちから</i></button>
+    </div>
   </div>
-  <ul id="teacher-roster"></ul>
-</aside>
+
+  <aside id="teacher" hidden>
+    <div class="eyebrow">TEACHER</div>
+    <h3><b class="en">Depth for the class</b><i class="ja">クラスの ふかさ</i></h3>
+    <div class="levels">
+      <button data-level="explore"><b class="en">Explore (4–7)</b><i class="ja">Explore（4〜7さい）</i></button>
+      <button data-level="investigate"><b class="en">Investigate (8–11)</b><i class="ja">Investigate（8〜11さい）</i></button>
+      <button data-level="engineer"><b class="en">Engineer (12–15)</b><i class="ja">Engineer（12〜15さい）</i></button>
+    </div>
+    <ul id="teacher-roster"></ul>
+  </aside>
+
+  <div id="near" class="near" hidden><button id="interact"><kbd>E</kbd> <span id="interact-text"></span> <span>↗</span></button></div>
+  <div id="toast" role="status"></div>
+
+  <div class="bottom" id="bottom" hidden>
+    <div class="control-hint"><kbd>W</kbd><span><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></span><p><b class="en">Move</b><i class="ja">うごく</i> <small><b class="en">drag to look around</b><i class="ja">ドラッグで まわりを 見る</i></small></p></div>
+    <nav class="hotbar" aria-label="Menu">
+      <button class="active" id="hb-explore"><small>1</small><span>⌖</span><b class="en">Explore</b><i class="ja">ぼうけん</i></button>
+      <button id="hb-powers"><small>2</small><span>✦</span><b class="en">Powers</b><i class="ja">ちから</i></button>
+      <button id="hb-map"><small>3</small><span>✈</span><b class="en">Islands</b><i class="ja">しまの ちず</i></button>
+      <button id="hb-home"><small>4</small><span>⌂</span><b class="en">Jetty</b><i class="ja">さんばしへ</i></button>
+    </nav>
+    <div class="save-status">◈ <b class="en">Server-judged</b><i class="ja">サーバーが はんてい</i> <small><b class="en">every trial is checked</b><i class="ja">ぜんぶの じっけんを たしかめる</i></small></div>
+  </div>
+  <div id="pad" class="mobile-pad" hidden><button data-key="w">▲</button><div><button data-key="a">◀</button><button data-key="s">▼</button><button data-key="d">▶</button></div></div>
+</main>
+
+<dialog id="lobby">
+  <div class="eyebrow">U-SPEAK STEM · THE SCIENCE ISLANDS</div>
+  <h1><b class="en">Welcome, explorer.</b><i class="ja">ようこそ、たんけんか。</i></h1>
+  <p class="lead"><b class="en">Two islands are waiting: COSMOS, where you launch rockets and find planets, and LAB, where you dissolve, test and burn. Predict, run, measure, explain — in English.</b><i class="ja">2つの しまが まっている。ロケットを うちあげ、わくせいを さがす COSMOS。とかして、しらべて、もやす LAB。よそうして、やって、はかって、せつめいする。</i></p>
+  <label><b class="en">Your name</b><i class="ja">なまえ</i><input id="lobby-name" maxlength="24" autocomplete="off" placeholder="Hikari"></label>
+  <label><b class="en">Class code</b><i class="ja">クラスの コード</i><input id="lobby-class" maxlength="32" autocomplete="off" placeholder="demo"></label>
+  <details><summary><b class="en">Teacher</b><i class="ja">せんせい</i></summary><label><b class="en">Teacher key</b><i class="ja">せんせいの キー</i><input id="lobby-key" type="password" maxlength="64" autocomplete="off"></label></details>
+  <button id="lobby-go" class="primary"><b class="en">Enter the islands →</b><i class="ja">しまに はいる →</i></button>
+  <p class="fine"><b class="en">Nothing you type is a score until the server has run the experiment too.</b><i class="ja">じぶんで かいた すうじは、サーバーが おなじ じっけんを してから はじめて てんに なります。</i></p>
+</dialog>
+
+<dialog id="travel">
+  <button class="close" id="travel-close" aria-label="Close">×</button>
+  <div class="eyebrow">U-SPEAK AIR · ISLAND HOPPING</div>
+  <h2><b class="en">Where to?</b><i class="ja">どこへ いく？</i></h2>
+  <div id="travel-list"></div>
+</dialog>
 
 <dialog id="lab">
   <button class="close" id="lab-close" aria-label="Close">×</button>
   <button class="lab-lang" id="lab-lang" aria-label="Switch language">あ / A</button>
-  <div class="lab-head">
-    <div class="eyebrow" id="lab-station"></div>
-    <h2 id="lab-title"></h2>
-    <p id="lab-intro"></p>
-  </div>
+  <div class="lab-head"><div class="eyebrow" id="lab-station"></div><h2 id="lab-title"></h2><p id="lab-intro"></p></div>
   <ol class="steps">
     <li data-step="set"><b class="en">Set</b><i class="ja">きめる</i></li>
     <li data-step="predict"><b class="en">Predict</b><i class="ja">よそう</i></li>
@@ -80,13 +110,13 @@
 
 <dialog id="powers">
   <button class="close" id="powers-close" aria-label="Close">×</button>
-  <h2><b class="en">My science powers</b><i class="ja">わたしの かがくの ちから</i></h2>
+  <div class="eyebrow">MY SCIENCE POWERS</div>
+  <h2><b class="en">What I can do</b><i class="ja">わたしの できること</i></h2>
   <canvas id="powers-canvas" width="360" height="300"></canvas>
   <ul id="powers-list"></ul>
 </dialog>
 
-<div id="toast" role="status"></div>
-<canvas id="world"></canvas>
+<div id="loading"><span class="brand-icon">u•</span><h2>U-Speak STEM</h2><p><b class="en">Building the islands…</b><i class="ja">しまを つくっています…</i></p></div>
 
 <script src="vendor/colyseus.js"></script>
 <script type="module" src="app.js"></script>

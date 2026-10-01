@@ -7,13 +7,14 @@
 import { t, both, esc, UI, isJa, onLang, toggleLang } from './i18n.js';
 import { EXPERIMENT_BY_ID, freeParams, sanitizeParams, POWERS } from '/shared/experiments/index.js';
 import { gravity, moon } from '/shared/sim/index.js';
+import * as chem from '/shared/sim/chem.js';
 import { dipsBucket } from '/shared/sim/run.js';
-import { drawOrbit, drawMoon, drawLightCurve, drawClass, drawPowers } from './draw.js';
+import { drawOrbit, drawMoon, drawLightCurve, drawClass, drawPowers, drawSolubility, drawAcidBase, drawCandle } from './draw.js';
 import { ask } from './net.js';
 
 const $ = (s, r = document) => r.querySelector(s);
 
-export function createPanels({ net, toast, me }) {
+export function createPanels({ net, toast, me, onDone = () => {} }) {
   const dlg = $('#lab');
   const classPoints = new Map(); // expId -> points
   let state = null; // { exp, level, params, trialId, result, step }
@@ -35,7 +36,10 @@ export function createPanels({ net, toast, me }) {
     const canvas = $('#lab-canvas'); const { exp, params, result } = state;
     if (exp.sim === 'gravity') drawOrbit(canvas, { body: gravity.BODIES[params.body], altitude: params.altitude, trail: result?.trail, outcome: result?.outcome });
     else if (exp.sim === 'moon') drawMoon(canvas, { angle: params.angle, result });
-    else drawLightCurve(canvas, { curve: result?.curve, dips: result ? findDipsForDrawing(result) : null });
+    else if (exp.sim === 'transit') drawLightCurve(canvas, { curve: result?.curve, dips: result ? findDipsForDrawing(result) : null });
+    else if (exp.sim === 'solubility') drawSolubility(canvas, { solute: chem.SOLUTES[params.solute], table: chem.SOLUTES[params.solute].table, tempC: params.tempC, grams: params.grams, result });
+    else if (exp.sim === 'acidbase') drawAcidBase(canvas, { liquid: chem.LIQUIDS[params.liquid], indicator: chem.INDICATORS[params.indicator], result, colorHex: chem.COLOR_HEX });
+    else if (exp.sim === 'candle') drawCandle(canvas, { litres: params.litres, candles: params.candles, o2: params.o2, result });
     const ro = $('#lab-readout');
     if (!result) { ro.innerHTML = ''; return; }
     const lv = exp.levels[state.level];
@@ -47,7 +51,10 @@ export function createPanels({ net, toast, me }) {
     const L = {
       outcome: { en: 'What happened', ja: 'どうなった' }, period: { en: 'Minutes per orbit', ja: '1しゅうの ふん' }, apoapsis: { en: 'Highest point (km)', ja: 'いちばん たかい ところ（km）' },
       phase: { en: 'Phase', ja: 'かたち' }, lit: { en: 'Lit part', ja: 'ひかる わりあい' }, side: { en: 'Lit side', ja: 'ひかる がわ' },
-      dips: { en: 'Dips', ja: 'くらくなった かいすう' }, periodDays: { en: 'Days between dips', ja: 'あいだ（日）' }, depth: { en: 'Dip depth', ja: 'ふかさ' }, planetRadiusEarths: { en: 'Planet size (Earths)', ja: 'わくせいの 大きさ（ちきゅう＝1）' }, orbitAU: { en: 'Orbit (AU)', ja: 'きどう（AU）' },
+      dips: { en: 'Dips', ja: 'くらくなった かいすう' },
+      dissolved: { en: 'Dissolved (g)', ja: 'とけた（g）' }, left: { en: 'Left on the bottom (g)', ja: 'そこに のこった（g）' }, saturated: { en: 'Saturated?', ja: 'もう とけない？' }, limit: { en: 'Limit (g per 100 g water)', ja: 'とける かぎり（100 g の みずに）' },
+      pH: { en: 'pH', ja: 'pH' }, kind: { en: 'Acid or base', ja: 'さんせい か アルカリせい か' }, color: { en: 'Colour', ja: 'いろ' },
+      seconds: { en: 'Seconds until out', ja: 'きえるまでの びょう' }, limewater: { en: 'Lime water', ja: 'せっかいすい' }, o2After: { en: 'Oxygen left (%)', ja: 'のこった さんそ（%）' }, co2ml: { en: 'CO2 made (mL)', ja: 'できた にさんかたんそ（mL）' }, longer: { en: 'Longer or shorter than 1 L of air?', ja: '1 L の くうきより ながい？ みじかい？' }, periodDays: { en: 'Days between dips', ja: 'あいだ（日）' }, depth: { en: 'Dip depth', ja: 'ふかさ' }, planetRadiusEarths: { en: 'Planet size (Earths)', ja: 'わくせいの 大きさ（ちきゅう＝1）' }, orbitAU: { en: 'Orbit (AU)', ja: 'きどう（AU）' },
     };
     return t(L[f] || { en: f, ja: f });
   }
@@ -57,6 +64,9 @@ export function createPanels({ net, toast, me }) {
     if (f === 'phase') { const p = moon.PHASES.find((x) => x.id === v); return isJa() ? `${p.en}（${p.ja}）` : p.en; }
     if (f === 'lit') return `${Math.round(v * 100)}%`;
     if (f === 'depth') return `${(v * 100).toFixed(3)}%`;
+    if (f === 'saturated') return t(v === 'true' ? { en: 'Yes — saturated', ja: 'うん、もう とけない' } : { en: 'No — it all dissolved', ja: 'ううん、ぜんぶ とけた' });
+    if (f === 'kind') return t({ acid: { en: 'Acid', ja: 'さんせい' }, base: { en: 'Base', ja: 'アルカリせい' }, neutral: { en: 'Neutral', ja: 'ちゅうせい' } }[v]);
+    if (f === 'longer') return t(v === 'longer' ? { en: 'Longer', ja: 'ながい' } : { en: 'Shorter', ja: 'みじかい' });
     return String(v);
   }
 
@@ -81,6 +91,10 @@ export function createPanels({ net, toast, me }) {
   function choiceName(exp, k, c) {
     if (k === 'body') return t(gravity.BODIES[c]);
     if (k === 'target') return t(exp.targets[c]);
+    if (k === 'solute') return t(chem.SOLUTES[c]);
+    if (k === 'liquid') return t(chem.LIQUIDS[c]);
+    if (k === 'indicator') return t(chem.INDICATORS[c]);
+    if (k === 'o2') return t(c === '1' ? { en: 'Pure oxygen', ja: 'さんそだけ' } : c === '0.16' ? { en: 'Used air (16% O2)', ja: 'つかった くうき' } : { en: 'Air (21% O2)', ja: 'ふつうの くうき' });
     return c;
   }
 
@@ -115,6 +129,9 @@ export function createPanels({ net, toast, me }) {
     const Q = {
       outcome: { en: 'What will the ball do?', ja: 'ボールは どうなる？' }, period: { en: 'How many minutes will one orbit take?', ja: '1しゅう なんぷん かかる？' },
       phase: { en: 'What shape will the Moon be tonight?', ja: 'こんや つきは どんな かたち？' }, lit: { en: 'What percent of the Moon will be lit?', ja: 'つきの なんパーセントが ひかる？' },
+      saturated: { en: 'Will it all dissolve?', ja: 'ぜんぶ とける？' }, left: { en: 'How many grams will stay on the bottom?', ja: 'なん g が そこに のこる？' }, limit: { en: 'How many grams dissolve in 100 g of water at this temperature?', ja: 'この おんどで、100 g の みずに なん g とける？' },
+      kind: { en: 'Acid, neutral or base?', ja: 'さんせい？ ちゅうせい？ アルカリせい？' }, color: { en: 'What colour will it turn?', ja: 'なにいろに なる？' }, pH: { en: 'What is the pH?', ja: 'pH は いくつ？' },
+      longer: { en: 'Longer or shorter than the 1-litre jar in air (20 s)?', ja: 'くうきの 1 L の びん（20びょう）より ながい？ みじかい？' }, seconds: { en: 'How many seconds will it burn?', ja: 'なんびょう もえる？' }, co2ml: { en: 'How many mL of CO2 will it make?', ja: 'にさんかたんそは なん mL できる？' },
       dips: UI.dipsLabel, periodDays: { en: 'How many days between dips?', ja: 'くらくなる あいだは なんにち？' }, planetRadiusEarths: { en: 'How big is the planet, in Earths?', ja: 'わくせいは ちきゅうの なんばい？' },
     };
     return Q[spec.field] || { en: spec.field, ja: spec.field };
@@ -122,6 +139,9 @@ export function createPanels({ net, toast, me }) {
   function choiceLabel(field, c) {
     if (field === 'outcome') return `${t(UI.outcomes[c])}${isJa() ? '' : ''}`;
     if (field === 'phase') { const p = moon.PHASES.find((x) => x.id === c); return isJa() ? `${p.en} ${p.ja}` : p.en; }
+    if (field === 'saturated') return t(c === 'true' ? { en: 'No, some stays', ja: 'のこる' } : { en: 'Yes, all of it', ja: 'ぜんぶ とける' });
+    if (field === 'kind') return t({ acid: { en: 'Acid', ja: 'さんせい' }, base: { en: 'Base', ja: 'アルカリせい' }, neutral: { en: 'Neutral', ja: 'ちゅうせい' } }[c]);
+    if (field === 'longer') return t(c === 'longer' ? { en: 'Longer', ja: 'ながい' } : { en: 'Shorter', ja: 'みじかい' });
     return c;
   }
   function showPrediction(field, want) { return field === 'lit' ? `${Math.round(want)}%` : showValue(field, want); }
@@ -135,6 +155,10 @@ export function createPanels({ net, toast, me }) {
       if (f === 'outcome') return `<div class="param"><span>${esc(labelFor(f))}</span><select data-m="${f}">${['crash', 'orbit', 'escape'].map((c) => `<option value="${c}">${esc(t(UI.outcomes[c]))}</option>`).join('')}</select><output></output></div>`;
       if (f === 'phase') return `<div class="param"><span>${esc(labelFor(f))}</span><select data-m="${f}">${moon.PHASES.map((p) => `<option value="${p.id}">${esc(p.en)}</option>`).join('')}</select><output></output></div>`;
       if (f === 'side') return `<div class="param"><span>${esc(labelFor(f))}</span><select data-m="${f}"><option value="right">right</option><option value="left">left</option></select><output></output></div>`;
+      if (f === 'saturated') return `<div class="param"><span>${esc(labelFor(f))}</span><select data-m="${f}"><option value="true">${esc(showValue(f, 'true'))}</option><option value="false">${esc(showValue(f, 'false'))}</option></select><output></output></div>`;
+      if (f === 'kind') return `<div class="param"><span>${esc(labelFor(f))}</span><select data-m="${f}">${['acid', 'neutral', 'base'].map((c) => `<option value="${c}">${esc(showValue(f, c))}</option>`).join('')}</select><output></output></div>`;
+      if (f === 'color') return `<div class="param"><span>${esc(labelFor(f))}</span><select data-m="${f}">${Object.keys(chem.COLOR_HEX).map((c) => `<option value="${c}">${c}</option>`).join('')}</select><output></output></div>`;
+      if (f === 'limewater') return `<div class="param"><span>${esc(labelFor(f))}</span><select data-m="${f}"><option value="cloudy">cloudy</option><option value="clear">clear</option></select><output></output></div>`;
       return `<div class="param"><span>${esc(labelFor(f))}</span><input type="number" step="any" data-m="${f}"><output></output></div>`;
     }).join('') + `<div class="row"><button id="measure-send" class="primary">${both(UI.send)}</button></div>`;
     $('#measure-send', box).onclick = async () => {
@@ -166,6 +190,7 @@ export function createPanels({ net, toast, me }) {
         me.powers = r.powers;
         if (!r.enough) toast({ en: 'Say a little more.', ja: 'もう すこし いってみよう。' });
         else if (r.met.length === r.total) toast({ en: 'All three! That is a scientist talking.', ja: '3つ ぜんぶ！ かがくしゃの はなしかただ。' });
+        onDone(exp.id);
         $('#lab-next').hidden = false; $('#lab-next').innerHTML = both(UI.done); $('#lab-next').onclick = () => open(exp.id, state.level);
         renderReal();
       } catch (e) { toast({ en: e.message, ja: e.message }); }
