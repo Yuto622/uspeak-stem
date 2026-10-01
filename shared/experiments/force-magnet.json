@@ -1,0 +1,340 @@
+{
+ "id": "force.magnet",
+ "region": "force",
+ "station": "magnet-corner",
+ "title": {
+  "en": "The Magnet Corner",
+  "ja": "じしゃくの コーナー"
+ },
+ "sim": "magnet",
+ "grade": "小3",
+ "unit": "じしゃくのせいしつ",
+ "intro": {
+  "en": "Touch the magnet to things: what sticks? Hold it farther away: how many clips can it still lift? Bring two magnets together: push or pull?",
+  "ja": "じしゃくを いろいろな ものに つけよう。なにが つく？ はなすと クリップは なんこ もちあがる？ じしゃく どうしは おす？ ひく？"
+ },
+ "params": {
+  "item": {
+   "choices": [
+    "clip",
+    "nail",
+    "can",
+    "coin",
+    "wire",
+    "eraser",
+    "paper"
+   ],
+   "en": "Thing",
+   "ja": "もの"
+  },
+  "distance": {
+   "min": 0,
+   "max": 5,
+   "step": 0.5,
+   "unit": "cm",
+   "en": "Distance",
+   "ja": "きょり"
+  },
+  "poles": {
+   "choices": [
+    "N-S",
+    "N-N",
+    "S-S"
+   ],
+   "en": "Poles facing",
+   "ja": "むかいあう きょく"
+  }
+ },
+ "levels": {
+  "explore": {
+   "ages": "4-7",
+   "fixed": {
+    "distance": 0,
+    "poles": "N-S"
+   },
+   "predict": {
+    "kind": "choice",
+    "field": "sticks",
+    "choices": [
+     "yes",
+     "no"
+    ]
+   },
+   "measure": [
+    "sticks",
+    "clips"
+   ]
+  },
+  "investigate": {
+   "ages": "8-11",
+   "fixed": {
+    "poles": "N-S"
+   },
+   "predict": {
+    "kind": "number",
+    "field": "clips",
+    "unit": "",
+    "tolerance": 0.1
+   },
+   "measure": [
+    "clips"
+   ],
+   "record": [
+    "distance",
+    "clips"
+   ]
+  },
+  "engineer": {
+   "ages": "12-15",
+   "fixed": {
+    "item": "clip",
+    "distance": 0
+   },
+   "predict": {
+    "kind": "choice",
+    "field": "pushPull",
+    "choices": [
+     "pull",
+     "push"
+    ]
+   },
+   "measure": [
+    "clips",
+    "pushPull"
+   ],
+   "record": [
+    "distance",
+    "clips"
+   ],
+   "challenge": {
+    "en": "Find the distance where the magnet lifts exactly half the clips.",
+    "ja": "クリップが はんぶんに なる きょりを さがそう。"
+   }
+  }
+ },
+ "explain": {
+  "en": "What does a magnet pull?",
+  "ja": "じしゃくは なにを ひきつける？",
+  "aims": [
+   {
+    "id": "iron",
+    "en": "It pulls iron and steel, not aluminium, copper or paper",
+    "ja": "てつは つくが、アルミ・どう・かみは つかない",
+    "keys": [
+     [
+      "iron",
+      "steel"
+     ],
+     [
+      "pull",
+      "pulls",
+      "stick",
+      "sticks",
+      "attract",
+      "attracts"
+     ]
+    ]
+   },
+   {
+    "id": "distance",
+    "en": "Farther away, weaker",
+    "ja": "はなれると よわくなる",
+    "keys": [
+     [
+      "far",
+      "farther",
+      "distance",
+      "away",
+      "gap"
+     ],
+     [
+      "weak",
+      "weaker",
+      "less",
+      "fewer",
+      "drop",
+      "drops"
+     ]
+    ]
+   },
+   {
+    "id": "poles",
+    "en": "Same poles push, different poles pull",
+    "ja": "おなじ きょくは おしあい、ちがう きょくは ひきあう",
+    "keys": [
+     [
+      "pole",
+      "poles",
+      "north",
+      "south",
+      "n",
+      "s"
+     ],
+     [
+      "push",
+      "repel",
+      "pull",
+      "attract",
+      "same",
+      "different",
+      "opposite"
+     ]
+    ]
+   }
+  ]
+ },
+ "classPlot": {
+  "x": "distance",
+  "y": "clips",
+  "xLabel": {
+   "en": "Distance (cm)",
+   "ja": "きょり（cm）"
+  },
+  "yLabel": {
+   "en": "Clips lifted",
+   "ja": "もちあがった クリップ"
+  }
+ },
+ "real": {
+  "en": "Walk around the kitchen with a fridge magnet and list what it sticks to.",
+  "ja": "れいぞうこの じしゃくを もって、くっつく ものを さがそう。",
+  "kit": [
+   "a magnet",
+   "paper clips"
+  ]
+ },
+ "standards": {
+  "jp": [
+   "小3 磁石の性質"
+  ],
+  "ngss": [
+   "3-PS2-3"
+  ],
+  "cambridge": [
+   "Science enquiry"
+  ],
+  "pisa": [
+   "explain",
+   "interpret"
+  ]
+ },
+ "powers": {
+  "predict": 1,
+  "measure": 1,
+  "data": 1,
+  "explain": 1,
+  "build": 1
+ },
+ "ui": {
+  "labels": {
+   "sticks": {
+    "en": "Sticks to the magnet?",
+    "ja": "じしゃくに つく？"
+   },
+   "clips": {
+    "en": "Clips lifted",
+    "ja": "もちあがった クリップ"
+   },
+   "pushPull": {
+    "en": "Push or pull",
+    "ja": "おす？ ひく？"
+   },
+   "material": {
+    "en": "Made of",
+    "ja": "ざいりょう"
+   }
+  },
+  "questions": {
+   "sticks": {
+    "en": "Will it stick to the magnet?",
+    "ja": "じしゃくに つく？"
+   },
+   "clips": {
+    "en": "How many clips will it lift?",
+    "ja": "クリップは なんこ もちあがる？"
+   },
+   "pushPull": {
+    "en": "Will the two magnets push apart or pull together?",
+    "ja": "2つの じしゃくは おしあう？ ひきあう？"
+   }
+  },
+  "choices": {
+   "sticks": {
+    "yes": {
+     "en": "Yes",
+     "ja": "はい"
+    },
+    "no": {
+     "en": "No",
+     "ja": "いいえ"
+    }
+   },
+   "pushPull": {
+    "pull": {
+     "en": "Pull together",
+     "ja": "ひきあう"
+    },
+    "push": {
+     "en": "Push apart",
+     "ja": "おしあう"
+    }
+   },
+   "material": {
+    "iron": {
+     "en": "Iron or steel",
+     "ja": "てつ"
+    },
+    "not-iron": {
+     "en": "Not iron",
+     "ja": "てつ じゃない"
+    }
+   }
+  },
+  "paramChoices": {
+   "item": {
+    "clip": {
+     "en": "Steel clip",
+     "ja": "てつの クリップ"
+    },
+    "nail": {
+     "en": "Iron nail",
+     "ja": "てつの くぎ"
+    },
+    "can": {
+     "en": "Steel can",
+     "ja": "スチールかん"
+    },
+    "coin": {
+     "en": "Aluminium coin",
+     "ja": "アルミの こうか"
+    },
+    "wire": {
+     "en": "Copper wire",
+     "ja": "どうの はりがね"
+    },
+    "eraser": {
+     "en": "Eraser",
+     "ja": "けしゴム"
+    },
+    "paper": {
+     "en": "Paper",
+     "ja": "かみ"
+    }
+   },
+   "poles": {
+    "N-S": {
+     "en": "N facing S",
+     "ja": "N と S"
+    },
+    "N-N": {
+     "en": "N facing N",
+     "ja": "N と N"
+    },
+    "S-S": {
+     "en": "S facing S",
+     "ja": "S と S"
+    }
+   }
+  }
+ }
+}

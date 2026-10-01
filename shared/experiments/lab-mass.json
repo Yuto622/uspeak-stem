@@ -1,0 +1,323 @@
+{
+ "id": "lab.mass",
+ "region": "lab",
+ "station": "balance-table",
+ "title": {
+  "en": "The Balance Table",
+  "ja": "はかりの テーブル"
+ },
+ "sim": "massShape",
+ "grade": "小3",
+ "unit": "物と重さ",
+ "intro": {
+  "en": "Squash a lump of clay into a ball, a pancake, or pieces, and weigh it each time. Then weigh the same size block of wood, plastic, iron.",
+  "ja": "ねんどを まるめたり、ひらたくしたり、ちぎったりして、そのたびに はかろう。おなじ 大きさの き・プラスチック・てつも はかろう。"
+ },
+ "params": {
+  "material": {
+   "choices": [
+    "foam",
+    "wood",
+    "ice",
+    "plastic",
+    "rubber",
+    "glass",
+    "aluminium",
+    "iron",
+    "copper"
+   ],
+   "en": "Material",
+   "ja": "ざいりょう"
+  },
+  "volume": {
+   "min": 20,
+   "max": 100,
+   "step": 10,
+   "unit": "cm³",
+   "en": "Size",
+   "ja": "大きさ"
+  },
+  "shape": {
+   "choices": [
+    "ball",
+    "flat",
+    "pieces"
+   ],
+   "en": "Shape",
+   "ja": "かたち"
+  }
+ },
+ "levels": {
+  "explore": {
+   "ages": "4-7",
+   "fixed": {
+    "material": "plastic",
+    "volume": 50
+   },
+   "predict": {
+    "kind": "choice",
+    "field": "shapeChanges",
+    "choices": [
+     "same",
+     "lighter",
+     "heavier"
+    ]
+   },
+   "measure": [
+    "grams",
+    "shapeChanges"
+   ]
+  },
+  "investigate": {
+   "ages": "8-11",
+   "fixed": {
+    "shape": "ball"
+   },
+   "predict": {
+    "kind": "number",
+    "field": "grams",
+    "unit": "g",
+    "tolerance": 0.1
+   },
+   "measure": [
+    "grams"
+   ],
+   "record": [
+    "volume",
+    "grams"
+   ]
+  },
+  "engineer": {
+   "ages": "12-15",
+   "fixed": {
+    "shape": "ball"
+   },
+   "predict": {
+    "kind": "number",
+    "field": "grams",
+    "unit": "g",
+    "tolerance": 0.05
+   },
+   "measure": [
+    "grams",
+    "density"
+   ],
+   "record": [
+    "volume",
+    "grams"
+   ],
+   "challenge": {
+    "en": "Find the material that weighs more than iron for the same size.",
+    "ja": "おなじ 大きさで てつより おもい ざいりょうを さがそう。"
+   }
+  }
+ },
+ "explain": {
+  "en": "Does changing the shape change the weight? What does?",
+  "ja": "かたちを かえると おもさは かわる？ なにで かわる？",
+  "aims": [
+   {
+    "id": "shape-same",
+    "en": "Changing the shape does not change the weight",
+    "ja": "かたちを かえても おもさは おなじ",
+    "keys": [
+     [
+      "shape",
+      "ball",
+      "flat",
+      "pieces"
+     ],
+     [
+      "same",
+      "not",
+      "doesn't",
+      "does not",
+      "no"
+     ]
+    ]
+   },
+   {
+    "id": "material",
+    "en": "Different materials weigh different amounts for the same size",
+    "ja": "おなじ 大きさでも ざいりょうで おもさが ちがう",
+    "keys": [
+     [
+      "material",
+      "iron",
+      "wood",
+      "plastic",
+      "metal",
+      "different"
+     ],
+     [
+      "heavier",
+      "lighter",
+      "heavy",
+      "light",
+      "weighs",
+      "weight"
+     ]
+    ]
+   },
+   {
+    "id": "volume",
+    "en": "A bigger piece weighs more",
+    "ja": "大きい ほうが おもい",
+    "keys": [
+     [
+      "bigger",
+      "big",
+      "larger",
+      "more",
+      "size",
+      "volume"
+     ],
+     [
+      "heavier",
+      "weighs",
+      "weight",
+      "more"
+     ]
+    ]
+   }
+  ]
+ },
+ "classPlot": {
+  "x": "volume",
+  "y": "grams",
+  "xLabel": {
+   "en": "Size (cm³)",
+   "ja": "大きさ（cm³）"
+  },
+  "yLabel": {
+   "en": "Weight (g)",
+   "ja": "おもさ（g）"
+  }
+ },
+ "real": {
+  "en": "Weigh a ball of clay, flatten it, weigh it again.",
+  "ja": "ねんどの たまを はかって、ひらたくして、また はかろう。",
+  "kit": [
+   "clay",
+   "kitchen scale"
+  ]
+ },
+ "standards": {
+  "jp": [
+   "小3 物と重さ"
+  ],
+  "ngss": [
+   "2-PS1-1"
+  ],
+  "cambridge": [
+   "Science enquiry"
+  ],
+  "pisa": [
+   "explain",
+   "interpret"
+  ]
+ },
+ "powers": {
+  "predict": 1,
+  "measure": 1,
+  "data": 1,
+  "explain": 1,
+  "build": 1
+ },
+ "ui": {
+  "labels": {
+   "grams": {
+    "en": "Weight (g)",
+    "ja": "おもさ（g）"
+   },
+   "shapeChanges": {
+    "en": "When the shape changes, the weight…",
+    "ja": "かたちを かえると おもさは…"
+   },
+   "density": {
+    "en": "Weight per cm³ (g)",
+    "ja": "1 cm³ の おもさ（g）"
+   }
+  },
+  "questions": {
+   "shapeChanges": {
+    "en": "If you change the shape, what happens to the weight?",
+    "ja": "かたちを かえると、おもさは どうなる？"
+   },
+   "grams": {
+    "en": "How many grams will it weigh?",
+    "ja": "なん g に なる？"
+   }
+  },
+  "choices": {
+   "shapeChanges": {
+    "same": {
+     "en": "Stays the same",
+     "ja": "かわらない"
+    },
+    "lighter": {
+     "en": "Gets lighter",
+     "ja": "かるくなる"
+    },
+    "heavier": {
+     "en": "Gets heavier",
+     "ja": "おもくなる"
+    }
+   }
+  },
+  "paramChoices": {
+   "material": {
+    "foam": {
+     "en": "Foam",
+     "ja": "はっぽうスチロール"
+    },
+    "wood": {
+     "en": "Wood",
+     "ja": "き"
+    },
+    "ice": {
+     "en": "Ice",
+     "ja": "こおり"
+    },
+    "plastic": {
+     "en": "Plastic",
+     "ja": "プラスチック"
+    },
+    "rubber": {
+     "en": "Rubber",
+     "ja": "ゴム"
+    },
+    "glass": {
+     "en": "Glass",
+     "ja": "ガラス"
+    },
+    "aluminium": {
+     "en": "Aluminium",
+     "ja": "アルミニウム"
+    },
+    "iron": {
+     "en": "Iron",
+     "ja": "てつ"
+    },
+    "copper": {
+     "en": "Copper",
+     "ja": "どう"
+    }
+   },
+   "shape": {
+    "ball": {
+     "en": "A ball",
+     "ja": "まるめる"
+    },
+    "flat": {
+     "en": "Flattened",
+     "ja": "ひらたく"
+    },
+    "pieces": {
+     "en": "In pieces",
+     "ja": "ちぎる"
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,322 @@
+{
+ "id": "earth.shadow",
+ "region": "earth",
+ "station": "shadow-post",
+ "title": {
+  "en": "The Shadow Post",
+  "ja": "かげの ぼう"
+ },
+ "sim": "shadow",
+ "grade": "小3",
+ "unit": "太陽とかげ",
+ "intro": {
+  "en": "A stick in the sun. Through the day the shadow swings from west to north to east, shortest at noon when the sun is highest. The sunny side is warmer.",
+  "ja": "ひなたの ぼう。かげは にし → きた → ひがしへ まわり、たいようが いちばん たかい ひるに いちばん みじかい。ひなたは あたたかい。"
+ },
+ "params": {
+  "hour": {
+   "min": 7,
+   "max": 17,
+   "step": 1,
+   "unit": "h",
+   "en": "Time",
+   "ja": "じこく"
+  },
+  "month": {
+   "min": 1,
+   "max": 12,
+   "step": 1,
+   "unit": "",
+   "en": "Month",
+   "ja": "つき"
+  }
+ },
+ "levels": {
+  "explore": {
+   "ages": "4-7",
+   "fixed": {
+    "month": 6
+   },
+   "predict": {
+    "kind": "choice",
+    "field": "shadowDir",
+    "choices": [
+     "N",
+     "NE",
+     "E",
+     "SE",
+     "S",
+     "SW",
+     "W",
+     "NW"
+    ]
+   },
+   "measure": [
+    "shadowDir",
+    "length"
+   ]
+  },
+  "investigate": {
+   "ages": "8-11",
+   "predict": {
+    "kind": "number",
+    "field": "length",
+    "unit": "m",
+    "tolerance": 0.1
+   },
+   "measure": [
+    "length",
+    "altitude"
+   ],
+   "record": [
+    "hour",
+    "length"
+   ]
+  },
+  "engineer": {
+   "ages": "12-15",
+   "predict": {
+    "kind": "number",
+    "field": "altitude",
+    "unit": "°",
+    "tolerance": 0.05
+   },
+   "measure": [
+    "altitude",
+    "length",
+    "shadowDir"
+   ],
+   "record": [
+    "month",
+    "altitude"
+   ],
+   "challenge": {
+    "en": "Find the month and hour with the shortest shadow of the year.",
+    "ja": "1ねんで いちばん みじかい かげの つきと じこくは？"
+   }
+  }
+ },
+ "explain": {
+  "en": "Why does the shadow move?",
+  "ja": "どうして かげは うごく？",
+  "aims": [
+   {
+    "id": "opposite",
+    "en": "The shadow points away from the sun",
+    "ja": "かげは たいようの はんたいがわ",
+    "keys": [
+     [
+      "opposite",
+      "away",
+      "other side",
+      "behind",
+      "against"
+     ],
+     [
+      "sun"
+     ]
+    ]
+   },
+   {
+    "id": "sun-moves",
+    "en": "The sun moves east to south to west, so the shadow swings",
+    "ja": "たいようが ひがし → みなみ → にしと うごくから かげも まわる",
+    "keys": [
+     [
+      "east",
+      "south",
+      "west",
+      "move",
+      "moves",
+      "moving",
+      "swing",
+      "swings",
+      "turn",
+      "turns"
+     ]
+    ]
+   },
+   {
+    "id": "noon",
+    "en": "At noon the sun is highest and the shadow shortest",
+    "ja": "ひるは たいようが たかくて かげが みじかい",
+    "keys": [
+     [
+      "noon",
+      "midday",
+      "12",
+      "high",
+      "highest"
+     ],
+     [
+      "short",
+      "shortest",
+      "small",
+      "smallest"
+     ]
+    ]
+   }
+  ]
+ },
+ "classPlot": {
+  "x": "hour",
+  "y": "length",
+  "xLabel": {
+   "en": "Time (h)",
+   "ja": "じこく"
+  },
+  "yLabel": {
+   "en": "Shadow length (m)",
+   "ja": "かげの ながさ（m）"
+  }
+ },
+ "real": {
+  "en": "Stand a pencil in clay on a sunny windowsill and mark the shadow tip every hour.",
+  "ja": "まどべの ねんどに えんぴつを たてて、1じかんごとに かげの さきに しるしを。",
+  "kit": [
+   "a pencil",
+   "clay",
+   "chalk"
+  ]
+ },
+ "standards": {
+  "jp": [
+   "小3 太陽と地面の様子"
+  ],
+  "ngss": [
+   "1-ESS1-1"
+  ],
+  "cambridge": [
+   "Science enquiry"
+  ],
+  "pisa": [
+   "explain",
+   "interpret"
+  ]
+ },
+ "powers": {
+  "predict": 1,
+  "measure": 1,
+  "data": 1,
+  "explain": 1,
+  "build": 1
+ },
+ "ui": {
+  "labels": {
+   "shadowDir": {
+    "en": "Shadow points",
+    "ja": "かげの むき"
+   },
+   "length": {
+    "en": "Shadow length (m)",
+    "ja": "かげの ながさ（m）"
+   },
+   "altitude": {
+    "en": "Sun height (°)",
+    "ja": "たいようの たかさ（°）"
+   },
+   "sunDir": {
+    "en": "Sun is in the",
+    "ja": "たいようの ほうこう"
+   },
+   "warmer": {
+    "en": "Sunny ground warmer?",
+    "ja": "ひなたは あたたかい？"
+   }
+  },
+  "questions": {
+   "shadowDir": {
+    "en": "Which way will the shadow point?",
+    "ja": "かげは どっちを むく？"
+   },
+   "length": {
+    "en": "How long will the 1 m stick's shadow be (m)?",
+    "ja": "1 m の ぼうの かげは なん m？"
+   },
+   "altitude": {
+    "en": "How high will the sun be (°)?",
+    "ja": "たいようの たかさは なんど？"
+   }
+  },
+  "choices": {
+   "shadowDir": {
+    "N": {
+     "en": "N",
+     "ja": "きた"
+    },
+    "NE": {
+     "en": "NE",
+     "ja": "ほくとう"
+    },
+    "E": {
+     "en": "E",
+     "ja": "ひがし"
+    },
+    "SE": {
+     "en": "SE",
+     "ja": "なんとう"
+    },
+    "S": {
+     "en": "S",
+     "ja": "みなみ"
+    },
+    "SW": {
+     "en": "SW",
+     "ja": "なんせい"
+    },
+    "W": {
+     "en": "W",
+     "ja": "にし"
+    },
+    "NW": {
+     "en": "NW",
+     "ja": "ほくせい"
+    }
+   },
+   "sunDir": {
+    "N": {
+     "en": "N",
+     "ja": "きた"
+    },
+    "NE": {
+     "en": "NE",
+     "ja": "ほくとう"
+    },
+    "E": {
+     "en": "E",
+     "ja": "ひがし"
+    },
+    "SE": {
+     "en": "SE",
+     "ja": "なんとう"
+    },
+    "S": {
+     "en": "S",
+     "ja": "みなみ"
+    },
+    "SW": {
+     "en": "SW",
+     "ja": "なんせい"
+    },
+    "W": {
+     "en": "W",
+     "ja": "にし"
+    },
+    "NW": {
+     "en": "NW",
+     "ja": "ほくせい"
+    }
+   },
+   "warmer": {
+    "yes": {
+     "en": "Yes",
+     "ja": "はい"
+    },
+    "no": {
+     "en": "No",
+     "ja": "いいえ"
+    }
+   }
+  }
+ }
+}

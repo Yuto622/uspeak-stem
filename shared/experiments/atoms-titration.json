@@ -1,0 +1,335 @@
+{
+ "id": "atoms.titration",
+ "region": "atoms",
+ "station": "drip-bench",
+ "title": {
+  "en": "The Drip Bench",
+  "ja": "ちゅうわの だい"
+ },
+ "sim": "titration",
+ "grade": "中3",
+ "unit": "酸・アルカリと中和",
+ "intro": {
+  "en": "Ten millilitres of acid with a drop of BTB. Drip in base. Yellow, then green at exactly neutral, then blue. Dry a drop of the green: salt crystals.",
+  "ja": "さん 10 mL に BTB を 1てき。アルカリを たらそう。きいろ → ちゅうせいで みどり → あお。みどりの しずくを かわかすと しおの けっしょう。"
+ },
+ "params": {
+  "acidMl": {
+   "min": 5,
+   "max": 20,
+   "step": 5,
+   "unit": "mL",
+   "en": "Acid",
+   "ja": "さんの りょう"
+  },
+  "acidC": {
+   "choices": [
+    "0.05",
+    "0.1",
+    "0.2"
+   ],
+   "en": "Acid strength",
+   "ja": "さんの こさ"
+  },
+  "baseC": {
+   "choices": [
+    "0.1"
+   ],
+   "en": "Base strength",
+   "ja": "アルカリの こさ"
+  },
+  "baseMl": {
+   "min": 0,
+   "max": 30,
+   "step": 1,
+   "unit": "mL",
+   "en": "Base dripped in",
+   "ja": "たらした アルカリ"
+  }
+ },
+ "levels": {
+  "explore": {
+   "ages": "4-7",
+   "fixed": {
+    "acidMl": 10,
+    "acidC": "0.1",
+    "baseC": "0.1"
+   },
+   "predict": {
+    "kind": "choice",
+    "field": "color",
+    "choices": [
+     "yellow",
+     "green",
+     "blue"
+    ]
+   },
+   "measure": [
+    "color",
+    "state"
+   ]
+  },
+  "investigate": {
+   "ages": "8-11",
+   "fixed": {
+    "baseC": "0.1"
+   },
+   "predict": {
+    "kind": "number",
+    "field": "neutralMl",
+    "unit": "mL",
+    "tolerance": 0.05
+   },
+   "measure": [
+    "neutralMl",
+    "color"
+   ],
+   "record": [
+    "baseMl",
+    "neutralMl"
+   ]
+  },
+  "engineer": {
+   "ages": "12-15",
+   "fixed": {
+    "baseC": "0.1"
+   },
+   "predict": {
+    "kind": "choice",
+    "field": "ionsLeft",
+    "choices": [
+     "H+",
+     "OH-",
+     "none"
+    ]
+   },
+   "measure": [
+    "color",
+    "state",
+    "neutralMl"
+   ],
+   "record": [
+    "baseMl",
+    "neutralMl"
+   ],
+   "challenge": {
+    "en": "Hit green on the first try for 15 mL of the strong acid.",
+    "ja": "こい さん 15 mL を、1かいで みどりに しよう。"
+   }
+  }
+ },
+ "explain": {
+  "en": "What happens when an acid meets a base?",
+  "ja": "さんと アルカリが あうと どうなる？",
+  "aims": [
+   {
+    "id": "neutral",
+    "en": "Acid and base cancel to neutral",
+    "ja": "さんと アルカリは うちけしあって ちゅうせいに",
+    "keys": [
+     [
+      "neutral",
+      "neutralise",
+      "neutralize",
+      "cancel",
+      "green"
+     ]
+    ]
+   },
+   {
+    "id": "salt-water",
+    "en": "They make salt and water",
+    "ja": "しおと みずが できる",
+    "keys": [
+     [
+      "salt"
+     ],
+     [
+      "water"
+     ]
+    ]
+   },
+   {
+    "id": "ions",
+    "en": "H+ and OH− join to make water",
+    "ja": "H+ と OH− が くっついて みず",
+    "keys": [
+     [
+      "h+",
+      "hydrogen ion",
+      "oh-",
+      "hydroxide",
+      "ions",
+      "ion"
+     ],
+     [
+      "join",
+      "joins",
+      "combine",
+      "combines",
+      "make",
+      "makes",
+      "water"
+     ]
+    ]
+   }
+  ]
+ },
+ "classPlot": {
+  "x": "baseMl",
+  "y": "neutralMl",
+  "xLabel": {
+   "en": "Base dripped (mL)",
+   "ja": "たらした アルカリ（mL）"
+  },
+  "yLabel": {
+   "en": "Needed for green (mL)",
+   "ja": "みどりに なる りょう（mL）"
+  }
+ },
+ "real": {
+  "en": "Red cabbage juice in vinegar, then baking soda a pinch at a time: watch the colour swing.",
+  "ja": "むらさきキャベツの しるを すに 入れて、じゅうそうを すこしずつ。いろが かわる。",
+  "kit": [
+   "red cabbage",
+   "vinegar",
+   "baking soda"
+  ]
+ },
+ "standards": {
+  "jp": [
+   "中3 化学変化とイオン（中和）"
+  ],
+  "ngss": [
+   "MS-PS1-2"
+  ],
+  "cambridge": [
+   "Science enquiry"
+  ],
+  "pisa": [
+   "explain",
+   "interpret"
+  ]
+ },
+ "powers": {
+  "predict": 1,
+  "measure": 1,
+  "data": 1,
+  "explain": 1,
+  "build": 1
+ },
+ "ui": {
+  "labels": {
+   "color": {
+    "en": "BTB colour",
+    "ja": "BTB の いろ"
+   },
+   "state": {
+    "en": "The solution is",
+    "ja": "えきは"
+   },
+   "neutralMl": {
+    "en": "Base for neutral (mL)",
+    "ja": "ちゅうせいに なる アルカリ（mL）"
+   },
+   "ionsLeft": {
+    "en": "Ions left over",
+    "ja": "のこる イオン"
+   },
+   "salt": {
+    "en": "Salt crystals?",
+    "ja": "しおの けっしょう？"
+   }
+  },
+  "questions": {
+   "color": {
+    "en": "What colour will the BTB be?",
+    "ja": "BTB は なにいろに なる？"
+   },
+   "neutralMl": {
+    "en": "How many mL of base make it exactly neutral?",
+    "ja": "なん mL で ちょうど ちゅうせい？"
+   },
+   "ionsLeft": {
+    "en": "Which ions will be left over?",
+    "ja": "どの イオンが のこる？"
+   }
+  },
+  "choices": {
+   "color": {
+    "yellow": {
+     "en": "Yellow",
+     "ja": "きいろ"
+    },
+    "green": {
+     "en": "Green",
+     "ja": "みどり"
+    },
+    "blue": {
+     "en": "Blue",
+     "ja": "あお"
+    }
+   },
+   "state": {
+    "acidic": {
+     "en": "Acidic",
+     "ja": "さんせい"
+    },
+    "neutral": {
+     "en": "Neutral",
+     "ja": "ちゅうせい"
+    },
+    "basic": {
+     "en": "Basic",
+     "ja": "アルカリせい"
+    }
+   },
+   "ionsLeft": {
+    "H+": {
+     "en": "H+ (acid)",
+     "ja": "H+（さん）"
+    },
+    "OH-": {
+     "en": "OH− (base)",
+     "ja": "OH−（アルカリ）"
+    },
+    "none": {
+     "en": "None, neutral",
+     "ja": "なし（ちゅうせい）"
+    }
+   },
+   "salt": {
+    "yes": {
+     "en": "Yes",
+     "ja": "はい"
+    },
+    "no": {
+     "en": "No",
+     "ja": "いいえ"
+    }
+   }
+  },
+  "paramChoices": {
+   "acidC": {
+    "0.05": {
+     "en": "Weak (0.05 mol/L)",
+     "ja": "うすい"
+    },
+    "0.1": {
+     "en": "Medium (0.1 mol/L)",
+     "ja": "ふつう"
+    },
+    "0.2": {
+     "en": "Strong (0.2 mol/L)",
+     "ja": "こい"
+    }
+   },
+   "baseC": {
+    "0.1": {
+     "en": "0.1 mol/L",
+     "ja": "0.1 mol/L"
+    }
+   }
+  }
+ }
+}

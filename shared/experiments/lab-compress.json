@@ -1,0 +1,266 @@
+{
+ "id": "lab.compress",
+ "region": "lab",
+ "station": "piston-bench",
+ "title": {
+  "en": "The Piston Bench",
+  "ja": "おしこむ だい"
+ },
+ "sim": "compress",
+ "grade": "小4",
+ "unit": "とじこめた空気と水",
+ "intro": {
+  "en": "Trap air in a syringe and push. Then trap water. Which one squashes, and which one pushes back?",
+  "ja": "ちゅうしゃきに くうきを とじこめて おそう。つぎは みず。どっちが ちぢむ？ おしかえすのは？"
+ },
+ "params": {
+  "fluid": {
+   "choices": [
+    "air",
+    "water"
+   ],
+   "en": "What is inside",
+   "ja": "なかみ"
+  },
+  "push": {
+   "min": 0,
+   "max": 3,
+   "step": 0.5,
+   "unit": "",
+   "en": "How hard you push",
+   "ja": "おす つよさ"
+  }
+ },
+ "levels": {
+  "explore": {
+   "ages": "4-7",
+   "fixed": {
+    "push": 1
+   },
+   "predict": {
+    "kind": "choice",
+    "field": "squashes",
+    "choices": [
+     "yes",
+     "no"
+    ]
+   },
+   "measure": [
+    "squashes",
+    "volume"
+   ]
+  },
+  "investigate": {
+   "ages": "8-11",
+   "predict": {
+    "kind": "number",
+    "field": "volume",
+    "unit": "mL",
+    "tolerance": 0.1
+   },
+   "measure": [
+    "volume",
+    "pushBack"
+   ],
+   "record": [
+    "push",
+    "volume"
+   ]
+  },
+  "engineer": {
+   "ages": "12-15",
+   "fixed": {
+    "fluid": "air"
+   },
+   "predict": {
+    "kind": "number",
+    "field": "pressed",
+    "unit": "mL",
+    "tolerance": 0.1
+   },
+   "measure": [
+    "volume",
+    "pressed"
+   ],
+   "record": [
+    "push",
+    "volume"
+   ],
+   "challenge": {
+    "en": "Find the push that squashes the air to half.",
+    "ja": "くうきを はんぶんに ちぢめる おしかたを さがそう。"
+   }
+  }
+ },
+ "explain": {
+  "en": "Why does air squash but water does not?",
+  "ja": "どうして くうきは ちぢむのに みずは ちぢまない？",
+  "aims": [
+   {
+    "id": "air-squash",
+    "en": "Air can be squashed smaller",
+    "ja": "くうきは おしちぢめられる",
+    "keys": [
+     [
+      "air"
+     ],
+     [
+      "squash",
+      "squashed",
+      "smaller",
+      "compress",
+      "compressed",
+      "shrink",
+      "shrinks",
+      "less"
+     ]
+    ]
+   },
+   {
+    "id": "water-not",
+    "en": "Water cannot be squashed",
+    "ja": "みずは ちぢまない",
+    "keys": [
+     [
+      "water"
+     ],
+     [
+      "not",
+      "can't",
+      "cannot",
+      "doesn't",
+      "does not",
+      "same",
+      "no"
+     ]
+    ]
+   },
+   {
+    "id": "push-back",
+    "en": "Squashed air pushes back",
+    "ja": "ちぢんだ くうきは おしかえす",
+    "keys": [
+     [
+      "push",
+      "pushes",
+      "pushed",
+      "spring",
+      "springs",
+      "back",
+      "bounce"
+     ]
+    ]
+   }
+  ]
+ },
+ "classPlot": {
+  "x": "push",
+  "y": "volume",
+  "xLabel": {
+   "en": "Push",
+   "ja": "おす つよさ"
+  },
+  "yLabel": {
+   "en": "Volume (mL)",
+   "ja": "たいせき（mL）"
+  }
+ },
+ "real": {
+  "en": "Cap a syringe with your finger and push the plunger with air, then with water.",
+  "ja": "ちゅうしゃきの さきを ゆびで ふさいで、くうきと みずで おしてみよう。",
+  "kit": [
+   "a syringe",
+   "water"
+  ]
+ },
+ "standards": {
+  "jp": [
+   "小4 空気と水の性質"
+  ],
+  "ngss": [
+   "5-PS1-1"
+  ],
+  "cambridge": [
+   "Science enquiry"
+  ],
+  "pisa": [
+   "explain",
+   "interpret"
+  ]
+ },
+ "powers": {
+  "predict": 1,
+  "measure": 1,
+  "data": 1,
+  "explain": 1,
+  "build": 1
+ },
+ "ui": {
+  "labels": {
+   "squashes": {
+    "en": "Does it squash?",
+    "ja": "ちぢむ？"
+   },
+   "volume": {
+    "en": "Volume (mL)",
+    "ja": "たいせき（mL）"
+   },
+   "pushBack": {
+    "en": "Pushes back",
+    "ja": "おしかえす"
+   },
+   "pressed": {
+    "en": "Squashed by (mL)",
+    "ja": "ちぢんだ ぶん（mL）"
+   }
+  },
+  "questions": {
+   "squashes": {
+    "en": "Will it squash smaller when you push?",
+    "ja": "おすと ちぢむ？"
+   },
+   "volume": {
+    "en": "How many mL will be left?",
+    "ja": "なん mL に なる？"
+   },
+   "pressed": {
+    "en": "By how many mL will it shrink?",
+    "ja": "なん mL ちぢむ？"
+   }
+  },
+  "choices": {
+   "squashes": {
+    "yes": {
+     "en": "Yes",
+     "ja": "はい"
+    },
+    "no": {
+     "en": "No",
+     "ja": "いいえ"
+    }
+   },
+   "pushBack": {
+    "strong": {
+     "en": "Yes, it pushes back",
+     "ja": "おしかえす"
+    },
+    "none": {
+     "en": "No",
+     "ja": "おしかえさない"
+    }
+   }
+  },
+  "paramChoices": {
+   "fluid": {
+    "air": {
+     "en": "Air",
+     "ja": "くうき"
+    },
+    "water": {
+     "en": "Water",
+     "ja": "みず"
+    }
+   }
+  }
+ }
+}

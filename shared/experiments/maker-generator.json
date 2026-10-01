@@ -1,0 +1,284 @@
+{
+ "id": "maker.generator",
+ "region": "maker",
+ "station": "crank-house",
+ "title": {
+  "en": "The Crank House",
+  "ja": "はつでんの こや"
+ },
+ "sim": "generator",
+ "grade": "小6",
+ "unit": "電気と私たちの生活（発電・蓄電）",
+ "intro": {
+  "en": "Crank the generator to fill a capacitor, then let it run a bulb, an LED, a motor. The LED runs far longer: it uses less.",
+  "ja": "はつでんきを まわして コンデンサーに ため、でんきゅう・LED・モーターを うごかそう。LED は ずっと ながく つく。つかう でんきが すくない。"
+ },
+ "params": {
+  "turns": {
+   "min": 10,
+   "max": 60,
+   "step": 10,
+   "unit": "",
+   "en": "Cranks",
+   "ja": "まわす かいすう"
+  },
+  "device": {
+   "choices": [
+    "bulb",
+    "led",
+    "motor",
+    "buzzer"
+   ],
+   "en": "Device",
+   "ja": "つなぐ もの"
+  }
+ },
+ "levels": {
+  "explore": {
+   "ages": "4-7",
+   "fixed": {
+    "turns": 20
+   },
+   "predict": {
+    "kind": "choice",
+    "field": "bucket",
+    "choices": [
+     "under-20",
+     "20-60",
+     "over-60"
+    ]
+   },
+   "measure": [
+    "seconds"
+   ]
+  },
+  "investigate": {
+   "ages": "8-11",
+   "predict": {
+    "kind": "number",
+    "field": "seconds",
+    "unit": "s",
+    "tolerance": 0.1
+   },
+   "measure": [
+    "seconds",
+    "stored"
+   ],
+   "record": [
+    "turns",
+    "seconds"
+   ]
+  },
+  "engineer": {
+   "ages": "12-15",
+   "predict": {
+    "kind": "number",
+    "field": "stored",
+    "unit": "J",
+    "tolerance": 0.05
+   },
+   "measure": [
+    "seconds",
+    "stored"
+   ],
+   "record": [
+    "turns",
+    "stored"
+   ],
+   "challenge": {
+    "en": "Store enough to run the motor for 30 seconds.",
+    "ja": "モーターを 30びょう うごかす ぶんを ためよう。"
+   }
+  }
+ },
+ "explain": {
+  "en": "Where does the electricity come from, and where does it go?",
+  "ja": "でんきは どこから きて どこへ いく？",
+  "aims": [
+   {
+    "id": "motion",
+    "en": "Turning the crank makes electricity",
+    "ja": "まわすと でんきが できる",
+    "keys": [
+     [
+      "turn",
+      "turning",
+      "crank",
+      "cranking",
+      "spin",
+      "spinning",
+      "move",
+      "motion",
+      "hand"
+     ],
+     [
+      "electricity",
+      "electric",
+      "generate",
+      "generates",
+      "make",
+      "makes",
+      "charge",
+      "charges"
+     ]
+    ]
+   },
+   {
+    "id": "store",
+    "en": "The capacitor stores it",
+    "ja": "コンデンサーに ためる",
+    "keys": [
+     [
+      "capacitor",
+      "store",
+      "stores",
+      "stored",
+      "save",
+      "saves",
+      "keep",
+      "keeps"
+     ]
+    ]
+   },
+   {
+    "id": "led-less",
+    "en": "The LED uses less, so it lasts longer",
+    "ja": "LED は つかう でんきが すくないから ながもち",
+    "keys": [
+     [
+      "led"
+     ],
+     [
+      "less",
+      "longer",
+      "efficient",
+      "little",
+      "small",
+      "saves"
+     ]
+    ]
+   }
+  ]
+ },
+ "classPlot": {
+  "x": "turns",
+  "y": "seconds",
+  "xLabel": {
+   "en": "Cranks",
+   "ja": "まわした かいすう"
+  },
+  "yLabel": {
+   "en": "Runs for (s)",
+   "ja": "うごく びょう"
+  }
+ },
+ "real": {
+  "en": "Compare how long a hand-crank torch stays lit on bulb and on LED settings.",
+  "ja": "てまわし かいちゅうでんとうで、でんきゅうと LED の もつ じかんを くらべよう。",
+  "kit": [
+   "a hand-crank torch"
+  ]
+ },
+ "standards": {
+  "jp": [
+   "小6 電気の利用"
+  ],
+  "ngss": [
+   "4-PS3-4"
+  ],
+  "cambridge": [
+   "Science enquiry"
+  ],
+  "pisa": [
+   "explain",
+   "interpret"
+  ]
+ },
+ "powers": {
+  "predict": 1,
+  "measure": 1,
+  "data": 1,
+  "explain": 1,
+  "build": 1
+ },
+ "ui": {
+  "labels": {
+   "seconds": {
+    "en": "Runs for (s)",
+    "ja": "うごく びょう"
+   },
+   "bucket": {
+    "en": "How long?",
+    "ja": "どれくらい？"
+   },
+   "stored": {
+    "en": "Energy stored (J)",
+    "ja": "ためた エネルギー（J）"
+   },
+   "longer": {
+    "en": "Lasts longer",
+    "ja": "ながもちは"
+   }
+  },
+  "questions": {
+   "bucket": {
+    "en": "How long will it run?",
+    "ja": "どれくらい うごく？"
+   },
+   "seconds": {
+    "en": "How many seconds?",
+    "ja": "なんびょう？"
+   },
+   "stored": {
+    "en": "How much energy is stored (J)?",
+    "ja": "エネルギーは なん J？"
+   }
+  },
+  "choices": {
+   "bucket": {
+    "under-20": {
+     "en": "Under 20 s",
+     "ja": "20びょう みまん"
+    },
+    "20-60": {
+     "en": "20 to 60 s",
+     "ja": "20〜60びょう"
+    },
+    "over-60": {
+     "en": "Over a minute",
+     "ja": "1ぷん いじょう"
+    }
+   },
+   "longer": {
+    "led": {
+     "en": "LED",
+     "ja": "LED"
+    },
+    "bulb": {
+     "en": "Bulb",
+     "ja": "でんきゅう"
+    }
+   }
+  },
+  "paramChoices": {
+   "device": {
+    "bulb": {
+     "en": "Bulb",
+     "ja": "まめでんきゅう"
+    },
+    "led": {
+     "en": "LED",
+     "ja": "LED"
+    },
+    "motor": {
+     "en": "Motor",
+     "ja": "モーター"
+    },
+    "buzzer": {
+     "en": "Buzzer",
+     "ja": "ブザー"
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,279 @@
+{
+ "id": "maker.cells",
+ "region": "maker",
+ "station": "battery-rack",
+ "title": {
+  "en": "The Battery Rack",
+  "ja": "かんでんちの たな"
+ },
+ "sim": "cells",
+ "grade": "小4",
+ "unit": "電気のはたらき",
+ "intro": {
+  "en": "One cell, two cells end to end, two cells side by side. Which way makes the bulb brighter? Which way lasts longer?",
+  "ja": "でんち 1こ、2こを たてに、2こを よこに。どれが あかるい？ どれが ながもち？"
+ },
+ "params": {
+  "count": {
+   "min": 1,
+   "max": 3,
+   "step": 1,
+   "unit": "",
+   "en": "Cells",
+   "ja": "でんちの かず"
+  },
+  "wiring": {
+   "choices": [
+    "series",
+    "parallel"
+   ],
+   "en": "How they are joined",
+   "ja": "つなぎかた"
+  }
+ },
+ "levels": {
+  "explore": {
+   "ages": "4-7",
+   "fixed": {
+    "count": 2
+   },
+   "predict": {
+    "kind": "choice",
+    "field": "brightness",
+    "choices": [
+     "brighter",
+     "same"
+    ]
+   },
+   "measure": [
+    "brightness",
+    "volts"
+   ]
+  },
+  "investigate": {
+   "ages": "8-11",
+   "predict": {
+    "kind": "number",
+    "field": "volts",
+    "unit": "V",
+    "tolerance": 0.05
+   },
+   "measure": [
+    "volts",
+    "mA"
+   ],
+   "record": [
+    "count",
+    "volts"
+   ]
+  },
+  "engineer": {
+   "ages": "12-15",
+   "predict": {
+    "kind": "number",
+    "field": "hours",
+    "unit": "h",
+    "tolerance": 0.05
+   },
+   "measure": [
+    "volts",
+    "hours",
+    "mA"
+   ],
+   "record": [
+    "count",
+    "hours"
+   ],
+   "challenge": {
+    "en": "Make a torch that is bright AND lasts 4 hours.",
+    "ja": "あかるくて 4じかん もつ かいちゅうでんとうを。"
+   }
+  }
+ },
+ "explain": {
+  "en": "Series or parallel: what changes?",
+  "ja": "ちょくれつと へいれつ、なにが ちがう？",
+  "aims": [
+   {
+    "id": "series",
+    "en": "Cells in series add their push: brighter",
+    "ja": "ちょくれつは おす ちからが たされて あかるい",
+    "keys": [
+     [
+      "series",
+      "end to end",
+      "in a row",
+      "line"
+     ],
+     [
+      "brighter",
+      "more",
+      "double",
+      "twice",
+      "add",
+      "adds",
+      "volts"
+     ]
+    ]
+   },
+   {
+    "id": "parallel",
+    "en": "Cells in parallel share the work: same brightness, longer",
+    "ja": "へいれつは てわけして、おなじ あかるさで ながもち",
+    "keys": [
+     [
+      "parallel",
+      "side by side",
+      "next to"
+     ],
+     [
+      "same",
+      "longer",
+      "last",
+      "lasts",
+      "share",
+      "shares",
+      "twice as long"
+     ]
+    ]
+   },
+   {
+    "id": "current",
+    "en": "More push, more current through the bulb",
+    "ja": "おす ちからが 大きいほど でんりゅうも 大きい",
+    "keys": [
+     [
+      "current",
+      "amp",
+      "amps",
+      "flow",
+      "flows",
+      "electricity"
+     ],
+     [
+      "more",
+      "bigger",
+      "larger",
+      "faster",
+      "volts",
+      "push"
+     ]
+    ]
+   }
+  ]
+ },
+ "classPlot": {
+  "x": "count",
+  "y": "volts",
+  "xLabel": {
+   "en": "Cells",
+   "ja": "でんちの かず"
+  },
+  "yLabel": {
+   "en": "Volts",
+   "ja": "でんあつ（V）"
+  }
+ },
+ "real": {
+  "en": "Compare a torch with one battery and with two in a row.",
+  "ja": "でんち 1この かいちゅうでんとうと、2こ たてに 入れたのを くらべよう。",
+  "kit": [
+   "a torch",
+   "batteries"
+  ]
+ },
+ "standards": {
+  "jp": [
+   "小4 電流の働き"
+  ],
+  "ngss": [
+   "4-PS3-4"
+  ],
+  "cambridge": [
+   "Science enquiry"
+  ],
+  "pisa": [
+   "explain",
+   "interpret"
+  ]
+ },
+ "powers": {
+  "predict": 1,
+  "measure": 1,
+  "data": 1,
+  "explain": 1,
+  "build": 1
+ },
+ "ui": {
+  "labels": {
+   "brightness": {
+    "en": "Brightness",
+    "ja": "あかるさ"
+   },
+   "volts": {
+    "en": "Volts",
+    "ja": "でんあつ（V）"
+   },
+   "mA": {
+    "en": "Current (mA)",
+    "ja": "でんりゅう（mA）"
+   },
+   "hours": {
+    "en": "Lasts (hours)",
+    "ja": "もつ じかん"
+   },
+   "motor": {
+    "en": "Motor",
+    "ja": "モーターは"
+   }
+  },
+  "questions": {
+   "brightness": {
+    "en": "Brighter than one cell, or the same?",
+    "ja": "1こより あかるい？ おなじ？"
+   },
+   "volts": {
+    "en": "How many volts?",
+    "ja": "なん V？"
+   },
+   "hours": {
+    "en": "How many hours will it last?",
+    "ja": "なんじかん もつ？"
+   }
+  },
+  "choices": {
+   "brightness": {
+    "brighter": {
+     "en": "Brighter",
+     "ja": "あかるい"
+    },
+    "same": {
+     "en": "Same as one cell",
+     "ja": "1こと おなじ"
+    }
+   },
+   "motor": {
+    "faster": {
+     "en": "Faster",
+     "ja": "はやい"
+    },
+    "same": {
+     "en": "Same",
+     "ja": "おなじ"
+    }
+   }
+  },
+  "paramChoices": {
+   "wiring": {
+    "series": {
+     "en": "In series (end to end)",
+     "ja": "ちょくれつ"
+    },
+    "parallel": {
+     "en": "In parallel (side by side)",
+     "ja": "へいれつ"
+    }
+   }
+  }
+ }
+}

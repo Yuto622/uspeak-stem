@@ -1,0 +1,273 @@
+{
+ "id": "cosmos.planets",
+ "region": "cosmos",
+ "station": "planet-walk",
+ "title": {
+  "en": "The Planet Walk",
+  "ja": "わくせいの みち"
+ },
+ "sim": "planets",
+ "grade": "中3",
+ "unit": "太陽系と惑星の動き",
+ "intro": {
+  "en": "Walk the planets. The farther from the Sun, the slower it moves and the longer its year: Mercury in 88 days, Saturn in 29 years. Kepler found the rule.",
+  "ja": "わくせいを あるこう。たいようから とおいほど ゆっくり うごき、1ねんが ながい。すいせいは 88日、どせいは 29ねん。ケプラーが きそくを 見つけた。"
+ },
+ "params": {
+  "planet": {
+   "choices": [
+    "mercury",
+    "venus",
+    "earth",
+    "mars",
+    "jupiter",
+    "saturn"
+   ],
+   "en": "Planet",
+   "ja": "わくせい"
+  }
+ },
+ "levels": {
+  "explore": {
+   "ages": "4-7",
+   "predict": {
+    "kind": "choice",
+    "field": "slower",
+    "choices": [
+     "slower",
+     "faster",
+     "same"
+    ]
+   },
+   "measure": [
+    "years",
+    "slower"
+   ]
+  },
+  "investigate": {
+   "ages": "8-11",
+   "predict": {
+    "kind": "number",
+    "field": "years",
+    "unit": "years",
+    "tolerance": 0.05
+   },
+   "measure": [
+    "years",
+    "au"
+   ],
+   "record": [
+    "au",
+    "years"
+   ]
+  },
+  "engineer": {
+   "ages": "12-15",
+   "predict": {
+    "kind": "number",
+    "field": "speedKms",
+    "unit": "km/s",
+    "tolerance": 0.05
+   },
+   "measure": [
+    "years",
+    "speedKms"
+   ],
+   "record": [
+    "au",
+    "speedKms"
+   ],
+   "challenge": {
+    "en": "A new planet is at 4 AU. How long is its year?",
+    "ja": "4 AU の あたらしい わくせい。1ねんは なんねん？"
+   }
+  }
+ },
+ "explain": {
+  "en": "Why do outer planets take longer to go round?",
+  "ja": "どうして とおい わくせいは 1しゅうに じかんが かかる？",
+  "aims": [
+   {
+    "id": "farther",
+    "en": "Farther from the Sun, a bigger circle to travel",
+    "ja": "とおいほど まわる みちが ながい",
+    "keys": [
+     [
+      "far",
+      "farther",
+      "distance",
+      "away",
+      "outer"
+     ],
+     [
+      "bigger",
+      "longer",
+      "larger",
+      "circle",
+      "orbit",
+      "path",
+      "way"
+     ]
+    ]
+   },
+   {
+    "id": "slower",
+    "en": "And it moves more slowly, because the Sun's pull is weaker",
+    "ja": "しかも たいようの ひっぱりが よわいから おそい",
+    "keys": [
+     [
+      "slow",
+      "slower",
+      "slowly",
+      "speed"
+     ],
+     [
+      "pull",
+      "gravity",
+      "weaker",
+      "weak",
+      "less",
+      "sun"
+     ]
+    ]
+   },
+   {
+    "id": "kepler",
+    "en": "Year squared equals distance cubed",
+    "ja": "1ねんの 2じょう ＝ きょりの 3じょう",
+    "keys": [
+     [
+      "kepler",
+      "squared",
+      "cubed",
+      "square",
+      "cube",
+      "1.5",
+      "rule",
+      "law"
+     ]
+    ]
+   }
+  ]
+ },
+ "classPlot": {
+  "x": "au",
+  "y": "years",
+  "xLabel": {
+   "en": "Distance from the Sun (AU)",
+   "ja": "たいようからの きょり（AU）"
+  },
+  "yLabel": {
+   "en": "Length of a year (Earth years)",
+   "ja": "1ねんの ながさ（ちきゅうの ねん）"
+  }
+ },
+ "real": {
+  "en": "Lay the planets out on a long path, one step per 0.1 AU, and walk it.",
+  "ja": "ながい みちに わくせいを 0.1 AU ごとに 1ぽで ならべて あるこう。",
+  "kit": [
+   "chalk",
+   "a long path"
+  ]
+ },
+ "standards": {
+  "jp": [
+   "中3 地球と宇宙（太陽系）"
+  ],
+  "ngss": [
+   "MS-ESS1-2"
+  ],
+  "cambridge": [
+   "Science enquiry"
+  ],
+  "pisa": [
+   "explain",
+   "interpret"
+  ]
+ },
+ "powers": {
+  "predict": 1,
+  "measure": 1,
+  "data": 1,
+  "explain": 1,
+  "build": 1
+ },
+ "ui": {
+  "labels": {
+   "years": {
+    "en": "Year length (Earth years)",
+    "ja": "1ねんの ながさ（ねん）"
+   },
+   "slower": {
+    "en": "Compared with Earth",
+    "ja": "ちきゅうと くらべて"
+   },
+   "au": {
+    "en": "Distance (AU)",
+    "ja": "きょり（AU）"
+   },
+   "speedKms": {
+    "en": "Speed (km/s)",
+    "ja": "はやさ（km/s）"
+   }
+  },
+  "questions": {
+   "slower": {
+    "en": "Does it go round slower or faster than Earth?",
+    "ja": "ちきゅうより おそい？ はやい？"
+   },
+   "years": {
+    "en": "How many Earth years is its year?",
+    "ja": "1ねんは ちきゅうの なんねん？"
+   },
+   "speedKms": {
+    "en": "How fast does it move (km/s)?",
+    "ja": "はやさは なん km/s？"
+   }
+  },
+  "choices": {
+   "slower": {
+    "slower": {
+     "en": "Slower",
+     "ja": "おそい"
+    },
+    "faster": {
+     "en": "Faster",
+     "ja": "はやい"
+    },
+    "same": {
+     "en": "Same",
+     "ja": "おなじ"
+    }
+   }
+  },
+  "paramChoices": {
+   "planet": {
+    "mercury": {
+     "en": "Mercury",
+     "ja": "すいせい"
+    },
+    "venus": {
+     "en": "Venus",
+     "ja": "きんせい"
+    },
+    "earth": {
+     "en": "Earth",
+     "ja": "ちきゅう"
+    },
+    "mars": {
+     "en": "Mars",
+     "ja": "かせい"
+    },
+    "jupiter": {
+     "en": "Jupiter",
+     "ja": "もくせい"
+    },
+    "saturn": {
+     "en": "Saturn",
+     "ja": "どせい"
+    }
+   }
+  }
+ }
+}

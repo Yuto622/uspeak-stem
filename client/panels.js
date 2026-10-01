@@ -57,6 +57,7 @@ export function createPanels({ net, toast, me, onDone = () => {} }) {
     tsunami: { height: { en: 'Wave height at the shore', ja: 'きしでの なみの たかさ' } },
   };
   function labelFor(f, sim = state.exp?.sim) {
+    if (state.exp?.ui?.labels?.[f]) return t(state.exp.ui.labels[f]);
     if (SIM_LABELS[sim]?.[f]) return t(SIM_LABELS[sim][f]);
     const L = {
       outcome: { en: 'What happened', ja: 'どうなった' }, period: { en: 'Minutes per orbit', ja: '1しゅうの ふん' }, apoapsis: { en: 'Highest point (km)', ja: 'いちばん たかい ところ（km）' },
@@ -85,6 +86,7 @@ export function createPanels({ net, toast, me, onDone = () => {} }) {
   }
   function showValue(f, v) {
     if (v === null || v === undefined) return t(UI.noAnswer);
+    if (state.exp?.ui?.choices?.[f]?.[String(v)]) return t(state.exp.ui.choices[f][String(v)]);
     if (f === 'outcome') return t(UI.outcomes[v]);
     if (f === 'phase') { const p = moon.PHASES.find((x) => x.id === v); return isJa() ? `${p.en}（${p.ja}）` : p.en; }
     if (f === 'lit') return `${Math.round(v * 100)}%`;
@@ -133,6 +135,7 @@ export function createPanels({ net, toast, me, onDone = () => {} }) {
     }
   }
   function choiceName(exp, k, c) {
+    if (exp.ui?.paramChoices?.[k]?.[c]) return t(exp.ui.paramChoices[k][c]);
     if (k === 'body') return t(gravity.BODIES[c]);
     if (k === 'target') return t(exp.targets[c]);
     if (k === 'solute') return t(chem.SOLUTES[c]);
@@ -181,6 +184,7 @@ export function createPanels({ net, toast, me, onDone = () => {} }) {
   };
   function predictQuestion(exp, level) {
     const spec = exp.levels[level].predict;
+    if (exp.ui?.questions?.[spec.field]) return exp.ui.questions[spec.field];
     if (SIM_QUESTIONS[exp.sim]?.[spec.field]) return SIM_QUESTIONS[exp.sim][spec.field];
     const Q = {
       outcome: { en: 'What will the ball do?', ja: 'ボールは どうなる？' }, period: { en: 'How many minutes will one orbit take?', ja: '1しゅう なんぷん かかる？' },
@@ -208,6 +212,7 @@ export function createPanels({ net, toast, me, onDone = () => {} }) {
     return Q[spec.field] || { en: spec.field, ja: spec.field };
   }
   function choiceLabel(field, c) {
+    if (state.exp?.ui?.choices?.[field]?.[String(c)]) return t(state.exp.ui.choices[field][String(c)]);
     if (field === 'outcome') return `${t(UI.outcomes[c])}${isJa() ? '' : ''}`;
     if (field === 'phase') { const p = moon.PHASES.find((x) => x.id === c); return isJa() ? `${p.en} ${p.ja}` : p.en; }
     if (field === 'saturated') return t(c === 'true' ? { en: 'No, some stays', ja: 'のこる' } : { en: 'Yes, all of it', ja: 'ぜんぶ とける' });
@@ -224,6 +229,7 @@ export function createPanels({ net, toast, me, onDone = () => {} }) {
     // The child reads the instrument and types what it says. The readout is on the
     // canvas; the form asks for the same fields.
     box.innerHTML = `<h4>${both(UI.measure)}</h4>` + lv.measure.map((f) => {
+      if (exp.ui?.choices?.[f]) return `<div class="param"><span>${esc(labelFor(f))}</span><select data-m="${f}">${Object.keys(exp.ui.choices[f]).map((c) => `<option value="${c}">${esc(showValue(f, c))}</option>`).join('')}</select><output></output></div>`;
       if (f === 'outcome') return `<div class="param"><span>${esc(labelFor(f))}</span><select data-m="${f}">${['crash', 'orbit', 'escape'].map((c) => `<option value="${c}">${esc(t(UI.outcomes[c]))}</option>`).join('')}</select><output></output></div>`;
       if (f === 'phase') return `<div class="param"><span>${esc(labelFor(f))}</span><select data-m="${f}">${moon.PHASES.map((p) => `<option value="${p.id}">${esc(p.en)}</option>`).join('')}</select><output></output></div>`;
       if (f === 'side') return `<div class="param"><span>${esc(labelFor(f))}</span><select data-m="${f}"><option value="right">right</option><option value="left">left</option></select><output></output></div>`;
@@ -295,7 +301,6 @@ export function createPanels({ net, toast, me, onDone = () => {} }) {
   $('#lab-close').onclick = () => dlg.close();
   dlg.addEventListener('close', () => stage?.stop()); // the stage sleeps while the panel is shut
   $('#lab-replay').onclick = () => stage?.replay();
-  dlg.addEventListener('close', () => stage?.stop());
   $('#lab-lang').onclick = toggleLang; // the HUD is inert while the modal is open
   onLang(() => { if (state && dlg.open) { drawView(); drawClassPlot(); } });
 

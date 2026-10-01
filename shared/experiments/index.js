@@ -7,27 +7,64 @@
 //
 // Rule: nothing in these files is an answer. Answers are computed by the sim.
 
-import moonPhases from './moon-phases.json' with { type: 'json' };
-import orbitLaunch from './orbit-launch.json' with { type: 'json' };
-import exoplanetHunter from './exoplanet-hunter.json' with { type: 'json' };
-import solubility from './solubility.json' with { type: 'json' };
 import acidBase from './acid-base.json' with { type: 'json' };
+import atomsBattery from './atoms-battery.json' with { type: 'json' };
+import atomsConservation from './atoms-conservation.json' with { type: 'json' };
+import atomsDensity from './atoms-density.json' with { type: 'json' };
+import atomsDistill from './atoms-distill.json' with { type: 'json' };
+import atomsElectrolysis from './atoms-electrolysis.json' with { type: 'json' };
+import atomsOxidation from './atoms-oxidation.json' with { type: 'json' };
+import atomsTitration from './atoms-titration.json' with { type: 'json' };
+import bodyBreath from './body-breath.json' with { type: 'json' };
+import bodyGenetics from './body-genetics.json' with { type: 'json' };
+import bodySaliva from './body-saliva.json' with { type: 'json' };
 import candle from './candle.json' with { type: 'json' };
+import cosmosPlanets from './cosmos-planets.json' with { type: 'json' };
+import cosmosSeasons from './cosmos-seasons.json' with { type: 'json' };
+import cosmosStars from './cosmos-stars.json' with { type: 'json' };
+import dataClassify from './data-classify.json' with { type: 'json' };
+import dataDice from './data-dice.json' with { type: 'json' };
+import dataPolygon from './data-polygon.json' with { type: 'json' };
+import dataPond from './data-pond.json' with { type: 'json' };
+import earthCloud from './earth-cloud.json' with { type: 'json' };
+import earthQuake from './earth-quake.json' with { type: 'json' };
+import earthRiver from './earth-river.json' with { type: 'json' };
+import earthShadow from './earth-shadow.json' with { type: 'json' };
+import earthSoil from './earth-soil.json' with { type: 'json' };
+import earthStrata from './earth-strata.json' with { type: 'json' };
+import earthTsunami from './earth-tsunami.json' with { type: 'json' };
+import earthVolcano from './earth-volcano.json' with { type: 'json' };
+import exoplanetHunter from './exoplanet-hunter.json' with { type: 'json' };
+import forceLever from './force-lever.json' with { type: 'json' };
+import forceLight from './force-light.json' with { type: 'json' };
+import forceMagnet from './force-magnet.json' with { type: 'json' };
 import forcePendulum from './force-pendulum.json' with { type: 'json' };
 import forceRamp from './force-ramp.json' with { type: 'json' };
-import forceLever from './force-lever.json' with { type: 'json' };
-import lifeMeadow from './life-meadow.json' with { type: 'json' };
-import lifePlant from './life-plant.json' with { type: 'json' };
+import forceRubber from './force-rubber.json' with { type: 'json' };
+import forceSound from './force-sound.json' with { type: 'json' };
+import forceSpring from './force-spring.json' with { type: 'json' };
+import labCompress from './lab-compress.json' with { type: 'json' };
+import labExpansion from './lab-expansion.json' with { type: 'json' };
+import labMass from './lab-mass.json' with { type: 'json' };
+import labMetalAcid from './lab-metal-acid.json' with { type: 'json' };
+import labStates from './lab-states.json' with { type: 'json' };
+import lifeButterfly from './life-butterfly.json' with { type: 'json' };
+import lifeGermination from './life-germination.json' with { type: 'json' };
 import lifeHeart from './life-heart.json' with { type: 'json' };
-import earthQuake from './earth-quake.json' with { type: 'json' };
-import earthTsunami from './earth-tsunami.json' with { type: 'json' };
-import earthCloud from './earth-cloud.json' with { type: 'json' };
+import lifeMeadow from './life-meadow.json' with { type: 'json' };
+import lifeMedaka from './life-medaka.json' with { type: 'json' };
+import lifePhotosynthesis from './life-photosynthesis.json' with { type: 'json' };
+import lifePlant from './life-plant.json' with { type: 'json' };
 import makerBridge from './maker-bridge.json' with { type: 'json' };
+import makerCells from './maker-cells.json' with { type: 'json' };
 import makerCircuit from './maker-circuit.json' with { type: 'json' };
+import makerConductor from './maker-conductor.json' with { type: 'json' };
+import makerElectromagnet from './maker-electromagnet.json' with { type: 'json' };
 import makerGears from './maker-gears.json' with { type: 'json' };
-import dataDice from './data-dice.json' with { type: 'json' };
-import dataPond from './data-pond.json' with { type: 'json' };
-import dataClassify from './data-classify.json' with { type: 'json' };
+import makerGenerator from './maker-generator.json' with { type: 'json' };
+import moonPhases from './moon-phases.json' with { type: 'json' };
+import orbitLaunch from './orbit-launch.json' with { type: 'json' };
+import solubility from './solubility.json' with { type: 'json' };
 
 export const LEVELS = ['explore', 'investigate', 'engineer'];
 export const POWERS = [
@@ -37,7 +74,10 @@ export const POWERS = [
   { id: 'explain', en: 'Explain', ja: 'せつめいする' },
   { id: 'build', en: 'Build', ja: 'つくる' },
 ];
-const SIMS = new Set(['moon', 'gravity', 'transit', 'solubility', 'acidbase', 'candle', 'pendulum', 'ramp', 'lever', 'meadow', 'plant', 'heart', 'quake', 'tsunami', 'cloud', 'bridge', 'circuit', 'gears', 'dice', 'pond', 'classify']);
+const SIMS = new Set(['moon', 'gravity', 'transit', 'solubility', 'acidbase', 'candle', 'pendulum', 'ramp', 'lever', 'meadow', 'plant', 'heart', 'quake', 'tsunami', 'cloud', 'bridge', 'circuit', 'gears', 'dice', 'pond', 'classify',
+  'massShape', 'compress', 'expansion', 'heating', 'metalAcid', 'density', 'distill', 'conservation', 'oxidation', 'electrolysis', 'titration', 'cell',
+  'rubber', 'magnet', 'mirrors', 'sound', 'spring', 'conductor', 'cells', 'electromagnet', 'generator',
+  'germination', 'medaka', 'saliva', 'breath', 'photosynthesis', 'butterfly', 'genetics', 'shadow', 'soil', 'river', 'strata', 'volcano', 'stars', 'seasons', 'planets', 'polygon']);
 
 function check(e) {
   const bad = (why) => { throw new Error(`experiment ${e?.id || '?'}: ${why}`); };
@@ -65,16 +105,25 @@ function check(e) {
     if (!Array.isArray(a.keys) || !a.keys.length || !a.keys.every((g) => Array.isArray(g) && g.length)) bad(`aim ${a.id} keys`);
   }
   if (!e.classPlot?.x || !e.classPlot?.y) bad('classPlot');
+  // Optional words for the page: labels for measured fields, the prediction question per
+  // field, the words for categorical values, the words for a parameter's choices. All
+  // {en, ja}. Nothing here is an answer; it is how the answer is spelled.
+  if (e.ui) {
+    for (const part of ['labels', 'questions']) for (const [k, v] of Object.entries(e.ui[part] || {})) if (!v?.en || !v?.ja) bad(`ui.${part}.${k} needs en and ja`);
+    for (const part of ['choices', 'paramChoices']) for (const [k, m] of Object.entries(e.ui[part] || {})) for (const [c, v] of Object.entries(m)) if (!v?.en || !v?.ja) bad(`ui.${part}.${k}.${c} needs en and ja`);
+  }
   if (!e.powers || POWERS.some((p) => !Number.isInteger(e.powers[p.id]))) bad('powers');
   return e;
 }
 
-export const EXPERIMENTS = [moonPhases, orbitLaunch, exoplanetHunter, solubility, acidBase, candle, forcePendulum, forceRamp, forceLever, lifeMeadow, lifePlant, lifeHeart, earthQuake, earthTsunami, earthCloud, makerBridge, makerCircuit, makerGears, dataDice, dataPond, dataClassify].map(check);
+export const EXPERIMENTS = [acidBase, atomsBattery, atomsConservation, atomsDensity, atomsDistill, atomsElectrolysis, atomsOxidation, atomsTitration, bodyBreath, bodyGenetics, bodySaliva, candle, cosmosPlanets, cosmosSeasons, cosmosStars, dataClassify, dataDice, dataPolygon, dataPond, earthCloud, earthQuake, earthRiver, earthShadow, earthSoil, earthStrata, earthTsunami, earthVolcano, exoplanetHunter, forceLever, forceLight, forceMagnet, forcePendulum, forceRamp, forceRubber, forceSound, forceSpring, labCompress, labExpansion, labMass, labMetalAcid, labStates, lifeButterfly, lifeGermination, lifeHeart, lifeMeadow, lifeMedaka, lifePhotosynthesis, lifePlant, makerBridge, makerCells, makerCircuit, makerConductor, makerElectromagnet, makerGears, makerGenerator, moonPhases, orbitLaunch, solubility].map(check);
 export const REGIONS = [
   { id: 'cosmos', en: 'COSMOS', ja: 'そらの しま', icon: '🚀' },
   { id: 'lab', en: 'LAB', ja: 'かがくの しま', icon: '🧪' },
+  { id: 'atoms', en: 'ATOMS', ja: 'げんしの しま', icon: '⚛️' },
   { id: 'force', en: 'FORCE', ja: 'ちからの しま', icon: '🎢' },
   { id: 'life', en: 'LIFE', ja: 'いのちの しま', icon: '🌱' },
+  { id: 'body', en: 'BODY', ja: 'からだの しま', icon: '🫀' },
   { id: 'earth', en: 'EARTH', ja: 'ちきゅうの しま', icon: '🌋' },
   { id: 'maker', en: 'MAKER', ja: 'つくる しま', icon: '🔧' },
   { id: 'data', en: 'DATA', ja: 'データの しま', icon: '🎲' },

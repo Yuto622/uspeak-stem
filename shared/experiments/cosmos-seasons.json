@@ -1,0 +1,274 @@
+{
+ "id": "cosmos.seasons",
+ "region": "cosmos",
+ "station": "season-dial",
+ "title": {
+  "en": "The Season Dial",
+  "ja": "きせつの ばんだい"
+ },
+ "sim": "seasons",
+ "grade": "中3",
+ "unit": "太陽の高さと季節",
+ "intro": {
+  "en": "Pick a month. The noon sun climbs high in June and stays low in December, and the day is long when the sun is high. The Earth's tilt does it.",
+  "ja": "つきを えらぼう。ひるの たいようは 6がつに たかく、12がつに ひくい。たいようが たかい つきは ひるが ながい。ちきゅうの じくの かたむきの せい。"
+ },
+ "params": {
+  "month": {
+   "min": 1,
+   "max": 12,
+   "step": 1,
+   "unit": "",
+   "en": "Month",
+   "ja": "つき"
+  }
+ },
+ "levels": {
+  "explore": {
+   "ages": "4-7",
+   "predict": {
+    "kind": "choice",
+    "field": "higher",
+    "choices": [
+     "high",
+     "low"
+    ]
+   },
+   "measure": [
+    "noonAlt",
+    "season"
+   ]
+  },
+  "investigate": {
+   "ages": "8-11",
+   "predict": {
+    "kind": "number",
+    "field": "noonAlt",
+    "unit": "°",
+    "tolerance": 0.05
+   },
+   "measure": [
+    "noonAlt",
+    "dayHours"
+   ],
+   "record": [
+    "month",
+    "noonAlt"
+   ]
+  },
+  "engineer": {
+   "ages": "12-15",
+   "predict": {
+    "kind": "number",
+    "field": "dayHours",
+    "unit": "h",
+    "tolerance": 0.05
+   },
+   "measure": [
+    "noonAlt",
+    "dayHours",
+    "sunriseDir"
+   ],
+   "record": [
+    "month",
+    "dayHours"
+   ],
+   "challenge": {
+    "en": "Find the two months with the same day length as September.",
+    "ja": "9がつと おなじ ひるの ながさの つきを 2つ さがそう。"
+   }
+  }
+ },
+ "explain": {
+  "en": "Why is summer hot and winter cold?",
+  "ja": "どうして なつは あつく、ふゆは さむい？",
+  "aims": [
+   {
+    "id": "tilt",
+    "en": "The Earth's axis is tilted",
+    "ja": "ちきゅうの じくは かたむいている",
+    "keys": [
+     [
+      "tilt",
+      "tilted",
+      "axis",
+      "lean",
+      "leans",
+      "23"
+     ]
+    ]
+   },
+   {
+    "id": "high-sun",
+    "en": "A high sun warms the ground more",
+    "ja": "たかい たいようは じめんを よく あたためる",
+    "keys": [
+     [
+      "high",
+      "higher",
+      "steep",
+      "overhead",
+      "direct"
+     ],
+     [
+      "warm",
+      "warms",
+      "hot",
+      "hotter",
+      "heat",
+      "more",
+      "strong",
+      "stronger"
+     ]
+    ]
+   },
+   {
+    "id": "long-day",
+    "en": "Long days give more sunshine",
+    "ja": "ひるが ながいと ひざしが おおい",
+    "keys": [
+     [
+      "long",
+      "longer",
+      "day",
+      "days",
+      "hours",
+      "daylight"
+     ],
+     [
+      "more",
+      "sun",
+      "sunshine",
+      "light",
+      "heat",
+      "warm"
+     ]
+    ]
+   }
+  ]
+ },
+ "classPlot": {
+  "x": "month",
+  "y": "noonAlt",
+  "xLabel": {
+   "en": "Month",
+   "ja": "つき"
+  },
+  "yLabel": {
+   "en": "Noon sun height (°)",
+   "ja": "なんちゅう こうど（°）"
+  }
+ },
+ "real": {
+  "en": "Note the sunset time on the first of each month for a year.",
+  "ja": "まいつき 1日の ひのいりの じかんを 1ねん きろくしよう。",
+  "kit": [
+   "a notebook"
+  ]
+ },
+ "standards": {
+  "jp": [
+   "中3 地球と宇宙（季節）"
+  ],
+  "ngss": [
+   "5-ESS1-2",
+   "MS-ESS1-1"
+  ],
+  "cambridge": [
+   "Science enquiry"
+  ],
+  "pisa": [
+   "explain",
+   "interpret"
+  ]
+ },
+ "powers": {
+  "predict": 1,
+  "measure": 1,
+  "data": 1,
+  "explain": 1,
+  "build": 1
+ },
+ "ui": {
+  "labels": {
+   "higher": {
+    "en": "Noon sun",
+    "ja": "ひるの たいようは"
+   },
+   "noonAlt": {
+    "en": "Noon sun height (°)",
+    "ja": "なんちゅう こうど（°）"
+   },
+   "dayHours": {
+    "en": "Daylight (h)",
+    "ja": "ひるの ながさ（じかん）"
+   },
+   "season": {
+    "en": "Season",
+    "ja": "きせつ"
+   },
+   "sunriseDir": {
+    "en": "Sunrise in the",
+    "ja": "ひので の ほうこう"
+   }
+  },
+  "questions": {
+   "higher": {
+    "en": "Will the noon sun be high or low that month?",
+    "ja": "その つきの ひるの たいようは たかい？ ひくい？"
+   },
+   "noonAlt": {
+    "en": "How high will the noon sun be (°)?",
+    "ja": "なんちゅう こうどは なんど？"
+   },
+   "dayHours": {
+    "en": "How many hours of daylight?",
+    "ja": "ひるは なんじかん？"
+   }
+  },
+  "choices": {
+   "higher": {
+    "high": {
+     "en": "High",
+     "ja": "たかい"
+    },
+    "low": {
+     "en": "Low",
+     "ja": "ひくい"
+    }
+   },
+   "season": {
+    "spring": {
+     "en": "Spring",
+     "ja": "はる"
+    },
+    "summer": {
+     "en": "Summer",
+     "ja": "なつ"
+    },
+    "autumn": {
+     "en": "Autumn",
+     "ja": "あき"
+    },
+    "winter": {
+     "en": "Winter",
+     "ja": "ふゆ"
+    }
+   },
+   "sunriseDir": {
+    "NE": {
+     "en": "Northeast",
+     "ja": "ほくとう"
+    },
+    "E": {
+     "en": "East",
+     "ja": "ひがし"
+    },
+    "SE": {
+     "en": "Southeast",
+     "ja": "なんとう"
+    }
+   }
+  }
+ }
+}

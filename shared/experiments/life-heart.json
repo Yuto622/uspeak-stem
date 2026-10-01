@@ -1,207 +1,207 @@
 {
-  "id": "life.heart",
-  "region": "life",
-  "station": "track",
-  "title": {
-    "en": "The Running Track",
-    "ja": "はしる コース"
+ "id": "life.heart",
+ "region": "body",
+ "station": "track",
+ "title": {
+  "en": "The Running Track",
+  "ja": "はしる コース"
+ },
+ "sim": "heart",
+ "intro": {
+  "en": "Rest, walk, run or sprint for a few minutes, then feel your pulse. How fast does your heart go, and how long to settle?",
+  "ja": "やすむ・あるく・はしる・ぜんりょく。すうふん やって、みゃくを かんじよう。しんぞうは どれくらい はやい？ もどるまで なんびょう？"
+ },
+ "params": {
+  "activity": {
+   "choices": [
+    "rest",
+    "walk",
+    "run",
+    "sprint"
+   ],
+   "en": "What you do",
+   "ja": "なにを する"
   },
-  "sim": "heart",
-  "intro": {
-    "en": "Rest, walk, run or sprint for a few minutes, then feel your pulse. How fast does your heart go, and how long to settle?",
-    "ja": "やすむ・あるく・はしる・ぜんりょく。すうふん やって、みゃくを かんじよう。しんぞうは どれくらい はやい？ もどるまで なんびょう？"
+  "minutes": {
+   "min": 1,
+   "max": 10,
+   "step": 1,
+   "unit": "min",
+   "en": "For how long",
+   "ja": "なんぷん"
   },
-  "params": {
-    "activity": {
-      "choices": [
-        "rest",
-        "walk",
-        "run",
-        "sprint"
-      ],
-      "en": "What you do",
-      "ja": "なにを する"
-    },
-    "minutes": {
-      "min": 1,
-      "max": 10,
-      "step": 1,
-      "unit": "min",
-      "en": "For how long",
-      "ja": "なんぷん"
-    },
-    "age": {
-      "min": 6,
-      "max": 15,
-      "step": 1,
-      "unit": "years",
-      "en": "Age",
-      "ja": "ねんれい"
-    }
-  },
-  "levels": {
-    "explore": {
-      "ages": "4-7",
-      "fixed": {
-        "minutes": 3,
-        "age": 7
-      },
-      "predict": {
-        "kind": "choice",
-        "field": "faster",
-        "choices": [
-          "same",
-          "faster"
-        ]
-      },
-      "measure": [
-        "faster",
-        "bpm"
-      ]
-    },
-    "investigate": {
-      "ages": "8-11",
-      "fixed": {
-        "age": 10
-      },
-      "predict": {
-        "kind": "number",
-        "field": "bpm",
-        "unit": "beats/min",
-        "tolerance": 0.15
-      },
-      "measure": [
-        "bpm",
-        "breaths"
-      ],
-      "record": [
-        "minutes",
-        "bpm"
-      ]
-    },
-    "engineer": {
-      "ages": "12-15",
-      "predict": {
-        "kind": "number",
-        "field": "recovery",
-        "unit": "s",
-        "tolerance": 0.25
-      },
-      "measure": [
-        "bpm",
-        "breaths",
-        "recovery"
-      ],
-      "record": [
-        "minutes",
-        "bpm"
-      ]
-    }
-  },
-  "explain": {
-    "en": "Why does your heart speed up when you run?",
-    "ja": "はしると どうして しんぞうが はやく なるの？",
-    "aims": [
-      {
-        "id": "oxygen",
-        "en": "Muscles need more oxygen",
-        "ja": "きんにくが もっと さんそを ほしがる",
-        "keys": [
-          [
-            "oxygen",
-            "air",
-            "breath",
-            "breathe"
-          ],
-          [
-            "muscle",
-            "muscles",
-            "body",
-            "legs",
-            "need",
-            "needs"
-          ]
-        ]
-      },
-      {
-        "id": "pump",
-        "en": "The heart pumps blood faster to carry it",
-        "ja": "しんぞうが ちを はやく おくる",
-        "keys": [
-          [
-            "heart",
-            "pump",
-            "pumps",
-            "blood"
-          ],
-          [
-            "fast",
-            "faster",
-            "quick",
-            "more"
-          ]
-        ]
-      },
-      {
-        "id": "recover",
-        "en": "It slows down again when you rest",
-        "ja": "やすむと また ゆっくりに なる",
-        "keys": [
-          [
-            "rest",
-            "stop",
-            "slow",
-            "slows",
-            "down",
-            "calm",
-            "recover",
-            "recovers",
-            "back"
-          ]
-        ]
-      }
-    ]
-  },
-  "classPlot": {
-    "x": "minutes",
-    "y": "bpm",
-    "xLabel": {
-      "en": "Minutes of activity",
-      "ja": "うんどうの ふん"
-    },
-    "yLabel": {
-      "en": "Heartbeats per minute",
-      "ja": "1ぷんの はくどう"
-    }
-  },
-  "real": {
-    "en": "Find your pulse on your wrist. Count for 15 seconds, times four. Then run on the spot and count again.",
-    "ja": "てくびの みゃくを さがそう。15びょう かぞえて 4ばい。そのばで はしって、もういちど。",
-    "kit": [
-      "a timer"
-    ]
-  },
-  "standards": {
-    "jp": [
-      "小4 人の体のつくりと運動",
-      "小6 人の体のつくりと働き"
-    ],
-    "ngss": [
-      "4-LS1-1",
-      "MS-LS1-3"
-    ],
-    "cambridge": [
-      "Humans and animals"
-    ],
-    "pisa": [
-      "explain"
-    ]
-  },
-  "powers": {
-    "predict": 1,
-    "measure": 1,
-    "data": 1,
-    "explain": 1,
-    "build": 0
+  "age": {
+   "min": 6,
+   "max": 15,
+   "step": 1,
+   "unit": "years",
+   "en": "Age",
+   "ja": "ねんれい"
   }
+ },
+ "levels": {
+  "explore": {
+   "ages": "4-7",
+   "fixed": {
+    "minutes": 3,
+    "age": 7
+   },
+   "predict": {
+    "kind": "choice",
+    "field": "faster",
+    "choices": [
+     "same",
+     "faster"
+    ]
+   },
+   "measure": [
+    "faster",
+    "bpm"
+   ]
+  },
+  "investigate": {
+   "ages": "8-11",
+   "fixed": {
+    "age": 10
+   },
+   "predict": {
+    "kind": "number",
+    "field": "bpm",
+    "unit": "beats/min",
+    "tolerance": 0.15
+   },
+   "measure": [
+    "bpm",
+    "breaths"
+   ],
+   "record": [
+    "minutes",
+    "bpm"
+   ]
+  },
+  "engineer": {
+   "ages": "12-15",
+   "predict": {
+    "kind": "number",
+    "field": "recovery",
+    "unit": "s",
+    "tolerance": 0.25
+   },
+   "measure": [
+    "bpm",
+    "breaths",
+    "recovery"
+   ],
+   "record": [
+    "minutes",
+    "bpm"
+   ]
+  }
+ },
+ "explain": {
+  "en": "Why does your heart speed up when you run?",
+  "ja": "はしると どうして しんぞうが はやく なるの？",
+  "aims": [
+   {
+    "id": "oxygen",
+    "en": "Muscles need more oxygen",
+    "ja": "きんにくが もっと さんそを ほしがる",
+    "keys": [
+     [
+      "oxygen",
+      "air",
+      "breath",
+      "breathe"
+     ],
+     [
+      "muscle",
+      "muscles",
+      "body",
+      "legs",
+      "need",
+      "needs"
+     ]
+    ]
+   },
+   {
+    "id": "pump",
+    "en": "The heart pumps blood faster to carry it",
+    "ja": "しんぞうが ちを はやく おくる",
+    "keys": [
+     [
+      "heart",
+      "pump",
+      "pumps",
+      "blood"
+     ],
+     [
+      "fast",
+      "faster",
+      "quick",
+      "more"
+     ]
+    ]
+   },
+   {
+    "id": "recover",
+    "en": "It slows down again when you rest",
+    "ja": "やすむと また ゆっくりに なる",
+    "keys": [
+     [
+      "rest",
+      "stop",
+      "slow",
+      "slows",
+      "down",
+      "calm",
+      "recover",
+      "recovers",
+      "back"
+     ]
+    ]
+   }
+  ]
+ },
+ "classPlot": {
+  "x": "minutes",
+  "y": "bpm",
+  "xLabel": {
+   "en": "Minutes of activity",
+   "ja": "うんどうの ふん"
+  },
+  "yLabel": {
+   "en": "Heartbeats per minute",
+   "ja": "1ぷんの はくどう"
+  }
+ },
+ "real": {
+  "en": "Find your pulse on your wrist. Count for 15 seconds, times four. Then run on the spot and count again.",
+  "ja": "てくびの みゃくを さがそう。15びょう かぞえて 4ばい。そのばで はしって、もういちど。",
+  "kit": [
+   "a timer"
+  ]
+ },
+ "standards": {
+  "jp": [
+   "小4 人の体のつくりと運動",
+   "小6 人の体のつくりと働き"
+  ],
+  "ngss": [
+   "4-LS1-1",
+   "MS-LS1-3"
+  ],
+  "cambridge": [
+   "Humans and animals"
+  ],
+  "pisa": [
+   "explain"
+  ]
+ },
+ "powers": {
+  "predict": 1,
+  "measure": 1,
+  "data": 1,
+  "explain": 1,
+  "build": 0
+ }
 }

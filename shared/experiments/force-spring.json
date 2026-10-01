@@ -1,0 +1,271 @@
+{
+ "id": "force.spring",
+ "region": "force",
+ "station": "spring-post",
+ "title": {
+  "en": "The Spring Post",
+  "ja": "ばねの はしら"
+ },
+ "sim": "spring",
+ "grade": "中1",
+ "unit": "力とばねののび",
+ "intro": {
+  "en": "Hang weights on a spring and measure the stretch. Twice the weight, twice the stretch: a straight line.",
+  "ja": "ばねに おもりを つるして、のびを はかろう。おもさが 2ばいなら、のびも 2ばい。まっすぐな せん。"
+ },
+ "params": {
+  "grams": {
+   "min": 20,
+   "max": 300,
+   "step": 20,
+   "unit": "g",
+   "en": "Weight",
+   "ja": "おもり"
+  },
+  "kind": {
+   "choices": [
+    "soft",
+    "medium",
+    "stiff"
+   ],
+   "en": "Spring",
+   "ja": "ばね"
+  }
+ },
+ "levels": {
+  "explore": {
+   "ages": "4-7",
+   "fixed": {
+    "kind": "medium"
+   },
+   "predict": {
+    "kind": "choice",
+    "field": "bucket",
+    "choices": [
+     "short",
+     "medium",
+     "long"
+    ]
+   },
+   "measure": [
+    "cm"
+   ]
+  },
+  "investigate": {
+   "ages": "8-11",
+   "predict": {
+    "kind": "number",
+    "field": "cm",
+    "unit": "cm",
+    "tolerance": 0.05
+   },
+   "measure": [
+    "cm",
+    "newtons"
+   ],
+   "record": [
+    "grams",
+    "cm"
+   ]
+  },
+  "engineer": {
+   "ages": "12-15",
+   "predict": {
+    "kind": "number",
+    "field": "cm",
+    "unit": "cm",
+    "tolerance": 0.03
+   },
+   "measure": [
+    "cm",
+    "newtons"
+   ],
+   "record": [
+    "grams",
+    "cm"
+   ],
+   "challenge": {
+    "en": "Use the stiff spring as a scale: what weight gives 3 cm?",
+    "ja": "かたい ばねを はかりに。3 cm のびる おもさは？"
+   }
+  }
+ },
+ "explain": {
+  "en": "How does a spring measure weight?",
+  "ja": "ばねは どうやって おもさを はかる？",
+  "aims": [
+   {
+    "id": "proportional",
+    "en": "The stretch is proportional to the weight",
+    "ja": "のびは おもさに ひれいする",
+    "keys": [
+     [
+      "proportional",
+      "double",
+      "twice",
+      "straight",
+      "line",
+      "same amount",
+      "each"
+     ],
+     [
+      "stretch",
+      "stretches",
+      "longer",
+      "extends",
+      "extension"
+     ]
+    ]
+   },
+   {
+    "id": "force",
+    "en": "Weight is a force that pulls the spring",
+    "ja": "おもさは ばねを ひく ちから",
+    "keys": [
+     [
+      "force",
+      "pull",
+      "pulls",
+      "newton",
+      "newtons",
+      "gravity",
+      "weight"
+     ]
+    ]
+   },
+   {
+    "id": "stiff",
+    "en": "A stiff spring stretches less",
+    "ja": "かたい ばねは のびが 小さい",
+    "keys": [
+     [
+      "stiff",
+      "stiffer",
+      "hard",
+      "strong",
+      "soft",
+      "softer"
+     ],
+     [
+      "less",
+      "smaller",
+      "shorter",
+      "more",
+      "longer"
+     ]
+    ]
+   }
+  ]
+ },
+ "classPlot": {
+  "x": "grams",
+  "y": "cm",
+  "xLabel": {
+   "en": "Weight (g)",
+   "ja": "おもり（g）"
+  },
+  "yLabel": {
+   "en": "Stretch (cm)",
+   "ja": "のび（cm）"
+  }
+ },
+ "real": {
+  "en": "Hang a bag on a rubber band and add coins one at a time; mark the stretch.",
+  "ja": "ゴムに ふくろを かけて、こうかを 1まいずつ 入れて、のびに しるしを。",
+  "kit": [
+   "a rubber band",
+   "coins",
+   "a ruler"
+  ]
+ },
+ "standards": {
+  "jp": [
+   "中1 力の働き（ばね）"
+  ],
+  "ngss": [
+   "MS-PS2-2"
+  ],
+  "cambridge": [
+   "Science enquiry"
+  ],
+  "pisa": [
+   "explain",
+   "interpret"
+  ]
+ },
+ "powers": {
+  "predict": 1,
+  "measure": 1,
+  "data": 1,
+  "explain": 1,
+  "build": 1
+ },
+ "ui": {
+  "labels": {
+   "cm": {
+    "en": "Stretch (cm)",
+    "ja": "のび（cm）"
+   },
+   "bucket": {
+    "en": "How much stretch?",
+    "ja": "のびは？"
+   },
+   "newtons": {
+    "en": "Force (N)",
+    "ja": "ちから（N）"
+   },
+   "doubles": {
+    "en": "Twice the weight → the stretch",
+    "ja": "おもさ 2ばい → のびは"
+   }
+  },
+  "questions": {
+   "bucket": {
+    "en": "How much will the spring stretch?",
+    "ja": "ばねは どれくらい のびる？"
+   },
+   "cm": {
+    "en": "How many cm will it stretch?",
+    "ja": "なん cm のびる？"
+   }
+  },
+  "choices": {
+   "bucket": {
+    "short": {
+     "en": "Under 2 cm",
+     "ja": "2 cm みまん"
+    },
+    "medium": {
+     "en": "2 to 5 cm",
+     "ja": "2〜5 cm"
+    },
+    "long": {
+     "en": "Over 5 cm",
+     "ja": "5 cm いじょう"
+    }
+   },
+   "doubles": {
+    "doubles": {
+     "en": "Doubles",
+     "ja": "2ばい"
+    }
+   }
+  },
+  "paramChoices": {
+   "kind": {
+    "soft": {
+     "en": "Soft spring",
+     "ja": "やわらかい ばね"
+    },
+    "medium": {
+     "en": "Medium spring",
+     "ja": "ふつうの ばね"
+    },
+    "stiff": {
+     "en": "Stiff spring",
+     "ja": "かたい ばね"
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,294 @@
+{
+ "id": "lab.expansion",
+ "region": "lab",
+ "station": "warm-bench",
+ "title": {
+  "en": "The Warming Bench",
+  "ja": "あたためる だい"
+ },
+ "sim": "expansion",
+ "grade": "小4",
+ "unit": "物の体積と温度",
+ "intro": {
+  "en": "Warm a flask of air, a flask of water, and a metal ball. Which one grows the most? Does the ball still fit through its ring?",
+  "ja": "くうきの フラスコ、みずの フラスコ、きんぞくの たま。あたためると どれが いちばん ふくらむ？ たまは わに とおる？"
+ },
+ "params": {
+  "substance": {
+   "choices": [
+    "air",
+    "water",
+    "metal"
+   ],
+   "en": "What you warm",
+   "ja": "あたためる もの"
+  },
+  "deltaT": {
+   "min": 10,
+   "max": 100,
+   "step": 10,
+   "unit": "°C",
+   "en": "How much warmer",
+   "ja": "なんど あたためる"
+  }
+ },
+ "levels": {
+  "explore": {
+   "ages": "4-7",
+   "fixed": {
+    "deltaT": 30
+   },
+   "predict": {
+    "kind": "choice",
+    "field": "most",
+    "choices": [
+     "air",
+     "water",
+     "metal"
+    ]
+   },
+   "measure": [
+    "deltaMl",
+    "bigger"
+   ]
+  },
+  "investigate": {
+   "ages": "8-11",
+   "predict": {
+    "kind": "number",
+    "field": "deltaMl",
+    "unit": "mL",
+    "tolerance": 0.15
+   },
+   "measure": [
+    "deltaMl"
+   ],
+   "record": [
+    "deltaT",
+    "deltaMl"
+   ]
+  },
+  "engineer": {
+   "ages": "12-15",
+   "fixed": {
+    "substance": "metal"
+   },
+   "predict": {
+    "kind": "choice",
+    "field": "ringPasses",
+    "choices": [
+     "yes",
+     "no"
+    ]
+   },
+   "measure": [
+    "deltaMl",
+    "ringPasses"
+   ],
+   "record": [
+    "deltaT",
+    "deltaMl"
+   ],
+   "challenge": {
+    "en": "Find how hot the ball must get before it no longer passes the ring.",
+    "ja": "たまが わを とおらなくなる おんどを さがそう。"
+   }
+  }
+ },
+ "explain": {
+  "en": "What happens to things when they get warm?",
+  "ja": "あたためると ものは どうなる？",
+  "aims": [
+   {
+    "id": "expand",
+    "en": "Warm things get bigger",
+    "ja": "あたためると 大きくなる",
+    "keys": [
+     [
+      "warm",
+      "warmer",
+      "heat",
+      "heated",
+      "hot"
+     ],
+     [
+      "bigger",
+      "expand",
+      "expands",
+      "grow",
+      "grows",
+      "larger",
+      "swell",
+      "swells"
+     ]
+    ]
+   },
+   {
+    "id": "air-most",
+    "en": "Air grows the most, metal the least",
+    "ja": "くうきが いちばん、きんぞくは すこし",
+    "keys": [
+     [
+      "air"
+     ],
+     [
+      "most",
+      "more",
+      "biggest",
+      "a lot"
+     ]
+    ]
+   },
+   {
+    "id": "cool",
+    "en": "Cool them and they shrink back",
+    "ja": "ひやすと もどる",
+    "keys": [
+     [
+      "cool",
+      "cooled",
+      "cold",
+      "cools"
+     ],
+     [
+      "shrink",
+      "shrinks",
+      "smaller",
+      "back",
+      "contract",
+      "contracts"
+     ]
+    ]
+   }
+  ]
+ },
+ "classPlot": {
+  "x": "deltaT",
+  "y": "deltaMl",
+  "xLabel": {
+   "en": "Warmer by (°C)",
+   "ja": "あたためた ぶん（°C）"
+  },
+  "yLabel": {
+   "en": "Grew by (mL)",
+   "ja": "ふえた たいせき（mL）"
+  }
+ },
+ "real": {
+  "en": "Put a balloon over a bottle and stand it in warm water.",
+  "ja": "びんに ふうせんを かぶせて、おゆに つけよう。",
+  "kit": [
+   "a bottle",
+   "a balloon",
+   "warm water"
+  ]
+ },
+ "standards": {
+  "jp": [
+   "小4 金属、水、空気と温度"
+  ],
+  "ngss": [
+   "MS-PS1-4"
+  ],
+  "cambridge": [
+   "Science enquiry"
+  ],
+  "pisa": [
+   "explain",
+   "interpret"
+  ]
+ },
+ "powers": {
+  "predict": 1,
+  "measure": 1,
+  "data": 1,
+  "explain": 1,
+  "build": 1
+ },
+ "ui": {
+  "labels": {
+   "deltaMl": {
+    "en": "Grew by (mL)",
+    "ja": "ふえた たいせき（mL）"
+   },
+   "bigger": {
+    "en": "Bigger or same?",
+    "ja": "大きくなった？"
+   },
+   "most": {
+    "en": "Grows the most",
+    "ja": "いちばん ふくらむ"
+   },
+   "ringPasses": {
+    "en": "Passes through the ring?",
+    "ja": "わを とおる？"
+   }
+  },
+  "questions": {
+   "most": {
+    "en": "Which grows the most when warmed?",
+    "ja": "あたためると どれが いちばん ふくらむ？"
+   },
+   "deltaMl": {
+    "en": "By how many mL will it grow?",
+    "ja": "なん mL ふえる？"
+   },
+   "ringPasses": {
+    "en": "Will the hot ball still pass through the ring?",
+    "ja": "あつい たまは わを とおる？"
+   }
+  },
+  "choices": {
+   "most": {
+    "air": {
+     "en": "Air",
+     "ja": "くうき"
+    },
+    "water": {
+     "en": "Water",
+     "ja": "みず"
+    },
+    "metal": {
+     "en": "Metal",
+     "ja": "きんぞく"
+    }
+   },
+   "bigger": {
+    "bigger": {
+     "en": "Bigger",
+     "ja": "大きくなった"
+    },
+    "same": {
+     "en": "Same",
+     "ja": "おなじ"
+    }
+   },
+   "ringPasses": {
+    "yes": {
+     "en": "Yes",
+     "ja": "はい"
+    },
+    "no": {
+     "en": "No",
+     "ja": "いいえ"
+    }
+   }
+  },
+  "paramChoices": {
+   "substance": {
+    "air": {
+     "en": "Air",
+     "ja": "くうき"
+    },
+    "water": {
+     "en": "Water",
+     "ja": "みず"
+    },
+    "metal": {
+     "en": "Metal (iron)",
+     "ja": "きんぞく（てつ）"
+    }
+   }
+  }
+ }
+}

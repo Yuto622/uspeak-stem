@@ -1,0 +1,265 @@
+{
+ "id": "life.butterfly",
+ "region": "life",
+ "station": "butterfly-house",
+ "title": {
+  "en": "The Butterfly House",
+  "ja": "チョウの いえ"
+ },
+ "sim": "butterfly",
+ "grade": "小3",
+ "unit": "チョウの育ち方",
+ "intro": {
+  "en": "A cabbage white: egg, caterpillar, pupa, butterfly in about a month at 25°C. Warmer and it hurries; cooler and it takes its time.",
+  "ja": "モンシロチョウ：たまご → よう虫 → さなぎ → せい虫。25°C で やく1かげつ。あたたかいと はやく、すずしいと ゆっくり。"
+ },
+ "params": {
+  "tempC": {
+   "min": 15,
+   "max": 35,
+   "step": 5,
+   "unit": "°C",
+   "en": "Temperature",
+   "ja": "おんど"
+  },
+  "day": {
+   "min": 0,
+   "max": 60,
+   "step": 1,
+   "unit": "day",
+   "en": "Day",
+   "ja": "なんにちめ"
+  }
+ },
+ "levels": {
+  "explore": {
+   "ages": "4-7",
+   "fixed": {
+    "tempC": 25
+   },
+   "predict": {
+    "kind": "choice",
+    "field": "stage",
+    "choices": [
+     "egg",
+     "larva",
+     "pupa",
+     "adult"
+    ]
+   },
+   "measure": [
+    "stage"
+   ]
+  },
+  "investigate": {
+   "ages": "8-11",
+   "predict": {
+    "kind": "number",
+    "field": "totalDays",
+    "unit": "days",
+    "tolerance": 0.1
+   },
+   "measure": [
+    "totalDays",
+    "stage"
+   ],
+   "record": [
+    "tempC",
+    "totalDays"
+   ]
+  },
+  "engineer": {
+   "ages": "12-15",
+   "predict": {
+    "kind": "number",
+    "field": "larvaDays",
+    "unit": "days",
+    "tolerance": 0.1
+   },
+   "measure": [
+    "totalDays",
+    "eggDays",
+    "larvaDays",
+    "pupaDays"
+   ],
+   "record": [
+    "tempC",
+    "larvaDays"
+   ],
+   "challenge": {
+    "en": "Find the temperature where the whole life takes three weeks.",
+    "ja": "3しゅうかんで せい虫に なる おんどを さがそう。"
+   }
+  }
+ },
+ "explain": {
+  "en": "How does a butterfly grow up?",
+  "ja": "チョウは どうやって おとなに なる？",
+  "aims": [
+   {
+    "id": "stages",
+    "en": "Egg, caterpillar, pupa, butterfly, in that order",
+    "ja": "たまご・よう虫・さなぎ・せい虫の じゅん",
+    "keys": [
+     [
+      "egg"
+     ],
+     [
+      "caterpillar",
+      "larva"
+     ],
+     [
+      "pupa",
+      "chrysalis",
+      "cocoon"
+     ],
+     [
+      "butterfly",
+      "adult"
+     ]
+    ]
+   },
+   {
+    "id": "eat",
+    "en": "The caterpillar eats and sheds its skin to grow",
+    "ja": "よう虫は たべて だっぴして 大きくなる",
+    "keys": [
+     [
+      "eat",
+      "eats",
+      "eating",
+      "leaves",
+      "cabbage",
+      "shed",
+      "sheds",
+      "skin",
+      "moult",
+      "molt"
+     ]
+    ]
+   },
+   {
+    "id": "warm",
+    "en": "Warmer, faster",
+    "ja": "あたたかいと はやい",
+    "keys": [
+     [
+      "warm",
+      "warmer",
+      "hot",
+      "temperature",
+      "summer"
+     ],
+     [
+      "fast",
+      "faster",
+      "quick",
+      "quicker",
+      "sooner",
+      "fewer"
+     ]
+    ]
+   }
+  ]
+ },
+ "classPlot": {
+  "x": "tempC",
+  "y": "totalDays",
+  "xLabel": {
+   "en": "Temperature (°C)",
+   "ja": "おんど（°C）"
+  },
+  "yLabel": {
+   "en": "Days to butterfly",
+   "ja": "せい虫までの 日"
+  }
+ },
+ "real": {
+  "en": "Look under cabbage leaves for tiny yellow eggs in spring; keep one caterpillar in a jar with fresh leaves.",
+  "ja": "はるに キャベツの はの うらで きいろい たまごを さがそう。よう虫を びんで そだてよう。",
+  "kit": [
+   "cabbage leaves",
+   "a jar"
+  ]
+ },
+ "standards": {
+  "jp": [
+   "小3 身の回りの生物（昆虫の育ち方）"
+  ],
+  "ngss": [
+   "3-LS1-1"
+  ],
+  "cambridge": [
+   "Science enquiry"
+  ],
+  "pisa": [
+   "explain",
+   "interpret"
+  ]
+ },
+ "powers": {
+  "predict": 1,
+  "measure": 1,
+  "data": 1,
+  "explain": 1,
+  "build": 1
+ },
+ "ui": {
+  "labels": {
+   "stage": {
+    "en": "On that day it is",
+    "ja": "その 日は"
+   },
+   "totalDays": {
+    "en": "Days to butterfly",
+    "ja": "せい虫までの 日"
+   },
+   "eggDays": {
+    "en": "Days as an egg",
+    "ja": "たまごの 日すう"
+   },
+   "larvaDays": {
+    "en": "Days as a caterpillar",
+    "ja": "よう虫の 日すう"
+   },
+   "pupaDays": {
+    "en": "Days as a pupa",
+    "ja": "さなぎの 日すう"
+   }
+  },
+  "questions": {
+   "stage": {
+    "en": "What will it be on that day?",
+    "ja": "その 日は なにに なっている？"
+   },
+   "totalDays": {
+    "en": "How many days until the butterfly?",
+    "ja": "せい虫まで なんにち？"
+   },
+   "larvaDays": {
+    "en": "How many days will it spend as a caterpillar?",
+    "ja": "よう虫で なんにち すごす？"
+   }
+  },
+  "choices": {
+   "stage": {
+    "egg": {
+     "en": "Egg",
+     "ja": "たまご"
+    },
+    "larva": {
+     "en": "Caterpillar",
+     "ja": "よう虫"
+    },
+    "pupa": {
+     "en": "Pupa",
+     "ja": "さなぎ"
+    },
+    "adult": {
+     "en": "Butterfly",
+     "ja": "せい虫"
+    }
+   }
+  }
+ }
+}

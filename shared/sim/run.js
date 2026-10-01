@@ -13,6 +13,12 @@ import * as life from './life.js';
 import * as earth from './earth.js';
 import * as maker from './maker.js';
 import * as data from './data.js';
+import * as chem2 from './chem2.js';
+import * as phys2 from './phys2.js';
+import * as elec from './elec.js';
+import * as bio2 from './bio2.js';
+import * as geo2 from './geo2.js';
+import * as sky2 from './sky2.js';
 import { seedOf } from './rng.js';
 
 export function runExperiment(exp, params, { seed = 0 } = {}) {
@@ -80,6 +86,50 @@ export function runExperiment(exp, params, { seed = 0 } = {}) {
     case 'dice': { const r = data.dice({ count: params.count, rolls: Number(params.rolls), seed: seedOf(`${exp.id}|${seed}`) }); return { ...r, rolls: Number(params.rolls) }; }
     case 'pond': return data.pond({ marked: params.marked, caught: params.caught, seed: seedOf(`${exp.id}|${seed}`) });
     case 'classify': return data.classify({ weight: params.weight, color: params.color, k: Number(params.k), seed: seedOf(`${exp.id}|${seed}`) });
+    // chemistry, 小3 → 中3
+    case 'massShape': return chem2.massShape({ material: params.material, volume: params.volume, shape: params.shape });
+    case 'compress': return chem2.compress({ fluid: params.fluid, push: params.push });
+    case 'expansion': return chem2.expansion({ substance: params.substance, deltaT: params.deltaT });
+    case 'heating': return chem2.heating({ minutes: params.minutes, power: Number(params.power) });
+    case 'metalAcid': return chem2.metalAcid({ metal: params.metal, solution: params.solution });
+    case 'density': return chem2.density({ material: params.material, volume: params.volume });
+    case 'distill': return chem2.distill({ ethanolPct: params.ethanolPct, tube: Number(params.tube) });
+    case 'conservation': return chem2.conservation({ reaction: params.reaction, lid: params.lid, grams: params.grams });
+    case 'oxidation': return chem2.oxidation({ metal: params.metal, grams: params.grams });
+    case 'electrolysis': return chem2.electrolysis({ current: params.current, minutes: params.minutes });
+    case 'titration': return chem2.titration({ acidMl: params.acidMl, acidC: Number(params.acidC), baseC: Number(params.baseC), baseMl: params.baseMl });
+    case 'cell': return chem2.cell({ metalA: params.metalA, metalB: params.metalB });
+    // forces and light and sound
+    case 'rubber': return phys2.rubber({ stretch: params.stretch, mass: params.mass });
+    case 'magnet': return phys2.magnet({ item: params.item, distance: params.distance, poles: params.poles });
+    case 'mirrors': return phys2.mirrors({ count: params.count, minutes: params.minutes });
+    case 'sound': return phys2.sound({ length: params.length, pluck: params.pluck, tension: params.tension });
+    case 'spring': return phys2.spring({ grams: params.grams, kind: params.kind });
+    // electricity
+    case 'conductor': return elec.conductor({ item: params.item });
+    case 'cells': return elec.cells({ count: params.count, wiring: params.wiring });
+    case 'electromagnet': return elec.electromagnet({ turns: params.turns, cellsN: params.cellsN });
+    case 'generator': return elec.generator({ turns: params.turns, device: params.device });
+    // life
+    case 'germination': return bio2.germination({ water: params.water, air: params.air, tempC: params.tempC, light: params.light });
+    case 'medaka': return bio2.medaka({ tempC: params.tempC });
+    case 'saliva': return bio2.saliva({ saliva: params.saliva, tempC: params.tempC, minutes: params.minutes });
+    case 'breath': return bio2.breath({ activity: params.activity, sample: params.sample });
+    case 'photosynthesis': return bio2.photosynthesis({ light: params.light, hours: params.hours, cover: params.cover });
+    case 'butterfly': return bio2.butterfly({ tempC: params.tempC, day: params.day });
+    case 'genetics': return bio2.genetics({ cross: params.cross, seeds: Number(params.seeds), seed: seedOf(`${exp.id}|${seed}`) });
+    // earth
+    case 'shadow': return geo2.shadow({ hour: params.hour, month: params.month });
+    case 'soil': return geo2.soil({ grain: params.grain });
+    case 'river': return geo2.river({ slope: params.slope, flow: params.flow });
+    case 'strata': return geo2.strata({ pours: params.pours, mix: params.mix });
+    case 'volcano': return geo2.volcano({ viscosity: params.viscosity });
+    // sky
+    case 'stars': return sky2.stars({ hours: params.hours, direction: params.direction });
+    case 'seasons': return sky2.seasons({ month: params.month });
+    case 'planets': return sky2.planets({ planet: params.planet });
+    // data
+    case 'polygon': return data.polygon({ sides: params.sides, angle: params.angle });
     default:
       throw new Error(`unknown sim ${exp.sim}`);
   }
@@ -88,7 +138,7 @@ export function runExperiment(exp, params, { seed = 0 } = {}) {
 // The measurements without the bulky drawing data (trail, curve). What the room stores
 // and what the judge compares.
 export function measurementsOnly(result) {
-  const { trail, curve, trace, hist, train, near, ...rest } = result;
+  const { trail, curve, trace, hist, train, near, path, ...rest } = result;
   return rest;
 }
 

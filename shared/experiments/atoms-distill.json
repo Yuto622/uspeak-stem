@@ -1,0 +1,281 @@
+{
+ "id": "atoms.distill",
+ "region": "atoms",
+ "station": "still-house",
+ "title": {
+  "en": "The Still House",
+  "ja": "じょうりゅうの こや"
+ },
+ "sim": "distill",
+ "grade": "中1",
+ "unit": "状態変化と蒸留",
+ "intro": {
+  "en": "Boil a mix of water and ethanol and collect three tubes in turn. Which tube burns? Ethanol boils at 78°C, water at 100°C.",
+  "ja": "みずと エタノールを まぜて ふっとうさせ、3本の しけんかんに じゅんばんに あつめよう。もえるのは どれ？ エタノールは 78°C、みずは 100°C で ふっとうする。"
+ },
+ "params": {
+  "ethanolPct": {
+   "min": 10,
+   "max": 50,
+   "step": 10,
+   "unit": "%",
+   "en": "Ethanol in the mix",
+   "ja": "エタノールの わりあい"
+  },
+  "tube": {
+   "choices": [
+    "1",
+    "2",
+    "3"
+   ],
+   "en": "Which tube",
+   "ja": "なん本め"
+  }
+ },
+ "levels": {
+  "explore": {
+   "ages": "4-7",
+   "fixed": {
+    "ethanolPct": 20,
+    "tube": "1"
+   },
+   "predict": {
+    "kind": "choice",
+    "field": "burns",
+    "choices": [
+     "yes",
+     "no"
+    ]
+   },
+   "measure": [
+    "burns",
+    "pct"
+   ]
+  },
+  "investigate": {
+   "ages": "8-11",
+   "predict": {
+    "kind": "number",
+    "field": "pct",
+    "unit": "%",
+    "tolerance": 0.1
+   },
+   "measure": [
+    "pct",
+    "burns"
+   ],
+   "record": [
+    "ethanolPct",
+    "pct"
+   ]
+  },
+  "engineer": {
+   "ages": "12-15",
+   "predict": {
+    "kind": "number",
+    "field": "pct",
+    "unit": "%",
+    "tolerance": 0.05
+   },
+   "measure": [
+    "pct",
+    "burns",
+    "smell"
+   ],
+   "record": [
+    "ethanolPct",
+    "pct"
+   ],
+   "challenge": {
+    "en": "Get a tube that is more than 80% ethanol.",
+    "ja": "80% より こい エタノールの しけんかんを つくろう。"
+   }
+  }
+ },
+ "explain": {
+  "en": "How does distilling separate a mixture?",
+  "ja": "じょうりゅうで どうして わけられる？",
+  "aims": [
+   {
+    "id": "boil-first",
+    "en": "Ethanol boils first because its boiling point is lower",
+    "ja": "エタノールの ほうが ふってんが ひくいから さきに 出る",
+    "keys": [
+     [
+      "ethanol",
+      "alcohol"
+     ],
+     [
+      "first",
+      "lower",
+      "78",
+      "before",
+      "earlier",
+      "boils"
+     ]
+    ]
+   },
+   {
+    "id": "cool",
+    "en": "The vapour cools in the tube and turns back to liquid",
+    "ja": "じょうきは ひやされて えきたいに もどる",
+    "keys": [
+     [
+      "cool",
+      "cools",
+      "cooled",
+      "cold",
+      "condense",
+      "condenses"
+     ],
+     [
+      "liquid",
+      "drops",
+      "drips",
+      "back",
+      "turns"
+     ]
+    ]
+   },
+   {
+    "id": "later-water",
+    "en": "The last tube is mostly water",
+    "ja": "さいごの しけんかんは ほとんど みず",
+    "keys": [
+     [
+      "last",
+      "third",
+      "later",
+      "end"
+     ],
+     [
+      "water",
+      "less",
+      "weak",
+      "little"
+     ]
+    ]
+   }
+  ]
+ },
+ "classPlot": {
+  "x": "ethanolPct",
+  "y": "pct",
+  "xLabel": {
+   "en": "Ethanol in the mix (%)",
+   "ja": "まぜた エタノール（%）"
+  },
+  "yLabel": {
+   "en": "Ethanol in the tube (%)",
+   "ja": "しけんかんの エタノール（%）"
+  }
+ },
+ "real": {
+  "en": "Smell the steam from a pot of wine with an adult; the first steam smells strongest.",
+  "ja": "大人と いっしょに、ワインの なべから 出る ゆげを かいでみよう。さいしょが いちばん におう。",
+  "kit": [
+   "an adult",
+   "a pot"
+  ]
+ },
+ "standards": {
+  "jp": [
+   "中1 状態変化（蒸留）"
+  ],
+  "ngss": [
+   "MS-PS1-4"
+  ],
+  "cambridge": [
+   "Science enquiry"
+  ],
+  "pisa": [
+   "explain",
+   "interpret"
+  ]
+ },
+ "powers": {
+  "predict": 1,
+  "measure": 1,
+  "data": 1,
+  "explain": 1,
+  "build": 1
+ },
+ "ui": {
+  "labels": {
+   "burns": {
+    "en": "Burns?",
+    "ja": "もえる？"
+   },
+   "pct": {
+    "en": "Ethanol in the tube (%)",
+    "ja": "しけんかんの エタノール（%）"
+   },
+   "smell": {
+    "en": "Smell",
+    "ja": "におい"
+   },
+   "firstOut": {
+    "en": "Comes out first",
+    "ja": "さきに 出る"
+   }
+  },
+  "questions": {
+   "burns": {
+    "en": "Will the liquid in that tube burn?",
+    "ja": "その しけんかんの えきは もえる？"
+   },
+   "pct": {
+    "en": "What percent ethanol will the tube hold?",
+    "ja": "しけんかんの エタノールは なん %？"
+   }
+  },
+  "choices": {
+   "burns": {
+    "yes": {
+     "en": "Yes",
+     "ja": "はい"
+    },
+    "no": {
+     "en": "No",
+     "ja": "いいえ"
+    }
+   },
+   "smell": {
+    "strong": {
+     "en": "Strong",
+     "ja": "つよい"
+    },
+    "faint": {
+     "en": "Faint",
+     "ja": "よわい"
+    }
+   },
+   "firstOut": {
+    "ethanol": {
+     "en": "Ethanol",
+     "ja": "エタノール"
+    },
+    "water": {
+     "en": "Water",
+     "ja": "みず"
+    }
+   }
+  },
+  "paramChoices": {
+   "tube": {
+    "1": {
+     "en": "First tube",
+     "ja": "1本め"
+    },
+    "2": {
+     "en": "Second tube",
+     "ja": "2本め"
+    },
+    "3": {
+     "en": "Third tube",
+     "ja": "3本め"
+    }
+   }
+  }
+ }
+}

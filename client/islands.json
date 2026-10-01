@@ -1,34 +1,1087 @@
 {
-  "version": 2,
-  "note": "The seven STEM islands, in the same shape as U-Speak Web's school.json. The client builds each island from these coordinates; the server knows the station ids through the experiments' `station` field. Nothing here is an answer. Islands sit 135 m apart in two rows, like the English world's second island.",
-  "islands": [
-    { "id": "cosmos", "name": "そらの しま", "en": "COSMOS", "x": 0, "z": 0, "radius": 5.0, "grass": 9347947, "grassTop": 10269806, "spawn": { "x": 0, "z": 19 }, "spots": [
-      { "id": "phase-hill", "exp": "cosmos.moon.phases", "kind": "hill", "name": "つきの おか", "en": "Phase Hill", "ja": "つきの みちかけ", "character": "Luna", "x": -17, "z": -4, "color": 10276730, "path": { "x": 0, "z": 12 } },
-      { "id": "launch-pad", "exp": "cosmos.orbit.launch", "kind": "pad", "name": "うちあげだい", "en": "Launch Pad", "ja": "ロケットの うちあげ", "character": "Rio", "x": 0, "z": -8, "color": 15254634, "path": { "x": 0, "z": 12 } },
-      { "id": "observatory", "exp": "cosmos.exoplanet.hunter", "kind": "dome", "name": "てんもんだい", "en": "Observatory", "ja": "ほしを 見る", "character": "Kepler", "x": 17, "z": -4, "color": 6724095, "path": { "x": 0, "z": 12 } } ] },
-    { "id": "lab", "name": "かがくの しま", "en": "LAB", "x": 135, "z": 0, "radius": 5.0, "grass": 10075478, "grassTop": 11131238, "spawn": { "x": 0, "z": 19 }, "spots": [
-      { "id": "dissolving-bench", "exp": "lab.solubility", "kind": "bench", "name": "とかす だい", "en": "Dissolving Bench", "ja": "とかす・けっしょう", "character": "Mia", "x": -17, "z": -4, "color": 8900331, "path": { "x": 0, "z": 12 } },
-      { "id": "indicator-shelf", "exp": "lab.acid-base", "kind": "shelf", "name": "しらべる たな", "en": "Indicator Shelf", "ja": "さんせい・アルカリせい", "character": "Finn", "x": 0, "z": -8, "color": 15254634, "path": { "x": 0, "z": 12 } },
-      { "id": "burning-corner", "exp": "lab.candle", "kind": "corner", "name": "もえる コーナー", "en": "Burning Corner", "ja": "ろうそくと びん", "character": "Oliver", "x": 17, "z": -4, "color": 14263349, "path": { "x": 0, "z": 12 } } ] },
-    { "id": "force", "name": "ちからの しま", "en": "FORCE", "x": 270, "z": 0, "radius": 5.0, "grass": 9024610, "grassTop": 9947748, "spawn": { "x": 0, "z": 19 }, "spots": [
-      { "id": "swing-frame", "exp": "force.pendulum", "kind": "frame", "name": "ふりこの わく", "en": "Swing Frame", "ja": "ふりこ", "character": "Galileo", "x": -17, "z": -4, "color": 12754584, "path": { "x": 0, "z": 12 } },
-      { "id": "slide-ramp", "exp": "force.ramp", "kind": "ramp", "name": "すべりだい", "en": "Slide Ramp", "ja": "さかと まさつ", "character": "Emma", "x": 0, "z": -8, "color": 6724095, "path": { "x": 0, "z": 12 } },
-      { "id": "seesaw", "exp": "force.lever", "kind": "seesaw", "name": "シーソー", "en": "Seesaw", "ja": "てこ", "character": "Archie", "x": 17, "z": -4, "color": 15254634, "path": { "x": 0, "z": 12 } } ] },
-    { "id": "life", "name": "いのちの しま", "en": "LIFE", "x": 405, "z": 0, "radius": 5.0, "grass": 8114770, "grassTop": 9037908, "spawn": { "x": 0, "z": 19 }, "spots": [
-      { "id": "rabbit-meadow", "exp": "life.meadow", "kind": "meadow", "name": "ウサギの はらっぱ", "en": "Rabbit Meadow", "ja": "ウサギと キツネ", "character": "Hana", "x": -17, "z": -4, "color": 10276730, "path": { "x": 0, "z": 12 } },
-      { "id": "windowsill", "exp": "life.plant", "kind": "greenhouse", "name": "まどべ", "en": "Windowsill", "ja": "まめを そだてる", "character": "Sora", "x": 0, "z": -8, "color": 8900331, "path": { "x": 0, "z": 12 } },
-      { "id": "track", "exp": "life.heart", "kind": "track", "name": "はしる コース", "en": "Running Track", "ja": "しんぞうと うんどう", "character": "Kenta", "x": 17, "z": -4, "color": 14263349, "path": { "x": 0, "z": 12 } } ] },
-    { "id": "earth", "name": "ちきゅうの しま", "en": "EARTH", "x": 0, "z": 125, "radius": 5.0, "grass": 9933417, "grassTop": 10856555, "spawn": { "x": 0, "z": 19 }, "spots": [
-      { "id": "seismo-house", "exp": "earth.quake", "kind": "seismo", "name": "じしんけいの いえ", "en": "Seismograph House", "ja": "じしんの なみ", "character": "Dr. Ishi", "x": -17, "z": -4, "color": 12754584, "path": { "x": 0, "z": 12 } },
-      { "id": "harbour-wall", "exp": "earth.tsunami", "kind": "harbour", "name": "みなとの かべ", "en": "Harbour Wall", "ja": "つなみ", "character": "Nami", "x": 0, "z": -8, "color": 6724095, "path": { "x": 0, "z": 12 } },
-      { "id": "weather-tower", "exp": "earth.cloud", "kind": "tower", "name": "てんきの とう", "en": "Weather Tower", "ja": "くもと あめ", "character": "Kumo", "x": 17, "z": -4, "color": 15254634, "path": { "x": 0, "z": 12 } } ] },
-    { "id": "maker", "name": "つくる しま", "en": "MAKER", "x": 135, "z": 125, "radius": 5.0, "grass": 10075478, "grassTop": 11131238, "spawn": { "x": 0, "z": 19 }, "spots": [
-      { "id": "bridge-yard", "exp": "maker.bridge", "kind": "bridge", "name": "はしの こうば", "en": "Bridge Yard", "ja": "はしの つよさ", "character": "Taku", "x": -17, "z": -4, "color": 10276730, "path": { "x": 0, "z": 12 } },
-      { "id": "circuit-shed", "exp": "maker.circuit", "kind": "shed", "name": "かいろの こや", "en": "Circuit Shed", "ja": "でんきの かいろ", "character": "Volta", "x": 0, "z": -8, "color": 15254634, "path": { "x": 0, "z": 12 } },
-      { "id": "gear-mill", "exp": "maker.gears", "kind": "mill", "name": "はぐるまの こや", "en": "Gear Mill", "ja": "はぐるま", "character": "Cog", "x": 17, "z": -4, "color": 8900331, "path": { "x": 0, "z": 12 } } ] },
-    { "id": "data", "name": "データの しま", "en": "DATA", "x": 270, "z": 125, "radius": 5.0, "grass": 9347947, "grassTop": 10269806, "spawn": { "x": 0, "z": 19 }, "spots": [
-      { "id": "dice-table", "exp": "data.dice", "kind": "table", "name": "サイコロの テーブル", "en": "Dice Table", "ja": "サイコロと かくりつ", "character": "Lucky", "x": -17, "z": -4, "color": 14263349, "path": { "x": 0, "z": 12 } },
-      { "id": "counting-pond", "exp": "data.pond", "kind": "pond", "name": "かぞえる いけ", "en": "Counting Pond", "ja": "見えない さかなを かぞえる", "character": "Ayu", "x": 0, "z": -8, "color": 6724095, "path": { "x": 0, "z": 12 } },
-      { "id": "sorting-machine", "exp": "data.classify", "kind": "machine", "name": "しわけ マシン", "en": "Sorting Machine", "ja": "AI の しわけ", "character": "Bit", "x": 17, "z": -4, "color": 12754584, "path": { "x": 0, "z": 12 } } ] }
-  ]
+ "version": 3,
+ "note": "Ten STEM islands, in the shape of U-Speak Web's school.json. The client builds each island from these coordinates (station props by `kind`, terrain by `terrain`); the server knows the station ids through the experiments' `station` field. Nothing here is an answer. Islands sit 135 m apart in three rows.",
+ "islands": [
+  {
+   "id": "cosmos",
+   "name": "そらの しま",
+   "en": "COSMOS",
+   "x": 0,
+   "z": 0,
+   "grass": 9347947,
+   "grassTop": 10269806,
+   "terrain": "peak",
+   "spots": [
+    {
+     "id": "phase-hill",
+     "exp": "cosmos.moon.phases",
+     "kind": "hill",
+     "name": "つきの おか",
+     "en": "Phase Hill",
+     "ja": "つきの みちかけ",
+     "character": "Luna",
+     "x": -20,
+     "z": -2,
+     "color": 10276730,
+     "path": {
+      "x": 0,
+      "z": 12
+     }
+    },
+    {
+     "id": "launch-pad",
+     "exp": "cosmos.orbit.launch",
+     "kind": "pad",
+     "name": "うちあげだい",
+     "en": "Launch Pad",
+     "ja": "ロケットの うちあげ",
+     "character": "Rio",
+     "x": 0,
+     "z": -6,
+     "color": 15254634,
+     "path": {
+      "x": 0,
+      "z": 12
+     }
+    },
+    {
+     "id": "observatory",
+     "exp": "cosmos.exoplanet.hunter",
+     "kind": "dome",
+     "name": "てんもんだい",
+     "en": "Observatory",
+     "ja": "ほしを 見る",
+     "character": "Kepler",
+     "x": 20,
+     "z": -2,
+     "color": 6724095,
+     "path": {
+      "x": 0,
+      "z": 12
+     }
+    },
+    {
+     "id": "star-wheel",
+     "exp": "cosmos.stars",
+     "kind": "wheel",
+     "name": "ほしの まわる ところ",
+     "en": "Star Wheel",
+     "ja": "ほしの うごき",
+     "character": "Hoshi",
+     "x": -11,
+     "z": -15,
+     "color": 8900331,
+     "path": {
+      "x": 0,
+      "z": -9
+     }
+    },
+    {
+     "id": "season-dial",
+     "exp": "cosmos.seasons",
+     "kind": "dial",
+     "name": "きせつの ばんだい",
+     "en": "Season Dial",
+     "ja": "たいようの たかさ",
+     "character": "Sol",
+     "x": 0,
+     "z": -17,
+     "color": 14263349,
+     "path": {
+      "x": 0,
+      "z": -9
+     }
+    },
+    {
+     "id": "planet-walk",
+     "exp": "cosmos.planets",
+     "kind": "walk",
+     "name": "わくせいの みち",
+     "en": "Planet Walk",
+     "ja": "わくせいの まわる はやさ",
+     "character": "Kep",
+     "x": 11,
+     "z": -15,
+     "color": 12754584,
+     "path": {
+      "x": 0,
+      "z": -9
+     }
+    }
+   ],
+   "radius": 5.0,
+   "spawn": {
+    "x": 0,
+    "z": 19
+   }
+  },
+  {
+   "id": "lab",
+   "name": "かがくの しま",
+   "en": "LAB",
+   "x": 135,
+   "z": 0,
+   "grass": 10075478,
+   "grassTop": 11131238,
+   "terrain": "campus",
+   "spots": [
+    {
+     "id": "balance-table",
+     "exp": "lab.mass",
+     "kind": "balance",
+     "name": "はかりの テーブル",
+     "en": "Balance Table",
+     "ja": "ものの おもさ",
+     "character": "Gram",
+     "x": -22,
+     "z": -1,
+     "color": 8900331,
+     "path": {
+      "x": 0,
+      "z": 12
+     }
+    },
+    {
+     "id": "piston-bench",
+     "exp": "lab.compress",
+     "kind": "piston",
+     "name": "おしこむ だい",
+     "en": "Piston Bench",
+     "ja": "とじこめた くうきと みず",
+     "character": "Pippa",
+     "x": -11,
+     "z": -5,
+     "color": 10276730,
+     "path": {
+      "x": 0,
+      "z": 12
+     }
+    },
+    {
+     "id": "warm-bench",
+     "exp": "lab.expansion",
+     "kind": "warm",
+     "name": "あたためる だい",
+     "en": "Warming Bench",
+     "ja": "おんどと たいせき",
+     "character": "Theo",
+     "x": 0,
+     "z": -7,
+     "color": 15254634,
+     "path": {
+      "x": 0,
+      "z": 12
+     }
+    },
+    {
+     "id": "kettle-corner",
+     "exp": "lab.states",
+     "kind": "kettle",
+     "name": "やかんの コーナー",
+     "en": "Kettle Corner",
+     "ja": "みずの すがた",
+     "character": "Yuki",
+     "x": 11,
+     "z": -5,
+     "color": 6724095,
+     "path": {
+      "x": 0,
+      "z": 12
+     }
+    },
+    {
+     "id": "dissolving-bench",
+     "exp": "lab.solubility",
+     "kind": "bench",
+     "name": "とかす だい",
+     "en": "Dissolving Bench",
+     "ja": "とかす・けっしょう",
+     "character": "Mia",
+     "x": 22,
+     "z": -1,
+     "color": 8900331,
+     "path": {
+      "x": 0,
+      "z": 12
+     }
+    },
+    {
+     "id": "indicator-shelf",
+     "exp": "lab.acid-base",
+     "kind": "shelf",
+     "name": "しらべる たな",
+     "en": "Indicator Shelf",
+     "ja": "さんせい・アルカリせい",
+     "character": "Finn",
+     "x": -10,
+     "z": -17,
+     "color": 15254634,
+     "path": {
+      "x": 0,
+      "z": -9
+     }
+    },
+    {
+     "id": "burning-corner",
+     "exp": "lab.candle",
+     "kind": "corner",
+     "name": "もえる コーナー",
+     "en": "Burning Corner",
+     "ja": "ろうそくと びん",
+     "character": "Oliver",
+     "x": 0,
+     "z": -19,
+     "color": 14263349,
+     "path": {
+      "x": 0,
+      "z": -9
+     }
+    },
+    {
+     "id": "metal-vat",
+     "exp": "lab.metal-acid",
+     "kind": "vat",
+     "name": "きんぞくの おけ",
+     "en": "Metal Vat",
+     "ja": "きんぞくと すいようえき",
+     "character": "Zed",
+     "x": 10,
+     "z": -17,
+     "color": 12754584,
+     "path": {
+      "x": 0,
+      "z": -9
+     }
+    }
+   ],
+   "radius": 5.0,
+   "spawn": {
+    "x": 0,
+    "z": 19
+   }
+  },
+  {
+   "id": "atoms",
+   "name": "げんしの しま",
+   "en": "ATOMS",
+   "x": 270,
+   "z": 0,
+   "grass": 9145227,
+   "grassTop": 10001062,
+   "terrain": "quarry",
+   "spots": [
+    {
+     "id": "density-dock",
+     "exp": "atoms.density",
+     "kind": "dock",
+     "name": "みつどの ふとう",
+     "en": "Density Dock",
+     "ja": "みつどと うく・しずむ",
+     "character": "Archimedes",
+     "x": -21,
+     "z": -1,
+     "color": 10276730,
+     "path": {
+      "x": 0,
+      "z": 12
+     }
+    },
+    {
+     "id": "still-house",
+     "exp": "atoms.distill",
+     "kind": "still",
+     "name": "じょうりゅうの こや",
+     "en": "Still House",
+     "ja": "じょうりゅう",
+     "character": "Marie",
+     "x": -8,
+     "z": -6,
+     "color": 6724095,
+     "path": {
+      "x": 0,
+      "z": 12
+     }
+    },
+    {
+     "id": "sealed-scale",
+     "exp": "atoms.conservation",
+     "kind": "scale",
+     "name": "ふうした はかり",
+     "en": "Sealed Scale",
+     "ja": "しつりょう ほぞん",
+     "character": "Lavo",
+     "x": 8,
+     "z": -6,
+     "color": 8900331,
+     "path": {
+      "x": 0,
+      "z": 12
+     }
+    },
+    {
+     "id": "copper-kiln",
+     "exp": "atoms.oxidation",
+     "kind": "kiln",
+     "name": "どうの かま",
+     "en": "Copper Kiln",
+     "ja": "きんぞくと さんそ",
+     "character": "Kiln",
+     "x": 21,
+     "z": -1,
+     "color": 15254634,
+     "path": {
+      "x": 0,
+      "z": 12
+     }
+    },
+    {
+     "id": "split-tank",
+     "exp": "atoms.electrolysis",
+     "kind": "tank",
+     "name": "でんきぶんかいの そうち",
+     "en": "Split Tank",
+     "ja": "みずの でんきぶんかい",
+     "character": "Volt",
+     "x": -11,
+     "z": -16,
+     "color": 14263349,
+     "path": {
+      "x": 0,
+      "z": -9
+     }
+    },
+    {
+     "id": "drip-bench",
+     "exp": "atoms.titration",
+     "kind": "drip",
+     "name": "ちゅうわの だい",
+     "en": "Drip Bench",
+     "ja": "ちゅうわ",
+     "character": "Ion",
+     "x": 0,
+     "z": -18,
+     "color": 12754584,
+     "path": {
+      "x": 0,
+      "z": -9
+     }
+    },
+    {
+     "id": "cell-bench",
+     "exp": "atoms.battery",
+     "kind": "cell",
+     "name": "でんちの だい",
+     "en": "Cell Bench",
+     "ja": "きんぞくと でんち",
+     "character": "Daniell",
+     "x": 11,
+     "z": -16,
+     "color": 8900331,
+     "path": {
+      "x": 0,
+      "z": -9
+     }
+    }
+   ],
+   "radius": 5.0,
+   "spawn": {
+    "x": 0,
+    "z": 19
+   }
+  },
+  {
+   "id": "force",
+   "name": "ちからの しま",
+   "en": "FORCE",
+   "x": 405,
+   "z": 0,
+   "grass": 9024610,
+   "grassTop": 9947748,
+   "terrain": "playground",
+   "spots": [
+    {
+     "id": "swing-frame",
+     "exp": "force.pendulum",
+     "kind": "frame",
+     "name": "ふりこの わく",
+     "en": "Swing Frame",
+     "ja": "ふりこ",
+     "character": "Galileo",
+     "x": -22,
+     "z": -1,
+     "color": 12754584,
+     "path": {
+      "x": 0,
+      "z": 12
+     }
+    },
+    {
+     "id": "slide-ramp",
+     "exp": "force.ramp",
+     "kind": "ramp",
+     "name": "すべりだい",
+     "en": "Slide Ramp",
+     "ja": "さかと まさつ",
+     "character": "Emma",
+     "x": -11,
+     "z": -5,
+     "color": 6724095,
+     "path": {
+      "x": 0,
+      "z": 12
+     }
+    },
+    {
+     "id": "seesaw",
+     "exp": "force.lever",
+     "kind": "seesaw",
+     "name": "シーソー",
+     "en": "Seesaw",
+     "ja": "てこ",
+     "character": "Archie",
+     "x": 0,
+     "z": -7,
+     "color": 15254634,
+     "path": {
+      "x": 0,
+      "z": 12
+     }
+    },
+    {
+     "id": "rubber-track",
+     "exp": "force.rubber",
+     "kind": "rtrack",
+     "name": "ゴムカーの コース",
+     "en": "Rubber Track",
+     "ja": "ゴムの ちから",
+     "character": "Gomu",
+     "x": 11,
+     "z": -5,
+     "color": 14263349,
+     "path": {
+      "x": 0,
+      "z": 12
+     }
+    },
+    {
+     "id": "magnet-corner",
+     "exp": "force.magnet",
+     "kind": "magnet",
+     "name": "じしゃくの コーナー",
+     "en": "Magnet Corner",
+     "ja": "じしゃくの せいしつ",
+     "character": "Maggie",
+     "x": 22,
+     "z": -1,
+     "color": 10276730,
+     "path": {
+      "x": 0,
+      "z": 12
+     }
+    },
+    {
+     "id": "mirror-wall",
+     "exp": "force.light",
+     "kind": "mirror",
+     "name": "かがみの かべ",
+     "en": "Mirror Wall",
+     "ja": "ひかりを あつめる",
+     "character": "Ray",
+     "x": -10,
+     "z": -17,
+     "color": 8900331,
+     "path": {
+      "x": 0,
+      "z": -9
+     }
+    },
+    {
+     "id": "drum-stage",
+     "exp": "force.sound",
+     "kind": "drum",
+     "name": "たいこの ステージ",
+     "en": "Drum Stage",
+     "ja": "おとの ふるえ",
+     "character": "Taiko",
+     "x": 0,
+     "z": -19,
+     "color": 15254634,
+     "path": {
+      "x": 0,
+      "z": -9
+     }
+    },
+    {
+     "id": "spring-post",
+     "exp": "force.spring",
+     "kind": "spring",
+     "name": "ばねの はしら",
+     "en": "Spring Post",
+     "ja": "ばねの のび",
+     "character": "Hooke",
+     "x": 10,
+     "z": -17,
+     "color": 6724095,
+     "path": {
+      "x": 0,
+      "z": -9
+     }
+    }
+   ],
+   "radius": 5.0,
+   "spawn": {
+    "x": 0,
+    "z": 19
+   }
+  },
+  {
+   "id": "life",
+   "name": "いのちの しま",
+   "en": "LIFE",
+   "x": 0,
+   "z": 125,
+   "grass": 8114770,
+   "grassTop": 9037908,
+   "terrain": "brook",
+   "spots": [
+    {
+     "id": "rabbit-meadow",
+     "exp": "life.meadow",
+     "kind": "meadow",
+     "name": "ウサギの はらっぱ",
+     "en": "Rabbit Meadow",
+     "ja": "ウサギと キツネ",
+     "character": "Hana",
+     "x": -20,
+     "z": -2,
+     "color": 10276730,
+     "path": {
+      "x": 0,
+      "z": 12
+     }
+    },
+    {
+     "id": "windowsill",
+     "exp": "life.plant",
+     "kind": "greenhouse",
+     "name": "まどべ",
+     "en": "Windowsill",
+     "ja": "まめを そだてる",
+     "character": "Sora",
+     "x": 0,
+     "z": -6,
+     "color": 8900331,
+     "path": {
+      "x": 0,
+      "z": 12
+     }
+    },
+    {
+     "id": "seed-tray",
+     "exp": "life.germination",
+     "kind": "tray",
+     "name": "たねの トレー",
+     "en": "Seed Tray",
+     "ja": "はつがの じょうけん",
+     "character": "Mame",
+     "x": 20,
+     "z": -2,
+     "color": 15254634,
+     "path": {
+      "x": 0,
+      "z": 12
+     }
+    },
+    {
+     "id": "butterfly-house",
+     "exp": "life.butterfly",
+     "kind": "butterfly",
+     "name": "チョウの いえ",
+     "en": "Butterfly House",
+     "ja": "チョウの そだち",
+     "character": "Mon",
+     "x": -11,
+     "z": -15,
+     "color": 14263349,
+     "path": {
+      "x": 0,
+      "z": -9
+     }
+    },
+    {
+     "id": "medaka-tank",
+     "exp": "life.medaka",
+     "kind": "aquarium",
+     "name": "メダカの すいそう",
+     "en": "Medaka Tank",
+     "ja": "メダカの たんじょう",
+     "character": "Medaka",
+     "x": 0,
+     "z": -17,
+     "color": 6724095,
+     "path": {
+      "x": 0,
+      "z": -9
+     }
+    },
+    {
+     "id": "leaf-lab",
+     "exp": "life.photosynthesis",
+     "kind": "leaf",
+     "name": "はっぱの じっけんしつ",
+     "en": "Leaf Lab",
+     "ja": "にっこうと でんぷん",
+     "character": "Leaf",
+     "x": 11,
+     "z": -15,
+     "color": 12754584,
+     "path": {
+      "x": 0,
+      "z": -9
+     }
+    }
+   ],
+   "radius": 5.0,
+   "spawn": {
+    "x": 0,
+    "z": 19
+   }
+  },
+  {
+   "id": "body",
+   "name": "からだの しま",
+   "en": "BODY",
+   "x": 135,
+   "z": 125,
+   "grass": 9933417,
+   "grassTop": 10856555,
+   "terrain": "stadium",
+   "spots": [
+    {
+     "id": "track",
+     "exp": "life.heart",
+     "kind": "track",
+     "name": "はしる コース",
+     "en": "Running Track",
+     "ja": "しんぞうと うんどう",
+     "character": "Kenta",
+     "x": -20,
+     "z": -2,
+     "color": 14263349,
+     "path": {
+      "x": 0,
+      "z": 12
+     }
+    },
+    {
+     "id": "spit-bench",
+     "exp": "body.saliva",
+     "kind": "spit",
+     "name": "だえきの だい",
+     "en": "Saliva Bench",
+     "ja": "だえきの はたらき",
+     "character": "Amy",
+     "x": -7,
+     "z": -7,
+     "color": 8900331,
+     "path": {
+      "x": 0,
+      "z": 12
+     }
+    },
+    {
+     "id": "breath-bag",
+     "exp": "body.breath",
+     "kind": "breath",
+     "name": "こきゅうの ふくろ",
+     "en": "Breath Bag",
+     "ja": "はく いきの なかみ",
+     "character": "Haa",
+     "x": 7,
+     "z": -7,
+     "color": 10276730,
+     "path": {
+      "x": 0,
+      "z": 12
+     }
+    },
+    {
+     "id": "pea-garden",
+     "exp": "body.genetics",
+     "kind": "pea",
+     "name": "エンドウの はたけ",
+     "en": "Pea Garden",
+     "ja": "いでんの きまり",
+     "character": "Mendel",
+     "x": 20,
+     "z": -2,
+     "color": 15254634,
+     "path": {
+      "x": 0,
+      "z": 12
+     }
+    }
+   ],
+   "radius": 5.0,
+   "spawn": {
+    "x": 0,
+    "z": 19
+   }
+  },
+  {
+   "id": "earth",
+   "name": "ちきゅうの しま",
+   "en": "EARTH",
+   "x": 270,
+   "z": 125,
+   "grass": 9933417,
+   "grassTop": 10856555,
+   "terrain": "volcano",
+   "spots": [
+    {
+     "id": "seismo-house",
+     "exp": "earth.quake",
+     "kind": "seismo",
+     "name": "じしんけいの いえ",
+     "en": "Seismograph House",
+     "ja": "じしんの なみ",
+     "character": "Dr. Ishi",
+     "x": -22,
+     "z": -1,
+     "color": 12754584,
+     "path": {
+      "x": 0,
+      "z": 12
+     }
+    },
+    {
+     "id": "harbour-wall",
+     "exp": "earth.tsunami",
+     "kind": "harbour",
+     "name": "みなとの かべ",
+     "en": "Harbour Wall",
+     "ja": "つなみ",
+     "character": "Nami",
+     "x": -11,
+     "z": -5,
+     "color": 6724095,
+     "path": {
+      "x": 0,
+      "z": 12
+     }
+    },
+    {
+     "id": "weather-tower",
+     "exp": "earth.cloud",
+     "kind": "tower",
+     "name": "てんきの とう",
+     "en": "Weather Tower",
+     "ja": "くもと あめ",
+     "character": "Kumo",
+     "x": 0,
+     "z": -7,
+     "color": 15254634,
+     "path": {
+      "x": 0,
+      "z": 12
+     }
+    },
+    {
+     "id": "shadow-post",
+     "exp": "earth.shadow",
+     "kind": "shadow",
+     "name": "かげの ぼう",
+     "en": "Shadow Post",
+     "ja": "たいようと かげ",
+     "character": "Kage",
+     "x": 11,
+     "z": -5,
+     "color": 8900331,
+     "path": {
+      "x": 0,
+      "z": 12
+     }
+    },
+    {
+     "id": "soil-tubes",
+     "exp": "earth.soil",
+     "kind": "soil",
+     "name": "つちの つつ",
+     "en": "Soil Tubes",
+     "ja": "あまみずの ゆくえ",
+     "character": "Tsuchi",
+     "x": 22,
+     "z": -1,
+     "color": 10276730,
+     "path": {
+      "x": 0,
+      "z": 12
+     }
+    },
+    {
+     "id": "stream-table",
+     "exp": "earth.river",
+     "kind": "stream",
+     "name": "ながれの テーブル",
+     "en": "Stream Table",
+     "ja": "ながれる みずの はたらき",
+     "character": "Kawa",
+     "x": -10,
+     "z": -17,
+     "color": 14263349,
+     "path": {
+      "x": 0,
+      "z": -9
+     }
+    },
+    {
+     "id": "strata-cliff",
+     "exp": "earth.strata",
+     "kind": "strata",
+     "name": "ちそうの がけ",
+     "en": "Strata Cliff",
+     "ja": "ちそうの でき方",
+     "character": "Chiso",
+     "x": 0,
+     "z": -19,
+     "color": 12754584,
+     "path": {
+      "x": 0,
+      "z": -9
+     }
+    },
+    {
+     "id": "volcano-rim",
+     "exp": "earth.volcano",
+     "kind": "volcano",
+     "name": "かざんの ふち",
+     "en": "Volcano Rim",
+     "ja": "マグマと かざん",
+     "character": "Magma",
+     "x": 10,
+     "z": -17,
+     "color": 15254634,
+     "path": {
+      "x": 0,
+      "z": -9
+     }
+    }
+   ],
+   "radius": 5.0,
+   "spawn": {
+    "x": 0,
+    "z": 19
+   }
+  },
+  {
+   "id": "maker",
+   "name": "つくる しま",
+   "en": "MAKER",
+   "x": 405,
+   "z": 125,
+   "grass": 10075478,
+   "grassTop": 11131238,
+   "terrain": "factory",
+   "spots": [
+    {
+     "id": "bridge-yard",
+     "exp": "maker.bridge",
+     "kind": "bridge",
+     "name": "はしの こうば",
+     "en": "Bridge Yard",
+     "ja": "はしの つよさ",
+     "character": "Taku",
+     "x": -21,
+     "z": -1,
+     "color": 10276730,
+     "path": {
+      "x": 0,
+      "z": 12
+     }
+    },
+    {
+     "id": "circuit-shed",
+     "exp": "maker.circuit",
+     "kind": "shed",
+     "name": "かいろの こや",
+     "en": "Circuit Shed",
+     "ja": "でんきの かいろ",
+     "character": "Volta",
+     "x": -8,
+     "z": -6,
+     "color": 15254634,
+     "path": {
+      "x": 0,
+      "z": 12
+     }
+    },
+    {
+     "id": "gear-mill",
+     "exp": "maker.gears",
+     "kind": "mill",
+     "name": "はぐるまの こや",
+     "en": "Gear Mill",
+     "ja": "はぐるま",
+     "character": "Cog",
+     "x": 8,
+     "z": -6,
+     "color": 8900331,
+     "path": {
+      "x": 0,
+      "z": 12
+     }
+    },
+    {
+     "id": "tester-bench",
+     "exp": "maker.conductor",
+     "kind": "tester",
+     "name": "でんきの テスター",
+     "en": "Tester Bench",
+     "ja": "でんきを とおす もの",
+     "character": "Tess",
+     "x": 21,
+     "z": -1,
+     "color": 6724095,
+     "path": {
+      "x": 0,
+      "z": 12
+     }
+    },
+    {
+     "id": "battery-rack",
+     "exp": "maker.cells",
+     "kind": "rack",
+     "name": "かんでんちの たな",
+     "en": "Battery Rack",
+     "ja": "かんでんちの つなぎかた",
+     "character": "Cell",
+     "x": -11,
+     "z": -16,
+     "color": 14263349,
+     "path": {
+      "x": 0,
+      "z": -9
+     }
+    },
+    {
+     "id": "coil-crane",
+     "exp": "maker.electromagnet",
+     "kind": "coil",
+     "name": "コイルの クレーン",
+     "en": "Coil Crane",
+     "ja": "でんじしゃく",
+     "character": "Coil",
+     "x": 0,
+     "z": -18,
+     "color": 12754584,
+     "path": {
+      "x": 0,
+      "z": -9
+     }
+    },
+    {
+     "id": "crank-house",
+     "exp": "maker.generator",
+     "kind": "crank",
+     "name": "はつでんの こや",
+     "en": "Crank House",
+     "ja": "はつでんと ちくでん",
+     "character": "Dyna",
+     "x": 11,
+     "z": -16,
+     "color": 8900331,
+     "path": {
+      "x": 0,
+      "z": -9
+     }
+    }
+   ],
+   "radius": 5.0,
+   "spawn": {
+    "x": 0,
+    "z": 19
+   }
+  },
+  {
+   "id": "data",
+   "name": "データの しま",
+   "en": "DATA",
+   "x": 135,
+   "z": 250,
+   "grass": 9347947,
+   "grassTop": 10269806,
+   "terrain": "grid",
+   "spots": [
+    {
+     "id": "dice-table",
+     "exp": "data.dice",
+     "kind": "table",
+     "name": "サイコロの テーブル",
+     "en": "Dice Table",
+     "ja": "サイコロと かくりつ",
+     "character": "Lucky",
+     "x": -20,
+     "z": -2,
+     "color": 14263349,
+     "path": {
+      "x": 0,
+      "z": 12
+     }
+    },
+    {
+     "id": "counting-pond",
+     "exp": "data.pond",
+     "kind": "pond",
+     "name": "かぞえる いけ",
+     "en": "Counting Pond",
+     "ja": "見えない さかなを かぞえる",
+     "character": "Ayu",
+     "x": -7,
+     "z": -7,
+     "color": 6724095,
+     "path": {
+      "x": 0,
+      "z": 12
+     }
+    },
+    {
+     "id": "sorting-machine",
+     "exp": "data.classify",
+     "kind": "machine",
+     "name": "しわけ マシン",
+     "en": "Sorting Machine",
+     "ja": "AI の しわけ",
+     "character": "Bit",
+     "x": 7,
+     "z": -7,
+     "color": 12754584,
+     "path": {
+      "x": 0,
+      "z": 12
+     }
+    },
+    {
+     "id": "turtle-plaza",
+     "exp": "data.polygon",
+     "kind": "turtle",
+     "name": "カメの ひろば",
+     "en": "Turtle Plaza",
+     "ja": "プログラムで かたちを かく",
+     "character": "Logo",
+     "x": 20,
+     "z": -2,
+     "color": 8900331,
+     "path": {
+      "x": 0,
+      "z": 12
+     }
+    }
+   ],
+   "radius": 5.0,
+   "spawn": {
+    "x": 0,
+    "z": 19
+   }
+  }
+ ]
 }

@@ -1,0 +1,343 @@
+{
+ "id": "atoms.battery",
+ "region": "atoms",
+ "station": "cell-bench",
+ "title": {
+  "en": "The Cell Bench",
+  "ja": "でんちの だい"
+ },
+ "sim": "cell",
+ "grade": "中3",
+ "unit": "化学変化と電池",
+ "intro": {
+  "en": "Two different metals in salt water make a battery. The more reactive metal dissolves and is the minus pole. Pick pairs and read the volts.",
+  "ja": "ちがう 2つの きんぞくを しおみずに 入れると でんちに なる。はんのうしやすい ほうが とけて マイナスきょく。くみあわせを かえて でんあつを よもう。"
+ },
+ "params": {
+  "metalA": {
+   "choices": [
+    "magnesium",
+    "zinc",
+    "iron",
+    "copper",
+    "silver"
+   ],
+   "en": "Metal A",
+   "ja": "きんぞく A"
+  },
+  "metalB": {
+   "choices": [
+    "magnesium",
+    "zinc",
+    "iron",
+    "copper",
+    "silver"
+   ],
+   "en": "Metal B",
+   "ja": "きんぞく B"
+  }
+ },
+ "levels": {
+  "explore": {
+   "ages": "4-7",
+   "fixed": {
+    "metalB": "copper"
+   },
+   "predict": {
+    "kind": "choice",
+    "field": "lights",
+    "choices": [
+     "yes",
+     "no"
+    ]
+   },
+   "measure": [
+    "volts",
+    "lights"
+   ]
+  },
+  "investigate": {
+   "ages": "8-11",
+   "predict": {
+    "kind": "number",
+    "field": "volts",
+    "unit": "V",
+    "tolerance": 0.05
+   },
+   "measure": [
+    "volts",
+    "negative"
+   ],
+   "record": [
+    "rank",
+    "volts"
+   ]
+  },
+  "engineer": {
+   "ages": "12-15",
+   "predict": {
+    "kind": "choice",
+    "field": "negative",
+    "choices": [
+     "magnesium",
+     "zinc",
+     "iron",
+     "copper",
+     "silver",
+     "none"
+    ]
+   },
+   "measure": [
+    "volts",
+    "negative",
+    "lights"
+   ],
+   "record": [
+    "rank",
+    "volts"
+   ],
+   "challenge": {
+    "en": "Find the pair with the biggest voltage, and the pair with none.",
+    "ja": "いちばん でんあつの 大きい くみと、ぜんぜん 出ない くみを さがそう。"
+   }
+  }
+ },
+ "explain": {
+  "en": "Where does a battery's push come from?",
+  "ja": "でんちの おす ちからは どこから？",
+  "aims": [
+   {
+    "id": "two-metals",
+    "en": "Two different metals are needed",
+    "ja": "ちがう 2つの きんぞくが いる",
+    "keys": [
+     [
+      "two",
+      "different",
+      "pair"
+     ],
+     [
+      "metal",
+      "metals"
+     ]
+    ]
+   },
+   {
+    "id": "reactive",
+    "en": "The more reactive metal gives up electrons and is the minus pole",
+    "ja": "はんのうしやすい きんぞくが でんしを 出して マイナス",
+    "keys": [
+     [
+      "reactive",
+      "dissolve",
+      "dissolves",
+      "zinc",
+      "magnesium"
+     ],
+     [
+      "electron",
+      "electrons",
+      "minus",
+      "negative",
+      "−",
+      "gives",
+      "loses"
+     ]
+    ]
+   },
+   {
+    "id": "gap",
+    "en": "A bigger difference between the metals makes more volts",
+    "ja": "さが 大きいほど でんあつが 大きい",
+    "keys": [
+     [
+      "difference",
+      "gap",
+      "far",
+      "apart",
+      "further"
+     ],
+     [
+      "volt",
+      "volts",
+      "voltage",
+      "bigger",
+      "more",
+      "higher"
+     ]
+    ]
+   }
+  ]
+ },
+ "classPlot": {
+  "x": "rank",
+  "y": "volts",
+  "xLabel": {
+   "en": "How reactive metal A is",
+   "ja": "きんぞく A の はんのうしやすさ"
+  },
+  "yLabel": {
+   "en": "Volts",
+   "ja": "でんあつ（V）"
+  }
+ },
+ "real": {
+  "en": "A lemon, a zinc nail and a copper coin: touch the two to your tongue... or a tiny LED.",
+  "ja": "レモンに あえんの くぎと どうの こうか。LED に つないでみよう。",
+  "kit": [
+   "a lemon",
+   "a galvanised nail",
+   "a copper coin"
+  ]
+ },
+ "standards": {
+  "jp": [
+   "中3 化学変化とイオン（電池）"
+  ],
+  "ngss": [
+   "MS-PS1-2"
+  ],
+  "cambridge": [
+   "Science enquiry"
+  ],
+  "pisa": [
+   "explain",
+   "interpret"
+  ]
+ },
+ "powers": {
+  "predict": 1,
+  "measure": 1,
+  "data": 1,
+  "explain": 1,
+  "build": 1
+ },
+ "ui": {
+  "labels": {
+   "volts": {
+    "en": "Volts",
+    "ja": "でんあつ（V）"
+   },
+   "lights": {
+    "en": "Lights an LED?",
+    "ja": "LED は つく？"
+   },
+   "negative": {
+    "en": "Minus pole",
+    "ja": "マイナスきょく"
+   },
+   "works": {
+    "en": "Works?",
+    "ja": "でんちに なる？"
+   }
+  },
+  "questions": {
+   "lights": {
+    "en": "Will the LED light up?",
+    "ja": "LED は つく？"
+   },
+   "volts": {
+    "en": "How many volts?",
+    "ja": "でんあつは なん V？"
+   },
+   "negative": {
+    "en": "Which metal will be the minus pole?",
+    "ja": "どっちが マイナスきょく？"
+   }
+  },
+  "choices": {
+   "lights": {
+    "yes": {
+     "en": "Yes",
+     "ja": "はい"
+    },
+    "no": {
+     "en": "No",
+     "ja": "いいえ"
+    }
+   },
+   "works": {
+    "yes": {
+     "en": "Yes",
+     "ja": "はい"
+    },
+    "no": {
+     "en": "No",
+     "ja": "いいえ"
+    }
+   },
+   "negative": {
+    "magnesium": {
+     "en": "Magnesium",
+     "ja": "マグネシウム"
+    },
+    "zinc": {
+     "en": "Zinc",
+     "ja": "あえん"
+    },
+    "iron": {
+     "en": "Iron",
+     "ja": "てつ"
+    },
+    "copper": {
+     "en": "Copper",
+     "ja": "どう"
+    },
+    "silver": {
+     "en": "Silver",
+     "ja": "ぎん"
+    },
+    "none": {
+     "en": "Neither (same metal)",
+     "ja": "どちらも（おなじ きんぞく）"
+    }
+   }
+  },
+  "paramChoices": {
+   "metalA": {
+    "magnesium": {
+     "en": "Magnesium",
+     "ja": "マグネシウム"
+    },
+    "zinc": {
+     "en": "Zinc",
+     "ja": "あえん"
+    },
+    "iron": {
+     "en": "Iron",
+     "ja": "てつ"
+    },
+    "copper": {
+     "en": "Copper",
+     "ja": "どう"
+    },
+    "silver": {
+     "en": "Silver",
+     "ja": "ぎん"
+    }
+   },
+   "metalB": {
+    "magnesium": {
+     "en": "Magnesium",
+     "ja": "マグネシウム"
+    },
+    "zinc": {
+     "en": "Zinc",
+     "ja": "あえん"
+    },
+    "iron": {
+     "en": "Iron",
+     "ja": "てつ"
+    },
+    "copper": {
+     "en": "Copper",
+     "ja": "どう"
+    },
+    "silver": {
+     "en": "Silver",
+     "ja": "ぎん"
+    }
+   }
+  }
+ }
+}

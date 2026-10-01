@@ -1,198 +1,149 @@
-// What stands on each island, built with the island kit's tools. One function per
-// island; the kit lays the ground, the jetty, the paths and the greenery.
+// What stands on each island, built with the island kit's tools.
+//
+// Every island is built the same way: the kit lays the ground, the jetty and the
+// greenery; this file adds the station props (one builder per station `kind`, looked
+// up from islands.json) and then the island's own terrain (one builder per `terrain`:
+// the peak on COSMOS, the volcano on EARTH, the crystal quarry on ATOMS...). The
+// crowns stand on the two north hills the kit always raises, above the stations.
 
-function stationsAndPaths({ island, path, resident, scatter, bench, flowers, lamp }, flowerColor = 0xf0d98a) {
+function stationsAndPaths({ island, path, resident, scatter, bench, flowers, lamp, house }, flowerColor = 0xf0d98a) {
   for (const sp of island.spots) path(sp.path.x, sp.path.z, sp.x, sp.z + 4.2);
   path(0, 19, 0, 12);
+  if (island.spots.some((sp) => sp.path.z < 0)) path(0, 12, 0, -9); // the back row's own hub
   for (const sp of island.spots) resident(sp);
   for (const [x, z] of [[-9, 6], [9, 6], [-24, 8], [24, 8]]) flowers(x, z, flowerColor);
   bench(-5, 14, Math.PI); bench(5, 14, Math.PI);
   for (const sx of [-5, 5]) lamp(sx, 10);
-  scatter(island, 100);
+  for (const sx of [-5, 5]) lamp(sx, -9);
+  if (island.houses) for (const h of island.houses) house(h.x, h.z, h.w || 5, h.d || 4.5, h.wall, h.roof, h.name);
+  scatter(island, 80);
 }
 
-export const BUILDERS = {
-  cosmos(k) {
-    const { island, B, D, house, fence, bunting, lamp, obstacles } = k;
-    const [hill, pad, obs] = island.spots;
-    for (let i = 0; i < 4; i++) D(hill.x, 0.3 + i * 0.5, hill.z - 3, 9 - i * 1.8, 0.5, 7 - i * 1.4, i % 2 ? 0x8fb061 : 0x9cbb6a);
-    D(hill.x, 3.2, hill.z - 3, 0.3, 2.4, 0.3, 0x6f5b3e);
-    B(hill.x, 4.6, hill.z - 3, 1.3, 1.3, 1.3, 0x3f7fd0);
-    const moon = B(hill.x + 3, 5.2, hill.z - 3, 0.7, 0.7, 0.7, 0xe6e2d6); moon.userData.orbit = { cx: hill.x, cz: hill.z - 3, r: 3.2 }; island._moon = moon;
-    obstacles.push({ x: hill.x, z: hill.z - 3, w: 4, d: 3 });
-    house(hill.x, hill.z - 10, 5, 4.5, 0xe8dcc0, 0x6b8fb8, { en: hill.en, ja: hill.name });
-    D(pad.x, 0.3, pad.z - 4, 9, 0.3, 9, 0x8a8f99); D(pad.x, 0.5, pad.z - 4, 7.5, 0.2, 7.5, 0x9aa0aa);
-    D(pad.x + 2.4, 4.8, pad.z - 4, 1.0, 9, 1.0, 0xc9cdd6); D(pad.x + 1.4, 7.5, pad.z - 4, 1.6, 0.3, 0.6, 0xc9cdd6);
-    D(pad.x, 2.4, pad.z - 4, 1.4, 4, 1.4, 0xf2f2f2); D(pad.x, 5.2, pad.z - 4, 1.0, 1.6, 1.0, 0xf2f2f2); D(pad.x, 6.4, pad.z - 4, 0.6, 0.9, 0.6, 0xd04030);
-    for (const [fx, fz] of [[-1, 0], [1, 0], [0, -1], [0, 1]]) D(pad.x + fx * 0.9, 0.9, pad.z - 4 + fz * 0.9, fx ? 0.8 : 0.3, 1.2, fz ? 0.8 : 0.3, 0xd04030);
-    obstacles.push({ x: pad.x, z: pad.z - 4, w: 4, d: 4 });
-    fence(pad.x - 6, pad.z - 9.5, 9); bunting(pad.x - 6, pad.z + 1, pad.x + 6, pad.z + 1, 4);
-    house(pad.x - 11, pad.z - 2, 5, 4.5, 0xe3e9f0, 0x5c8583, { en: 'Mission Control', ja: 'かんせいしつ' });
-    for (let i = 0; i < 6; i++) D(obs.x, 0.5 + i, obs.z - 4, 6.4 - (i > 4 ? 0.6 : 0), 1, 6.4 - (i > 4 ? 0.6 : 0), i % 2 ? 0xe8e2d0 : 0xdcd4c0);
-    for (let i = 0; i < 4; i++) D(obs.x, 6.6 + i * 0.7, obs.z - 4, 6.2 - i * 1.4, 0.7, 6.2 - i * 1.4, 0xb9c6d6);
-    D(obs.x + 0.8, 8.6, obs.z - 4.4, 0.8, 0.8, 3.2, 0x334455); D(obs.x, 1.5, obs.z - 0.9, 1.4, 2.6, 0.3, 0x50412f);
-    obstacles.push({ x: obs.x, z: obs.z - 4, w: 3.6, d: 3.6 });
-    for (const sx of [-5, 5]) lamp(obs.x + sx, obs.z + 1);
-    stationsAndPaths(k);
-  },
+// A bench top on four legs, the lab's standard furniture.
+const benchTop = ({ D }, x, z, w = 5) => { D(x, 1.0, z, w, 0.3, 2.2, 0xa58c62); for (const sx of [-w / 2 + 0.3, w / 2 - 0.3]) D(x + sx, 0.5, z, 0.3, 1, 1.6, 0x7b6647); };
 
-  lab(k) {
-    const { island, D, house, crate, barrel, fence, obstacles } = k;
-    const [bench_, shelf, corner] = island.spots;
-    D(bench_.x, 1.0, bench_.z - 4, 7, 0.3, 2.4, 0xa58c62);
-    for (const sx of [-3.2, 3.2]) for (const sz of [-1, 1]) D(bench_.x + sx, 0.5, bench_.z - 4 + sz, 0.3, 1, 0.3, 0x7b6647);
-    [0x7fd1ff, 0xd9c4ff, 0xf6f1c8, 0xa9f0d1].forEach((c, i) => { D(bench_.x - 2.4 + i * 1.6, 1.6, bench_.z - 4, 0.7, 0.9, 0.7, 0xe8f2f5); D(bench_.x - 2.4 + i * 1.6, 1.45, bench_.z - 4, 0.6, 0.5, 0.6, c); });
-    for (const sx of [-3.6, 3.6]) D(bench_.x + sx, 2.6, bench_.z - 5.2, 0.25, 3.2, 0.25, 0x6f5b3e);
-    D(bench_.x, 4.2, bench_.z - 4.4, 8.4, 0.2, 3.6, 0xb86e46);
-    obstacles.push({ x: bench_.x, z: bench_.z - 4, w: 3.8, d: 1.6 });
-    house(bench_.x, bench_.z - 11, 6, 5, 0xf0e6cc, 0xb86e46, { en: bench_.en, ja: bench_.name });
-    D(shelf.x, 2.0, shelf.z - 4, 7, 4, 1.4, 0x8a6a45);
-    const tints = [0xd9433a, 0xe98ab0, 0x7a4ea8, 0x3a6fd0, 0x3f9a52, 0xe4c239];
-    for (let row = 0; row < 3; row++) for (let i = 0; i < 6; i++) D(shelf.x - 2.5 + i, 0.9 + row * 1.2, shelf.z - 3.2, 0.5, 0.8, 0.5, tints[(i + row) % 6]);
-    D(shelf.x, 4.1, shelf.z - 4, 7.4, 0.2, 1.8, 0x6d543a);
-    obstacles.push({ x: shelf.x, z: shelf.z - 4, w: 3.7, d: 0.9 });
-    house(shelf.x - 11, shelf.z - 2, 5.5, 4.5, 0xdde6d2, 0x5c8583, { en: 'Stockroom', ja: 'やくひんしつ' });
-    crate(shelf.x + 6, shelf.z - 3); barrel(shelf.x + 7.4, shelf.z - 3);
-    D(corner.x, 0.4, corner.z - 4, 5, 0.6, 5, 0x9a9585);
-    for (let i = 0; i < 8; i++) { const a = (i / 8) * Math.PI * 2; D(corner.x + Math.cos(a) * 2, 0.9, corner.z - 4 + Math.sin(a) * 2, 0.6, 0.5, 0.6, 0x8c917c); }
-    D(corner.x, 1.2, corner.z - 4, 0.4, 1.0, 0.4, 0xfff4d7); D(corner.x, 1.9, corner.z - 4, 0.3, 0.4, 0.3, 0xffc66a, 2.2); D(corner.x, 1.7, corner.z - 4, 1.6, 2.2, 1.6, 0xd8ecf2);
-    obstacles.push({ x: corner.x, z: corner.z - 4, w: 2.6, d: 2.6 });
-    fence(corner.x - 4, corner.z - 8, 6);
-    house(corner.x, corner.z - 11, 5, 4.5, 0xe6d8c8, 0x8e795f, { en: corner.en, ja: corner.name });
-    stationsAndPaths(k, 0xe89bb0);
-  },
+// ---- station props, by kind. Each draws at (sp.x, sp.z - 4), the spot the child faces.
+const PROPS = {
+  hill(k, sp) { const { D, B, obstacles, island } = k; for (let i = 0; i < 4; i++) D(sp.x, 0.3 + i * 0.5, sp.z - 3, 9 - i * 1.8, 0.5, 7 - i * 1.4, i % 2 ? 0x8fb061 : 0x9cbb6a); D(sp.x, 3.2, sp.z - 3, 0.3, 2.4, 0.3, 0x6f5b3e); B(sp.x, 4.6, sp.z - 3, 1.3, 1.3, 1.3, 0x3f7fd0); const moon = B(sp.x + 3, 5.2, sp.z - 3, 0.7, 0.7, 0.7, 0xe6e2d6); moon.userData.orbit = { cx: sp.x, cz: sp.z - 3, r: 3.2 }; island._moon = moon; obstacles.push({ x: sp.x, z: sp.z - 3, w: 4, d: 3 }); },
+  pad(k, sp) { const { D, obstacles, fence } = k; D(sp.x, 0.3, sp.z - 4, 9, 0.3, 9, 0x8a8f99); D(sp.x, 0.5, sp.z - 4, 7.5, 0.2, 7.5, 0x9aa0aa); D(sp.x + 2.4, 4.8, sp.z - 4, 1.0, 9, 1.0, 0xc9cdd6); D(sp.x + 1.4, 7.5, sp.z - 4, 1.6, 0.3, 0.6, 0xc9cdd6); D(sp.x, 2.4, sp.z - 4, 1.4, 4, 1.4, 0xf2f2f2); D(sp.x, 5.2, sp.z - 4, 1.0, 1.6, 1.0, 0xf2f2f2); D(sp.x, 6.4, sp.z - 4, 0.6, 0.9, 0.6, 0xd04030); for (const [fx, fz] of [[-1, 0], [1, 0], [0, -1], [0, 1]]) D(sp.x + fx * 0.9, 0.9, sp.z - 4 + fz * 0.9, fx ? 0.8 : 0.3, 1.2, fz ? 0.8 : 0.3, 0xd04030); obstacles.push({ x: sp.x, z: sp.z - 4, w: 4, d: 4 }); fence(sp.x - 6, sp.z - 9.5, 9); },
+  dome(k, sp) { const { D, B, obstacles, island } = k; for (let i = 0; i < 6; i++) D(sp.x, 0.5 + i, sp.z - 4, 6.4 - (i > 4 ? 0.6 : 0), 1, 6.4 - (i > 4 ? 0.6 : 0), i % 2 ? 0xe8e2d0 : 0xdcd4c0); for (let i = 0; i < 4; i++) D(sp.x, 6.6 + i * 0.7, sp.z - 4, 6.2 - i * 1.4, 0.7, 6.2 - i * 1.4, 0xb9c6d6); const scope = B(sp.x + 0.8, 8.6, sp.z - 4.4, 0.8, 0.8, 3.2, 0x334455); island._scope = scope; D(sp.x, 1.5, sp.z - 0.9, 1.4, 2.6, 0.3, 0x50412f); obstacles.push({ x: sp.x, z: sp.z - 4, w: 3.6, d: 3.6 }); },
+  wheel(k, sp) { const { D, B, obstacles, island } = k; D(sp.x, 0.3, sp.z - 4, 6, 0.3, 6, 0x334455); D(sp.x, 2.2, sp.z - 4, 0.3, 4, 0.3, 0x8d9aa0); const w = B(sp.x, 4.4, sp.z - 4, 5.2, 5.2, 0.3, 0x1c2a3a); island._starWheel = w; for (let i = 0; i < 9; i++) { const a = i * 0.7; const r = 0.6 + (i % 3) * 0.7; B(Math.cos(a) * r / 5.2, Math.sin(a) * r / 5.2, 0.6, 0.05, 0.05, 0.4, 0xfff4d7, w, 1.8); } D(sp.x, 4.4, sp.z - 3.8, 0.4, 0.4, 0.1, 0xffd36b, 2.4); obstacles.push({ x: sp.x, z: sp.z - 4, w: 2.8, d: 1 }); },
+  dial(k, sp) { const { D, obstacles } = k; D(sp.x, 0.3, sp.z - 4, 7, 0.3, 7, 0xd9c38a); for (let i = 0; i < 12; i++) { const a = (i / 12) * Math.PI * 2; D(sp.x + Math.cos(a) * 3, 0.55, sp.z - 4 + Math.sin(a) * 3, 0.5, 0.2, 0.5, i % 3 ? 0xa58c62 : 0xd04030); } D(sp.x, 1.6, sp.z - 4, 0.3, 2.8, 0.3, 0x8d9aa0); D(sp.x + 1.2, 1.2, sp.z - 4, 2.4, 0.2, 0.2, 0x8d9aa0); for (let i = 0; i < 3; i++) D(sp.x - 2 + i * 2, 3.4 + i * 0.9, sp.z - 7, 0.9, 0.9, 0.9, 0xffd36b, 1.6 + i * 0.3); obstacles.push({ x: sp.x, z: sp.z - 4, w: 1, d: 1 }); },
+  walk(k, sp) { const { D, obstacles } = k; D(sp.x, 0.25, sp.z - 4, 10, 0.2, 2.2, 0x334455); const sizes = [1.0, 0.5, 0.6, 0.6, 0.45, 1.6, 1.3, 0.9, 0.9]; const cols = [0xffd36b, 0x9a9585, 0xe6cfa0, 0x3f7fd0, 0xb55a32, 0xd9b07a, 0xe8d8a8, 0x7fd1ff, 0x3a5fd0]; for (let i = 0; i < 9; i++) { D(sp.x - 4.4 + i * 1.1, 0.55 + sizes[i] / 2 + 0.3, sp.z - 4, sizes[i], sizes[i], sizes[i], cols[i], i === 0 ? 1.6 : 0); D(sp.x - 4.4 + i * 1.1, 0.45, sp.z - 4, 0.12, 0.5, 0.12, 0x8d9aa0); } obstacles.push({ x: sp.x, z: sp.z - 4, w: 5, d: 1 }); },
 
-  force(k) {
-    const { island, D, B, house, fence, obstacles } = k;
-    const [frame, ramp, seesaw] = island.spots;
-    // Swing frame: two tall posts, a bar, a bob on a rope.
-    for (const sx of [-2.5, 2.5]) D(frame.x + sx, 3, frame.z - 4, 0.4, 6, 0.4, 0x6f5b3e);
-    D(frame.x, 6.1, frame.z - 4, 5.6, 0.4, 0.4, 0x6f5b3e);
-    D(frame.x, 3.6, frame.z - 4, 0.06, 4.6, 0.06, 0xd4c49b);
-    const bob = B(frame.x, 1.2, frame.z - 4, 0.8, 0.8, 0.8, 0x8d9aa0); bob.userData.swing = { cx: frame.x, cz: frame.z - 4, top: 6, len: 4.8 }; island._bob = bob;
-    obstacles.push({ x: frame.x, z: frame.z - 4, w: 3, d: 1 });
-    house(frame.x, frame.z - 11, 5, 4.5, 0xe8dcc0, 0x8e795f, { en: frame.en, ja: frame.name });
-    // Slide ramp: a wedge of boxes rising to a platform, a box at the top.
-    for (let i = 0; i < 8; i++) D(ramp.x - 3.5 + i, 0.3 + i * 0.3, ramp.z - 4, 1, 0.6 + i * 0.6, 3, i % 2 ? 0xc9b48a : 0xbda77c);
-    D(ramp.x + 4.5, 2.7, ramp.z - 4, 1.2, 5.4, 3, 0x8a7350); D(ramp.x + 4.5, 5.6, ramp.z - 4, 1.6, 0.3, 3.4, 0xa58c62);
-    D(ramp.x + 4.5, 6.2, ramp.z - 4, 0.9, 0.9, 0.9, 0xd04030);
-    obstacles.push({ x: ramp.x + 0.5, z: ramp.z - 4, w: 5, d: 1.7 });
-    fence(ramp.x - 5, ramp.z - 7.5, 8);
-    house(ramp.x - 11, ramp.z - 2, 5, 4.5, 0xe3e9f0, 0x5c8583, { en: 'Workshop', ja: 'さぎょうしつ' });
-    // Seesaw: a plank on a fulcrum, two weights.
-    D(seesaw.x, 0.6, seesaw.z - 4, 1.2, 1.2, 1.2, 0x7b6647);
-    const plank = B(seesaw.x, 1.35, seesaw.z - 4, 7, 0.25, 1.2, 0xa58c62); plank.rotation.z = -0.18; island._plank = plank;
-    D(seesaw.x - 3, 2.3, seesaw.z - 4, 1.1, 1.1, 1.1, 0x3a6fd0); D(seesaw.x + 3, 1.0, seesaw.z - 4, 0.8, 0.8, 0.8, 0xd04030);
-    obstacles.push({ x: seesaw.x, z: seesaw.z - 4, w: 3.8, d: 1 });
-    house(seesaw.x, seesaw.z - 11, 5, 4.5, 0xe6d8c8, 0x6b8fb8, { en: seesaw.en, ja: seesaw.name });
-    stationsAndPaths(k, 0xe7b06a);
-  },
+  bench(k, sp) { const { D, obstacles } = k; D(sp.x, 1.0, sp.z - 4, 7, 0.3, 2.4, 0xa58c62); for (const sx of [-3.2, 3.2]) for (const sz of [-1, 1]) D(sp.x + sx, 0.5, sp.z - 4 + sz, 0.3, 1, 0.3, 0x7b6647); [0x7fd1ff, 0xd9c4ff, 0xf6f1c8, 0xa9f0d1].forEach((c, i) => { D(sp.x - 2.4 + i * 1.6, 1.6, sp.z - 4, 0.7, 0.9, 0.7, 0xe8f2f5); D(sp.x - 2.4 + i * 1.6, 1.45, sp.z - 4, 0.6, 0.5, 0.6, c); }); for (const sx of [-3.6, 3.6]) D(sp.x + sx, 2.6, sp.z - 5.2, 0.25, 3.2, 0.25, 0x6f5b3e); D(sp.x, 4.2, sp.z - 4.4, 8.4, 0.2, 3.6, 0xb86e46); obstacles.push({ x: sp.x, z: sp.z - 4, w: 3.8, d: 1.6 }); },
+  shelf(k, sp) { const { D, obstacles, crate, barrel } = k; D(sp.x, 2.0, sp.z - 4, 7, 4, 1.4, 0x8a6a45); const tints = [0xd9433a, 0xe98ab0, 0x7a4ea8, 0x3a6fd0, 0x3f9a52, 0xe4c239]; for (let row = 0; row < 3; row++) for (let i = 0; i < 6; i++) D(sp.x - 2.5 + i, 0.9 + row * 1.2, sp.z - 3.2, 0.5, 0.8, 0.5, tints[(i + row) % 6]); D(sp.x, 4.1, sp.z - 4, 7.4, 0.2, 1.8, 0x6d543a); obstacles.push({ x: sp.x, z: sp.z - 4, w: 3.7, d: 0.9 }); crate(sp.x + 5, sp.z - 3); barrel(sp.x + 6.2, sp.z - 3); },
+  corner(k, sp) { const { D, obstacles } = k; D(sp.x, 0.4, sp.z - 4, 5, 0.6, 5, 0x9a9585); for (let i = 0; i < 8; i++) { const a = (i / 8) * Math.PI * 2; D(sp.x + Math.cos(a) * 2, 0.9, sp.z - 4 + Math.sin(a) * 2, 0.6, 0.5, 0.6, 0x8c917c); } D(sp.x, 1.2, sp.z - 4, 0.4, 1.0, 0.4, 0xfff4d7); D(sp.x, 1.9, sp.z - 4, 0.3, 0.4, 0.3, 0xffc66a, 2.2); D(sp.x, 1.7, sp.z - 4, 1.6, 2.2, 1.6, 0xd8ecf2); obstacles.push({ x: sp.x, z: sp.z - 4, w: 2.6, d: 2.6 }); },
+  balance(k, sp) { const { D, obstacles } = k; benchTop(k, sp.x, sp.z - 4); D(sp.x, 1.5, sp.z - 4, 0.3, 0.7, 0.3, 0x8d9aa0); D(sp.x, 1.9, sp.z - 4, 4, 0.12, 0.3, 0x8d9aa0); for (const sx of [-1.8, 1.8]) { D(sp.x + sx, 1.55, sp.z - 4, 1.2, 0.12, 1.2, 0xd4c49b); D(sp.x + sx, 1.75, sp.z - 4, 0.05, 0.3, 0.05, 0x8d9aa0); } D(sp.x - 1.8, 1.9, sp.z - 4, 0.7, 0.5, 0.7, 0xb86e46); D(sp.x + 1.8, 1.9, sp.z - 4, 0.7, 0.5, 0.7, 0x8d9aa0); obstacles.push({ x: sp.x, z: sp.z - 4, w: 2.6, d: 1.2 }); },
+  piston(k, sp) { const { D, obstacles } = k; benchTop(k, sp.x, sp.z - 4); for (const [sx, c] of [[-1.2, 0xd8ecf2], [1.2, 0x7fd1ff]]) { D(sp.x + sx, 2.1, sp.z - 4, 0.9, 2.0, 0.9, c); D(sp.x + sx, 3.5, sp.z - 4, 0.2, 1.6, 0.2, 0x8d9aa0); D(sp.x + sx, 4.3, sp.z - 4, 1.2, 0.2, 0.4, 0xd04030); } obstacles.push({ x: sp.x, z: sp.z - 4, w: 2.6, d: 1.2 }); },
+  warm(k, sp) { const { D, obstacles } = k; benchTop(k, sp.x, sp.z - 4); D(sp.x - 1.4, 1.35, sp.z - 4, 1.1, 0.4, 1.1, 0x334455); D(sp.x - 1.4, 1.75, sp.z - 4, 0.5, 0.4, 0.5, 0xff7528, 2.2); D(sp.x - 1.4, 2.5, sp.z - 4, 1.2, 1.0, 1.2, 0xd8ecf2); D(sp.x + 1.4, 2.2, sp.z - 4, 0.3, 2.2, 0.3, 0x8d9aa0); D(sp.x + 1.4, 3.5, sp.z - 4, 0.9, 0.9, 0.9, 0xc9a24a); D(sp.x + 1.4, 1.4, sp.z - 4, 1.0, 0.3, 1.0, 0xc9a24a); obstacles.push({ x: sp.x, z: sp.z - 4, w: 2.6, d: 1.2 }); },
+  kettle(k, sp) { const { D, B, obstacles, island } = k; D(sp.x, 0.4, sp.z - 4, 4, 0.6, 3, 0x9a9585); D(sp.x, 1.1, sp.z - 4, 2.4, 0.8, 2.4, 0x334455); D(sp.x, 1.3, sp.z - 2.9, 0.9, 0.5, 0.3, 0xff7528, 2.0); D(sp.x, 2.3, sp.z - 4, 2.0, 1.6, 2.0, 0x8d9aa0); D(sp.x + 1.3, 2.6, sp.z - 4, 0.8, 0.3, 0.3, 0x8d9aa0); const steam = B(sp.x + 1.9, 3.6, sp.z - 4, 0.9, 0.9, 0.9, 0xffffff); island._steam = steam; obstacles.push({ x: sp.x, z: sp.z - 4, w: 2.2, d: 1.6 }); },
+  vat(k, sp) { const { D, obstacles } = k; D(sp.x, 0.4, sp.z - 4, 5, 0.6, 3, 0x9a9585); for (let i = 0; i < 3; i++) { D(sp.x - 1.6 + i * 1.6, 1.4, sp.z - 4, 1.3, 1.6, 1.3, 0xd8ecf2); D(sp.x - 1.6 + i * 1.6, 1.2, sp.z - 4, 1.1, 1.0, 1.1, [0xcfe8f0, 0xcfe8f0, 0xfff1c0][i]); D(sp.x - 1.6 + i * 1.6, 1.7, sp.z - 4, 0.5, 0.5, 0.5, [0xb8c0c8, 0x7b6647, 0xb87333][i]); } obstacles.push({ x: sp.x, z: sp.z - 4, w: 2.6, d: 1 }); },
 
-  life(k) {
-    const { island, D, house, fence, tree, bush, obstacles, rand } = k;
-    const [meadow, sill, track] = island.spots;
-    // Rabbit meadow: a fenced paddock with rabbits and a fox.
-    fence(meadow.x - 5, meadow.z - 8.5, 7); fence(meadow.x - 5, meadow.z - 8.5, 5, 'z'); fence(meadow.x + 4, meadow.z - 8.5, 5, 'z');
-    for (let i = 0; i < 7; i++) { const x = meadow.x - 4 + rand() * 8; const z = meadow.z - 8 + rand() * 5; D(x, 0.5, z, 0.5, 0.5, 0.7, 0xf4f1ea); D(x, 0.95, z + 0.2, 0.3, 0.5, 0.15, 0xf4f1ea); }
-    D(meadow.x + 2.5, 0.6, meadow.z - 3, 0.6, 0.6, 1.2, 0xd4713d); D(meadow.x + 2.5, 1.0, meadow.z - 2.3, 0.5, 0.4, 0.5, 0xd4713d);
-    obstacles.push({ x: meadow.x, z: meadow.z - 6, w: 4.6, d: 2.6 });
-    house(meadow.x, meadow.z - 13, 5, 4.5, 0xe8dcc0, 0x8e795f, { en: meadow.en, ja: meadow.name });
-    // Greenhouse: glass walls, pots inside.
-    D(sill.x, 2.0, sill.z - 4, 7, 3.6, 5, 0xd8ecf2); D(sill.x, 4.1, sill.z - 4, 7.6, 0.4, 5.6, 0xffffff);
-    for (const sx of [-3.5, 3.5]) for (const sz of [-2.5, 2.5]) D(sill.x + sx, 2.0, sill.z - 4 + sz, 0.3, 3.8, 0.3, 0xffffff);
-    for (let i = 0; i < 4; i++) { D(sill.x - 2.2 + i * 1.5, 0.5, sill.z - 4, 0.8, 0.8, 0.8, 0xb86e46); D(sill.x - 2.2 + i * 1.5, 1.2 + i * 0.2, sill.z - 4, 0.12, 0.6 + i * 0.4, 0.12, 0x4f8f4a); D(sill.x - 2.2 + i * 1.5, 1.5 + i * 0.4, sill.z - 4, 0.6, 0.2, 0.4, 0x6fb55a); }
-    obstacles.push({ x: sill.x, z: sill.z - 4, w: 3.7, d: 2.7 });
-    house(sill.x - 11, sill.z - 2, 5, 4.5, 0xdde6d2, 0x5c8583, { en: 'Potting Shed', ja: 'うえきの こや' });
-    // Running track: an oval of red track around a lawn.
-    for (let a = 0; a < Math.PI * 2; a += 0.18) D(track.x + Math.cos(a) * 5, 0.18, track.z - 4 + Math.sin(a) * 3.2, 1.3, 0.12, 1.3, 0xc0604a);
-    D(track.x, 1.4, track.z - 7.5, 0.2, 2.6, 0.2, 0xffffff); D(track.x, 2.6, track.z - 7.5, 1.4, 0.6, 0.1, 0xd04030);
-    house(track.x, track.z - 12, 5, 4.5, 0xe6d8c8, 0x6b8fb8, { en: track.en, ja: track.name });
-    tree(meadow.x - 8, meadow.z - 12, 1.2, 0); bush(sill.x + 6, sill.z - 1);
-    stationsAndPaths(k, 0xe89bb0);
-  },
+  dock(k, sp) { const { D, obstacles } = k; D(sp.x, 0.2, sp.z - 4, 7, 0.4, 4, 0x4b8090); D(sp.x, 0.45, sp.z - 4, 6.4, 0.1, 3.4, 0x5a96a4); D(sp.x - 2.2, 0.75, sp.z - 4, 1.0, 0.6, 1.0, 0xb08655); D(sp.x, 0.9, sp.z - 4.2, 0.8, 0.8, 0.8, 0xffffff); D(sp.x + 2.2, 0.35, sp.z - 4, 0.9, 0.9, 0.9, 0x8d9aa0); D(sp.x + 4, 1.1, sp.z - 4, 0.3, 2, 0.3, 0x6f5b3e); D(sp.x + 4, 2.2, sp.z - 4, 1.4, 0.2, 1.4, 0xa58c62); obstacles.push({ x: sp.x, z: sp.z - 4, w: 3.6, d: 2 }); },
+  still(k, sp) { const { D, B, obstacles, island } = k; D(sp.x, 0.4, sp.z - 4, 6, 0.6, 3, 0x9a9585); D(sp.x - 1.8, 1.2, sp.z - 4, 1.4, 1.0, 1.4, 0x334455); D(sp.x - 1.8, 1.4, sp.z - 3.2, 0.6, 0.4, 0.2, 0xff7528, 2); D(sp.x - 1.8, 2.5, sp.z - 4, 1.4, 1.4, 1.4, 0xd8ecf2); D(sp.x - 0.4, 3.1, sp.z - 4, 1.8, 0.25, 0.25, 0xd8ecf2); D(sp.x + 0.9, 2.3, sp.z - 4, 0.25, 1.8, 0.25, 0xd8ecf2); D(sp.x + 0.9, 2.0, sp.z - 4, 1.2, 1.4, 1.0, 0x7fd1ff); D(sp.x + 2.4, 1.3, sp.z - 4, 0.8, 1.0, 0.8, 0xd8ecf2); D(sp.x + 2.4, 1.0, sp.z - 4, 0.6, 0.4, 0.6, 0xf2e3b8); const drip = B(sp.x + 2.4, 1.9, sp.z - 4, 0.15, 0.3, 0.15, 0x7fd1ff); island._drip = drip; obstacles.push({ x: sp.x, z: sp.z - 4, w: 3.2, d: 1 }); },
+  scale(k, sp) { const { D, obstacles } = k; benchTop(k, sp.x, sp.z - 4); D(sp.x, 1.5, sp.z - 4, 2.6, 0.7, 1.4, 0x334455); D(sp.x, 1.7, sp.z - 3.25, 1.4, 0.4, 0.1, 0x7fd1ff, 1.6); D(sp.x, 1.95, sp.z - 4, 2.0, 0.12, 1.2, 0x8d9aa0); D(sp.x, 2.7, sp.z - 4, 1.0, 1.4, 1.0, 0xd8ecf2); D(sp.x, 3.5, sp.z - 4, 0.6, 0.3, 0.6, 0xd04030); D(sp.x, 2.3, sp.z - 4, 0.8, 0.5, 0.8, 0xfff1c0); obstacles.push({ x: sp.x, z: sp.z - 4, w: 2.6, d: 1.2 }); },
+  kiln(k, sp) { const { D, B, obstacles, island } = k; D(sp.x, 0.4, sp.z - 4, 5, 0.6, 4, 0x9a9585); for (let i = 0; i < 3; i++) D(sp.x, 1.0 + i * 0.6, sp.z - 4, 3.4 - i * 0.3, 0.6, 3.0 - i * 0.3, i % 2 ? 0xb86e46 : 0xa5603a); D(sp.x, 1.3, sp.z - 2.3, 1.2, 0.8, 0.3, 0xff7528, 2.4); D(sp.x, 3.6, sp.z - 4.6, 0.8, 2.2, 0.8, 0x6d543a); const puff = B(sp.x, 5.2, sp.z - 4.6, 0.8, 0.8, 0.8, 0x8d9aa0); island._kilnSmoke = puff; D(sp.x + 2.8, 1.0, sp.z - 4, 0.3, 1.6, 0.3, 0x8d9aa0); D(sp.x + 2.8, 1.9, sp.z - 4, 1.2, 0.12, 0.3, 0x8d9aa0); D(sp.x + 2.3, 2.15, sp.z - 4, 0.4, 0.4, 0.4, 0xb87333); D(sp.x + 3.3, 2.15, sp.z - 4, 0.4, 0.4, 0.4, 0x1c1c1c); obstacles.push({ x: sp.x, z: sp.z - 4, w: 2.4, d: 2 }); },
+  tank(k, sp) { const { D, obstacles } = k; D(sp.x, 0.4, sp.z - 4, 5, 0.6, 3, 0x9a9585); D(sp.x, 1.7, sp.z - 4, 2.6, 2.0, 1.4, 0xd8ecf2); D(sp.x, 1.5, sp.z - 4, 2.4, 1.4, 1.2, 0x9fd3dc); for (const [sx, h, c] of [[-0.7, 1.4, 0xff8a7a], [0.7, 0.7, 0x7fd1ff]]) { D(sp.x + sx, 1.9 + h / 2, sp.z - 4, 0.5, h, 0.5, 0xd8ecf2); D(sp.x + sx, 3.2, sp.z - 4, 0.14, 0.9, 0.14, c, 1.6); } D(sp.x + 2.4, 1.4, sp.z - 4, 1.0, 1.4, 0.8, 0x334455); D(sp.x + 2.4, 1.6, sp.z - 3.5, 0.5, 0.3, 0.1, 0x7fd1ff, 1.6); obstacles.push({ x: sp.x, z: sp.z - 4, w: 2.4, d: 1 }); },
+  drip(k, sp) { const { D, obstacles } = k; benchTop(k, sp.x, sp.z - 4); D(sp.x - 1.4, 2.6, sp.z - 4, 0.3, 3.0, 0.3, 0x8d9aa0); D(sp.x - 0.5, 3.4, sp.z - 4, 1.8, 0.2, 0.2, 0x8d9aa0); D(sp.x + 0.3, 2.9, sp.z - 4, 0.3, 1.4, 0.3, 0xd8ecf2); D(sp.x + 0.3, 3.0, sp.z - 4, 0.22, 0.8, 0.22, 0x3a6fd0); D(sp.x + 0.3, 1.6, sp.z - 4, 1.0, 0.9, 1.0, 0xd8ecf2); D(sp.x + 0.3, 1.45, sp.z - 4, 0.9, 0.5, 0.9, 0xe4c239); D(sp.x + 1.8, 1.4, sp.z - 4, 0.7, 0.5, 0.7, 0x3f9a52); obstacles.push({ x: sp.x, z: sp.z - 4, w: 2.6, d: 1.2 }); },
+  cell(k, sp) { const { D, obstacles } = k; benchTop(k, sp.x, sp.z - 4); D(sp.x - 0.6, 1.7, sp.z - 4, 1.4, 1.1, 1.0, 0xd8ecf2); D(sp.x - 0.6, 1.55, sp.z - 4, 1.2, 0.7, 0.8, 0x7fd1ff); D(sp.x - 1.0, 2.4, sp.z - 4, 0.2, 1.2, 0.5, 0xb8c0c8); D(sp.x - 0.2, 2.4, sp.z - 4, 0.2, 1.2, 0.5, 0xb87333); D(sp.x + 1.4, 2.0, sp.z - 4, 0.6, 0.6, 0.6, 0xffe6ad, 2.2); D(sp.x + 0.4, 3.0, sp.z - 4, 1.6, 0.08, 0.08, 0xb87333); obstacles.push({ x: sp.x, z: sp.z - 4, w: 2.6, d: 1.2 }); },
 
-  earth(k) {
-    const { island, D, B, house, rock, obstacles } = k;
-    const [seismo, harbour, tower] = island.spots;
-    // Seismograph house: a house with a drum and a needle out front.
-    house(seismo.x, seismo.z - 9, 6, 5, 0xe8dcc0, 0x8e795f, { en: seismo.en, ja: seismo.name });
-    D(seismo.x, 0.8, seismo.z - 4, 2.6, 1.2, 1.4, 0x8a7350); D(seismo.x - 0.5, 1.9, seismo.z - 4, 1.4, 1.0, 1.0, 0xf4f1ea);
-    D(seismo.x + 1.0, 2.2, seismo.z - 4, 0.08, 1.4, 0.08, 0x334455);
-    obstacles.push({ x: seismo.x, z: seismo.z - 4, w: 1.6, d: 1 });
-    for (let i = 0; i < 3; i++) rock(seismo.x - 5 + i * 1.6, seismo.z - 1, 0.6 + i * 0.2);
-    // Harbour wall: a stone wall with a lighthouse and a sea-level mark.
-    for (let i = 0; i < 9; i++) D(harbour.x - 4 + i, 0.9 + (i % 2) * 0.1, harbour.z - 5, 1, 1.8, 1.2, i % 2 ? 0x8d9aa0 : 0x9a9585);
-    D(harbour.x, 2.6, harbour.z - 5, 1.6, 4, 1.6, 0xf2f2f2); D(harbour.x, 4.9, harbour.z - 5, 1.9, 0.6, 1.9, 0xd04030); D(harbour.x, 5.5, harbour.z - 5, 1.2, 0.8, 1.2, 0xffe6ad, 2);
-    obstacles.push({ x: harbour.x, z: harbour.z - 5, w: 4.6, d: 0.9 });
-    house(harbour.x - 11, harbour.z - 2, 5, 4.5, 0xe3e9f0, 0x5c8583, { en: 'Tide Office', ja: 'しおの じむしょ' });
-    // Weather tower: a lattice tower with a vane and a cloud over it.
-    for (let i = 0; i < 5; i++) D(tower.x, 1 + i * 1.6, tower.z - 4, 2.2 - i * 0.3, 1.6, 2.2 - i * 0.3, i % 2 ? 0x8d9aa0 : 0x9aa0aa);
-    D(tower.x, 9.3, tower.z - 4, 0.1, 1.4, 0.1, 0x334455); D(tower.x + 0.4, 9.8, tower.z - 4, 0.9, 0.12, 0.1, 0xd04030);
-    const cloud = B(tower.x, 12.5, tower.z - 4, 3.4, 1.2, 2.2, 0xffffff); island._cloud = cloud;
-    obstacles.push({ x: tower.x, z: tower.z - 4, w: 1.3, d: 1.3 });
-    house(tower.x, tower.z - 11, 5, 4.5, 0xe6d8c8, 0x6b8fb8, { en: tower.en, ja: tower.name });
-    stationsAndPaths(k, 0xdfe4ef);
-  },
+  frame(k, sp) { const { D, B, obstacles, island } = k; for (const sx of [-2.5, 2.5]) D(sp.x + sx, 3, sp.z - 4, 0.4, 6, 0.4, 0x6f5b3e); D(sp.x, 6.1, sp.z - 4, 5.6, 0.4, 0.4, 0x6f5b3e); D(sp.x, 3.6, sp.z - 4, 0.06, 4.6, 0.06, 0xd4c49b); const bob = B(sp.x, 1.2, sp.z - 4, 0.8, 0.8, 0.8, 0x8d9aa0); bob.userData.swing = { cx: sp.x, cz: sp.z - 4, top: 6, len: 4.8 }; island._bob = bob; obstacles.push({ x: sp.x, z: sp.z - 4, w: 3, d: 1 }); },
+  ramp(k, sp) { const { D, obstacles } = k; for (let i = 0; i < 8; i++) D(sp.x - 3.5 + i, 0.3 + i * 0.3, sp.z - 4, 1, 0.6 + i * 0.6, 3, i % 2 ? 0xc9b48a : 0xbda77c); D(sp.x + 4.5, 2.7, sp.z - 4, 1.2, 5.4, 3, 0x8a7350); D(sp.x + 4.5, 5.6, sp.z - 4, 1.6, 0.3, 3.4, 0xa58c62); D(sp.x + 4.5, 6.2, sp.z - 4, 0.9, 0.9, 0.9, 0xd04030); obstacles.push({ x: sp.x + 0.5, z: sp.z - 4, w: 5, d: 1.7 }); },
+  seesaw(k, sp) { const { D, B, obstacles, island } = k; D(sp.x, 0.6, sp.z - 4, 1.2, 1.2, 1.2, 0x7b6647); const plank = B(sp.x, 1.35, sp.z - 4, 7, 0.25, 1.2, 0xa58c62); plank.rotation.z = -0.18; island._plank = plank; D(sp.x - 3, 2.3, sp.z - 4, 1.1, 1.1, 1.1, 0x3a6fd0); D(sp.x + 3, 1.0, sp.z - 4, 0.8, 0.8, 0.8, 0xd04030); obstacles.push({ x: sp.x, z: sp.z - 4, w: 3.8, d: 1 }); },
+  rtrack(k, sp) { const { D, B, obstacles, island } = k; D(sp.x, 0.22, sp.z - 4, 10, 0.12, 2.0, 0x334455); for (let i = 0; i < 6; i++) D(sp.x - 4.5 + i * 1.8, 0.3, sp.z - 3.1, 0.1, 0.12, 0.4, 0xffffff); D(sp.x - 4.6, 0.9, sp.z - 4, 0.3, 1.2, 2.2, 0xd04030); const car = B(sp.x - 3.5, 0.6, sp.z - 4, 1.2, 0.5, 0.8, 0xe4c239); island._car = car; for (const dx of [-0.35, 0.35]) for (const dz of [-0.55, 0.55]) B(dx, -0.3, dz, 0.25, 0.6, 0.15, 0x1c1c1c, car); obstacles.push({ x: sp.x, z: sp.z - 4, w: 5, d: 1 }); },
+  magnet(k, sp) { const { D, obstacles } = k; benchTop(k, sp.x, sp.z - 4); D(sp.x - 0.8, 1.8, sp.z - 4, 0.8, 1.4, 0.8, 0xd04030); D(sp.x + 0.8, 1.8, sp.z - 4, 0.8, 1.4, 0.8, 0x3a6fd0); D(sp.x, 2.7, sp.z - 4, 2.4, 0.6, 0.8, 0x8d9aa0); for (let i = 0; i < 5; i++) D(sp.x - 1.2 + i * 0.6, 1.25, sp.z - 3.4, 0.3, 0.12, 0.5, 0xb8c0c8); obstacles.push({ x: sp.x, z: sp.z - 4, w: 2.6, d: 1.2 }); },
+  mirror(k, sp) { const { D, obstacles } = k; D(sp.x, 0.3, sp.z - 4, 7, 0.3, 4, 0x9a9585); for (let i = 0; i < 3; i++) { const x = sp.x - 2.4 + i * 2.4; D(x, 1.3, sp.z - 5, 0.3, 2.2, 0.3, 0x6f5b3e); D(x, 2.6, sp.z - 5, 1.8, 1.8, 0.15, 0xdff6ff, 0.4); } D(sp.x, 1.5, sp.z - 1.6, 0.3, 2.6, 0.3, 0x6f5b3e); D(sp.x, 3.0, sp.z - 1.6, 1.2, 1.0, 0.15, 0x1c2a3a); D(sp.x, 3.0, sp.z - 1.5, 0.5, 0.5, 0.05, 0xffd36b, 2.6); obstacles.push({ x: sp.x, z: sp.z - 5, w: 3.6, d: 0.5 }); },
+  drum(k, sp) { const { D, obstacles } = k; D(sp.x, 0.5, sp.z - 4, 7, 0.9, 4, 0xa58c62); D(sp.x - 2, 1.75, sp.z - 4, 1.6, 1.5, 1.6, 0xb86e46); D(sp.x - 2, 2.55, sp.z - 4, 1.7, 0.12, 1.7, 0xf4f1ea); D(sp.x + 1.4, 1.9, sp.z - 4, 0.3, 1.8, 0.3, 0x6f5b3e); for (let i = 0; i < 4; i++) D(sp.x + 1.4 + i * 0.5, 2.9, sp.z - 4, 0.04, 0.04, 2.2, 0xd4c49b); D(sp.x + 2.2, 1.9, sp.z - 4, 2.0, 0.6, 0.2, 0x6f5b3e); D(sp.x + 2.4, 3.9, sp.z - 4, 0.3, 0.3, 0.3, 0x8d9aa0); obstacles.push({ x: sp.x, z: sp.z - 4, w: 3.6, d: 2 }); },
+  spring(k, sp) { const { D, B, obstacles, island } = k; D(sp.x, 0.3, sp.z - 4, 4, 0.3, 4, 0x9a9585); D(sp.x, 3.2, sp.z - 4, 0.4, 6, 0.4, 0x6f5b3e); D(sp.x + 1.2, 6.1, sp.z - 4, 2.8, 0.3, 0.3, 0x6f5b3e); for (let i = 0; i < 8; i++) D(sp.x + 2.2, 5.6 - i * 0.4, sp.z - 4, 0.6, 0.12, 0.6, 0xb8c0c8); const w = B(sp.x + 2.2, 2.0, sp.z - 4, 0.9, 0.9, 0.9, 0xd04030); island._weight = w; for (let i = 0; i < 6; i++) D(sp.x - 0.6, 1 + i * 0.9, sp.z - 3.75, 0.5, 0.05, 0.1, 0xfff4d7); obstacles.push({ x: sp.x + 1, z: sp.z - 4, w: 1.6, d: 0.8 }); },
 
-  maker(k) {
-    const { island, D, B, house, crate, barrel, fence, obstacles } = k;
-    const [yard, shed, mill] = island.spots;
-    // Bridge yard: two stone piers with a plank, a crate on it.
-    for (const sx of [-3, 3]) D(yard.x + sx, 0.9, yard.z - 4, 1.4, 1.8, 2, 0x9a9585);
-    D(yard.x, 1.85, yard.z - 4, 7.2, 0.3, 1.4, 0xa58c62); crate(yard.x, yard.z - 4, 0.9);
-    obstacles.push({ x: yard.x, z: yard.z - 4, w: 3.8, d: 1 });
-    for (let i = 0; i < 3; i++) D(yard.x - 6 + i * 0.9, 0.3 + i * 0.3, yard.z - 8, 0.4, 0.6 + i * 0.6, 3, 0xb08655);
-    house(yard.x, yard.z - 12, 6, 5, 0xe8dcc0, 0x8e795f, { en: yard.en, ja: yard.name });
-    // Circuit shed: a shed with a big battery and a bulb over the door.
-    house(shed.x, shed.z - 9, 6, 5, 0xe3e9f0, 0x5c8583, { en: shed.en, ja: shed.name });
-    D(shed.x - 3.5, 1.0, shed.z - 4, 1.4, 2.0, 1.0, 0x334455); D(shed.x - 3.5, 2.2, shed.z - 4, 0.5, 0.4, 0.5, 0xd4c49b);
-    D(shed.x, 7.6, shed.z - 6.4, 0.7, 0.7, 0.7, 0xffe6ad, 2.4);
-    obstacles.push({ x: shed.x - 3.5, z: shed.z - 4, w: 0.9, d: 0.7 });
-    barrel(shed.x + 4, shed.z - 4);
-    // Gear mill: a mill with two big gears on the wall and a water wheel.
-    house(mill.x, mill.z - 9, 6, 5, 0xe6d8c8, 0x6b8fb8, { en: mill.en, ja: mill.name });
-    const g1 = B(mill.x - 2.2, 4.2, mill.z - 6.2, 2.4, 2.4, 0.4, 0xb08655); const g2 = B(mill.x + 0.6, 4.2, mill.z - 6.2, 1.6, 1.6, 0.4, 0xd4c49b);
-    for (let i = 0; i < 8; i++) { const a = (i / 8) * Math.PI * 2; D(mill.x - 2.2 + Math.cos(a) * 1.35, 4.2 + Math.sin(a) * 1.35, mill.z - 6.2, 0.4, 0.4, 0.4, 0xb08655); }
-    island._gears = [g1, g2];
-    const wheel = B(mill.x + 4.6, 2, mill.z - 4, 0.4, 3.6, 3.6, 0x8a7350); island._wheel = wheel;
-    obstacles.push({ x: mill.x + 4.6, z: mill.z - 4, w: 0.6, d: 2 });
-    fence(mill.x - 5, mill.z - 1, 4);
-    stationsAndPaths(k, 0xe7b06a);
-  },
+  meadow(k, sp) { const { D, obstacles, fence, rand } = k; fence(sp.x - 5, sp.z - 8.5, 7); fence(sp.x - 5, sp.z - 8.5, 5, 'z'); fence(sp.x + 4, sp.z - 8.5, 5, 'z'); for (let i = 0; i < 7; i++) { const x = sp.x - 4 + rand() * 8; const z = sp.z - 8 + rand() * 5; D(x, 0.5, z, 0.5, 0.5, 0.7, 0xf4f1ea); D(x, 0.95, z + 0.2, 0.3, 0.5, 0.15, 0xf4f1ea); } D(sp.x + 2.5, 0.6, sp.z - 3, 0.6, 0.6, 1.2, 0xd4713d); D(sp.x + 2.5, 1.0, sp.z - 2.3, 0.5, 0.4, 0.5, 0xd4713d); obstacles.push({ x: sp.x, z: sp.z - 6, w: 4.6, d: 2.6 }); },
+  greenhouse(k, sp) { const { D, obstacles } = k; D(sp.x, 2.0, sp.z - 4, 7, 3.6, 5, 0xd8ecf2); D(sp.x, 4.1, sp.z - 4, 7.6, 0.4, 5.6, 0xffffff); for (const sx of [-3.5, 3.5]) for (const sz of [-2.5, 2.5]) D(sp.x + sx, 2.0, sp.z - 4 + sz, 0.3, 3.8, 0.3, 0xffffff); for (let i = 0; i < 4; i++) { D(sp.x - 2.2 + i * 1.5, 0.5, sp.z - 4, 0.8, 0.8, 0.8, 0xb86e46); D(sp.x - 2.2 + i * 1.5, 1.2 + i * 0.2, sp.z - 4, 0.12, 0.6 + i * 0.4, 0.12, 0x4f8f4a); D(sp.x - 2.2 + i * 1.5, 1.5 + i * 0.4, sp.z - 4, 0.7, 0.3, 0.7, 0x5faa5a); } obstacles.push({ x: sp.x, z: sp.z - 4, w: 3.7, d: 2.7 }); },
+  tray(k, sp) { const { D, obstacles } = k; benchTop(k, sp.x, sp.z - 4); for (let i = 0; i < 4; i++) { const x = sp.x - 1.8 + i * 1.2; D(x, 1.3, sp.z - 4, 1.0, 0.3, 1.0, 0xd8ecf2); D(x, 1.4, sp.z - 4, 0.8, 0.2, 0.8, i === 3 ? 0x7fd1ff : 0xf4f1ea); if (i < 2) { D(x, 1.75, sp.z - 4, 0.08, 0.5, 0.08, 0x4f8f4a); D(x, 2.0, sp.z - 4, 0.4, 0.15, 0.3, 0x5faa5a); } } D(sp.x + 1.8, 2.3, sp.z - 5, 1.6, 1.2, 0.3, 0x334455); D(sp.x + 1.8, 2.3, sp.z - 4.8, 1.2, 0.8, 0.1, 0x7fd1ff, 1.4); obstacles.push({ x: sp.x, z: sp.z - 4, w: 2.6, d: 1.2 }); },
+  butterfly(k, sp) { const { D, B, obstacles, island } = k; for (const sx of [-2.5, 2.5]) for (const sz of [-2, 2]) D(sp.x + sx, 1.8, sp.z - 4 + sz, 0.2, 3.6, 0.2, 0xffffff); D(sp.x, 3.6, sp.z - 4, 5.4, 0.15, 4.4, 0xffffff); D(sp.x, 1.9, sp.z - 4, 5.2, 3.4, 4.2, 0xf4f8ff, 0.2); for (let i = 0; i < 3; i++) D(sp.x - 1.6 + i * 1.6, 0.6, sp.z - 4, 0.6, 0.8, 0.6, 0x4f8f4a); const bf = []; for (let i = 0; i < 3; i++) { const b = B(sp.x - 1.5 + i * 1.5, 2.6, sp.z - 4, 0.7, 0.1, 0.5, [0xffffff, 0xf2b134, 0x7fd1ff][i]); b.userData.seed = i * 2; bf.push(b); } island._butterflies = bf; obstacles.push({ x: sp.x, z: sp.z - 4, w: 2.8, d: 2.3 }); },
+  aquarium(k, sp) { const { D, B, obstacles, island } = k; D(sp.x, 0.5, sp.z - 4, 5, 0.8, 2.4, 0x6f5b3e); D(sp.x, 1.9, sp.z - 4, 4.4, 2.0, 1.8, 0xd8ecf2, 0.1); D(sp.x, 1.75, sp.z - 4, 4.2, 1.6, 1.6, 0x9fd3dc); D(sp.x, 1.0, sp.z - 4, 4.0, 0.2, 1.5, 0xd9c38a); for (let i = 0; i < 3; i++) D(sp.x - 1.4 + i * 1.4, 1.5, sp.z - 4.4, 0.1, 0.9, 0.1, 0x4f9a52); const fish = []; for (let i = 0; i < 4; i++) { const f = B(sp.x - 1.5 + i * 1.0, 1.6 + (i % 2) * 0.5, sp.z - 4, 0.35, 0.14, 0.12, 0xf2b134); f.userData.seed = i; fish.push(f); } island._fish = fish; D(sp.x + 3, 1.4, sp.z - 4, 0.6, 1.8, 0.6, 0x334455); D(sp.x + 3, 1.9, sp.z - 3.65, 0.3, 0.5, 0.1, 0xff8a7a, 1.6); obstacles.push({ x: sp.x, z: sp.z - 4, w: 2.6, d: 1.3 }); },
+  leaf(k, sp) { const { D, obstacles } = k; benchTop(k, sp.x, sp.z - 4); D(sp.x - 1.5, 1.5, sp.z - 4, 0.8, 0.8, 0.8, 0xb86e46); D(sp.x - 1.5, 2.4, sp.z - 4, 0.12, 1.2, 0.12, 0x4f8f4a); for (const [dx, dz, c] of [[-0.5, 0, 0x5faa5a], [0.5, 0.2, 0x5faa5a], [0, -0.5, 0xb8c0c8]]) D(sp.x - 1.5 + dx, 2.7, sp.z - 4 + dz, 0.8, 0.08, 0.5, c); D(sp.x + 1.2, 1.55, sp.z - 4, 0.9, 0.7, 0.9, 0xd8ecf2); D(sp.x + 1.2, 1.5, sp.z - 4, 0.7, 0.4, 0.7, 0x8a5a3a); D(sp.x + 2.3, 1.9, sp.z - 4, 0.3, 1.4, 0.3, 0xd8ecf2); D(sp.x + 2.3, 2.7, sp.z - 4, 0.4, 0.25, 0.4, 0x1c2a3a); obstacles.push({ x: sp.x, z: sp.z - 4, w: 2.6, d: 1.2 }); },
 
-  data(k) {
-    const { island, D, B, house, fence, obstacles, rand } = k;
-    const [table, pond, machine] = island.spots;
-    // Dice table: a green table with giant dice.
-    D(table.x, 1.0, table.z - 4, 5, 0.3, 3.4, 0x3f7a52); for (const sx of [-2.2, 2.2]) for (const sz of [-1.4, 1.4]) D(table.x + sx, 0.5, table.z - 4 + sz, 0.3, 1, 0.3, 0x7b6647);
-    const d1 = B(table.x - 1, 1.75, table.z - 4, 1.2, 1.2, 1.2, 0xf4f1ea); const d2 = B(table.x + 1.2, 1.75, table.z - 4.5, 1.2, 1.2, 1.2, 0xf4f1ea); d2.rotation.y = 0.6;
-    for (const d of [d1, d2]) for (const [px, py] of [[-0.3, 0.3], [0, 0], [0.3, -0.3]]) D(d.position.x + px, d.position.y + py, d.position.z + 0.62, 0.18, 0.18, 0.05, 0x1c2a3a);
-    obstacles.push({ x: table.x, z: table.z - 4, w: 2.7, d: 1.9 });
-    house(table.x, table.z - 11, 5, 4.5, 0xe8dcc0, 0x8e795f, { en: table.en, ja: table.name });
-    // Counting pond: a pond with fish and a net.
-    for (let i = 0; i < 3; i++) D(pond.x, 0.12 + i * 0.03, pond.z - 4, 9 - i * 1.5, 0.1, 6 - i, i === 2 ? 0x4b8090 : i ? 0x5a96a4 : 0xd9c38a);
-    for (let i = 0; i < 9; i++) { const x = pond.x - 3 + rand() * 6; const z = pond.z - 6 + rand() * 4; D(x, 0.3, z, 0.5, 0.15, 0.25, i % 3 ? 0xf2b134 : 0xd04030); }
-    D(pond.x + 5, 1.4, pond.z - 2, 0.1, 2.8, 0.1, 0x8a7350); D(pond.x + 5.4, 2.6, pond.z - 2, 0.9, 0.6, 0.9, 0xd8ecf2);
-    obstacles.push({ x: pond.x, z: pond.z - 4, w: 4.6, d: 3.1 });
-    house(pond.x - 11, pond.z - 2, 5, 4.5, 0xe3e9f0, 0x5c8583, { en: 'Tally Hut', ja: 'かぞえ ごや' });
-    // Sorting machine: a conveyor with fruit and two bins.
-    D(machine.x, 1.0, machine.z - 4, 8, 0.3, 1.4, 0x334455); for (const sx of [-3.5, 3.5]) D(machine.x + sx, 0.5, machine.z - 4, 0.3, 1, 1.2, 0x8d9aa0);
-    for (let i = 0; i < 5; i++) D(machine.x - 3 + i * 1.5, 1.45, machine.z - 4, 0.6, 0.6, 0.6, i % 2 ? 0xd9433a : 0xf2a034);
-    D(machine.x - 1.2, 0.6, machine.z - 6.4, 1.6, 1.2, 1.6, 0xd9433a); D(machine.x + 1.2, 0.6, machine.z - 6.4, 1.6, 1.2, 1.6, 0xf2a034);
-    D(machine.x, 2.6, machine.z - 4, 1.2, 1.2, 1.2, 0x8d9aa0); D(machine.x, 2.6, machine.z - 3.35, 0.6, 0.3, 0.1, 0x7fd1ff, 2);
-    obstacles.push({ x: machine.x, z: machine.z - 4.6, w: 4.2, d: 1.6 });
-    fence(machine.x - 4, machine.z - 8.5, 6);
-    house(machine.x, machine.z - 12, 5, 4.5, 0xe6d8c8, 0x6b8fb8, { en: machine.en, ja: machine.name });
-    stationsAndPaths(k, 0xdfe4ef);
-  },
+  track(k, sp) { const { D } = k; for (let a = 0; a < Math.PI * 2; a += 0.18) D(sp.x + Math.cos(a) * 5, 0.18, sp.z - 4 + Math.sin(a) * 3.2, 1.3, 0.12, 1.3, 0xc0604a); D(sp.x, 1.4, sp.z - 7.5, 0.2, 2.6, 0.2, 0xffffff); D(sp.x, 2.6, sp.z - 7.5, 1.4, 0.6, 0.1, 0xd04030); },
+  spit(k, sp) { const { D, obstacles } = k; benchTop(k, sp.x, sp.z - 4); D(sp.x - 1.2, 1.7, sp.z - 4, 1.4, 1.0, 1.0, 0xd8ecf2); D(sp.x - 1.2, 1.55, sp.z - 4, 1.2, 0.7, 0.8, 0x7fd1ff); for (const [sx, c] of [[-1.5, 0x1c2a3a], [-0.9, 0xb86e46]]) { D(sp.x + sx, 2.4, sp.z - 4, 0.2, 0.9, 0.2, 0xd8ecf2); D(sp.x + sx, 2.3, sp.z - 4, 0.14, 0.5, 0.14, c); } D(sp.x + 1.4, 1.6, sp.z - 4, 0.9, 0.9, 0.9, 0x8d9aa0); D(sp.x + 1.4, 1.75, sp.z - 3.5, 0.4, 0.4, 0.1, 0xff7528, 1.6); D(sp.x + 1.4, 2.25, sp.z - 4, 0.6, 0.3, 0.6, 0x334455); D(sp.x + 1.4, 2.5, sp.z - 3.75, 0.4, 0.15, 0.1, 0xd9433a); obstacles.push({ x: sp.x, z: sp.z - 4, w: 2.6, d: 1.2 }); },
+  breath(k, sp) { const { D, B, obstacles, island } = k; benchTop(k, sp.x, sp.z - 4); const bag = B(sp.x - 1.2, 2.0, sp.z - 4, 1.4, 1.4, 1.2, 0xdff6ff); island._bag = bag; D(sp.x - 1.2, 1.25, sp.z - 4, 0.3, 0.3, 0.3, 0xd04030); D(sp.x + 1.2, 1.7, sp.z - 4, 1.0, 1.0, 1.0, 0xd8ecf2); D(sp.x + 1.2, 1.55, sp.z - 4, 0.8, 0.6, 0.8, 0xf4f4f4); D(sp.x + 1.2, 2.5, sp.z - 4, 0.12, 0.8, 0.12, 0xd8ecf2); obstacles.push({ x: sp.x, z: sp.z - 4, w: 2.6, d: 1.2 }); },
+  pea(k, sp) { const { D, obstacles, fence } = k; fence(sp.x - 4, sp.z - 8, 6); D(sp.x, 0.25, sp.z - 5, 7, 0.3, 3.4, 0x6d543a); for (let i = 0; i < 6; i++) { const x = sp.x - 2.8 + i * 1.1; D(x, 1.4, sp.z - 5, 0.1, 2.4, 0.1, 0x8a7350); D(x, 1.6, sp.z - 5, 0.4, 2.0, 0.4, 0x4f8f4a); D(x, 2.7, sp.z - 5, 0.3, 0.25, 0.3, i % 2 ? 0xffffff : 0xe98ab0); D(x + 0.2, 1.3, sp.z - 4.7, 0.25, 0.4, 0.15, 0x5faa5a); } obstacles.push({ x: sp.x, z: sp.z - 5, w: 3.6, d: 1.6 }); },
+
+  seismo(k, sp) { const { D, obstacles, rock } = k; D(sp.x, 0.8, sp.z - 4, 2.6, 1.2, 1.4, 0x8a7350); D(sp.x - 0.5, 1.9, sp.z - 4, 1.4, 1.0, 1.0, 0xf4f1ea); D(sp.x + 1.0, 2.2, sp.z - 4, 0.08, 1.4, 0.08, 0x334455); obstacles.push({ x: sp.x, z: sp.z - 4, w: 1.6, d: 1 }); for (let i = 0; i < 3; i++) rock(sp.x - 5 + i * 1.6, sp.z - 1, 0.6 + i * 0.2); },
+  harbour(k, sp) { const { D, obstacles } = k; for (let i = 0; i < 9; i++) D(sp.x - 4 + i, 0.9 + (i % 2) * 0.1, sp.z - 5, 1, 1.8, 1.2, i % 2 ? 0x8d9aa0 : 0x9a9585); D(sp.x, 2.6, sp.z - 5, 1.6, 4, 1.6, 0xf2f2f2); D(sp.x, 4.9, sp.z - 5, 1.9, 0.6, 1.9, 0xd04030); D(sp.x, 5.5, sp.z - 5, 1.2, 0.8, 1.2, 0xffe6ad, 2); obstacles.push({ x: sp.x, z: sp.z - 5, w: 4.6, d: 0.9 }); },
+  tower(k, sp) { const { D, B, obstacles, island } = k; for (let i = 0; i < 5; i++) D(sp.x, 1 + i * 1.6, sp.z - 4, 2.2 - i * 0.3, 1.6, 2.2 - i * 0.3, i % 2 ? 0x8d9aa0 : 0x9aa0aa); D(sp.x, 9.3, sp.z - 4, 0.1, 1.4, 0.1, 0x334455); D(sp.x + 0.4, 9.8, sp.z - 4, 0.9, 0.12, 0.1, 0xd04030); const cloud = B(sp.x, 12.5, sp.z - 4, 3.4, 1.2, 2.2, 0xffffff); island._cloud = cloud; obstacles.push({ x: sp.x, z: sp.z - 4, w: 1.3, d: 1.3 }); },
+  shadow(k, sp) { const { D, obstacles } = k; D(sp.x, 0.3, sp.z - 4, 6, 0.3, 6, 0xd9c38a); for (let i = 0; i < 8; i++) { const a = (i / 8) * Math.PI * 2; D(sp.x + Math.cos(a) * 2.6, 0.5, sp.z - 4 + Math.sin(a) * 2.6, 0.4, 0.14, 0.4, 0x8d9aa0); } D(sp.x, 2.0, sp.z - 4, 0.25, 3.4, 0.25, 0x6f5b3e); D(sp.x + 1.6, 0.48, sp.z - 2.6, 3.0, 0.06, 0.5, 0x3a3f4a); obstacles.push({ x: sp.x, z: sp.z - 4, w: 0.8, d: 0.8 }); },
+  soil(k, sp) { const { D, obstacles } = k; benchTop(k, sp.x, sp.z - 4); [[-1.4, 0xd9c38a], [0, 0x8a6a45], [1.4, 0xb8a090]].forEach(([sx, c]) => { D(sp.x + sx, 2.0, sp.z - 4, 0.8, 1.6, 0.8, 0xd8ecf2); D(sp.x + sx, 1.7, sp.z - 4, 0.7, 0.8, 0.7, c); D(sp.x + sx, 2.6, sp.z - 4, 0.6, 0.3, 0.6, 0x7fd1ff); D(sp.x + sx, 1.25, sp.z - 4, 0.9, 0.3, 0.9, 0x7fd1ff); }); obstacles.push({ x: sp.x, z: sp.z - 4, w: 2.6, d: 1.2 }); },
+  stream(k, sp) { const { D, obstacles } = k; D(sp.x, 0.9, sp.z - 4, 8, 0.4, 3.2, 0x8a7350); D(sp.x - 2.5, 1.3, sp.z - 4, 3, 0.4, 3.0, 0x9a8a5c); for (let i = 0; i < 6; i++) { const x = sp.x - 3.2 + i * 1.3; const z = sp.z - 4 + Math.sin(i * 1.2) * 0.8; D(x, 1.2 + (i < 2 ? 0.3 : 0), z, 1.4, 0.12, 0.9, 0x5a96a4); } D(sp.x + 4.2, 1.6, sp.z - 4, 0.6, 1.0, 0.6, 0xd8ecf2); D(sp.x + 4.2, 1.5, sp.z - 4, 0.5, 0.7, 0.5, 0x7fd1ff); D(sp.x - 4.4, 1.9, sp.z - 5.2, 0.8, 0.8, 0.8, 0xd8ecf2); D(sp.x - 4.4, 1.8, sp.z - 5.2, 0.6, 0.5, 0.6, 0x7fd1ff); obstacles.push({ x: sp.x, z: sp.z - 4, w: 4, d: 1.6 }); },
+  strata(k, sp) { const { D, obstacles } = k; const layers = [0x8a7a5c, 0xd9c38a, 0x9a9585, 0xb8a090, 0x6d543a, 0xd4c49b]; for (let i = 0; i < 6; i++) D(sp.x, 0.5 + i * 0.7, sp.z - 5, 7 - i * 0.25, 0.7, 2.6 - i * 0.2, layers[i]); for (let i = 0; i < 4; i++) D(sp.x - 2.5 + i * 1.6, 1.9, sp.z - 3.6, 0.4, 0.14, 0.3, 0xf4f1ea); D(sp.x + 2.8, 1.3, sp.z - 2.6, 0.8, 1.6, 0.8, 0xd8ecf2); for (let i = 0; i < 3; i++) D(sp.x + 2.8, 0.7 + i * 0.35, sp.z - 2.6, 0.7, 0.3, 0.7, [0x9a9585, 0xd9c38a, 0x8a7a5c][i]); obstacles.push({ x: sp.x, z: sp.z - 5, w: 3.6, d: 1.4 }); },
+  volcano(k, sp) { const { D, B, obstacles, island } = k; for (let i = 0; i < 6; i++) D(sp.x, 0.5 + i * 0.9, sp.z - 5, 8 - i * 1.2, 0.9, 7 - i * 1.05, i % 2 ? 0x6a5a4a : 0x7a6a58); D(sp.x, 5.6, sp.z - 5, 1.6, 0.4, 1.6, 0xff5a1f, 2.4); const puff = B(sp.x, 7.2, sp.z - 5, 1.4, 1.4, 1.4, 0x8d9aa0); island._volcanoSmoke = puff; for (let i = 0; i < 4; i++) D(sp.x + Math.cos(i * 1.6) * 3.4, 2.2 - i * 0.3, sp.z - 5 + Math.sin(i * 1.6) * 2.8, 0.5, 1.4, 0.5, 0xff7528, 1.8); obstacles.push({ x: sp.x, z: sp.z - 5, w: 4, d: 3.5 }); },
+
+  bridge(k, sp) { const { D, obstacles, crate } = k; for (const sx of [-3, 3]) D(sp.x + sx, 0.9, sp.z - 4, 1.4, 1.8, 2, 0x9a9585); D(sp.x, 1.85, sp.z - 4, 7.2, 0.3, 1.4, 0xa58c62); crate(sp.x, sp.z - 4, 0.9); obstacles.push({ x: sp.x, z: sp.z - 4, w: 3.8, d: 1 }); for (let i = 0; i < 3; i++) D(sp.x - 6 + i * 0.9, 0.3 + i * 0.3, sp.z - 8, 0.4, 0.6 + i * 0.6, 3, 0xb08655); },
+  shed(k, sp) { const { D, obstacles, barrel } = k; D(sp.x - 2.5, 1.0, sp.z - 4, 1.4, 2.0, 1.0, 0x334455); D(sp.x - 2.5, 2.2, sp.z - 4, 0.5, 0.4, 0.5, 0xd4c49b); D(sp.x + 1.5, 1.6, sp.z - 4, 0.25, 3.0, 0.25, 0x6f5b3e); D(sp.x + 1.5, 3.4, sp.z - 4, 0.9, 0.9, 0.9, 0xffe6ad, 2.4); D(sp.x - 0.5, 1.2, sp.z - 4, 2.4, 0.08, 0.08, 0xb87333); obstacles.push({ x: sp.x - 2.5, z: sp.z - 4, w: 0.9, d: 0.7 }); barrel(sp.x + 3.6, sp.z - 4); },
+  mill(k, sp) { const { D, B, obstacles, island } = k; D(sp.x, 2.2, sp.z - 7, 6, 4.4, 1.2, 0xe6d8c8); const g1 = B(sp.x - 1.8, 3.0, sp.z - 6.2, 2.4, 2.4, 0.4, 0xb08655); const g2 = B(sp.x + 1.0, 3.0, sp.z - 6.2, 1.6, 1.6, 0.4, 0xd4c49b); for (let i = 0; i < 8; i++) { const a = (i / 8) * Math.PI * 2; D(sp.x - 1.8 + Math.cos(a) * 1.35, 3.0 + Math.sin(a) * 1.35, sp.z - 6.2, 0.4, 0.4, 0.4, 0xb08655); } island._gears = [g1, g2]; const wheel = B(sp.x + 4.4, 2, sp.z - 4, 0.4, 3.6, 3.6, 0x8a7350); island._wheel = wheel; obstacles.push({ x: sp.x + 4.4, z: sp.z - 4, w: 0.6, d: 2 }); obstacles.push({ x: sp.x, z: sp.z - 7, w: 3, d: 0.6 }); },
+  tester(k, sp) { const { D, obstacles } = k; benchTop(k, sp.x, sp.z - 4); D(sp.x - 1.6, 1.5, sp.z - 4, 0.9, 0.7, 0.9, 0x334455); D(sp.x + 0.2, 2.2, sp.z - 4, 0.6, 0.6, 0.6, 0xffe6ad, 2.2); D(sp.x - 0.6, 1.6, sp.z - 4, 1.6, 0.08, 0.08, 0xb87333); [0xb8c0c8, 0xa58c62, 0xd8ecf2, 0xd04030, 0xb87333].forEach((c, i) => D(sp.x + 1.0 + (i % 3) * 0.6, 1.4 + Math.floor(i / 3) * 0.5, sp.z - 3.4 - Math.floor(i / 3) * 0.6, 0.4, 0.4, 0.4, c)); obstacles.push({ x: sp.x, z: sp.z - 4, w: 2.6, d: 1.2 }); },
+  rack(k, sp) { const { D, obstacles } = k; D(sp.x, 2.0, sp.z - 4.6, 5, 4, 0.8, 0x6d543a); for (let r = 0; r < 3; r++) D(sp.x, 1.0 + r * 1.3, sp.z - 4.2, 5.2, 0.14, 1.2, 0x8a6a45); for (let r = 0; r < 3; r++) for (let i = 0; i < 4; i++) { D(sp.x - 1.8 + i * 1.2, 1.5 + r * 1.3, sp.z - 4.2, 0.6, 0.9, 0.6, i % 2 ? 0x334455 : 0xd04030); D(sp.x - 1.8 + i * 1.2, 2.0 + r * 1.3, sp.z - 4.2, 0.25, 0.12, 0.25, 0xd4c49b); } D(sp.x + 3.2, 1.8, sp.z - 4, 0.8, 0.8, 0.8, 0xffe6ad, 2.0); obstacles.push({ x: sp.x, z: sp.z - 4.4, w: 2.8, d: 0.9 }); },
+  coil(k, sp) { const { D, B, obstacles, island } = k; D(sp.x - 3, 2.6, sp.z - 4, 0.5, 5.2, 0.5, 0xe4c239); D(sp.x - 0.5, 5.3, sp.z - 4, 5.6, 0.5, 0.5, 0xe4c239); D(sp.x + 1.8, 4.4, sp.z - 4, 0.08, 1.4, 0.08, 0x334455); for (let i = 0; i < 6; i++) D(sp.x + 1.8, 3.6 - i * 0.18, sp.z - 4, 1.2, 0.12, 1.2, 0xb87333); const load = B(sp.x + 1.8, 2.0, sp.z - 4, 1.0, 0.6, 1.0, 0x8d9aa0); island._load = load; for (let i = 0; i < 7; i++) D(sp.x + 0.5 + (i % 4) * 0.6, 0.35, sp.z - 2.5 + Math.floor(i / 4) * 0.5, 0.3, 0.1, 0.5, 0xb8c0c8); D(sp.x - 3, 0.5, sp.z - 4, 2, 0.6, 2, 0x334455); obstacles.push({ x: sp.x - 3, z: sp.z - 4, w: 1.2, d: 1.2 }); },
+  crank(k, sp) { const { D, B, obstacles, island } = k; benchTop(k, sp.x, sp.z - 4); D(sp.x - 1.4, 1.75, sp.z - 4, 1.4, 1.2, 1.0, 0x334455); const handle = B(sp.x - 1.4, 2.6, sp.z - 3.4, 1.2, 0.12, 0.12, 0xd04030); island._handle = handle; D(sp.x + 0.6, 1.6, sp.z - 4, 0.6, 0.9, 0.6, 0x1c2a3a); D(sp.x + 0.6, 2.15, sp.z - 4, 0.3, 0.2, 0.3, 0xd4c49b); D(sp.x + 1.8, 1.9, sp.z - 4, 0.5, 0.5, 0.5, 0xffe6ad, 1.4); D(sp.x + 1.8, 2.5, sp.z - 4, 0.3, 0.3, 0.3, 0x7fd1ff, 2.2); obstacles.push({ x: sp.x, z: sp.z - 4, w: 2.6, d: 1.2 }); },
+
+  table(k, sp) { const { D, B, obstacles } = k; D(sp.x, 1.0, sp.z - 4, 5, 0.3, 3.4, 0x3f7a52); for (const sx of [-2.2, 2.2]) for (const sz of [-1.4, 1.4]) D(sp.x + sx, 0.5, sp.z - 4 + sz, 0.3, 1, 0.3, 0x7b6647); const d1 = B(sp.x - 1, 1.75, sp.z - 4, 1.2, 1.2, 1.2, 0xf4f1ea); const d2 = B(sp.x + 1.2, 1.75, sp.z - 4.5, 1.2, 1.2, 1.2, 0xf4f1ea); d2.rotation.y = 0.6; for (const d of [d1, d2]) for (const [px, py] of [[-0.3, 0.3], [0, 0], [0.3, -0.3]]) D(d.position.x + px, d.position.y + py, d.position.z + 0.62, 0.18, 0.18, 0.05, 0x1c2a3a); obstacles.push({ x: sp.x, z: sp.z - 4, w: 2.7, d: 1.9 }); },
+  pond(k, sp) { const { D, obstacles, rand } = k; for (let i = 0; i < 3; i++) D(sp.x, 0.12 + i * 0.03, sp.z - 4, 9 - i * 1.5, 0.1, 6 - i, i === 2 ? 0x4b8090 : i ? 0x5a96a4 : 0xd9c38a); for (let i = 0; i < 9; i++) { const x = sp.x - 3 + rand() * 6; const z = sp.z - 6 + rand() * 4; D(x, 0.3, z, 0.5, 0.15, 0.25, i % 3 ? 0xf2b134 : 0xd04030); } D(sp.x + 5, 1.4, sp.z - 2, 0.1, 2.8, 0.1, 0x8a7350); D(sp.x + 5.4, 2.6, sp.z - 2, 0.9, 0.6, 0.9, 0xd8ecf2); obstacles.push({ x: sp.x, z: sp.z - 4, w: 4.6, d: 3.1 }); },
+  machine(k, sp) { const { D, obstacles, fence } = k; D(sp.x, 1.0, sp.z - 4, 8, 0.3, 1.4, 0x334455); for (const sx of [-3.5, 3.5]) D(sp.x + sx, 0.5, sp.z - 4, 0.3, 1, 1.2, 0x8d9aa0); for (let i = 0; i < 5; i++) D(sp.x - 3 + i * 1.5, 1.45, sp.z - 4, 0.6, 0.6, 0.6, i % 2 ? 0xd9433a : 0xf2a034); D(sp.x - 1.2, 0.6, sp.z - 6.4, 1.6, 1.2, 1.6, 0xd9433a); D(sp.x + 1.2, 0.6, sp.z - 6.4, 1.6, 1.2, 1.6, 0xf2a034); D(sp.x, 2.6, sp.z - 4, 1.2, 1.2, 1.2, 0x8d9aa0); D(sp.x, 2.6, sp.z - 3.35, 0.6, 0.3, 0.1, 0x7fd1ff, 2); obstacles.push({ x: sp.x, z: sp.z - 4.6, w: 4.2, d: 1.6 }); fence(sp.x - 4, sp.z - 8.5, 6); },
+  turtle(k, sp) { const { D, B, island } = k; D(sp.x, 0.25, sp.z - 4, 8, 0.2, 6, 0x1c2a3a); for (let i = 0; i < 5; i++) { D(sp.x - 4 + i * 2, 0.36, sp.z - 4, 0.06, 0.02, 6, 0x7fd1ff); D(sp.x, 0.36, sp.z - 7 + i * 1.5, 8, 0.02, 0.06, 0x7fd1ff); } for (let i = 0; i < 5; i++) { const a = (i / 5) * Math.PI * 2 + Math.PI / 2; const b = ((i + 1) / 5) * Math.PI * 2 + Math.PI / 2; const ax = sp.x + Math.cos(a) * 2; const az = sp.z - 4 + Math.sin(a) * 1.6; const bx = sp.x + Math.cos(b) * 2; const bz = sp.z - 4 + Math.sin(b) * 1.6; const seg = B((ax + bx) / 2, 0.42, (az + bz) / 2, Math.hypot(bx - ax, bz - az), 0.06, 0.18, 0xf2b134, undefined, 1.2); seg.rotation.y = -Math.atan2(bz - az, bx - ax); } const turtle = B(sp.x + 2, 0.7, sp.z - 4, 0.8, 0.4, 0.6, 0x4f9a52); turtle.userData.cx = sp.x; turtle.userData.cz = sp.z - 4; island._turtle = turtle; B(0.6, 0, 0, 0.35, 0.7, 0.5, 0x5faa5a, turtle); },
 };
 
-// Little motions on the islands: the Moon circling, the bob swinging, gears turning.
+// ---- the island's own terrain. The kit raises two hills to the north, at (−21,−14)
+// and (22,−12), about 2.2 m high; each island's crown stands on them.
+const NW = [-21, -14]; const NE = [22, -12]; const HY = 2.2;
+const TERRAIN = {
+  peak(k) { const { D, B, lamp, island, tree } = k; const [x, z] = NW; for (let i = 0; i < 5; i++) D(x, HY + 0.5 + i * 0.9, z, 7 - i * 1.1, 0.9, 7 - i * 1.1, i % 2 ? 0x8d9aa0 : 0x9aa0aa); D(x, HY + 5.2, z, 0.3, 1.2, 0.3, 0x334455); const dish = B(x, HY + 6.4, z, 3.2, 0.6, 3.2, 0xdfe4ef); dish.rotation.x = -0.5; island._dish = dish; const [x2, z2] = NE; for (let i = 0; i < 7; i++) D(x2 + Math.cos(i * 0.9) * 3, HY + 0.5 + (i % 3) * 0.7, z2 + Math.sin(i * 0.9) * 2.6, 0.5, 1 + (i % 3) * 1.4, 0.5, 0xfff4d7, 1.6); D(x2, HY + 0.7, z2, 2.4, 1.4, 2.4, 0x334455); lamp(x2, z2 + 4); tree(-27, 0, 1.1, 1); tree(27, 2, 1.0, 1); },
+  campus(k) { const { D, B, island, tree } = k; const [x, z] = NW; D(x, HY + 2.4, z, 5, 4.8, 5, 0xd8ecf2, 0.15); for (const sx of [-2.5, 2.5]) for (const sz of [-2.5, 2.5]) D(x + sx, HY + 2.4, z + sz, 0.3, 5, 0.3, 0xffffff); D(x, HY + 5.0, z, 5.6, 0.4, 5.6, 0xffffff); for (let i = 0; i < 3; i++) { D(x - 1.5 + i * 1.5, HY + 0.9, z, 0.8, 0.8, 0.8, 0xb86e46); D(x - 1.5 + i * 1.5, HY + 1.9, z, 0.5, 1.2, 0.5, 0x5faa5a); } const [x2, z2] = NE; D(x2, HY + 3, z2, 1.6, 6, 1.6, 0x9a9585); D(x2, HY + 6.3, z2, 2.2, 0.6, 2.2, 0xd04030); const steam = B(x2, HY + 7.6, z2, 1.6, 1.6, 1.6, 0xffffff); island._chimney = steam; for (let i = 0; i < 8; i++) for (let j = 0; j < 3; j++) D(-7 + i * 2, 0.26, 14 + j * 2, 1.9, 0.08, 1.9, (i + j) % 2 ? 0xe9e4d6 : 0xd8d2c2); tree(-27, 1, 0.9, 0); tree(27, 3, 0.9, 0); },
+  quarry(k) { const { D } = k; const [x, z] = NW; for (let i = 0; i < 7; i++) { const a = i * 0.9; const h = 1.6 + (i % 3) * 1.2; D(x + Math.cos(a) * 2.2, HY + h / 2, z + Math.sin(a) * 2.2, 0.9, h, 0.9, i % 2 ? 0x9a6fd0 : 0xb48cf0, 0.9); } D(x, HY + 1.8, z, 1.2, 3.6, 1.2, 0xd9c4ff, 1.4); const [x2, z2] = NE; D(x2, HY + 0.2, z2, 7, 0.4, 6, 0x4a4a4a); D(x2, HY + 0.45, z2, 6, 0.2, 5, 0x3fd08a, 1.2); for (let i = 0; i < 5; i++) D(x2 - 3 + i * 1.5, HY + 1.2, z2 - 3.4, 0.4, 2.0, 0.4, 0x8d9aa0); for (let i = 0; i < 6; i++) D(-27 + i * 1.2, 0.6 + (i % 2) * 0.4, 4 + (i % 3), 0.8, 1.2 + (i % 2) * 0.8, 0.8, 0x9a6fd0, 0.6); },
+  playground(k) { const { D, B, island, lamp } = k; const [x, z] = NW; for (let i = 0; i < 6; i++) D(x - 3 + i * 1.2, HY + 0.6 + i * 0.5, z, 1.2, 0.3, 1.6, 0xe4c239); D(x + 3.6, HY + 2.0, z, 0.3, 4, 0.3, 0x8d9aa0); D(x + 3.6, HY + 4.1, z, 2.2, 0.3, 2.0, 0xd04030); for (const sz of [-0.9, 0.9]) for (let i = 0; i < 7; i++) D(x - 3.6 + i * 1.2, HY + 0.9 + i * 0.5, z + sz, 1.2, 0.1, 0.1, 0xd04030); const [x2, z2] = NE; D(x2, HY + 3.2, z2, 0.4, 6.4, 0.4, 0x8d9aa0); const wheel = B(x2, HY + 6.2, z2, 5.2, 5.2, 0.4, 0x7fd1ff); island._ferris = wheel; for (let i = 0; i < 6; i++) { const a = (i / 6) * Math.PI * 2; B(Math.cos(a) * 0.42, Math.sin(a) * 0.42, 0, 0.17, 0.12, 2.2, [0xd04030, 0xe4c239, 0x3f9a52][i % 3], wheel); } lamp(x2 - 4, z2 + 3); },
+  brook(k) { const { D, B, tree, bush, island, flowers } = k; for (let i = 0; i < 16; i++) { const t = i / 15; const bx = -29 + t * 58; const bz = 12 + Math.sin(t * Math.PI * 2) * 2.2; if (Math.abs(bx) < 8) continue; D(bx, 0.15, bz, 4, 0.12, 1.8, 0x5a96a4); D(bx, 0.1, bz, 4.2, 0.1, 2.2, 0x4b8090); } for (const sx of [-10, 10]) D(sx, 0.55, 12, 2.2, 0.2, 3.0, 0xa58c62); const [x, z] = NW; D(x, HY + 2.5, z, 1.6, 5, 1.6, 0xe8dcc0); D(x, HY + 5.3, z, 2.0, 0.8, 2.0, 0xb86e46); const blades = B(x, HY + 4.5, z + 1.1, 0.3, 0.3, 0.3, 0x6f5b3e); for (let i = 0; i < 4; i++) { const b = B(0, 0, 0, 1, 14, 0.3, 0xf4f1ea, blades); b.rotation.z = (i / 4) * Math.PI * 2; } island._windmill = blades; const [x2, z2] = NE; for (let i = 0; i < 5; i++) tree(x2 + Math.cos(i * 1.3) * 3, z2 + Math.sin(i * 1.3) * 2.4, 1.1 + (i % 2) * 0.3, 0); bush(x2, z2); for (const [fx, fz] of [[-16, 4], [16, 4], [-28, -4], [28, -2]]) flowers(fx, fz, 0xe98ab0); },
+  stadium(k) { const { D, bunting } = k; for (const [x, z] of [NW, NE]) { for (let i = 0; i < 4; i++) D(x, HY + 0.5 + i * 0.6, z - i * 0.9, 9 - i * 0.6, 0.6, 1.2, i % 2 ? 0x3a6fd0 : 0xd04030); for (let i = 0; i < 7; i++) D(x - 3.6 + i * 1.2, HY + 3.1, z - 3.0, 0.5, 0.6, 0.5, [0xe8c39a, 0xd04030, 0x3f9a52, 0xffffff][i % 4]); } D(0, 4.2, -24, 0.4, 8.4, 0.4, 0x8d9aa0); D(0, 8.4, -24, 4.4, 2.4, 0.4, 0x1c2a3a); D(0, 8.4, -23.75, 3.8, 1.8, 0.1, 0xff8a7a, 1.2); bunting(-8, 16, 8, 16, 5.2); },
+  volcano(k) { const { D, B, island, rock } = k; const [x, z] = NW; for (let i = 0; i < 8; i++) D(x, HY + 0.6 + i * 1.0, z, 12 - i * 1.4, 1.0, 10 - i * 1.2, i % 2 ? 0x5a4a3e : 0x6a5a4a); D(x, HY + 8.5, z, 2.6, 0.5, 2.4, 0xff5a1f, 2.6); for (let i = 0; i < 6; i++) D(x + Math.cos(i * 1.1) * 4, HY + 3.5 - (i % 3) * 0.6, z + Math.sin(i * 1.1) * 3.4, 0.6, 2.4, 0.6, 0xff7528, 2.0); const smoke = []; for (let i = 0; i < 3; i++) { const s = B(x, HY + 10 + i * 1.6, z, 2.2 - i * 0.4, 2.2 - i * 0.4, 2.2 - i * 0.4, 0x8d9aa0); s.userData.seed = i; smoke.push(s); } island._eruption = smoke; const [x2, z2] = NE; for (let i = 0; i < 6; i++) rock(x2 + Math.cos(i * 1.2) * 3, z2 + Math.sin(i * 1.2) * 2.4, 0.8 + (i % 3) * 0.4); D(x2, HY + 1.5, z2, 1.6, 3, 1.6, 0x4a4a4a); D(x2, HY + 3.2, z2, 2.0, 0.4, 2.0, 0x9a9585); },
+  factory(k) { const { D, B, island, crate, barrel } = k; const [x, z] = NW; D(x, HY + 2, z, 7, 4, 5, 0x9a9585); D(x, HY + 4.3, z, 7.4, 0.6, 5.4, 0x8d9aa0); for (let i = 0; i < 3; i++) D(x - 2 + i * 2, HY + 4.8, z - 1, 1.2, 0.6, 1.2, 0x6d6d6d); D(x + 2.4, HY + 6.5, z + 1, 1.0, 5, 1.0, 0xb86e46); const s = B(x + 2.4, HY + 9.8, z + 1, 1.6, 1.6, 1.6, 0xb5b3a3); island._factorySmoke = s; const [x2, z2] = NE; D(x2 - 3, HY + 4, z2, 0.5, 8, 0.5, 0xe4c239); D(x2 + 0.5, HY + 8.2, z2, 7.6, 0.5, 0.5, 0xe4c239); D(x2 + 3, HY + 6.8, z2, 0.08, 2.4, 0.08, 0x334455); const hook = B(x2 + 3, HY + 5.2, z2, 1.2, 1.0, 1.2, 0x3a6fd0); island._hook = hook; for (let i = 0; i < 4; i++) crate(x2 - 2 + (i % 2) * 1.3, z2 + 2 + Math.floor(i / 2) * 1.3); barrel(x2 + 1.5, z2 + 2.5); for (let i = 0; i < 6; i++) D(-27 + i * 1.3, 0.75, 3, 1.1, 1.1, 1.1, [0xd04030, 0x3a6fd0, 0xe4c239][i % 3]); },
+  grid(k) { const { D, B, island } = k; for (const [x, z] of [NW, NE]) { for (let i = 0; i < 3; i++) for (let j = 0; j < 2; j++) { D(x - 2.5 + i * 2.5, HY + 1.6, z - 1 + j * 2, 1.6, 3.2, 1.0, 0x1c2a3a); for (let r = 0; r < 5; r++) D(x - 2.5 + i * 2.5, HY + 0.5 + r * 0.55, z - 1 + j * 2 + 0.52, 1.2, 0.12, 0.06, (r + i + j) % 3 ? 0x3fd08a : 0xff8a7a, 1.8); } } const blink = B(NW[0], HY + 3.6, NW[1], 0.4, 0.4, 0.4, 0x7fd1ff, undefined, 2.5); island._blink = blink; for (let i = 0; i < 6; i++) for (let j = 0; j < 4; j++) D(-6 + i * 2, 0.26, 13 + j * 2, 1.9, 0.08, 1.9, (i + j) % 2 ? 0x1c2a3a : 0xe9e4d6); },
+};
+
+const FLOWERS = { cosmos: 0xf0d98a, lab: 0xe89bb0, atoms: 0xd9c4ff, force: 0xe7b06a, life: 0xe98ab0, body: 0xf0d98a, earth: 0xdfe4ef, maker: 0xe7b06a, data: 0xdfe4ef };
+
+export function buildIsland(k) {
+  const { island } = k;
+  for (const sp of island.spots) { const prop = PROPS[sp.kind]; if (prop) prop(k, sp); else console.warn('no prop for station kind', sp.kind); }
+  TERRAIN[island.terrain]?.(k);
+  stationsAndPaths(k, FLOWERS[island.id] || 0xf0d98a);
+}
+
+// Little motions on the islands: the Moon circling, the bob swinging, gears turning,
+// the volcano smoking, the windmill turning, the ferris wheel going round.
 export function animateIslands(islands, time) {
-  const c = islands.get('cosmos')?._moon; if (c) { const o = c.userData.orbit; c.position.x = o.cx + Math.cos(time * 0.6) * o.r; c.position.z = o.cz + Math.sin(time * 0.6) * o.r; }
-  const bob = islands.get('force')?._bob; if (bob) { const s = bob.userData.swing; const a = Math.sin(time * 1.4) * 0.5; bob.position.x = s.cx + Math.sin(a) * s.len; bob.position.y = s.top - Math.cos(a) * s.len; }
-  const plank = islands.get('force')?._plank; if (plank) plank.rotation.z = Math.sin(time * 0.5) * 0.18;
-  const gears = islands.get('maker')?._gears; if (gears) { gears[0].rotation.z = time * 0.8; gears[1].rotation.z = -time * 1.2; }
-  const wheel = islands.get('maker')?._wheel; if (wheel) wheel.rotation.x = time * 0.7;
-  const cloud = islands.get('earth')?._cloud; if (cloud) cloud.position.x += Math.sin(time * 0.3) * 0.002;
+  const g = (id) => islands.get(id);
+  const c = g('cosmos')?._moon; if (c) { const o = c.userData.orbit; c.position.x = o.cx + Math.cos(time * 0.6) * o.r; c.position.z = o.cz + Math.sin(time * 0.6) * o.r; }
+  const dish = g('cosmos')?._dish; if (dish) dish.rotation.y = time * 0.15;
+  const starWheel = g('cosmos')?._starWheel; if (starWheel) starWheel.rotation.z = -time * 0.1;
+  const scope = g('cosmos')?._scope; if (scope) scope.rotation.y = Math.sin(time * 0.2) * 0.5;
+  const bob = g('force')?._bob; if (bob) { const s = bob.userData.swing; const a = Math.sin(time * 1.4) * 0.5; bob.position.x = s.cx + Math.sin(a) * s.len; bob.position.y = s.top - Math.cos(a) * s.len; }
+  const plank = g('force')?._plank; if (plank) plank.rotation.z = Math.sin(time * 0.5) * 0.18;
+  const car = g('force')?._car; if (car) { if (car.userData.x0 === undefined) car.userData.x0 = car.position.x; const t = (time * 0.6) % 4; car.position.x = car.userData.x0 + Math.min(7.5, t * t * 1.4); }
+  const weight = g('force')?._weight; if (weight) weight.position.y = 2.0 + Math.sin(time * 1.1) * 0.4;
+  const ferris = g('force')?._ferris; if (ferris) ferris.rotation.z = time * 0.25;
+  const gears = g('maker')?._gears; if (gears) { gears[0].rotation.z = time * 0.8; gears[1].rotation.z = -time * 1.2; }
+  const wheel = g('maker')?._wheel; if (wheel) wheel.rotation.x = time * 0.7;
+  const hook = g('maker')?._hook; if (hook) hook.position.y = HY + 5.2 + Math.sin(time * 0.5) * 1.2;
+  const handle = g('maker')?._handle; if (handle) handle.rotation.z = time * 3;
+  const load = g('maker')?._load; if (load) load.position.y = 2.0 + Math.max(0, Math.sin(time * 0.8)) * 1.2;
+  const cloud = g('earth')?._cloud; if (cloud) cloud.position.x += Math.sin(time * 0.3) * 0.002;
+  for (const [id, key] of [['earth', '_eruption'], ['lab', '_chimney'], ['maker', '_factorySmoke'], ['atoms', '_kilnSmoke'], ['earth', '_volcanoSmoke'], ['lab', '_steam']]) {
+    const s = g(id)?.[key]; if (!s) continue;
+    for (const puff of Array.isArray(s) ? s : [s]) { const seed = puff.userData.seed || 0; const ph = (time * 0.35 + seed * 0.33) % 1; if (puff.userData.y0 === undefined) { puff.userData.y0 = puff.position.y; puff.userData.s0 = puff.scale.x; } puff.position.y = puff.userData.y0 + ph * 3; puff.scale.setScalar(puff.userData.s0 * (0.6 + ph * 0.9)); }
+  }
+  const mill = g('life')?._windmill; if (mill) mill.rotation.z = time * 0.6;
+  const bf = g('life')?._butterflies; if (bf) for (const b of bf) { b.position.y = 2.6 + Math.sin(time * 2 + b.userData.seed) * 0.5; b.rotation.y = time * 0.7 + b.userData.seed; b.scale.x = 0.7 + Math.abs(Math.sin(time * 9 + b.userData.seed)) * 0.3; }
+  const fish = g('life')?._fish; if (fish) for (const f of fish) { if (f.userData.x0 === undefined) f.userData.x0 = f.position.x; f.position.x = f.userData.x0 + Math.sin(time * 0.8 + f.userData.seed) * 0.6; f.rotation.y = Math.cos(time * 0.8 + f.userData.seed) > 0 ? 0 : Math.PI; }
+  const bag = g('body')?._bag; if (bag) bag.scale.setScalar(1.0 + Math.abs(Math.sin(time * 1.5)) * 0.4);
+  const drip = g('atoms')?._drip; if (drip) drip.position.y = 1.9 - ((time * 0.8) % 1) * 0.7;
+  const turtle = g('data')?._turtle; if (turtle) { const a = time * 0.8; turtle.position.x = turtle.userData.cx + Math.cos(a) * 2; turtle.position.z = turtle.userData.cz + Math.sin(a) * 1.6; turtle.rotation.y = -a; }
+  const blink = g('data')?._blink; if (blink) blink.visible = Math.sin(time * 4) > 0;
 }

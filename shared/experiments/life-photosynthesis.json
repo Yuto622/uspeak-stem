@@ -1,0 +1,313 @@
+{
+ "id": "life.photosynthesis",
+ "region": "life",
+ "station": "leaf-lab",
+ "title": {
+  "en": "The Leaf Lab",
+  "ja": "はっぱの じっけんしつ"
+ },
+ "sim": "photosynthesis",
+ "grade": "小6",
+ "unit": "植物の養分と水のゆくえ",
+ "intro": {
+  "en": "Cover half a leaf with foil and leave the plant in the sun. Boil the leaf, drop iodine on it. Blue-black where the sun reached: starch was made there.",
+  "ja": "はの はんぶんを アルミはくで おおって、ひなたに。はを にて、ヨウそえきを たらそう。ひかりが あたった ところだけ あおむらさき。でんぷんが できた。"
+ },
+ "params": {
+  "light": {
+   "choices": [
+    "sun",
+    "dark"
+   ],
+   "en": "Where the plant stood",
+   "ja": "おいた ばしょ"
+  },
+  "hours": {
+   "min": 0,
+   "max": 8,
+   "step": 1,
+   "unit": "h",
+   "en": "Hours",
+   "ja": "じかん"
+  },
+  "cover": {
+   "choices": [
+    "none",
+    "foil"
+   ],
+   "en": "The leaf",
+   "ja": "はっぱは"
+  }
+ },
+ "levels": {
+  "explore": {
+   "ages": "4-7",
+   "fixed": {
+    "hours": 4,
+    "cover": "none"
+   },
+   "predict": {
+    "kind": "choice",
+    "field": "starch",
+    "choices": [
+     "yes",
+     "no"
+    ]
+   },
+   "measure": [
+    "starch",
+    "iodine"
+   ]
+  },
+  "investigate": {
+   "ages": "8-11",
+   "fixed": {
+    "light": "sun"
+   },
+   "predict": {
+    "kind": "choice",
+    "field": "iodine",
+    "choices": [
+     "blue-black",
+     "brown"
+    ]
+   },
+   "measure": [
+    "iodine",
+    "why"
+   ],
+   "record": [
+    "hours",
+    "starchScore"
+   ]
+  },
+  "engineer": {
+   "ages": "12-15",
+   "predict": {
+    "kind": "choice",
+    "field": "why",
+    "choices": [
+     "dark",
+     "covered",
+     "short",
+     "ok"
+    ]
+   },
+   "measure": [
+    "starch",
+    "iodine",
+    "why"
+   ],
+   "record": [
+    "hours",
+    "starchScore"
+   ],
+   "challenge": {
+    "en": "Design the fair test that proves the sun, not the air, makes the starch.",
+    "ja": "でんぷんを つくるのは くうきじゃなく たいようだと しめす じっけんを かんがえよう。"
+   }
+  }
+ },
+ "explain": {
+  "en": "How does a leaf make food?",
+  "ja": "はっぱは どうやって えいようを つくる？",
+  "aims": [
+   {
+    "id": "sun-starch",
+    "en": "Sunlight lets the leaf make starch",
+    "ja": "ひかりが あたると でんぷんが できる",
+    "keys": [
+     [
+      "sun",
+      "sunlight",
+      "light"
+     ],
+     [
+      "starch",
+      "food",
+      "sugar",
+      "make",
+      "makes",
+      "made"
+     ]
+    ]
+   },
+   {
+    "id": "covered",
+    "en": "The covered part makes none",
+    "ja": "おおった ところは できない",
+    "keys": [
+     [
+      "cover",
+      "covered",
+      "foil",
+      "dark",
+      "shade",
+      "shaded"
+     ],
+     [
+      "none",
+      "no",
+      "not",
+      "nothing",
+      "brown",
+      "doesn't",
+      "does not"
+     ]
+    ]
+   },
+   {
+    "id": "iodine",
+    "en": "Iodine shows starch as blue-black",
+    "ja": "ヨウそえきで でんぷんが あおむらさきに",
+    "keys": [
+     [
+      "iodine"
+     ],
+     [
+      "blue",
+      "black",
+      "purple",
+      "shows",
+      "test"
+     ]
+    ]
+   }
+  ]
+ },
+ "classPlot": {
+  "x": "hours",
+  "y": "starchScore",
+  "xLabel": {
+   "en": "Hours in the sun",
+   "ja": "ひなたの じかん"
+  },
+  "yLabel": {
+   "en": "Starch made (1) or not (0)",
+   "ja": "でんぷん あり（1）・なし（0）"
+  }
+ },
+ "real": {
+  "en": "Clip a piece of card onto a leaf of a plant in the window for two days, then look.",
+  "ja": "まどべの はなの はに、かみを クリップで とめて 2日。はずして 見よう。",
+  "kit": [
+   "a house plant",
+   "card",
+   "a clip"
+  ]
+ },
+ "standards": {
+  "jp": [
+   "小6 植物の養分と水の通り道"
+  ],
+  "ngss": [
+   "5-LS1-1"
+  ],
+  "cambridge": [
+   "Science enquiry"
+  ],
+  "pisa": [
+   "explain",
+   "interpret"
+  ]
+ },
+ "powers": {
+  "predict": 1,
+  "measure": 1,
+  "data": 1,
+  "explain": 1,
+  "build": 1
+ },
+ "ui": {
+  "labels": {
+   "starch": {
+    "en": "Starch made?",
+    "ja": "でんぷんは できた？"
+   },
+   "iodine": {
+    "en": "Iodine turns",
+    "ja": "ヨウそえきは"
+   },
+   "why": {
+    "en": "Because",
+    "ja": "りゆう"
+   }
+  },
+  "questions": {
+   "starch": {
+    "en": "Will the leaf have made starch?",
+    "ja": "はに でんぷんは できる？"
+   },
+   "iodine": {
+    "en": "What colour will the iodine turn?",
+    "ja": "ヨウそえきは なにいろに なる？"
+   },
+   "why": {
+    "en": "Why that result?",
+    "ja": "どうして その けっか？"
+   }
+  },
+  "choices": {
+   "starch": {
+    "yes": {
+     "en": "Yes",
+     "ja": "はい"
+    },
+    "no": {
+     "en": "No",
+     "ja": "いいえ"
+    }
+   },
+   "iodine": {
+    "blue-black": {
+     "en": "Blue-black",
+     "ja": "あおむらさき"
+    },
+    "brown": {
+     "en": "Brown",
+     "ja": "ちゃいろ"
+    }
+   },
+   "why": {
+    "dark": {
+     "en": "No light",
+     "ja": "ひかりが なかった"
+    },
+    "covered": {
+     "en": "It was covered",
+     "ja": "おおわれていた"
+    },
+    "short": {
+     "en": "Too little time",
+     "ja": "じかんが みじかかった"
+    },
+    "ok": {
+     "en": "Light reached it long enough",
+     "ja": "ひかりが じゅうぶん あたった"
+    }
+   }
+  },
+  "paramChoices": {
+   "light": {
+    "sun": {
+     "en": "In the sun",
+     "ja": "ひなた"
+    },
+    "dark": {
+     "en": "In the dark",
+     "ja": "くらい ところ"
+    }
+   },
+   "cover": {
+    "none": {
+     "en": "Uncovered",
+     "ja": "おおわない"
+    },
+    "foil": {
+     "en": "Covered with foil",
+     "ja": "アルミはくで おおう"
+    }
+   }
+  }
+ }
+}

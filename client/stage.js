@@ -11,6 +11,8 @@ import { t, onLang } from './i18n.js';
 import { gravity, moon } from '/shared/sim/index.js';
 import * as chem from '/shared/sim/chem.js';
 import { moreBuilders } from './stage-more.js';
+import { chemBuilders } from './stage-chem.js';
+import { sciBuilders } from './stage-sci.js';
 import * as look from './stage-look.js';
 
 const W = 720; const H = 420;
@@ -370,7 +372,7 @@ const BUILDERS = {
   },
 };
 
-Object.assign(BUILDERS, moreBuilders({ labelSprite, graph, look }));
+Object.assign(BUILDERS, moreBuilders({ labelSprite, graph, look }), chemBuilders({ labelSprite, graph, look }), sciBuilders({ labelSprite, graph, look }));
 
 export function createStage(canvas) {
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
@@ -430,7 +432,7 @@ export function createStage(canvas) {
       const dir = new THREE.Vector3(); camera.getWorldDirection(dir);
       const dist = current.lookDistance ?? Math.max(1, home.length());
       lookAt.copy(home).addScaledVector(dir, dist * 0.9);
-      if (LOOK[exp.sim]) lookAt.set(...LOOK[exp.sim]);
+      if (current.lookAt) lookAt.set(...current.lookAt); else if (LOOK[exp.sim]) lookAt.set(...LOOK[exp.sim]);
       clock.getDelta();
       if (!running) { running = true; requestAnimationFrame(frame); }
     },

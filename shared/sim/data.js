@@ -49,3 +49,17 @@ export function classify({ weight, color, k = 5, seed }) {
   }
   return { label, confidence, accuracy: Math.round((right / train.length) * 100), train, near: near.map((p) => ({ w: Math.round(p.w), c: Math.round(p.c * 100) / 100, label: p.label })) };
 }
+
+// 小5 プログラミング: a turtle walks `sides` steps, turning `angle` each time. It comes
+// home when the turns add up to a whole number of circles.
+export const POLYGONS = { 3: { en: 'triangle', ja: 'さんかくけい' }, 4: { en: 'square', ja: 'せいほうけい' }, 5: { en: 'pentagon', ja: 'ごかくけい' }, 6: { en: 'hexagon', ja: 'ろっかくけい' }, 8: { en: 'octagon', ja: 'はっかくけい' } };
+export function polygon({ sides = 4, angle = 90 }) {
+  const total = sides * angle;
+  const closes = Math.abs(total / 360 - Math.round(total / 360)) < 1e-9 && total > 0;
+  const regular = closes && Math.abs(angle - 360 / sides) < 1e-9;
+  const name = regular ? sides : closes ? 'star' : 'open';
+  // the turtle's path, for drawing
+  const pts = [[0, 0]]; let x = 0; let y = 0; let h = 0;
+  for (let i = 0; i < sides; i++) { x += Math.cos((h * Math.PI) / 180); y += Math.sin((h * Math.PI) / 180); pts.push([Math.round(x * 1000) / 1000, Math.round(y * 1000) / 1000]); h += angle; }
+  return { closes: closes ? 'yes' : 'no', rightAngle: 360 / sides, name: String(name), turns: total / 360, path: pts };
+}

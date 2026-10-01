@@ -1,0 +1,277 @@
+{
+ "id": "force.rubber",
+ "region": "force",
+ "station": "rubber-track",
+ "title": {
+  "en": "The Rubber Track",
+  "ja": "ゴムカーの コース"
+ },
+ "sim": "rubber",
+ "grade": "小3",
+ "unit": "風やゴムのはたらき",
+ "intro": {
+  "en": "Stretch the rubber band, let the car go, and measure how far it rolls. Twice the stretch is more than twice the distance.",
+  "ja": "ゴムを のばして、くるまを はなして、きょりを はかろう。のばす ながさを 2ばいに すると、きょりは 2ばい いじょう。"
+ },
+ "params": {
+  "stretch": {
+   "min": 4,
+   "max": 20,
+   "step": 2,
+   "unit": "cm",
+   "en": "Stretch",
+   "ja": "のばす ながさ"
+  },
+  "mass": {
+   "choices": [
+    "light",
+    "heavy"
+   ],
+   "en": "Car",
+   "ja": "くるま"
+  }
+ },
+ "levels": {
+  "explore": {
+   "ages": "4-7",
+   "fixed": {
+    "mass": "light"
+   },
+   "predict": {
+    "kind": "choice",
+    "field": "bucket",
+    "choices": [
+     "under-2",
+     "2-5",
+     "over-5"
+    ]
+   },
+   "measure": [
+    "metres"
+   ]
+  },
+  "investigate": {
+   "ages": "8-11",
+   "predict": {
+    "kind": "number",
+    "field": "metres",
+    "unit": "m",
+    "tolerance": 0.1
+   },
+   "measure": [
+    "metres"
+   ],
+   "record": [
+    "stretch",
+    "metres"
+   ]
+  },
+  "engineer": {
+   "ages": "12-15",
+   "fixed": {
+    "mass": "heavy"
+   },
+   "predict": {
+    "kind": "number",
+    "field": "metres",
+    "unit": "m",
+    "tolerance": 0.05
+   },
+   "measure": [
+    "metres"
+   ],
+   "record": [
+    "stretch",
+    "metres"
+   ],
+   "challenge": {
+    "en": "Stop the heavy car on the 3 m line.",
+    "ja": "おもい くるまを 3 m の せんで とめよう。"
+   }
+  }
+ },
+ "explain": {
+  "en": "What makes the car go farther?",
+  "ja": "くるまを とおくまで はしらせるのは なに？",
+  "aims": [
+   {
+    "id": "stretch",
+    "en": "A longer stretch stores more push",
+    "ja": "ながく のばすほど ちからが たまる",
+    "keys": [
+     [
+      "stretch",
+      "stretched",
+      "longer",
+      "more",
+      "pull",
+      "pulled",
+      "further"
+     ],
+     [
+      "far",
+      "farther",
+      "further",
+      "distance",
+      "goes",
+      "push",
+      "force",
+      "energy"
+     ]
+    ]
+   },
+   {
+    "id": "rubber-back",
+    "en": "The rubber wants to go back to its shape",
+    "ja": "ゴムは もとに もどろうとする",
+    "keys": [
+     [
+      "rubber",
+      "band",
+      "elastic"
+     ],
+     [
+      "back",
+      "return",
+      "returns",
+      "shape",
+      "snap",
+      "snaps",
+      "spring",
+      "springs"
+     ]
+    ]
+   },
+   {
+    "id": "heavy",
+    "en": "A heavier car goes a shorter way",
+    "ja": "おもい くるまは みじかい",
+    "keys": [
+     [
+      "heavy",
+      "heavier",
+      "weight",
+      "mass"
+     ],
+     [
+      "shorter",
+      "less",
+      "slower",
+      "not as far"
+     ]
+    ]
+   }
+  ]
+ },
+ "classPlot": {
+  "x": "stretch",
+  "y": "metres",
+  "xLabel": {
+   "en": "Stretch (cm)",
+   "ja": "のばした ながさ（cm）"
+  },
+  "yLabel": {
+   "en": "Distance (m)",
+   "ja": "はしった きょり（m）"
+  }
+ },
+ "real": {
+  "en": "Make a rubber-band car from a bottle and skewers; mark the floor every metre.",
+  "ja": "ペットボトルと くしで ゴムカーを つくって、ゆかに 1 m ごとに しるしを。",
+  "kit": [
+   "a rubber band",
+   "a bottle",
+   "skewers"
+  ]
+ },
+ "standards": {
+  "jp": [
+   "小3 風とゴムの力の働き"
+  ],
+  "ngss": [
+   "3-PS2-1"
+  ],
+  "cambridge": [
+   "Science enquiry"
+  ],
+  "pisa": [
+   "explain",
+   "interpret"
+  ]
+ },
+ "powers": {
+  "predict": 1,
+  "measure": 1,
+  "data": 1,
+  "explain": 1,
+  "build": 1
+ },
+ "ui": {
+  "labels": {
+   "metres": {
+    "en": "Distance (m)",
+    "ja": "きょり（m）"
+   },
+   "bucket": {
+    "en": "How far?",
+    "ja": "どれくらい？"
+   },
+   "farther": {
+    "en": "Compared with 10 cm",
+    "ja": "10 cm と くらべて"
+   }
+  },
+  "questions": {
+   "bucket": {
+    "en": "How far will the car go?",
+    "ja": "くるまは どれくらい すすむ？"
+   },
+   "metres": {
+    "en": "How many metres?",
+    "ja": "なん m？"
+   }
+  },
+  "choices": {
+   "bucket": {
+    "under-2": {
+     "en": "Under 2 m",
+     "ja": "2 m みまん"
+    },
+    "2-5": {
+     "en": "2 to 5 m",
+     "ja": "2〜5 m"
+    },
+    "over-5": {
+     "en": "Over 5 m",
+     "ja": "5 m いじょう"
+    }
+   },
+   "farther": {
+    "farther": {
+     "en": "Farther",
+     "ja": "とおく"
+    },
+    "shorter": {
+     "en": "Shorter",
+     "ja": "みじかく"
+    },
+    "same": {
+     "en": "Same",
+     "ja": "おなじ"
+    }
+   }
+  },
+  "paramChoices": {
+   "mass": {
+    "light": {
+     "en": "Light car",
+     "ja": "かるい くるま"
+    },
+    "heavy": {
+     "en": "Heavy car",
+     "ja": "おもい くるま"
+    }
+   }
+  }
+ }
+}

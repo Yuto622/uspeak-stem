@@ -1,0 +1,325 @@
+{
+ "id": "earth.river",
+ "region": "earth",
+ "station": "stream-table",
+ "title": {
+  "en": "The Stream Table",
+  "ja": "ながれの テーブル"
+ },
+ "sim": "river",
+ "grade": "小5",
+ "unit": "流れる水のはたらきと土地の変化",
+ "intro": {
+  "en": "Run water down a tray of sand with a bend in it. Steeper or more water: faster. The outside of the bend is cut away, the inside piles up.",
+  "ja": "すなの トレーに まがった みちを つけて みずを ながそう。きゅうだったり みずが おおいと はやい。カーブの そとがわは けずれ、うちがわに つもる。"
+ },
+ "params": {
+  "slope": {
+   "min": 1,
+   "max": 6,
+   "step": 1,
+   "unit": "°",
+   "en": "Slope",
+   "ja": "かたむき"
+  },
+  "flow": {
+   "choices": [
+    "low",
+    "medium",
+    "high"
+   ],
+   "en": "Water",
+   "ja": "みずの りょう"
+  }
+ },
+ "levels": {
+  "explore": {
+   "ages": "4-7",
+   "fixed": {
+    "flow": "medium"
+   },
+   "predict": {
+    "kind": "choice",
+    "field": "erodes",
+    "choices": [
+     "outer",
+     "inner"
+    ]
+   },
+   "measure": [
+    "erodes",
+    "speed"
+   ]
+  },
+  "investigate": {
+   "ages": "8-11",
+   "predict": {
+    "kind": "number",
+    "field": "speed",
+    "unit": "m/s",
+    "tolerance": 0.1
+   },
+   "measure": [
+    "speed",
+    "carries"
+   ],
+   "record": [
+    "slope",
+    "speed"
+   ]
+  },
+  "engineer": {
+   "ages": "12-15",
+   "predict": {
+    "kind": "choice",
+    "field": "carries",
+    "choices": [
+     "mud",
+     "sand",
+     "gravel"
+    ]
+   },
+   "measure": [
+    "speed",
+    "carries",
+    "flood"
+   ],
+   "record": [
+    "slope",
+    "speed"
+   ],
+   "challenge": {
+    "en": "Set the stream so it carries sand but not gravel.",
+    "ja": "すなは はこぶけど れきは はこばない ながれに しよう。"
+   }
+  }
+ },
+ "explain": {
+  "en": "What does flowing water do to the land?",
+  "ja": "ながれる みずは とちを どうする？",
+  "aims": [
+   {
+    "id": "three",
+    "en": "Water erodes, carries and deposits",
+    "ja": "けずる・はこぶ・つもらせる",
+    "keys": [
+     [
+      "erode",
+      "erodes",
+      "erosion",
+      "cut",
+      "cuts",
+      "wear",
+      "wears"
+     ],
+     [
+      "carry",
+      "carries",
+      "transport",
+      "move",
+      "moves"
+     ],
+     [
+      "deposit",
+      "deposits",
+      "pile",
+      "piles",
+      "drop",
+      "drops",
+      "settle",
+      "settles"
+     ]
+    ]
+   },
+   {
+    "id": "fast",
+    "en": "Faster water does more: steep slopes and floods",
+    "ja": "はやい みずほど はたらきが 大きい。きゅうな さか、こうずい",
+    "keys": [
+     [
+      "fast",
+      "faster",
+      "steep",
+      "steeper",
+      "flood",
+      "floods",
+      "more water",
+      "heavy rain"
+     ],
+     [
+      "more",
+      "bigger",
+      "stronger",
+      "cut",
+      "carries",
+      "gravel"
+     ]
+    ]
+   },
+   {
+    "id": "bend",
+    "en": "The outer bank is cut, the inner bank builds up",
+    "ja": "そとがわは けずれ、うちがわは つもる",
+    "keys": [
+     [
+      "outside",
+      "outer",
+      "inside",
+      "inner",
+      "bend",
+      "curve",
+      "bank"
+     ],
+     [
+      "cut",
+      "erode",
+      "erodes",
+      "pile",
+      "piles",
+      "build",
+      "builds",
+      "deposit"
+     ]
+    ]
+   }
+  ]
+ },
+ "classPlot": {
+  "x": "slope",
+  "y": "speed",
+  "xLabel": {
+   "en": "Slope (°)",
+   "ja": "かたむき（°）"
+  },
+  "yLabel": {
+   "en": "Water speed (m/s)",
+   "ja": "みずの はやさ（m/s）"
+  }
+ },
+ "real": {
+  "en": "After rain, find where a stream has cut a bank and where it has left a sandbar.",
+  "ja": "あめの あと、ながれが きしを けずった ところと、すなが つもった ところを さがそう。",
+  "kit": [
+   "a stream",
+   "your eyes"
+  ]
+ },
+ "standards": {
+  "jp": [
+   "小5 流れる水の働きと土地の変化"
+  ],
+  "ngss": [
+   "4-ESS2-1"
+  ],
+  "cambridge": [
+   "Science enquiry"
+  ],
+  "pisa": [
+   "explain",
+   "interpret"
+  ]
+ },
+ "powers": {
+  "predict": 1,
+  "measure": 1,
+  "data": 1,
+  "explain": 1,
+  "build": 1
+ },
+ "ui": {
+  "labels": {
+   "erodes": {
+    "en": "The bend's… bank is cut",
+    "ja": "けずれる きし"
+   },
+   "speed": {
+    "en": "Water speed (m/s)",
+    "ja": "みずの はやさ（m/s）"
+   },
+   "carries": {
+    "en": "Biggest grain carried",
+    "ja": "はこべる いちばん 大きい つぶ"
+   },
+   "flood": {
+    "en": "Flood?",
+    "ja": "こうずい？"
+   },
+   "deposits": {
+    "en": "Builds up on the",
+    "ja": "つもる きし"
+   }
+  },
+  "questions": {
+   "erodes": {
+    "en": "Which bank of the bend will be cut away?",
+    "ja": "カーブの どっちの きしが けずれる？"
+   },
+   "speed": {
+    "en": "How fast will the water flow (m/s)?",
+    "ja": "みずは なん m/s？"
+   },
+   "carries": {
+    "en": "What is the biggest thing the water will carry?",
+    "ja": "みずが はこべる いちばん 大きい ものは？"
+   }
+  },
+  "choices": {
+   "erodes": {
+    "outer": {
+     "en": "The outer bank",
+     "ja": "そとがわ"
+    },
+    "inner": {
+     "en": "The inner bank",
+     "ja": "うちがわ"
+    }
+   },
+   "deposits": {
+    "inner": {
+     "en": "Inner bank",
+     "ja": "うちがわ"
+    }
+   },
+   "carries": {
+    "mud": {
+     "en": "Only mud",
+     "ja": "どろだけ"
+    },
+    "sand": {
+     "en": "Sand",
+     "ja": "すな"
+    },
+    "gravel": {
+     "en": "Gravel",
+     "ja": "れき"
+    }
+   },
+   "flood": {
+    "yes": {
+     "en": "Yes",
+     "ja": "はい"
+    },
+    "no": {
+     "en": "No",
+     "ja": "いいえ"
+    }
+   }
+  },
+  "paramChoices": {
+   "flow": {
+    "low": {
+     "en": "A trickle",
+     "ja": "すこし"
+    },
+    "medium": {
+     "en": "Normal",
+     "ja": "ふつう"
+    },
+    "high": {
+     "en": "A flood",
+     "ja": "たくさん"
+    }
+   }
+  }
+ }
+}

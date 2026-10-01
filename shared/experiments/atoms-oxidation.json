@@ -1,0 +1,284 @@
+{
+ "id": "atoms.oxidation",
+ "region": "atoms",
+ "station": "copper-kiln",
+ "title": {
+  "en": "The Copper Kiln",
+  "ja": "どうの かま"
+ },
+ "sim": "oxidation",
+ "grade": "中2",
+ "unit": "化学変化と質量（定比例の法則）",
+ "intro": {
+  "en": "Heat copper powder until it stops gaining mass. The oxygen that joined it always comes in the same proportion: 4 g of copper takes 1 g of oxygen; 3 g of magnesium takes 2 g.",
+  "ja": "どうの こなを かねつして、おもさが ふえなくなるまで。むすびつく さんそは いつも おなじ わりあい。どう 4 g に さんそ 1 g、マグネシウム 3 g に さんそ 2 g。"
+ },
+ "params": {
+  "metal": {
+   "choices": [
+    "copper",
+    "magnesium"
+   ],
+   "en": "Metal",
+   "ja": "きんぞく"
+  },
+  "grams": {
+   "min": 0.5,
+   "max": 4,
+   "step": 0.5,
+   "unit": "g",
+   "en": "Metal to heat",
+   "ja": "かねつする きんぞく"
+  }
+ },
+ "levels": {
+  "explore": {
+   "ages": "4-7",
+   "fixed": {
+    "grams": 2
+   },
+   "predict": {
+    "kind": "choice",
+    "field": "color",
+    "choices": [
+     "black",
+     "white"
+    ]
+   },
+   "measure": [
+    "oxide",
+    "color"
+   ]
+  },
+  "investigate": {
+   "ages": "8-11",
+   "predict": {
+    "kind": "number",
+    "field": "oxide",
+    "unit": "g",
+    "tolerance": 0.05
+   },
+   "measure": [
+    "oxide",
+    "oxygen"
+   ],
+   "record": [
+    "grams",
+    "oxygen"
+   ]
+  },
+  "engineer": {
+   "ages": "12-15",
+   "predict": {
+    "kind": "number",
+    "field": "oxygen",
+    "unit": "g",
+    "tolerance": 0.05
+   },
+   "measure": [
+    "oxide",
+    "oxygen",
+    "ratio"
+   ],
+   "record": [
+    "grams",
+    "oxide"
+   ],
+   "challenge": {
+    "en": "Predict the oxygen for 3.2 g of copper before heating.",
+    "ja": "どう 3.2 g が とる さんそを かねつする まえに いおう。"
+   }
+  }
+ },
+ "explain": {
+  "en": "Why does the metal get heavier, and why always by the same proportion?",
+  "ja": "どうして きんぞくは おもくなる？ どうして いつも おなじ わりあい？",
+  "aims": [
+   {
+    "id": "oxygen",
+    "en": "Oxygen from the air joins the metal",
+    "ja": "くうきの さんそが むすびつく",
+    "keys": [
+     [
+      "oxygen",
+      "air"
+     ],
+     [
+      "join",
+      "joins",
+      "joined",
+      "combine",
+      "combines",
+      "stick",
+      "sticks",
+      "bond",
+      "bonds",
+      "react",
+      "reacts"
+     ]
+    ]
+   },
+   {
+    "id": "ratio",
+    "en": "The mass ratio is always the same",
+    "ja": "しつりょうの ひは いつも おなじ",
+    "keys": [
+     [
+      "ratio",
+      "proportion",
+      "4:1",
+      "3:2",
+      "four to one",
+      "three to two"
+     ],
+     [
+      "same",
+      "always",
+      "constant",
+      "fixed"
+     ]
+    ]
+   },
+   {
+    "id": "double",
+    "en": "Twice the metal takes twice the oxygen",
+    "ja": "きんぞくが 2ばいなら さんそも 2ばい",
+    "keys": [
+     [
+      "twice",
+      "double",
+      "two times",
+      "2x",
+      "more metal"
+     ],
+     [
+      "twice",
+      "double",
+      "more oxygen",
+      "proportional",
+      "straight line"
+     ]
+    ]
+   }
+  ]
+ },
+ "classPlot": {
+  "x": "grams",
+  "y": "oxygen",
+  "xLabel": {
+   "en": "Metal (g)",
+   "ja": "きんぞく（g）"
+  },
+  "yLabel": {
+   "en": "Oxygen joined (g)",
+   "ja": "むすびついた さんそ（g）"
+  }
+ },
+ "real": {
+  "en": "Leave a shiny copper coin and a dull one side by side: the dull one has already met oxygen.",
+  "ja": "ぴかぴかの どうかと くすんだ どうかを ならべよう。くすんだ ほうは もう さんそと あっている。",
+  "kit": [
+   "two copper coins"
+  ]
+ },
+ "standards": {
+  "jp": [
+   "中2 化学変化と物質の質量（定比例）"
+  ],
+  "ngss": [
+   "MS-PS1-5"
+  ],
+  "cambridge": [
+   "Science enquiry"
+  ],
+  "pisa": [
+   "explain",
+   "interpret"
+  ]
+ },
+ "powers": {
+  "predict": 1,
+  "measure": 1,
+  "data": 1,
+  "explain": 1,
+  "build": 1
+ },
+ "ui": {
+  "labels": {
+   "oxide": {
+    "en": "Oxide made (g)",
+    "ja": "できた さんかぶつ（g）"
+   },
+   "oxygen": {
+    "en": "Oxygen joined (g)",
+    "ja": "むすびついた さんそ（g）"
+   },
+   "ratio": {
+    "en": "Metal : oxygen",
+    "ja": "きんぞく：さんそ"
+   },
+   "color": {
+    "en": "Colour after heating",
+    "ja": "かねつ あとの いろ"
+   },
+   "heavier": {
+    "en": "Mass",
+    "ja": "しつりょうは"
+   }
+  },
+  "questions": {
+   "color": {
+    "en": "What colour will the powder be after heating?",
+    "ja": "かねつ あと、こなは なにいろ？"
+   },
+   "oxide": {
+    "en": "How many grams of oxide will there be?",
+    "ja": "さんかぶつは なん g できる？"
+   },
+   "oxygen": {
+    "en": "How many grams of oxygen will join?",
+    "ja": "さんそは なん g むすびつく？"
+   }
+  },
+  "choices": {
+   "color": {
+    "black": {
+     "en": "Black",
+     "ja": "くろ"
+    },
+    "white": {
+     "en": "White",
+     "ja": "しろ"
+    }
+   },
+   "ratio": {
+    "4:1": {
+     "en": "4 : 1",
+     "ja": "4：1"
+    },
+    "3:2": {
+     "en": "3 : 2",
+     "ja": "3：2"
+    }
+   },
+   "heavier": {
+    "heavier": {
+     "en": "Heavier",
+     "ja": "おもくなる"
+    }
+   }
+  },
+  "paramChoices": {
+   "metal": {
+    "copper": {
+     "en": "Copper",
+     "ja": "どう"
+    },
+    "magnesium": {
+     "en": "Magnesium",
+     "ja": "マグネシウム"
+    }
+   }
+  }
+ }
+}

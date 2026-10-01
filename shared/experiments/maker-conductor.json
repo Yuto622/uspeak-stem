@@ -1,0 +1,311 @@
+{
+ "id": "maker.conductor",
+ "region": "maker",
+ "station": "tester-bench",
+ "title": {
+  "en": "The Tester Bench",
+  "ja": "でんきの テスター"
+ },
+ "sim": "conductor",
+ "grade": "小3",
+ "unit": "電気の通り道",
+ "intro": {
+  "en": "Put a thing in the gap of the circuit. If the bulb lights, electricity went through it. Metals do; paper, wood and plastic do not.",
+  "ja": "かいろの すきまに ものを はさもう。でんきゅうが つけば でんきが とおった。きんぞくは とおす。かみ・き・プラスチックは とおさない。"
+ },
+ "params": {
+  "item": {
+   "choices": [
+    "clip",
+    "coin",
+    "wire",
+    "foil",
+    "pencil",
+    "paper",
+    "wood",
+    "plastic",
+    "glass",
+    "eraser"
+   ],
+   "en": "Thing in the gap",
+   "ja": "すきまに はさむ もの"
+  }
+ },
+ "levels": {
+  "explore": {
+   "ages": "4-7",
+   "predict": {
+    "kind": "choice",
+    "field": "lights",
+    "choices": [
+     "yes",
+     "no"
+    ]
+   },
+   "measure": [
+    "lights",
+    "kind"
+   ]
+  },
+  "investigate": {
+   "ages": "8-11",
+   "predict": {
+    "kind": "choice",
+    "field": "kind",
+    "choices": [
+     "metal",
+     "not-metal"
+    ]
+   },
+   "measure": [
+    "lights",
+    "kind"
+   ]
+  },
+  "engineer": {
+   "ages": "12-15",
+   "predict": {
+    "kind": "choice",
+    "field": "conducts",
+    "choices": [
+     "yes",
+     "no"
+    ]
+   },
+   "measure": [
+    "lights",
+    "conducts",
+    "kind"
+   ],
+   "challenge": {
+    "en": "Sort all ten things into two boxes without lighting the bulb first.",
+    "ja": "でんきゅうを つける まえに 10こを 2つに わけよう。"
+   }
+  }
+ },
+ "explain": {
+  "en": "What lets electricity through?",
+  "ja": "でんきを とおすのは なに？",
+  "aims": [
+   {
+    "id": "metal",
+    "en": "Metals let electricity through",
+    "ja": "きんぞくは でんきを とおす",
+    "keys": [
+     [
+      "metal",
+      "metals",
+      "iron",
+      "copper",
+      "aluminium",
+      "aluminum",
+      "steel"
+     ],
+     [
+      "through",
+      "conduct",
+      "conducts",
+      "conductor",
+      "pass",
+      "passes",
+      "lights",
+      "light",
+      "flow",
+      "flows"
+     ]
+    ]
+   },
+   {
+    "id": "not",
+    "en": "Paper, wood, plastic and glass do not",
+    "ja": "かみ・き・プラスチック・ガラスは とおさない",
+    "keys": [
+     [
+      "paper",
+      "wood",
+      "plastic",
+      "glass",
+      "rubber",
+      "eraser"
+     ],
+     [
+      "not",
+      "don't",
+      "do not",
+      "doesn't",
+      "does not",
+      "no",
+      "block",
+      "blocks",
+      "insulator"
+     ]
+    ]
+   },
+   {
+    "id": "loop",
+    "en": "The circuit must be a closed loop",
+    "ja": "かいろは わに なっていないと いけない",
+    "keys": [
+     [
+      "loop",
+      "circle",
+      "circuit",
+      "closed",
+      "complete",
+      "connected",
+      "gap"
+     ]
+    ]
+   }
+  ]
+ },
+ "classPlot": {
+  "x": "conductivity",
+  "y": "conductivity",
+  "xLabel": {
+   "en": "Conducts (1) or not (0)",
+   "ja": "とおす（1）・とおさない（0）"
+  },
+  "yLabel": {
+   "en": "Conducts (1) or not (0)",
+   "ja": "とおす（1）・とおさない（0）"
+  }
+ },
+ "real": {
+  "en": "A battery, a bulb and two wires: test spoons, coins, erasers and pencil lead.",
+  "ja": "でんち・でんきゅう・どうせん 2本で、スプーン・こうか・けしゴム・えんぴつの しんを しらべよう。",
+  "kit": [
+   "a battery",
+   "a bulb",
+   "two wires"
+  ]
+ },
+ "standards": {
+  "jp": [
+   "小3 電気の通り道"
+  ],
+  "ngss": [
+   "4-PS3-2"
+  ],
+  "cambridge": [
+   "Science enquiry"
+  ],
+  "pisa": [
+   "explain",
+   "interpret"
+  ]
+ },
+ "powers": {
+  "predict": 1,
+  "measure": 1,
+  "data": 1,
+  "explain": 1,
+  "build": 1
+ },
+ "ui": {
+  "labels": {
+   "lights": {
+    "en": "Bulb lights?",
+    "ja": "でんきゅうは つく？"
+   },
+   "kind": {
+    "en": "The thing is",
+    "ja": "その ものは"
+   },
+   "conducts": {
+    "en": "Conducts?",
+    "ja": "でんきを とおす？"
+   }
+  },
+  "questions": {
+   "lights": {
+    "en": "Will the bulb light?",
+    "ja": "でんきゅうは つく？"
+   },
+   "kind": {
+    "en": "Is it a metal?",
+    "ja": "きんぞく？"
+   },
+   "conducts": {
+    "en": "Does electricity go through it?",
+    "ja": "でんきは とおる？"
+   }
+  },
+  "choices": {
+   "lights": {
+    "yes": {
+     "en": "Yes",
+     "ja": "はい"
+    },
+    "no": {
+     "en": "No",
+     "ja": "いいえ"
+    }
+   },
+   "conducts": {
+    "yes": {
+     "en": "Yes",
+     "ja": "はい"
+    },
+    "no": {
+     "en": "No",
+     "ja": "いいえ"
+    }
+   },
+   "kind": {
+    "metal": {
+     "en": "A metal",
+     "ja": "きんぞく"
+    },
+    "not-metal": {
+     "en": "Not a metal",
+     "ja": "きんぞく じゃない"
+    }
+   }
+  },
+  "paramChoices": {
+   "item": {
+    "clip": {
+     "en": "Steel clip",
+     "ja": "てつの クリップ"
+    },
+    "coin": {
+     "en": "Aluminium coin",
+     "ja": "アルミの こうか"
+    },
+    "wire": {
+     "en": "Copper wire",
+     "ja": "どうの はりがね"
+    },
+    "foil": {
+     "en": "Aluminium foil",
+     "ja": "アルミはく"
+    },
+    "pencil": {
+     "en": "Pencil lead",
+     "ja": "えんぴつの しん"
+    },
+    "paper": {
+     "en": "Paper",
+     "ja": "かみ"
+    },
+    "wood": {
+     "en": "Wooden stick",
+     "ja": "きの ぼう"
+    },
+    "plastic": {
+     "en": "Plastic ruler",
+     "ja": "プラスチックの じょうぎ"
+    },
+    "glass": {
+     "en": "Glass",
+     "ja": "ガラス"
+    },
+    "eraser": {
+     "en": "Eraser",
+     "ja": "けしゴム"
+    }
+   }
+  }
+ }
+}

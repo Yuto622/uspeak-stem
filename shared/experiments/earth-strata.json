@@ -1,0 +1,363 @@
+{
+ "id": "earth.strata",
+ "region": "earth",
+ "station": "strata-cliff",
+ "title": {
+  "en": "The Strata Cliff",
+  "ja": "ちそうの がけ"
+ },
+ "sim": "strata",
+ "grade": "小6",
+ "unit": "土地のつくりと変化",
+ "intro": {
+  "en": "Tip a mix of gravel, sand and mud into a tall jar of water and wait. Big heavy grains settle first; mud last, on top. Pour again and you have layers, like a cliff.",
+  "ja": "れき・すな・どろを まぜて、みずの 入った たかい びんに。おもい 大きい つぶが さきに しずみ、どろは さいご、いちばん 上。もう1かい そそぐと、がけのような ちそう。"
+ },
+ "params": {
+  "pours": {
+   "min": 1,
+   "max": 3,
+   "step": 1,
+   "unit": "",
+   "en": "Pours",
+   "ja": "そそぐ かいすう"
+  },
+  "mix": {
+   "choices": [
+    "all",
+    "sand-mud",
+    "gravel-sand"
+   ],
+   "en": "What is in the mix",
+   "ja": "まぜる もの"
+  }
+ },
+ "levels": {
+  "explore": {
+   "ages": "4-7",
+   "fixed": {
+    "pours": 1,
+    "mix": "all"
+   },
+   "predict": {
+    "kind": "choice",
+    "field": "bottom",
+    "choices": [
+     "gravel",
+     "sand",
+     "mud"
+    ]
+   },
+   "measure": [
+    "bottom",
+    "top"
+   ]
+  },
+  "investigate": {
+   "ages": "8-11",
+   "predict": {
+    "kind": "number",
+    "field": "layers",
+    "unit": "",
+    "tolerance": 0.1
+   },
+   "measure": [
+    "layers",
+    "bottom"
+   ],
+   "record": [
+    "pours",
+    "layers"
+   ]
+  },
+  "engineer": {
+   "ages": "12-15",
+   "predict": {
+    "kind": "choice",
+    "field": "top",
+    "choices": [
+     "gravel",
+     "sand",
+     "mud"
+    ]
+   },
+   "measure": [
+    "bottom",
+    "top",
+    "layers",
+    "order"
+   ],
+   "record": [
+    "pours",
+    "layers"
+   ],
+   "challenge": {
+    "en": "Make a jar with six layers.",
+    "ja": "6つの そうが ある びんを つくろう。"
+   }
+  }
+ },
+ "explain": {
+  "en": "How do layers of rock form?",
+  "ja": "ちそうは どうやって できる？",
+  "aims": [
+   {
+    "id": "settle",
+    "en": "Grains settle in water, big ones first",
+    "ja": "つぶは みずの なかで しずむ。大きいのが さき",
+    "keys": [
+     [
+      "settle",
+      "settles",
+      "sink",
+      "sinks",
+      "fall",
+      "falls",
+      "drop",
+      "drops"
+     ],
+     [
+      "big",
+      "bigger",
+      "heavy",
+      "heavier",
+      "gravel",
+      "first",
+      "fast",
+      "faster"
+     ]
+    ]
+   },
+   {
+    "id": "mud-top",
+    "en": "Mud is last, on top",
+    "ja": "どろは さいごで いちばん 上",
+    "keys": [
+     [
+      "mud",
+      "clay",
+      "fine",
+      "small",
+      "tiny"
+     ],
+     [
+      "top",
+      "last",
+      "slow",
+      "slowly",
+      "above"
+     ]
+    ]
+   },
+   {
+    "id": "repeat",
+    "en": "Each flood adds a layer, so old layers are below",
+    "ja": "こうずいの たびに そうが ふえ、ふるい そうが した",
+    "keys": [
+     [
+      "again",
+      "repeat",
+      "another",
+      "each",
+      "every",
+      "flood",
+      "time",
+      "years"
+     ],
+     [
+      "layer",
+      "layers",
+      "below",
+      "under",
+      "older",
+      "old",
+      "bottom"
+     ]
+    ]
+   }
+  ]
+ },
+ "classPlot": {
+  "x": "pours",
+  "y": "layers",
+  "xLabel": {
+   "en": "Pours",
+   "ja": "そそいだ かいすう"
+  },
+  "yLabel": {
+   "en": "Layers",
+   "ja": "そうの かず"
+  }
+ },
+ "real": {
+  "en": "A jar, a handful of garden soil with grit, water: shake and leave it overnight.",
+  "ja": "びんに はたけの つちと みず。ふって、ひとばん おこう。",
+  "kit": [
+   "a jar",
+   "soil",
+   "water"
+  ]
+ },
+ "standards": {
+  "jp": [
+   "小6 土地のつくりと変化"
+  ],
+  "ngss": [
+   "4-ESS1-1"
+  ],
+  "cambridge": [
+   "Science enquiry"
+  ],
+  "pisa": [
+   "explain",
+   "interpret"
+  ]
+ },
+ "powers": {
+  "predict": 1,
+  "measure": 1,
+  "data": 1,
+  "explain": 1,
+  "build": 1
+ },
+ "ui": {
+  "labels": {
+   "bottom": {
+    "en": "Bottom layer",
+    "ja": "いちばん した"
+   },
+   "top": {
+    "en": "Top layer",
+    "ja": "いちばん 上"
+   },
+   "layers": {
+    "en": "Number of layers",
+    "ja": "そうの かず"
+   },
+   "order": {
+    "en": "Order, bottom to top",
+    "ja": "じゅんばん（した → 上）"
+   },
+   "middle": {
+    "en": "Middle",
+    "ja": "まんなか"
+   }
+  },
+  "questions": {
+   "bottom": {
+    "en": "What will be on the bottom?",
+    "ja": "いちばん したは なに？"
+   },
+   "layers": {
+    "en": "How many layers will there be?",
+    "ja": "そうは いくつ できる？"
+   },
+   "top": {
+    "en": "What will be on top?",
+    "ja": "いちばん 上は なに？"
+   }
+  },
+  "choices": {
+   "bottom": {
+    "gravel": {
+     "en": "Gravel",
+     "ja": "れき（こいし）"
+    },
+    "sand": {
+     "en": "Sand",
+     "ja": "すな"
+    },
+    "soil": {
+     "en": "Garden soil",
+     "ja": "はたけの つち"
+    },
+    "clay": {
+     "en": "Clay",
+     "ja": "ねんど"
+    },
+    "mud": {
+     "en": "Mud",
+     "ja": "どろ"
+    }
+   },
+   "top": {
+    "gravel": {
+     "en": "Gravel",
+     "ja": "れき（こいし）"
+    },
+    "sand": {
+     "en": "Sand",
+     "ja": "すな"
+    },
+    "soil": {
+     "en": "Garden soil",
+     "ja": "はたけの つち"
+    },
+    "clay": {
+     "en": "Clay",
+     "ja": "ねんど"
+    },
+    "mud": {
+     "en": "Mud",
+     "ja": "どろ"
+    }
+   },
+   "middle": {
+    "gravel": {
+     "en": "Gravel",
+     "ja": "れき（こいし）"
+    },
+    "sand": {
+     "en": "Sand",
+     "ja": "すな"
+    },
+    "soil": {
+     "en": "Garden soil",
+     "ja": "はたけの つち"
+    },
+    "clay": {
+     "en": "Clay",
+     "ja": "ねんど"
+    },
+    "none": {
+     "en": "None",
+     "ja": "なし"
+    },
+    "mud": {
+     "en": "Mud",
+     "ja": "どろ"
+    }
+   },
+   "order": {
+    "gravel-sand-mud": {
+     "en": "gravel, sand, mud",
+     "ja": "れき・すな・どろ"
+    },
+    "sand-mud": {
+     "en": "sand, mud",
+     "ja": "すな・どろ"
+    },
+    "gravel-sand": {
+     "en": "gravel, sand",
+     "ja": "れき・すな"
+    }
+   }
+  },
+  "paramChoices": {
+   "mix": {
+    "all": {
+     "en": "Gravel, sand and mud",
+     "ja": "れき・すな・どろ"
+    },
+    "sand-mud": {
+     "en": "Sand and mud",
+     "ja": "すなと どろ"
+    },
+    "gravel-sand": {
+     "en": "Gravel and sand",
+     "ja": "れきと すな"
+    }
+   }
+  }
+ }
+}

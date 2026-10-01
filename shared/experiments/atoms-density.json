@@ -1,0 +1,307 @@
+{
+ "id": "atoms.density",
+ "region": "atoms",
+ "station": "density-dock",
+ "title": {
+  "en": "The Density Dock",
+  "ja": "みつどの ふとう"
+ },
+ "sim": "density",
+ "grade": "中1",
+ "unit": "身のまわりの物質・密度",
+ "intro": {
+  "en": "Weigh a block, measure its volume, divide. The number tells you what it is made of, and whether it will float.",
+  "ja": "かたまりを はかって、たいせきを はかって、わり算。その数が なにで できているかを おしえてくれる。うくかも わかる。"
+ },
+ "params": {
+  "material": {
+   "choices": [
+    "foam",
+    "wood",
+    "ice",
+    "plastic",
+    "rubber",
+    "glass",
+    "aluminium",
+    "iron",
+    "copper"
+   ],
+   "en": "Material",
+   "ja": "ざいりょう"
+  },
+  "volume": {
+   "min": 10,
+   "max": 100,
+   "step": 10,
+   "unit": "cm³",
+   "en": "Volume",
+   "ja": "たいせき"
+  }
+ },
+ "levels": {
+  "explore": {
+   "ages": "4-7",
+   "fixed": {
+    "volume": 20
+   },
+   "predict": {
+    "kind": "choice",
+    "field": "floats",
+    "choices": [
+     "floats",
+     "sinks"
+    ]
+   },
+   "measure": [
+    "floats",
+    "grams"
+   ]
+  },
+  "investigate": {
+   "ages": "8-11",
+   "predict": {
+    "kind": "number",
+    "field": "grams",
+    "unit": "g",
+    "tolerance": 0.05
+   },
+   "measure": [
+    "grams",
+    "density"
+   ],
+   "record": [
+    "volume",
+    "grams"
+   ]
+  },
+  "engineer": {
+   "ages": "12-15",
+   "predict": {
+    "kind": "number",
+    "field": "density",
+    "unit": "g/cm³",
+    "tolerance": 0.05
+   },
+   "measure": [
+    "grams",
+    "density",
+    "floats"
+   ],
+   "record": [
+    "volume",
+    "grams"
+   ],
+   "challenge": {
+    "en": "A mystery block weighs 54 g and is 20 cm³. Name it.",
+    "ja": "54 g で 20 cm³ の かたまりは なに？"
+   }
+  }
+ },
+ "explain": {
+  "en": "Why do some things float?",
+  "ja": "どうして うく ものが あるの？",
+  "aims": [
+   {
+    "id": "density",
+    "en": "Density is mass divided by volume",
+    "ja": "みつどは しつりょう ÷ たいせき",
+    "keys": [
+     [
+      "density"
+     ],
+     [
+      "mass",
+      "weight",
+      "divided",
+      "divide",
+      "per",
+      "volume",
+      "grams"
+     ]
+    ]
+   },
+   {
+    "id": "float",
+    "en": "Less dense than water floats; denser sinks",
+    "ja": "みずより 小さい みつどは うく、大きいと しずむ",
+    "keys": [
+     [
+      "float",
+      "floats",
+      "sink",
+      "sinks"
+     ],
+     [
+      "less",
+      "lower",
+      "smaller",
+      "more",
+      "greater",
+      "higher",
+      "denser",
+      "than water",
+      "water"
+     ]
+    ]
+   },
+   {
+    "id": "same",
+    "en": "The same material has the same density whatever the size",
+    "ja": "おなじ ざいりょうなら 大きさが ちがっても みつどは おなじ",
+    "keys": [
+     [
+      "same"
+     ],
+     [
+      "size",
+      "big",
+      "small",
+      "piece",
+      "any",
+      "whatever",
+      "always"
+     ]
+    ]
+   }
+  ]
+ },
+ "classPlot": {
+  "x": "volume",
+  "y": "grams",
+  "xLabel": {
+   "en": "Volume (cm³)",
+   "ja": "たいせき（cm³）"
+  },
+  "yLabel": {
+   "en": "Mass (g)",
+   "ja": "しつりょう（g）"
+  }
+ },
+ "real": {
+  "en": "Weigh a potato, drop it in a measuring jug of water, and read the rise.",
+  "ja": "じゃがいもを はかり、めもりつきの みずに 入れて、ふえた ぶんを よもう。",
+  "kit": [
+   "a potato",
+   "a measuring jug",
+   "a scale"
+  ]
+ },
+ "standards": {
+  "jp": [
+   "中1 身のまわりの物質（密度）"
+  ],
+  "ngss": [
+   "MS-PS1-2"
+  ],
+  "cambridge": [
+   "Science enquiry"
+  ],
+  "pisa": [
+   "explain",
+   "interpret"
+  ]
+ },
+ "powers": {
+  "predict": 1,
+  "measure": 1,
+  "data": 1,
+  "explain": 1,
+  "build": 1
+ },
+ "ui": {
+  "labels": {
+   "floats": {
+    "en": "Floats or sinks?",
+    "ja": "うく？ しずむ？"
+   },
+   "grams": {
+    "en": "Mass (g)",
+    "ja": "しつりょう（g）"
+   },
+   "density": {
+    "en": "Density (g/cm³)",
+    "ja": "みつど（g/cm³）"
+   },
+   "denserThanWater": {
+    "en": "Denser than water?",
+    "ja": "みずより みつどが 大きい？"
+   }
+  },
+  "questions": {
+   "floats": {
+    "en": "Will it float in water?",
+    "ja": "みずに うく？"
+   },
+   "grams": {
+    "en": "How many grams?",
+    "ja": "なん g？"
+   },
+   "density": {
+    "en": "What is its density (g/cm³)?",
+    "ja": "みつどは いくつ？（g/cm³）"
+   }
+  },
+  "choices": {
+   "floats": {
+    "floats": {
+     "en": "Floats",
+     "ja": "うく"
+    },
+    "sinks": {
+     "en": "Sinks",
+     "ja": "しずむ"
+    }
+   },
+   "denserThanWater": {
+    "yes": {
+     "en": "Yes",
+     "ja": "はい"
+    },
+    "no": {
+     "en": "No",
+     "ja": "いいえ"
+    }
+   }
+  },
+  "paramChoices": {
+   "material": {
+    "foam": {
+     "en": "Foam",
+     "ja": "はっぽうスチロール"
+    },
+    "wood": {
+     "en": "Wood",
+     "ja": "き"
+    },
+    "ice": {
+     "en": "Ice",
+     "ja": "こおり"
+    },
+    "plastic": {
+     "en": "Plastic",
+     "ja": "プラスチック"
+    },
+    "rubber": {
+     "en": "Rubber",
+     "ja": "ゴム"
+    },
+    "glass": {
+     "en": "Glass",
+     "ja": "ガラス"
+    },
+    "aluminium": {
+     "en": "Aluminium",
+     "ja": "アルミニウム"
+    },
+    "iron": {
+     "en": "Iron",
+     "ja": "てつ"
+    },
+    "copper": {
+     "en": "Copper",
+     "ja": "どう"
+    }
+   }
+  }
+ }
+}

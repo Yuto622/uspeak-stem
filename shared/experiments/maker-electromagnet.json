@@ -1,0 +1,255 @@
+{
+ "id": "maker.electromagnet",
+ "region": "maker",
+ "station": "coil-crane",
+ "title": {
+  "en": "The Coil Crane",
+  "ja": "コイルの クレーン"
+ },
+ "sim": "electromagnet",
+ "grade": "小5",
+ "unit": "電磁石の性質",
+ "intro": {
+  "en": "Wind wire around an iron nail and connect a cell: a magnet you can switch off. More turns, more cells, more clips.",
+  "ja": "てつの くぎに どうせんを まいて でんちに つなぐと、スイッチで きれる じしゃく。まきすうを ふやす、でんちを ふやす、クリップが ふえる。"
+ },
+ "params": {
+  "turns": {
+   "min": 50,
+   "max": 300,
+   "step": 50,
+   "unit": "",
+   "en": "Turns of wire",
+   "ja": "まきすう"
+  },
+  "cellsN": {
+   "min": 1,
+   "max": 2,
+   "step": 1,
+   "unit": "",
+   "en": "Cells",
+   "ja": "でんちの かず"
+  }
+ },
+ "levels": {
+  "explore": {
+   "ages": "4-7",
+   "fixed": {
+    "cellsN": 1
+   },
+   "predict": {
+    "kind": "choice",
+    "field": "stronger",
+    "choices": [
+     "stronger",
+     "same"
+    ]
+   },
+   "measure": [
+    "clips"
+   ]
+  },
+  "investigate": {
+   "ages": "8-11",
+   "predict": {
+    "kind": "number",
+    "field": "clips",
+    "unit": "",
+    "tolerance": 0.1
+   },
+   "measure": [
+    "clips"
+   ],
+   "record": [
+    "turns",
+    "clips"
+   ]
+  },
+  "engineer": {
+   "ages": "12-15",
+   "predict": {
+    "kind": "number",
+    "field": "clips",
+    "unit": "",
+    "tolerance": 0.05
+   },
+   "measure": [
+    "clips",
+    "pole"
+   ],
+   "record": [
+    "turns",
+    "clips"
+   ],
+   "challenge": {
+    "en": "Lift exactly 20 clips.",
+    "ja": "クリップを ちょうど 20こ もちあげよう。"
+   }
+  }
+ },
+ "explain": {
+  "en": "How can electricity make a magnet?",
+  "ja": "でんきで どうして じしゃくに なる？",
+  "aims": [
+   {
+    "id": "current-magnet",
+    "en": "A current in a coil makes a magnet",
+    "ja": "コイルに でんきが ながれると じしゃくに なる",
+    "keys": [
+     [
+      "current",
+      "electricity",
+      "coil",
+      "wire"
+     ],
+     [
+      "magnet",
+      "magnetic",
+      "pull",
+      "pulls",
+      "attract",
+      "attracts"
+     ]
+    ]
+   },
+   {
+    "id": "turns",
+    "en": "More turns or more current, stronger",
+    "ja": "まきすうや でんりゅうを ふやすと つよい",
+    "keys": [
+     [
+      "turns",
+      "winds",
+      "coils",
+      "loops",
+      "more",
+      "cells",
+      "current"
+     ],
+     [
+      "stronger",
+      "more",
+      "lift",
+      "lifts",
+      "clips"
+     ]
+    ]
+   },
+   {
+    "id": "switch",
+    "en": "Switch the current off and the magnet is gone",
+    "ja": "でんきを きると じしゃくも きえる",
+    "keys": [
+     [
+      "switch",
+      "off",
+      "stop",
+      "stops",
+      "cut",
+      "disconnect"
+     ],
+     [
+      "gone",
+      "stops",
+      "drops",
+      "falls",
+      "not",
+      "no longer"
+     ]
+    ]
+   }
+  ]
+ },
+ "classPlot": {
+  "x": "turns",
+  "y": "clips",
+  "xLabel": {
+   "en": "Turns",
+   "ja": "まきすう"
+  },
+  "yLabel": {
+   "en": "Clips lifted",
+   "ja": "もちあがった クリップ"
+  }
+ },
+ "real": {
+  "en": "Wind wire fifty times round a nail and touch it to a battery; try a hundred.",
+  "ja": "くぎに どうせんを 50かい まいて、でんちに つけよう。100かいも。",
+  "kit": [
+   "an iron nail",
+   "wire",
+   "a battery",
+   "clips"
+  ]
+ },
+ "standards": {
+  "jp": [
+   "小5 電流がつくる磁力"
+  ],
+  "ngss": [
+   "3-PS2-3"
+  ],
+  "cambridge": [
+   "Science enquiry"
+  ],
+  "pisa": [
+   "explain",
+   "interpret"
+  ]
+ },
+ "powers": {
+  "predict": 1,
+  "measure": 1,
+  "data": 1,
+  "explain": 1,
+  "build": 1
+ },
+ "ui": {
+  "labels": {
+   "clips": {
+    "en": "Clips lifted",
+    "ja": "もちあがった クリップ"
+   },
+   "stronger": {
+    "en": "Stronger than 100 turns?",
+    "ja": "100まきより つよい？"
+   },
+   "pole": {
+    "en": "Pole at the tip",
+    "ja": "さきの きょく"
+   }
+  },
+  "questions": {
+   "stronger": {
+    "en": "Will it be stronger than 100 turns on one cell?",
+    "ja": "100まき・でんち 1こより つよくなる？"
+   },
+   "clips": {
+    "en": "How many clips will it lift?",
+    "ja": "クリップは なんこ？"
+   }
+  },
+  "choices": {
+   "stronger": {
+    "stronger": {
+     "en": "Stronger",
+     "ja": "つよい"
+    },
+    "same": {
+     "en": "Same",
+     "ja": "おなじ"
+    }
+   },
+   "pole": {
+    "N": {
+     "en": "N",
+     "ja": "N"
+    },
+    "S": {
+     "en": "S",
+     "ja": "S"
+    }
+   }
+  }
+ }
+}

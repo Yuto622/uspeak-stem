@@ -1,0 +1,297 @@
+{
+ "id": "body.saliva",
+ "region": "body",
+ "station": "spit-bench",
+ "title": {
+  "en": "The Saliva Bench",
+  "ja": "だえきの だい"
+ },
+ "sim": "saliva",
+ "grade": "小6",
+ "unit": "体のつくりとはたらき（だ液）",
+ "intro": {
+  "en": "Starch water with saliva, kept at body warmth. After ten minutes add iodine. Blue-black means starch is still there; brown means it has turned into sugar.",
+  "ja": "でんぷんの みずに だえきを 入れて、たいおんに。10ぷん したら ヨウそえきを。あおむらさきなら でんぷんが のこっている。ちゃいろなら とうに かわった。"
+ },
+ "params": {
+  "saliva": {
+   "choices": [
+    "yes",
+    "no"
+   ],
+   "en": "Saliva",
+   "ja": "だえき"
+  },
+  "tempC": {
+   "min": 0,
+   "max": 60,
+   "step": 10,
+   "unit": "°C",
+   "en": "Temperature",
+   "ja": "おんど"
+  },
+  "minutes": {
+   "min": 0,
+   "max": 20,
+   "step": 5,
+   "unit": "min",
+   "en": "Minutes",
+   "ja": "ふん"
+  }
+ },
+ "levels": {
+  "explore": {
+   "ages": "4-7",
+   "fixed": {
+    "tempC": 40,
+    "minutes": 10
+   },
+   "predict": {
+    "kind": "choice",
+    "field": "iodine",
+    "choices": [
+     "blue-black",
+     "brown"
+    ]
+   },
+   "measure": [
+    "iodine",
+    "digested"
+   ]
+  },
+  "investigate": {
+   "ages": "8-11",
+   "fixed": {
+    "saliva": "yes",
+    "minutes": 10
+   },
+   "predict": {
+    "kind": "choice",
+    "field": "iodine",
+    "choices": [
+     "blue-black",
+     "brown"
+    ]
+   },
+   "measure": [
+    "iodine",
+    "starchLeft"
+   ],
+   "record": [
+    "tempC",
+    "starchLeft"
+   ]
+  },
+  "engineer": {
+   "ages": "12-15",
+   "fixed": {
+    "saliva": "yes"
+   },
+   "predict": {
+    "kind": "number",
+    "field": "starchLeft",
+    "unit": "%",
+    "tolerance": 0.1
+   },
+   "measure": [
+    "starchLeft",
+    "iodine",
+    "sugar"
+   ],
+   "record": [
+    "minutes",
+    "starchLeft"
+   ],
+   "challenge": {
+    "en": "Find the shortest time at 40°C that leaves no starch.",
+    "ja": "40°C で でんぷんが なくなる いちばん みじかい じかんは？"
+   }
+  }
+ },
+ "explain": {
+  "en": "What does saliva do to starch?",
+  "ja": "だえきは でんぷんを どうする？",
+  "aims": [
+   {
+    "id": "sugar",
+    "en": "Saliva turns starch into sugar",
+    "ja": "だえきは でんぷんを とうに かえる",
+    "keys": [
+     [
+      "saliva",
+      "spit",
+      "amylase",
+      "enzyme"
+     ],
+     [
+      "sugar",
+      "sweet",
+      "change",
+      "changes",
+      "turn",
+      "turns",
+      "break",
+      "breaks"
+     ]
+    ]
+   },
+   {
+    "id": "warm",
+    "en": "It works best at body warmth",
+    "ja": "たいおんで いちばん はたらく",
+    "keys": [
+     [
+      "warm",
+      "body",
+      "37",
+      "40",
+      "temperature"
+     ],
+     [
+      "best",
+      "works",
+      "fast",
+      "faster",
+      "not",
+      "cold",
+      "slow"
+     ]
+    ]
+   },
+   {
+    "id": "iodine",
+    "en": "Iodine goes blue-black only with starch",
+    "ja": "ヨウそえきは でんぷんが あると あおむらさき",
+    "keys": [
+     [
+      "iodine"
+     ],
+     [
+      "blue",
+      "black",
+      "purple",
+      "starch",
+      "brown",
+      "colour",
+      "color"
+     ]
+    ]
+   }
+  ]
+ },
+ "classPlot": {
+  "x": "minutes",
+  "y": "starchLeft",
+  "xLabel": {
+   "en": "Minutes",
+   "ja": "ふん"
+  },
+  "yLabel": {
+   "en": "Starch left (%)",
+   "ja": "のこった でんぷん（%）"
+  }
+ },
+ "real": {
+  "en": "Chew a piece of bread for a minute without swallowing: it starts to taste sweet.",
+  "ja": "パンを のみこまずに 1ぷん かもう。あまく なってくる。",
+  "kit": [
+   "bread"
+  ]
+ },
+ "standards": {
+  "jp": [
+   "小6 人の体のつくりと働き（消化）"
+  ],
+  "ngss": [
+   "MS-LS1-7"
+  ],
+  "cambridge": [
+   "Science enquiry"
+  ],
+  "pisa": [
+   "explain",
+   "interpret"
+  ]
+ },
+ "powers": {
+  "predict": 1,
+  "measure": 1,
+  "data": 1,
+  "explain": 1,
+  "build": 1
+ },
+ "ui": {
+  "labels": {
+   "iodine": {
+    "en": "Iodine turns",
+    "ja": "ヨウそえきは"
+   },
+   "digested": {
+    "en": "Starch digested?",
+    "ja": "でんぷんは しょうかされた？"
+   },
+   "starchLeft": {
+    "en": "Starch left (%)",
+    "ja": "のこった でんぷん（%）"
+   },
+   "sugar": {
+    "en": "Sugar made?",
+    "ja": "とうは できた？"
+   }
+  },
+  "questions": {
+   "iodine": {
+    "en": "What colour will the iodine turn?",
+    "ja": "ヨウそえきは なにいろに なる？"
+   },
+   "starchLeft": {
+    "en": "How much starch will be left (%)?",
+    "ja": "でんぷんは なん % のこる？"
+   }
+  },
+  "choices": {
+   "iodine": {
+    "blue-black": {
+     "en": "Blue-black (starch)",
+     "ja": "あおむらさき（でんぷん あり）"
+    },
+    "brown": {
+     "en": "Brown (no starch)",
+     "ja": "ちゃいろ（でんぷん なし）"
+    }
+   },
+   "digested": {
+    "yes": {
+     "en": "Yes",
+     "ja": "はい"
+    },
+    "no": {
+     "en": "No",
+     "ja": "いいえ"
+    }
+   },
+   "sugar": {
+    "yes": {
+     "en": "Yes",
+     "ja": "はい"
+    },
+    "no": {
+     "en": "No",
+     "ja": "いいえ"
+    }
+   }
+  },
+  "paramChoices": {
+   "saliva": {
+    "yes": {
+     "en": "With saliva",
+     "ja": "だえき あり"
+    },
+    "no": {
+     "en": "Water only",
+     "ja": "みずだけ"
+    }
+   }
+  }
+ }
+}

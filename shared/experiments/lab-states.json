@@ -1,0 +1,297 @@
+{
+ "id": "lab.states",
+ "region": "lab",
+ "station": "kettle-corner",
+ "title": {
+  "en": "The Kettle Corner",
+  "ja": "やかんの コーナー"
+ },
+ "sim": "heating",
+ "grade": "小4",
+ "unit": "水のすがたと温度",
+ "intro": {
+  "en": "Heat a beaker of ice and watch the thermometer. It stops at 0°C while the ice melts, climbs, then stops again at 100°C while the water boils.",
+  "ja": "こおりを あたためて おんどけいを 見よう。とける あいだは 0°C で とまり、のぼって、ふっとうすると 100°C で また とまる。"
+ },
+ "params": {
+  "minutes": {
+   "min": 0,
+   "max": 30,
+   "step": 1,
+   "unit": "min",
+   "en": "Minutes of heating",
+   "ja": "あたためる ふん"
+  },
+  "power": {
+   "choices": [
+    "250",
+    "500",
+    "1000"
+   ],
+   "en": "Burner",
+   "ja": "コンロの つよさ"
+  }
+ },
+ "levels": {
+  "explore": {
+   "ages": "4-7",
+   "fixed": {
+    "power": "500"
+   },
+   "predict": {
+    "kind": "choice",
+    "field": "state",
+    "choices": [
+     "ice",
+     "melting",
+     "water",
+     "boiling",
+     "steam"
+    ]
+   },
+   "measure": [
+    "state",
+    "tempC"
+   ]
+  },
+  "investigate": {
+   "ages": "8-11",
+   "predict": {
+    "kind": "number",
+    "field": "tempC",
+    "unit": "°C",
+    "tolerance": 0.1
+   },
+   "measure": [
+    "tempC",
+    "state"
+   ],
+   "record": [
+    "minutes",
+    "tempC"
+   ]
+  },
+  "engineer": {
+   "ages": "12-15",
+   "predict": {
+    "kind": "number",
+    "field": "boilStartMin",
+    "unit": "min",
+    "tolerance": 0.1
+   },
+   "measure": [
+    "tempC",
+    "boilStartMin"
+   ],
+   "record": [
+    "minutes",
+    "tempC"
+   ],
+   "challenge": {
+    "en": "Predict the minute the water starts to boil for each burner.",
+    "ja": "コンロごとに ふっとうが はじまる ふんを いいあてよう。"
+   }
+  }
+ },
+ "explain": {
+  "en": "Why does the thermometer stop twice?",
+  "ja": "どうして おんどけいは 2かい とまるの？",
+  "aims": [
+   {
+    "id": "melt-flat",
+    "en": "It stays at 0°C while the ice melts",
+    "ja": "こおりが とける あいだは 0°C のまま",
+    "keys": [
+     [
+      "0",
+      "zero",
+      "melt",
+      "melts",
+      "melting",
+      "ice"
+     ],
+     [
+      "stay",
+      "stays",
+      "stop",
+      "stops",
+      "flat",
+      "same",
+      "constant"
+     ]
+    ]
+   },
+   {
+    "id": "boil-flat",
+    "en": "It stays at 100°C while the water boils",
+    "ja": "ふっとうの あいだは 100°C のまま",
+    "keys": [
+     [
+      "100",
+      "boil",
+      "boils",
+      "boiling",
+      "steam"
+     ],
+     [
+      "stay",
+      "stays",
+      "stop",
+      "stops",
+      "flat",
+      "same",
+      "constant"
+     ]
+    ]
+   },
+   {
+    "id": "heat-change",
+    "en": "The heat goes into changing ice to water, or water to steam",
+    "ja": "ねつは こおり→みず、みず→すいじょうきに つかわれる",
+    "keys": [
+     [
+      "heat",
+      "energy"
+     ],
+     [
+      "change",
+      "changing",
+      "turn",
+      "turns",
+      "into",
+      "become",
+      "becomes"
+     ]
+    ]
+   }
+  ]
+ },
+ "classPlot": {
+  "x": "minutes",
+  "y": "tempC",
+  "xLabel": {
+   "en": "Minutes",
+   "ja": "ふん"
+  },
+  "yLabel": {
+   "en": "Temperature (°C)",
+   "ja": "おんど（°C）"
+  }
+ },
+ "real": {
+  "en": "Time a pan of ice on the stove with a thermometer, and write the temperature every minute.",
+  "ja": "なべの こおりを おんどけいで はかりながら、1ぷんごとに かこう。",
+  "kit": [
+   "ice",
+   "a pan",
+   "a thermometer"
+  ]
+ },
+ "standards": {
+  "jp": [
+   "小4 水のすがた",
+   "中1 状態変化"
+  ],
+  "ngss": [
+   "MS-PS1-4"
+  ],
+  "cambridge": [
+   "Science enquiry"
+  ],
+  "pisa": [
+   "explain",
+   "interpret"
+  ]
+ },
+ "powers": {
+  "predict": 1,
+  "measure": 1,
+  "data": 1,
+  "explain": 1,
+  "build": 1
+ },
+ "ui": {
+  "labels": {
+   "state": {
+    "en": "What is in the beaker",
+    "ja": "ビーカーの なかは"
+   },
+   "tempC": {
+    "en": "Temperature (°C)",
+    "ja": "おんど（°C）"
+   },
+   "boilStartMin": {
+    "en": "Boiling starts at (min)",
+    "ja": "ふっとうが はじまる ふん"
+   },
+   "flat": {
+    "en": "Thermometer",
+    "ja": "おんどけいは"
+   }
+  },
+  "questions": {
+   "state": {
+    "en": "What will be in the beaker after that time?",
+    "ja": "その じかんの あと、なかは どうなっている？"
+   },
+   "tempC": {
+    "en": "What will the thermometer say (°C)?",
+    "ja": "おんどけいは なん °C？"
+   },
+   "boilStartMin": {
+    "en": "At what minute will it start to boil?",
+    "ja": "なんぷんで ふっとうが はじまる？"
+   }
+  },
+  "choices": {
+   "state": {
+    "ice": {
+     "en": "Still ice",
+     "ja": "まだ こおり"
+    },
+    "melting": {
+     "en": "Ice melting, 0°C",
+     "ja": "とけている とちゅう（0°C）"
+    },
+    "water": {
+     "en": "Water, warming",
+     "ja": "みず（あたたまっている）"
+    },
+    "boiling": {
+     "en": "Boiling, 100°C",
+     "ja": "ふっとう（100°C）"
+    },
+    "steam": {
+     "en": "All steam",
+     "ja": "ぜんぶ すいじょうき"
+    }
+   },
+   "flat": {
+    "flat": {
+     "en": "Stopped",
+     "ja": "とまっている"
+    },
+    "rising": {
+     "en": "Rising",
+     "ja": "あがっている"
+    }
+   }
+  },
+  "paramChoices": {
+   "power": {
+    "250": {
+     "en": "Low (250 W)",
+     "ja": "よわい"
+    },
+    "500": {
+     "en": "Medium (500 W)",
+     "ja": "ふつう"
+    },
+    "1000": {
+     "en": "High (1000 W)",
+     "ja": "つよい"
+    }
+   }
+  }
+ }
+}

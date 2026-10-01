@@ -1,0 +1,304 @@
+{
+ "id": "atoms.conservation",
+ "region": "atoms",
+ "station": "sealed-scale",
+ "title": {
+  "en": "The Sealed Scale",
+  "ja": "ふうした はかり"
+ },
+ "sim": "conservation",
+ "grade": "中2",
+ "unit": "化学変化と質量の保存",
+ "intro": {
+  "en": "Put a reaction on a balance, lid on or lid off, and read the mass before and after. When does the number change, and where did the mass go?",
+  "ja": "はかりの 上で はんのうさせよう。ふたを して、ふたを あけて。まえと あとで 数は かわる？ かわった ぶんは どこへ？"
+ },
+ "params": {
+  "reaction": {
+   "choices": [
+    "fizz",
+    "ironSulfur",
+    "copperAir",
+    "precipitate"
+   ],
+   "en": "Reaction",
+   "ja": "はんのう"
+  },
+  "lid": {
+   "choices": [
+    "on",
+    "off"
+   ],
+   "en": "Lid",
+   "ja": "ふた"
+  },
+  "grams": {
+   "min": 1,
+   "max": 5,
+   "step": 1,
+   "unit": "g",
+   "en": "Amount",
+   "ja": "りょう"
+  }
+ },
+ "levels": {
+  "explore": {
+   "ages": "4-7",
+   "fixed": {
+    "reaction": "fizz",
+    "grams": 1
+   },
+   "predict": {
+    "kind": "choice",
+    "field": "change",
+    "choices": [
+     "same",
+     "less",
+     "more"
+    ]
+   },
+   "measure": [
+    "change",
+    "after"
+   ]
+  },
+  "investigate": {
+   "ages": "8-11",
+   "predict": {
+    "kind": "number",
+    "field": "after",
+    "unit": "g",
+    "tolerance": 0.01
+   },
+   "measure": [
+    "after",
+    "change"
+   ],
+   "record": [
+    "grams",
+    "deltaG"
+   ]
+  },
+  "engineer": {
+   "ages": "12-15",
+   "fixed": {
+    "lid": "off"
+   },
+   "predict": {
+    "kind": "number",
+    "field": "deltaG",
+    "unit": "g",
+    "tolerance": 0.1
+   },
+   "measure": [
+    "after",
+    "deltaG",
+    "change"
+   ],
+   "record": [
+    "grams",
+    "deltaG"
+   ],
+   "challenge": {
+    "en": "Find a reaction whose mass goes UP with the lid off, and say why.",
+    "ja": "ふたを あけると おもくなる はんのうを さがして、りゆうを いおう。"
+   }
+  }
+ },
+ "explain": {
+  "en": "Is mass lost in a chemical change?",
+  "ja": "かがくへんかで しつりょうは へる？",
+  "aims": [
+   {
+    "id": "conserved",
+    "en": "With the lid on, the mass stays the same",
+    "ja": "ふたを すると しつりょうは かわらない",
+    "keys": [
+     [
+      "lid",
+      "closed",
+      "sealed",
+      "shut"
+     ],
+     [
+      "same",
+      "equal",
+      "conserved",
+      "doesn't change",
+      "does not change",
+      "stays"
+     ]
+    ]
+   },
+   {
+    "id": "gas-escapes",
+    "en": "With the lid off, a gas can escape and the mass drops",
+    "ja": "ふたを あけると きたいが にげて へる",
+    "keys": [
+     [
+      "gas",
+      "bubbles",
+      "carbon dioxide",
+      "co2",
+      "air"
+     ],
+     [
+      "escape",
+      "escapes",
+      "leaves",
+      "out",
+      "away",
+      "lost",
+      "drops",
+      "less"
+     ]
+    ]
+   },
+   {
+    "id": "oxygen-joins",
+    "en": "Heated copper gains mass because oxygen joins it",
+    "ja": "どうは さんそと むすびついて おもくなる",
+    "keys": [
+     [
+      "oxygen",
+      "air"
+     ],
+     [
+      "join",
+      "joins",
+      "joined",
+      "combine",
+      "combines",
+      "gain",
+      "gains",
+      "heavier",
+      "more"
+     ]
+    ]
+   }
+  ]
+ },
+ "classPlot": {
+  "x": "grams",
+  "y": "deltaG",
+  "xLabel": {
+   "en": "Amount reacted (g)",
+   "ja": "はんのうした りょう（g）"
+  },
+  "yLabel": {
+   "en": "Mass change (g)",
+   "ja": "しつりょうの へんか（g）"
+  }
+ },
+ "real": {
+  "en": "Weigh a cup of vinegar and a spoon of baking soda together, mix, and weigh again.",
+  "ja": "すと じゅうそうを いっしょに はかって、まぜて、また はかろう。",
+  "kit": [
+   "vinegar",
+   "baking soda",
+   "a scale"
+  ]
+ },
+ "standards": {
+  "jp": [
+   "中2 化学変化と物質の質量"
+  ],
+  "ngss": [
+   "MS-PS1-5"
+  ],
+  "cambridge": [
+   "Science enquiry"
+  ],
+  "pisa": [
+   "explain",
+   "interpret"
+  ]
+ },
+ "powers": {
+  "predict": 1,
+  "measure": 1,
+  "data": 1,
+  "explain": 1,
+  "build": 1
+ },
+ "ui": {
+  "labels": {
+   "change": {
+    "en": "Mass after",
+    "ja": "あとの しつりょうは"
+   },
+   "after": {
+    "en": "Mass after (g)",
+    "ja": "あとの しつりょう（g）"
+   },
+   "before": {
+    "en": "Mass before (g)",
+    "ja": "まえの しつりょう（g）"
+   },
+   "deltaG": {
+    "en": "Change (g)",
+    "ja": "へんか（g）"
+   }
+  },
+  "questions": {
+   "change": {
+    "en": "After the reaction, the mass will be…",
+    "ja": "はんのうの あと、しつりょうは…"
+   },
+   "after": {
+    "en": "What will the balance read after (g)?",
+    "ja": "あとで はかりは なん g？"
+   },
+   "deltaG": {
+    "en": "By how many grams will it change? (minus = lighter)",
+    "ja": "なん g かわる？（へると マイナス）"
+   }
+  },
+  "choices": {
+   "change": {
+    "same": {
+     "en": "The same",
+     "ja": "おなじ"
+    },
+    "less": {
+     "en": "Less",
+     "ja": "へる"
+    },
+    "more": {
+     "en": "More",
+     "ja": "ふえる"
+    }
+   }
+  },
+  "paramChoices": {
+   "reaction": {
+    "fizz": {
+     "en": "Baking soda + vinegar",
+     "ja": "じゅうそう ＋ す"
+    },
+    "ironSulfur": {
+     "en": "Iron + sulfur, heated",
+     "ja": "てつ ＋ いおう（かねつ）"
+    },
+    "copperAir": {
+     "en": "Copper heated in air",
+     "ja": "どうを くうきで かねつ"
+    },
+    "precipitate": {
+     "en": "Two clear liquids → white solid",
+     "ja": "とうめいな えき 2つ → しろい こな"
+    }
+   },
+   "lid": {
+    "on": {
+     "en": "Lid on",
+     "ja": "ふたを する"
+    },
+    "off": {
+     "en": "Lid off",
+     "ja": "ふたを あける"
+    }
+   }
+  }
+ }
+}

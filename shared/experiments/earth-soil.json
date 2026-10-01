@@ -1,0 +1,299 @@
+{
+ "id": "earth.soil",
+ "region": "earth",
+ "station": "soil-tubes",
+ "title": {
+  "en": "The Soil Tubes",
+  "ja": "つちの つつ"
+ },
+ "sim": "soil",
+ "grade": "小4",
+ "unit": "雨水のゆくえと地面のようす",
+ "intro": {
+  "en": "Pour the same water through gravel, sand, soil and clay. Time how long it takes to drain. Big grains let water through fast; tiny grains hold it, and a puddle forms.",
+  "ja": "おなじ みずを れき・すな・つち・ねんどに そそごう。しみこむ じかんを はかろう。つぶが 大きいと はやい。小さいと みずが たまって みずたまり。"
+ },
+ "params": {
+  "grain": {
+   "choices": [
+    "gravel",
+    "sand",
+    "soil",
+    "clay"
+   ],
+   "en": "Ground",
+   "ja": "じめん"
+  }
+ },
+ "levels": {
+  "explore": {
+   "ages": "4-7",
+   "predict": {
+    "kind": "choice",
+    "field": "bucket",
+    "choices": [
+     "fast",
+     "medium",
+     "slow"
+    ]
+   },
+   "measure": [
+    "seconds",
+    "bucket"
+   ]
+  },
+  "investigate": {
+   "ages": "8-11",
+   "predict": {
+    "kind": "number",
+    "field": "seconds",
+    "unit": "s",
+    "tolerance": 0.1
+   },
+   "measure": [
+    "seconds"
+   ],
+   "record": [
+    "grainSize",
+    "seconds"
+   ]
+  },
+  "engineer": {
+   "ages": "12-15",
+   "predict": {
+    "kind": "choice",
+    "field": "puddle",
+    "choices": [
+     "yes",
+     "no"
+    ]
+   },
+   "measure": [
+    "seconds",
+    "puddle"
+   ],
+   "record": [
+    "grainSize",
+    "seconds"
+   ],
+   "challenge": {
+    "en": "Rank the four grounds before pouring, and say why.",
+    "ja": "そそぐ まえに 4つを じゅんばんに ならべて、りゆうを いおう。"
+   }
+  }
+ },
+ "explain": {
+  "en": "Where does rain go?",
+  "ja": "あまみずは どこへ いく？",
+  "aims": [
+   {
+    "id": "grain",
+    "en": "Water drains faster through big grains",
+    "ja": "つぶが 大きいと はやく しみこむ",
+    "keys": [
+     [
+      "big",
+      "bigger",
+      "large",
+      "gravel",
+      "sand",
+      "grain",
+      "grains",
+      "gaps",
+      "spaces"
+     ],
+     [
+      "fast",
+      "faster",
+      "quick",
+      "drain",
+      "drains",
+      "through"
+     ]
+    ]
+   },
+   {
+    "id": "puddle",
+    "en": "Tiny grains hold the water, so puddles form",
+    "ja": "小さい つぶは みずを ためて みずたまりに",
+    "keys": [
+     [
+      "small",
+      "tiny",
+      "clay",
+      "fine"
+     ],
+     [
+      "puddle",
+      "puddles",
+      "slow",
+      "slowly",
+      "hold",
+      "holds",
+      "stays",
+      "sits"
+     ]
+    ]
+   },
+   {
+    "id": "downhill",
+    "en": "Water on the ground runs to the low places",
+    "ja": "じめんの みずは ひくい ほうへ ながれる",
+    "keys": [
+     [
+      "low",
+      "lower",
+      "downhill",
+      "slope",
+      "flow",
+      "flows",
+      "run",
+      "runs"
+     ]
+    ]
+   }
+  ]
+ },
+ "classPlot": {
+  "x": "grainSize",
+  "y": "seconds",
+  "xLabel": {
+   "en": "Grain size (1 clay → 4 gravel)",
+   "ja": "つぶの 大きさ"
+  },
+  "yLabel": {
+   "en": "Seconds to drain",
+   "ja": "しみこむ びょう"
+  }
+ },
+ "real": {
+  "en": "Two flowerpots: one of sand, one of garden soil. Pour a cup of water into each and time it.",
+  "ja": "うえきばち 2つ：すなと はたけの つち。コップ 1ぱいの みずを 入れて、じかんを はかろう。",
+  "kit": [
+   "two pots",
+   "sand",
+   "soil",
+   "a cup"
+  ]
+ },
+ "standards": {
+  "jp": [
+   "小4 雨水の行方と地面の様子"
+  ],
+  "ngss": [
+   "2-ESS2-1"
+  ],
+  "cambridge": [
+   "Science enquiry"
+  ],
+  "pisa": [
+   "explain",
+   "interpret"
+  ]
+ },
+ "powers": {
+  "predict": 1,
+  "measure": 1,
+  "data": 1,
+  "explain": 1,
+  "build": 1
+ },
+ "ui": {
+  "labels": {
+   "seconds": {
+    "en": "Seconds to drain",
+    "ja": "しみこむ びょう"
+   },
+   "bucket": {
+    "en": "How fast?",
+    "ja": "はやさ"
+   },
+   "puddle": {
+    "en": "Puddle forms?",
+    "ja": "みずたまりは できる？"
+   },
+   "fastest": {
+    "en": "Fastest",
+    "ja": "いちばん はやい"
+   }
+  },
+  "questions": {
+   "bucket": {
+    "en": "How fast will the water drain?",
+    "ja": "みずは どれくらいで しみこむ？"
+   },
+   "seconds": {
+    "en": "How many seconds will it take?",
+    "ja": "なんびょう かかる？"
+   },
+   "puddle": {
+    "en": "Will a puddle form on top?",
+    "ja": "みずたまりは できる？"
+   }
+  },
+  "choices": {
+   "bucket": {
+    "fast": {
+     "en": "Fast (seconds)",
+     "ja": "はやい（すうびょう）"
+    },
+    "medium": {
+     "en": "A few minutes",
+     "ja": "すうふん"
+    },
+    "slow": {
+     "en": "Slow (a puddle)",
+     "ja": "おそい（みずたまり）"
+    }
+   },
+   "puddle": {
+    "yes": {
+     "en": "Yes",
+     "ja": "はい"
+    },
+    "no": {
+     "en": "No",
+     "ja": "いいえ"
+    }
+   },
+   "fastest": {
+    "gravel": {
+     "en": "Gravel",
+     "ja": "れき（こいし）"
+    },
+    "sand": {
+     "en": "Sand",
+     "ja": "すな"
+    },
+    "soil": {
+     "en": "Garden soil",
+     "ja": "はたけの つち"
+    },
+    "clay": {
+     "en": "Clay",
+     "ja": "ねんど"
+    }
+   }
+  },
+  "paramChoices": {
+   "grain": {
+    "gravel": {
+     "en": "Gravel",
+     "ja": "れき（こいし）"
+    },
+    "sand": {
+     "en": "Sand",
+     "ja": "すな"
+    },
+    "soil": {
+     "en": "Garden soil",
+     "ja": "はたけの つち"
+    },
+    "clay": {
+     "en": "Clay",
+     "ja": "ねんど"
+    }
+   }
+  }
+ }
+}

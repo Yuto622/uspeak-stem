@@ -8,7 +8,7 @@
 import * as THREE from './vendor/three.module.js';
 import { createIsland, NEAR_DISTANCE, shade } from './island-kit.js';
 import { t, onLang } from './i18n.js';
-import { BUILDERS, animateIslands } from './islands-build.js';
+import { buildIsland, animateIslands } from './islands-build.js';
 import { phaseAt } from './world-clock.js';
 
 const SPEED = 9;
@@ -82,8 +82,8 @@ export function createWorld(canvas) {
   }
   function define(data) {
     defs.set(data.id, data);
-    const seeds = { cosmos: 20250910, lab: 30414159, force: 41421356, life: 27182818, earth: 16180339, maker: 12345679, data: 73205080 };
-    const island = createIsland({ scene, seed: seeds[data.id] || 7, build: (k) => BUILDERS[data.id]?.(k) });
+    let seed = 7; for (const ch of data.id) seed = (seed * 31 + ch.charCodeAt(0)) % 2147483647; // the same island every time
+    const island = createIsland({ scene, seed, build: (k) => buildIsland(k) });
     island.receive(data);
     island.show(true);
     islands.set(data.id, island);

@@ -1,0 +1,257 @@
+{
+ "id": "force.light",
+ "region": "force",
+ "station": "mirror-wall",
+ "title": {
+  "en": "The Mirror Wall",
+  "ja": "かがみの かべ"
+ },
+ "sim": "mirrors",
+ "grade": "小3",
+ "unit": "太陽の光",
+ "intro": {
+  "en": "Bounce sunlight with mirrors onto a black card and read the thermometer behind it. One mirror, two, three: brighter and warmer.",
+  "ja": "かがみで たいようの ひかりを くろい かみに あつめて、うらの おんどけいを よもう。かがみが 1まい、2まい、3まい。あかるく、あたたかく。"
+ },
+ "params": {
+  "count": {
+   "min": 1,
+   "max": 5,
+   "step": 1,
+   "unit": "",
+   "en": "Mirrors",
+   "ja": "かがみの まいすう"
+  },
+  "minutes": {
+   "min": 1,
+   "max": 5,
+   "step": 1,
+   "unit": "min",
+   "en": "Minutes",
+   "ja": "ふん"
+  }
+ },
+ "levels": {
+  "explore": {
+   "ages": "4-7",
+   "fixed": {
+    "minutes": 3
+   },
+   "predict": {
+    "kind": "choice",
+    "field": "warmer",
+    "choices": [
+     "warmer",
+     "same"
+    ]
+   },
+   "measure": [
+    "tempC",
+    "warmer"
+   ]
+  },
+  "investigate": {
+   "ages": "8-11",
+   "predict": {
+    "kind": "number",
+    "field": "tempC",
+    "unit": "°C",
+    "tolerance": 0.05
+   },
+   "measure": [
+    "tempC",
+    "rise"
+   ],
+   "record": [
+    "count",
+    "tempC"
+   ]
+  },
+  "engineer": {
+   "ages": "12-15",
+   "predict": {
+    "kind": "number",
+    "field": "rise",
+    "unit": "°C",
+    "tolerance": 0.1
+   },
+   "measure": [
+    "tempC",
+    "rise"
+   ],
+   "record": [
+    "count",
+    "rise"
+   ],
+   "challenge": {
+    "en": "Reach 40°C in two minutes.",
+    "ja": "2ふんで 40°C に しよう。"
+   }
+  }
+ },
+ "explain": {
+  "en": "What does gathered light do?",
+  "ja": "あつめた ひかりは なにを する？",
+  "aims": [
+   {
+    "id": "straight",
+    "en": "Light travels straight and a mirror bounces it",
+    "ja": "ひかりは まっすぐ すすみ、かがみで はねかえる",
+    "keys": [
+     [
+      "straight",
+      "bounce",
+      "bounces",
+      "reflect",
+      "reflects",
+      "reflected",
+      "mirror"
+     ]
+    ]
+   },
+   {
+    "id": "more-warm",
+    "en": "More light makes it brighter and warmer",
+    "ja": "ひかりが おおいほど あかるく あたたかい",
+    "keys": [
+     [
+      "more",
+      "mirrors",
+      "two",
+      "three",
+      "gather",
+      "gathered",
+      "collect"
+     ],
+     [
+      "warm",
+      "warmer",
+      "hot",
+      "hotter",
+      "bright",
+      "brighter",
+      "temperature"
+     ]
+    ]
+   },
+   {
+    "id": "dark-absorb",
+    "en": "Black things soak up light and warm up",
+    "ja": "くろい ものは ひかりを すって あつくなる",
+    "keys": [
+     [
+      "black",
+      "dark"
+     ],
+     [
+      "absorb",
+      "absorbs",
+      "soak",
+      "soaks",
+      "warm",
+      "warms",
+      "hot"
+     ]
+    ]
+   }
+  ]
+ },
+ "classPlot": {
+  "x": "count",
+  "y": "tempC",
+  "xLabel": {
+   "en": "Mirrors",
+   "ja": "かがみの まいすう"
+  },
+  "yLabel": {
+   "en": "Temperature (°C)",
+   "ja": "おんど（°C）"
+  }
+ },
+ "real": {
+  "en": "On a sunny day, aim two hand mirrors at the same spot on a wall.",
+  "ja": "はれた 日に、かがみ 2まいで かべの おなじ ところを ねらおう。",
+  "kit": [
+   "two mirrors",
+   "a sunny wall"
+  ]
+ },
+ "standards": {
+  "jp": [
+   "小3 光と音の性質（光）"
+  ],
+  "ngss": [
+   "4-PS4-2"
+  ],
+  "cambridge": [
+   "Science enquiry"
+  ],
+  "pisa": [
+   "explain",
+   "interpret"
+  ]
+ },
+ "powers": {
+  "predict": 1,
+  "measure": 1,
+  "data": 1,
+  "explain": 1,
+  "build": 1
+ },
+ "ui": {
+  "labels": {
+   "tempC": {
+    "en": "Temperature (°C)",
+    "ja": "おんど（°C）"
+   },
+   "warmer": {
+    "en": "Warmer than one mirror?",
+    "ja": "1まいより あたたかい？"
+   },
+   "rise": {
+    "en": "Rise (°C)",
+    "ja": "あがった ぶん（°C）"
+   },
+   "brighter": {
+    "en": "Brighter?",
+    "ja": "あかるい？"
+   }
+  },
+  "questions": {
+   "warmer": {
+    "en": "With more mirrors, will the card get warmer?",
+    "ja": "かがみを ふやすと かみは あたたかくなる？"
+   },
+   "tempC": {
+    "en": "What temperature will it reach (°C)?",
+    "ja": "なん °C に なる？"
+   },
+   "rise": {
+    "en": "By how many degrees will it rise?",
+    "ja": "なんど あがる？"
+   }
+  },
+  "choices": {
+   "warmer": {
+    "warmer": {
+     "en": "Warmer",
+     "ja": "あたたかくなる"
+    },
+    "same": {
+     "en": "Same",
+     "ja": "おなじ"
+    }
+   },
+   "brighter": {
+    "brighter": {
+     "en": "Brighter",
+     "ja": "あかるい"
+    },
+    "same": {
+     "en": "Same",
+     "ja": "おなじ"
+    }
+   }
+  }
+ }
+}

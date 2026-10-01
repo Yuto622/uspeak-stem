@@ -1,0 +1,316 @@
+{
+ "id": "lab.metal-acid",
+ "region": "lab",
+ "station": "metal-vat",
+ "title": {
+  "en": "The Metal Vat",
+  "ja": "きんぞくの おけ"
+ },
+ "sim": "metalAcid",
+ "grade": "小6",
+ "unit": "水溶液の性質（金属）",
+ "intro": {
+  "en": "Drop a metal into dilute acid, or into sodium hydroxide, and watch for bubbles. Some metals fizz, some do nothing.",
+  "ja": "きんぞくを うすい えんさんや すいさんかナトリウムに 入れて、あわを 見よう。あわが 出る きんぞくと 出ない きんぞくが ある。"
+ },
+ "params": {
+  "metal": {
+   "choices": [
+    "magnesium",
+    "aluminium",
+    "zinc",
+    "iron",
+    "copper"
+   ],
+   "en": "Metal",
+   "ja": "きんぞく"
+  },
+  "solution": {
+   "choices": [
+    "hcl",
+    "naoh",
+    "water"
+   ],
+   "en": "Liquid",
+   "ja": "えき"
+  }
+ },
+ "levels": {
+  "explore": {
+   "ages": "4-7",
+   "fixed": {
+    "solution": "hcl"
+   },
+   "predict": {
+    "kind": "choice",
+    "field": "bubbles",
+    "choices": [
+     "yes",
+     "no"
+    ]
+   },
+   "measure": [
+    "bubbles",
+    "gas"
+   ]
+  },
+  "investigate": {
+   "ages": "8-11",
+   "predict": {
+    "kind": "choice",
+    "field": "rate",
+    "choices": [
+     "none",
+     "slow",
+     "yes",
+     "fast"
+    ]
+   },
+   "measure": [
+    "bubbles",
+    "rate"
+   ]
+  },
+  "engineer": {
+   "ages": "12-15",
+   "fixed": {
+    "solution": "naoh"
+   },
+   "predict": {
+    "kind": "choice",
+    "field": "rate",
+    "choices": [
+     "none",
+     "slow",
+     "yes",
+     "fast"
+    ]
+   },
+   "measure": [
+    "bubbles",
+    "rate",
+    "gas"
+   ],
+   "challenge": {
+    "en": "Find the metal that fizzes in both the acid and the base.",
+    "ja": "さんせいでも アルカリせいでも あわが 出る きんぞくを さがそう。"
+   }
+  }
+ },
+ "explain": {
+  "en": "What happens when a metal meets an acid?",
+  "ja": "きんぞくが さんに あうと どうなる？",
+  "aims": [
+   {
+    "id": "bubbles",
+    "en": "Some metals make bubbles of hydrogen in acid",
+    "ja": "さんに 入れると すいそが あわに なる きんぞくが ある",
+    "keys": [
+     [
+      "bubble",
+      "bubbles",
+      "fizz",
+      "fizzes",
+      "gas",
+      "hydrogen"
+     ]
+    ]
+   },
+   {
+    "id": "dissolve",
+    "en": "The metal slowly dissolves",
+    "ja": "きんぞくは とけて 小さくなる",
+    "keys": [
+     [
+      "dissolve",
+      "dissolves",
+      "dissolved",
+      "smaller",
+      "disappear",
+      "disappears",
+      "eaten"
+     ]
+    ]
+   },
+   {
+    "id": "copper-no",
+    "en": "Copper does nothing",
+    "ja": "どうは なにも おきない",
+    "keys": [
+     [
+      "copper"
+     ],
+     [
+      "nothing",
+      "not",
+      "no",
+      "doesn't",
+      "does not",
+      "stays"
+     ]
+    ]
+   }
+  ]
+ },
+ "classPlot": {
+  "x": "reactivity",
+  "y": "bubbleRate",
+  "xLabel": {
+   "en": "How reactive the metal is",
+   "ja": "きんぞくの はんのうしやすさ"
+  },
+  "yLabel": {
+   "en": "Bubbles per second",
+   "ja": "1びょうの あわ"
+  }
+ },
+ "real": {
+  "en": "Drop a strip of aluminium foil into vinegar and watch for a few minutes.",
+  "ja": "アルミはくを すに 入れて、しばらく 見てみよう。",
+  "kit": [
+   "aluminium foil",
+   "vinegar"
+  ]
+ },
+ "standards": {
+  "jp": [
+   "小6 水溶液の性質",
+   "中3 化学変化とイオン"
+  ],
+  "ngss": [
+   "MS-PS1-2"
+  ],
+  "cambridge": [
+   "Science enquiry"
+  ],
+  "pisa": [
+   "explain",
+   "interpret"
+  ]
+ },
+ "powers": {
+  "predict": 1,
+  "measure": 1,
+  "data": 1,
+  "explain": 1,
+  "build": 1
+ },
+ "ui": {
+  "labels": {
+   "bubbles": {
+    "en": "Bubbles?",
+    "ja": "あわは 出る？"
+   },
+   "gas": {
+    "en": "The gas",
+    "ja": "出た きたい"
+   },
+   "rate": {
+    "en": "How fast",
+    "ja": "はやさ"
+   },
+   "dissolves": {
+    "en": "Dissolves?",
+    "ja": "とける？"
+   }
+  },
+  "questions": {
+   "bubbles": {
+    "en": "Will bubbles come out?",
+    "ja": "あわは 出る？"
+   },
+   "rate": {
+    "en": "How fast will it fizz?",
+    "ja": "どれくらい あわが 出る？"
+   }
+  },
+  "choices": {
+   "bubbles": {
+    "yes": {
+     "en": "Yes",
+     "ja": "はい"
+    },
+    "no": {
+     "en": "No",
+     "ja": "いいえ"
+    }
+   },
+   "gas": {
+    "hydrogen": {
+     "en": "Hydrogen",
+     "ja": "すいそ"
+    },
+    "none": {
+     "en": "None",
+     "ja": "なし"
+    }
+   },
+   "rate": {
+    "none": {
+     "en": "No bubbles",
+     "ja": "あわなし"
+    },
+    "slow": {
+     "en": "A few bubbles",
+     "ja": "すこし"
+    },
+    "yes": {
+     "en": "Steady bubbles",
+     "ja": "どんどん"
+    },
+    "fast": {
+     "en": "Fizzes hard",
+     "ja": "はげしく"
+    }
+   },
+   "dissolves": {
+    "yes": {
+     "en": "Yes",
+     "ja": "はい"
+    },
+    "no": {
+     "en": "No",
+     "ja": "いいえ"
+    }
+   }
+  },
+  "paramChoices": {
+   "metal": {
+    "magnesium": {
+     "en": "Magnesium",
+     "ja": "マグネシウム"
+    },
+    "aluminium": {
+     "en": "Aluminium",
+     "ja": "アルミニウム"
+    },
+    "zinc": {
+     "en": "Zinc",
+     "ja": "あえん"
+    },
+    "iron": {
+     "en": "Iron",
+     "ja": "てつ"
+    },
+    "copper": {
+     "en": "Copper",
+     "ja": "どう"
+    }
+   },
+   "solution": {
+    "hcl": {
+     "en": "Dilute hydrochloric acid",
+     "ja": "うすい えんさん"
+    },
+    "naoh": {
+     "en": "Dilute sodium hydroxide",
+     "ja": "うすい すいさんかナトリウム"
+    },
+    "water": {
+     "en": "Water",
+     "ja": "みず"
+    }
+   }
+  }
+ }
+}

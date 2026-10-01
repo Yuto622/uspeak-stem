@@ -1,0 +1,323 @@
+{
+ "id": "earth.volcano",
+ "region": "earth",
+ "station": "volcano-rim",
+ "title": {
+  "en": "The Volcano Rim",
+  "ja": "かざんの ふち"
+ },
+ "sim": "volcano",
+ "grade": "中1",
+ "unit": "火山と火成岩",
+ "intro": {
+  "en": "Runny magma spreads into a wide, gentle shield and the rock is black. Sticky magma piles into a steep dome and bursts out violently, and the rock is pale.",
+  "ja": "さらさらの マグマは ひろく なだらかに ひろがり、いわは くろい。ねばねばの マグマは きゅうな ドームに なって はげしく ふんか、いわは しろっぽい。"
+ },
+ "params": {
+  "viscosity": {
+   "choices": [
+    "runny",
+    "medium",
+    "sticky"
+   ],
+   "en": "Magma",
+   "ja": "マグマ"
+  }
+ },
+ "levels": {
+  "explore": {
+   "ages": "4-7",
+   "predict": {
+    "kind": "choice",
+    "field": "shape",
+    "choices": [
+     "shield",
+     "cone",
+     "dome"
+    ]
+   },
+   "measure": [
+    "shape",
+    "eruption"
+   ]
+  },
+  "investigate": {
+   "ages": "8-11",
+   "predict": {
+    "kind": "choice",
+    "field": "eruption",
+    "choices": [
+     "gentle",
+     "moderate",
+     "explosive"
+    ]
+   },
+   "measure": [
+    "shape",
+    "eruption",
+    "rock"
+   ],
+   "record": [
+    "stickiness",
+    "steepness"
+   ]
+  },
+  "engineer": {
+   "ages": "12-15",
+   "predict": {
+    "kind": "choice",
+    "field": "rock",
+    "choices": [
+     "black",
+     "grey",
+     "white"
+    ]
+   },
+   "measure": [
+    "shape",
+    "eruption",
+    "rock",
+    "example"
+   ],
+   "record": [
+    "stickiness",
+    "steepness"
+   ],
+   "challenge": {
+    "en": "Match three real volcanoes to the three magmas.",
+    "ja": "3つの ほんものの かざんを 3つの マグマに あてはめよう。"
+   }
+  }
+ },
+ "explain": {
+  "en": "Why do volcanoes have different shapes?",
+  "ja": "どうして かざんの かたちは ちがう？",
+  "aims": [
+   {
+    "id": "sticky",
+    "en": "Sticky magma piles up steep; runny magma spreads flat",
+    "ja": "ねばねばは きゅう、さらさらは なだらか",
+    "keys": [
+     [
+      "sticky",
+      "thick",
+      "viscous",
+      "runny",
+      "thin",
+      "fluid"
+     ],
+     [
+      "steep",
+      "dome",
+      "pile",
+      "piles",
+      "flat",
+      "spread",
+      "spreads",
+      "gentle",
+      "wide"
+     ]
+    ]
+   },
+   {
+    "id": "explosive",
+    "en": "Sticky magma traps gas and bursts",
+    "ja": "ねばねばは ガスを とじこめて ばくはつ",
+    "keys": [
+     [
+      "gas",
+      "trap",
+      "traps",
+      "trapped",
+      "pressure"
+     ],
+     [
+      "burst",
+      "bursts",
+      "explode",
+      "explodes",
+      "explosive",
+      "violent"
+     ]
+    ]
+   },
+   {
+    "id": "colour",
+    "en": "Pale rock from sticky magma, dark from runny",
+    "ja": "しろっぽい いわは ねばねば、くろい いわは さらさら",
+    "keys": [
+     [
+      "white",
+      "pale",
+      "light",
+      "grey",
+      "black",
+      "dark"
+     ],
+     [
+      "rock",
+      "rocks",
+      "lava",
+      "colour",
+      "color"
+     ]
+    ]
+   }
+  ]
+ },
+ "classPlot": {
+  "x": "stickiness",
+  "y": "steepness",
+  "xLabel": {
+   "en": "Stickiness (0 runny → 2 sticky)",
+   "ja": "ねばりけ"
+  },
+  "yLabel": {
+   "en": "Steepness (0 flat → 2 steep)",
+   "ja": "きゅうさ"
+  }
+ },
+ "real": {
+  "en": "Squeeze honey and then water onto a plate: which one piles up?",
+  "ja": "はちみつと みずを さらに たらそう。もりあがるのは どっち？",
+  "kit": [
+   "honey",
+   "water",
+   "a plate"
+  ]
+ },
+ "standards": {
+  "jp": [
+   "中1 大地の成り立ちと変化（火山）"
+  ],
+  "ngss": [
+   "4-ESS2-2"
+  ],
+  "cambridge": [
+   "Science enquiry"
+  ],
+  "pisa": [
+   "explain",
+   "interpret"
+  ]
+ },
+ "powers": {
+  "predict": 1,
+  "measure": 1,
+  "data": 1,
+  "explain": 1,
+  "build": 1
+ },
+ "ui": {
+  "labels": {
+   "shape": {
+    "en": "Shape",
+    "ja": "かたち"
+   },
+   "eruption": {
+    "en": "Eruption",
+    "ja": "ふんか"
+   },
+   "rock": {
+    "en": "Rock colour",
+    "ja": "いわの いろ"
+   },
+   "example": {
+    "en": "Like",
+    "ja": "にている かざん"
+   },
+   "steep": {
+    "en": "Slope",
+    "ja": "かたむき"
+   }
+  },
+  "questions": {
+   "shape": {
+    "en": "What shape will the volcano be?",
+    "ja": "かざんは どんな かたち？"
+   },
+   "eruption": {
+    "en": "How will it erupt?",
+    "ja": "どんな ふんか？"
+   },
+   "rock": {
+    "en": "What colour will the rock be?",
+    "ja": "いわは なにいろ？"
+   }
+  },
+  "choices": {
+   "shape": {
+    "shield": {
+     "en": "Wide shield",
+     "ja": "ひろい たてじょう"
+    },
+    "cone": {
+     "en": "Cone",
+     "ja": "えんすい"
+    },
+    "dome": {
+     "en": "Steep dome",
+     "ja": "きゅうな ドーム"
+    }
+   },
+   "eruption": {
+    "gentle": {
+     "en": "Gentle",
+     "ja": "おだやか"
+    },
+    "moderate": {
+     "en": "Moderate",
+     "ja": "ふつう"
+    },
+    "explosive": {
+     "en": "Explosive",
+     "ja": "はげしい"
+    }
+   },
+   "rock": {
+    "black": {
+     "en": "Black",
+     "ja": "くろ"
+    },
+    "grey": {
+     "en": "Grey",
+     "ja": "はいいろ"
+    },
+    "white": {
+     "en": "White",
+     "ja": "しろ"
+    }
+   },
+   "steep": {
+    "flat": {
+     "en": "Flat",
+     "ja": "なだらか"
+    },
+    "medium": {
+     "en": "Medium",
+     "ja": "ふつう"
+    },
+    "steep": {
+     "en": "Steep",
+     "ja": "きゅう"
+    }
+   }
+  },
+  "paramChoices": {
+   "viscosity": {
+    "runny": {
+     "en": "Runny",
+     "ja": "さらさら"
+    },
+    "medium": {
+     "en": "Medium",
+     "ja": "ふつう"
+    },
+    "sticky": {
+     "en": "Sticky",
+     "ja": "ねばねば"
+    }
+   }
+  }
+ }
+}

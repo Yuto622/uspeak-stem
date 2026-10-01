@@ -1,0 +1,269 @@
+{
+ "id": "data.polygon",
+ "region": "data",
+ "station": "turtle-plaza",
+ "title": {
+  "en": "The Turtle Plaza",
+  "ja": "カメの ひろば"
+ },
+ "sim": "polygon",
+ "grade": "小5",
+ "unit": "正多角形とプログラミング",
+ "intro": {
+  "en": "Tell the turtle: go forward, turn, repeat. Choose how many times and how much to turn. When do you get back home with a closed shape?",
+  "ja": "カメに めいれい：すすむ、まがる、くりかえす。なんかい くりかえすか、なんど まがるかを きめよう。いつ もとの ばしょに もどって とじた かたちに なる？"
+ },
+ "params": {
+  "sides": {
+   "min": 3,
+   "max": 8,
+   "step": 1,
+   "unit": "",
+   "en": "Repeats",
+   "ja": "くりかえす かいすう"
+  },
+  "angle": {
+   "min": 30,
+   "max": 180,
+   "step": 1,
+   "unit": "°",
+   "en": "Turn each time",
+   "ja": "まがる かくど"
+  }
+ },
+ "levels": {
+  "explore": {
+   "ages": "4-7",
+   "predict": {
+    "kind": "choice",
+    "field": "closes",
+    "choices": [
+     "yes",
+     "no"
+    ]
+   },
+   "measure": [
+    "closes",
+    "turns"
+   ]
+  },
+  "investigate": {
+   "ages": "8-11",
+   "predict": {
+    "kind": "number",
+    "field": "rightAngle",
+    "unit": "°",
+    "tolerance": 0.02
+   },
+   "measure": [
+    "rightAngle",
+    "closes"
+   ],
+   "record": [
+    "sides",
+    "rightAngle"
+   ]
+  },
+  "engineer": {
+   "ages": "12-15",
+   "predict": {
+    "kind": "choice",
+    "field": "name",
+    "choices": [
+     "3",
+     "4",
+     "5",
+     "6",
+     "8",
+     "star",
+     "open"
+    ]
+   },
+   "measure": [
+    "closes",
+    "name",
+    "turns"
+   ],
+   "record": [
+    "sides",
+    "turns"
+   ],
+   "challenge": {
+    "en": "Draw a five-pointed star with five repeats.",
+    "ja": "5かいの くりかえしで ほしを かこう。"
+   }
+  }
+ },
+ "explain": {
+  "en": "What makes the shape close?",
+  "ja": "かたちが とじるのは どんなとき？",
+  "aims": [
+   {
+    "id": "360",
+    "en": "The turns must add up to a full circle, 360°",
+    "ja": "まがった ぶんの ごうけいが 360° に なる",
+    "keys": [
+     [
+      "360",
+      "full circle",
+      "whole turn",
+      "all the way round",
+      "add up",
+      "total"
+     ]
+    ]
+   },
+   {
+    "id": "divide",
+    "en": "Turn 360 divided by the number of sides",
+    "ja": "360 ÷ へんの かず だけ まがる",
+    "keys": [
+     [
+      "divide",
+      "divided",
+      "÷",
+      "split",
+      "share",
+      "each",
+      "equal"
+     ]
+    ]
+   },
+   {
+    "id": "repeat",
+    "en": "Repeating a small program draws the shape",
+    "ja": "小さい プログラムを くりかえすと かたちに なる",
+    "keys": [
+     [
+      "repeat",
+      "repeats",
+      "loop",
+      "loops",
+      "again",
+      "program",
+      "instruction",
+      "instructions",
+      "steps"
+     ]
+    ]
+   }
+  ]
+ },
+ "classPlot": {
+  "x": "sides",
+  "y": "turns",
+  "xLabel": {
+   "en": "Repeats",
+   "ja": "くりかえし"
+  },
+  "yLabel": {
+   "en": "Full turns made",
+   "ja": "まわった かいすう"
+  }
+ },
+ "real": {
+  "en": "Walk it yourself in the playground: three steps, turn, three steps, turn.",
+  "ja": "こうていで じぶんで あるこう。3ぽ すすんで まがる、3ぽ すすんで まがる。",
+  "kit": [
+   "a playground"
+  ]
+ },
+ "standards": {
+  "jp": [
+   "小5 算数 正多角形（プログラミング）"
+  ],
+  "ngss": [
+   "MS-ETS1-4"
+  ],
+  "cambridge": [
+   "Science enquiry"
+  ],
+  "pisa": [
+   "explain",
+   "interpret"
+  ]
+ },
+ "powers": {
+  "predict": 1,
+  "measure": 1,
+  "data": 1,
+  "explain": 1,
+  "build": 1
+ },
+ "ui": {
+  "labels": {
+   "closes": {
+    "en": "Comes back home?",
+    "ja": "もとの ばしょに もどる？"
+   },
+   "turns": {
+    "en": "Full turns",
+    "ja": "まわった かいすう"
+   },
+   "rightAngle": {
+    "en": "Angle for a regular shape (°)",
+    "ja": "せいたかくけいに なる かくど（°）"
+   },
+   "name": {
+    "en": "The shape",
+    "ja": "かたち"
+   }
+  },
+  "questions": {
+   "closes": {
+    "en": "Will the turtle come back to where it started?",
+    "ja": "カメは はじめの ばしょに もどる？"
+   },
+   "rightAngle": {
+    "en": "What angle makes a regular shape with that many sides?",
+    "ja": "その かずで せいたかくけいに なる かくどは？"
+   },
+   "name": {
+    "en": "What shape will it draw?",
+    "ja": "どんな かたちに なる？"
+   }
+  },
+  "choices": {
+   "closes": {
+    "yes": {
+     "en": "Yes",
+     "ja": "はい"
+    },
+    "no": {
+     "en": "No",
+     "ja": "いいえ"
+    }
+   },
+   "name": {
+    "3": {
+     "en": "Triangle",
+     "ja": "さんかくけい"
+    },
+    "4": {
+     "en": "Square",
+     "ja": "せいほうけい"
+    },
+    "5": {
+     "en": "Pentagon",
+     "ja": "ごかくけい"
+    },
+    "6": {
+     "en": "Hexagon",
+     "ja": "ろっかくけい"
+    },
+    "8": {
+     "en": "Octagon",
+     "ja": "はっかくけい"
+    },
+    "star": {
+     "en": "A star",
+     "ja": "ほし"
+    },
+    "open": {
+     "en": "Does not close",
+     "ja": "とじない"
+    }
+   }
+  }
+ }
+}

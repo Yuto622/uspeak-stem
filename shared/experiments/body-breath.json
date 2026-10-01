@@ -1,0 +1,288 @@
+{
+ "id": "body.breath",
+ "region": "body",
+ "station": "breath-bag",
+ "title": {
+  "en": "The Breath Bag",
+  "ja": "こきゅうの ふくろ"
+ },
+ "sim": "breath",
+ "grade": "小6",
+ "unit": "体のつくりとはたらき（呼吸）",
+ "intro": {
+  "en": "Fill one bag with the air you breathe in, one with the air you breathe out. Shake lime water in each. The breathed-out one turns cloudy: more carbon dioxide, less oxygen.",
+  "ja": "すう くうきと はく いきを ふくろに。せっかいすいを 入れて ふろう。はいた ほうは しろく にごる。にさんかたんそが おおく、さんそが すくない。"
+ },
+ "params": {
+  "activity": {
+   "choices": [
+    "rest",
+    "walk",
+    "run"
+   ],
+   "en": "What you were doing",
+   "ja": "なにを していた"
+  },
+  "sample": {
+   "choices": [
+    "in",
+    "out"
+   ],
+   "en": "Air sample",
+   "ja": "くうき"
+  }
+ },
+ "levels": {
+  "explore": {
+   "ages": "4-7",
+   "fixed": {
+    "activity": "rest"
+   },
+   "predict": {
+    "kind": "choice",
+    "field": "limewater",
+    "choices": [
+     "cloudy",
+     "clear"
+    ]
+   },
+   "measure": [
+    "limewater",
+    "co2"
+   ]
+  },
+  "investigate": {
+   "ages": "8-11",
+   "fixed": {
+    "sample": "out"
+   },
+   "predict": {
+    "kind": "number",
+    "field": "breathsPerMin",
+    "unit": "",
+    "tolerance": 0.1
+   },
+   "measure": [
+    "breathsPerMin",
+    "o2"
+   ],
+   "record": [
+    "effort",
+    "breathsPerMin"
+   ]
+  },
+  "engineer": {
+   "ages": "12-15",
+   "predict": {
+    "kind": "number",
+    "field": "o2",
+    "unit": "%",
+    "tolerance": 0.05
+   },
+   "measure": [
+    "o2",
+    "co2",
+    "limewater"
+   ],
+   "record": [
+    "effort",
+    "co2"
+   ],
+   "challenge": {
+    "en": "Explain why a runner breathes faster, using the numbers.",
+    "ja": "はしる ひとの こきゅうが はやい りゆうを、数で せつめいしよう。"
+   }
+  }
+ },
+ "explain": {
+  "en": "What changes in the air we breathe?",
+  "ja": "すった くうきと はいた いき、なにが ちがう？",
+  "aims": [
+   {
+    "id": "oxygen",
+    "en": "We take in oxygen",
+    "ja": "さんそを とりこむ",
+    "keys": [
+     [
+      "oxygen"
+     ],
+     [
+      "take",
+      "takes",
+      "in",
+      "use",
+      "uses",
+      "breathe in",
+      "absorb",
+      "absorbs",
+      "less"
+     ]
+    ]
+   },
+   {
+    "id": "co2",
+    "en": "We breathe out carbon dioxide, which clouds lime water",
+    "ja": "にさんかたんそを はく。せっかいすいが にごる",
+    "keys": [
+     [
+      "carbon dioxide",
+      "co2",
+      "lime",
+      "cloudy",
+      "white",
+      "milky"
+     ]
+    ]
+   },
+   {
+    "id": "exercise",
+    "en": "Running needs more oxygen, so we breathe faster",
+    "ja": "はしると さんそが もっと いるから はやく こきゅう",
+    "keys": [
+     [
+      "run",
+      "running",
+      "exercise",
+      "move",
+      "moving"
+     ],
+     [
+      "faster",
+      "more",
+      "quick",
+      "quicker",
+      "harder",
+      "deeper"
+     ]
+    ]
+   }
+  ]
+ },
+ "classPlot": {
+  "x": "effort",
+  "y": "breathsPerMin",
+  "xLabel": {
+   "en": "Effort (0 rest, 2 run)",
+   "ja": "うんどうの つよさ"
+  },
+  "yLabel": {
+   "en": "Breaths per minute",
+   "ja": "1ぷんの こきゅう"
+  }
+ },
+ "real": {
+  "en": "Count your breaths for a minute sitting, then after running on the spot.",
+  "ja": "すわって 1ぷん こきゅうを かぞえ、その ばで はしった あとも かぞえよう。",
+  "kit": [
+   "a timer"
+  ]
+ },
+ "standards": {
+  "jp": [
+   "小6 人の体のつくりと働き（呼吸）"
+  ],
+  "ngss": [
+   "MS-LS1-7"
+  ],
+  "cambridge": [
+   "Science enquiry"
+  ],
+  "pisa": [
+   "explain",
+   "interpret"
+  ]
+ },
+ "powers": {
+  "predict": 1,
+  "measure": 1,
+  "data": 1,
+  "explain": 1,
+  "build": 1
+ },
+ "ui": {
+  "labels": {
+   "limewater": {
+    "en": "Lime water",
+    "ja": "せっかいすい"
+   },
+   "co2": {
+    "en": "Carbon dioxide (%)",
+    "ja": "にさんかたんそ（%）"
+   },
+   "o2": {
+    "en": "Oxygen (%)",
+    "ja": "さんそ（%）"
+   },
+   "breathsPerMin": {
+    "en": "Breaths per minute",
+    "ja": "1ぷんの こきゅう"
+   },
+   "moreCO2": {
+    "en": "More CO2 than air?",
+    "ja": "くうきより CO2 が おおい？"
+   }
+  },
+  "questions": {
+   "limewater": {
+    "en": "Will the lime water go cloudy?",
+    "ja": "せっかいすいは にごる？"
+   },
+   "breathsPerMin": {
+    "en": "How many breaths a minute?",
+    "ja": "1ぷんに なんかい こきゅう？"
+   },
+   "o2": {
+    "en": "What percent oxygen will the bag hold?",
+    "ja": "ふくろの さんそは なん %？"
+   }
+  },
+  "choices": {
+   "limewater": {
+    "cloudy": {
+     "en": "Cloudy",
+     "ja": "にごる"
+    },
+    "clear": {
+     "en": "Clear",
+     "ja": "そのまま"
+    }
+   },
+   "moreCO2": {
+    "yes": {
+     "en": "Yes",
+     "ja": "はい"
+    },
+    "no": {
+     "en": "No",
+     "ja": "いいえ"
+    }
+   }
+  },
+  "paramChoices": {
+   "activity": {
+    "rest": {
+     "en": "Resting",
+     "ja": "やすんでいた"
+    },
+    "walk": {
+     "en": "Walking",
+     "ja": "あるいていた"
+    },
+    "run": {
+     "en": "Running",
+     "ja": "はしっていた"
+    }
+   },
+   "sample": {
+    "in": {
+     "en": "Breathed in",
+     "ja": "すう くうき"
+    },
+    "out": {
+     "en": "Breathed out",
+     "ja": "はいた いき"
+    }
+   }
+  }
+ }
+}

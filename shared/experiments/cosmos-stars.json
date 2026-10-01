@@ -1,0 +1,283 @@
+{
+ "id": "cosmos.stars",
+ "region": "cosmos",
+ "station": "star-wheel",
+ "title": {
+  "en": "The Star Wheel",
+  "ja": "ほしの まわる ところ"
+ },
+ "sim": "stars",
+ "grade": "小4",
+ "unit": "月や星の動き",
+ "intro": {
+  "en": "Watch one star for two hours. Facing east it climbs up and to the right; south, it slides right; west, it sinks; north, the sky wheels round the Pole Star, which never moves.",
+  "ja": "1つの ほしを 2じかん 見よう。ひがしでは みぎ上へ、みなみでは みぎへ、にしでは しずみ、きたでは ほっきょくせいの まわりを まわる。ほっきょくせいは うごかない。"
+ },
+ "params": {
+  "hours": {
+   "min": 1,
+   "max": 6,
+   "step": 1,
+   "unit": "h",
+   "en": "Hours",
+   "ja": "じかん"
+  },
+  "direction": {
+   "choices": [
+    "east",
+    "south",
+    "west",
+    "north"
+   ],
+   "en": "Facing",
+   "ja": "むいている ほうこう"
+  }
+ },
+ "levels": {
+  "explore": {
+   "ages": "4-7",
+   "fixed": {
+    "hours": 2
+   },
+   "predict": {
+    "kind": "choice",
+    "field": "motion",
+    "choices": [
+     "up-right",
+     "right",
+     "down-right",
+     "anticlockwise"
+    ]
+   },
+   "measure": [
+    "motion",
+    "degrees"
+   ]
+  },
+  "investigate": {
+   "ages": "8-11",
+   "predict": {
+    "kind": "number",
+    "field": "degrees",
+    "unit": "°",
+    "tolerance": 0.05
+   },
+   "measure": [
+    "degrees"
+   ],
+   "record": [
+    "hours",
+    "degrees"
+   ]
+  },
+  "engineer": {
+   "ages": "12-15",
+   "fixed": {
+    "direction": "north"
+   },
+   "predict": {
+    "kind": "choice",
+    "field": "fixed",
+    "choices": [
+     "Polaris",
+     "none"
+    ]
+   },
+   "measure": [
+    "degrees",
+    "fixed"
+   ],
+   "record": [
+    "hours",
+    "degrees"
+   ],
+   "challenge": {
+    "en": "Work out how many hours until the sky has turned a quarter.",
+    "ja": "そらが 4ぶんの1 まわるのに なんじかん？"
+   }
+  }
+ },
+ "explain": {
+  "en": "Why do the stars move across the sky?",
+  "ja": "どうして ほしは うごく？",
+  "aims": [
+   {
+    "id": "earth-turns",
+    "en": "The Earth turns, so the whole sky seems to turn",
+    "ja": "ちきゅうが まわるから そらが まわって 見える",
+    "keys": [
+     [
+      "earth",
+      "spin",
+      "spins",
+      "rotate",
+      "rotates",
+      "turn",
+      "turns",
+      "turning"
+     ]
+    ]
+   },
+   {
+    "id": "fifteen",
+    "en": "Fifteen degrees every hour, all the way round in a day",
+    "ja": "1じかんに 15ど、1日で 1しゅう",
+    "keys": [
+     [
+      "15",
+      "fifteen",
+      "hour",
+      "24",
+      "day",
+      "round",
+      "circle"
+     ]
+    ]
+   },
+   {
+    "id": "polaris",
+    "en": "The Pole Star stays put because it is over the axis",
+    "ja": "ほっきょくせいは じくの 上だから うごかない",
+    "keys": [
+     [
+      "pole star",
+      "polaris",
+      "north star",
+      "axis"
+     ],
+     [
+      "still",
+      "stays",
+      "fixed",
+      "doesn't move",
+      "does not move",
+      "centre",
+      "center"
+     ]
+    ]
+   }
+  ]
+ },
+ "classPlot": {
+  "x": "hours",
+  "y": "degrees",
+  "xLabel": {
+   "en": "Hours",
+   "ja": "じかん"
+  },
+  "yLabel": {
+   "en": "Degrees turned",
+   "ja": "まわった かくど"
+  }
+ },
+ "real": {
+  "en": "Photograph the same stars from the same spot an hour apart.",
+  "ja": "おなじ ばしょから 1じかん おいて おなじ ほしを しゃしんに。",
+  "kit": [
+   "a camera",
+   "a clear night"
+  ]
+ },
+ "standards": {
+  "jp": [
+   "小4 月と星"
+  ],
+  "ngss": [
+   "5-ESS1-2"
+  ],
+  "cambridge": [
+   "Science enquiry"
+  ],
+  "pisa": [
+   "explain",
+   "interpret"
+  ]
+ },
+ "powers": {
+  "predict": 1,
+  "measure": 1,
+  "data": 1,
+  "explain": 1,
+  "build": 1
+ },
+ "ui": {
+  "labels": {
+   "motion": {
+    "en": "The star moves",
+    "ja": "ほしの うごき"
+   },
+   "degrees": {
+    "en": "Degrees turned",
+    "ja": "まわった かくど"
+   },
+   "fixed": {
+    "en": "Star that never moves",
+    "ja": "うごかない ほし"
+   }
+  },
+  "questions": {
+   "motion": {
+    "en": "Which way will the star move?",
+    "ja": "ほしは どっちへ うごく？"
+   },
+   "degrees": {
+    "en": "How many degrees will the sky turn?",
+    "ja": "そらは なんど まわる？"
+   },
+   "fixed": {
+    "en": "Which star stays still?",
+    "ja": "うごかない ほしは？"
+   }
+  },
+  "choices": {
+   "motion": {
+    "up-right": {
+     "en": "Up and to the right",
+     "ja": "みぎ上へ"
+    },
+    "right": {
+     "en": "To the right",
+     "ja": "みぎへ"
+    },
+    "down-right": {
+     "en": "Down and to the right",
+     "ja": "みぎ下へ"
+    },
+    "anticlockwise": {
+     "en": "Round the Pole Star, anticlockwise",
+     "ja": "ほっきょくせいの まわりを ひだりまわり"
+    }
+   },
+   "fixed": {
+    "Polaris": {
+     "en": "The Pole Star",
+     "ja": "ほっきょくせい"
+    },
+    "none": {
+     "en": "None",
+     "ja": "ない"
+    }
+   }
+  },
+  "paramChoices": {
+   "direction": {
+    "east": {
+     "en": "East",
+     "ja": "ひがし"
+    },
+    "south": {
+     "en": "South",
+     "ja": "みなみ"
+    },
+    "west": {
+     "en": "West",
+     "ja": "にし"
+    },
+    "north": {
+     "en": "North",
+     "ja": "きた"
+    }
+   }
+  }
+ }
+}

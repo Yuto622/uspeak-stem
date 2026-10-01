@@ -1,0 +1,313 @@
+{
+ "id": "force.sound",
+ "region": "force",
+ "station": "drum-stage",
+ "title": {
+  "en": "The Drum Stage",
+  "ja": "たいこの ステージ"
+ },
+ "sim": "sound",
+ "grade": "小3",
+ "unit": "音のせいしつ",
+ "intro": {
+  "en": "Pluck a string. A hard pluck shakes it more and sounds louder. A shorter string shakes faster and sounds higher.",
+  "ja": "げんを はじこう。つよく はじくと 大きく ふるえて 大きな おと。みじかい げんは はやく ふるえて たかい おと。"
+ },
+ "params": {
+  "length": {
+   "min": 20,
+   "max": 80,
+   "step": 10,
+   "unit": "cm",
+   "en": "String length",
+   "ja": "げんの ながさ"
+  },
+  "pluck": {
+   "choices": [
+    "soft",
+    "hard"
+   ],
+   "en": "Pluck",
+   "ja": "はじきかた"
+  },
+  "tension": {
+   "choices": [
+    "loose",
+    "medium",
+    "tight"
+   ],
+   "en": "Tightness",
+   "ja": "はりの つよさ"
+  }
+ },
+ "levels": {
+  "explore": {
+   "ages": "4-7",
+   "fixed": {
+    "length": 60,
+    "tension": "medium"
+   },
+   "predict": {
+    "kind": "choice",
+    "field": "shake",
+    "choices": [
+     "big",
+     "small"
+    ]
+   },
+   "measure": [
+    "shake",
+    "loud"
+   ]
+  },
+  "investigate": {
+   "ages": "8-11",
+   "fixed": {
+    "pluck": "soft"
+   },
+   "predict": {
+    "kind": "choice",
+    "field": "pitch",
+    "choices": [
+     "higher",
+     "lower",
+     "same"
+    ]
+   },
+   "measure": [
+    "hz",
+    "pitch"
+   ],
+   "record": [
+    "length",
+    "hz"
+   ]
+  },
+  "engineer": {
+   "ages": "12-15",
+   "predict": {
+    "kind": "number",
+    "field": "hz",
+    "unit": "Hz",
+    "tolerance": 0.05
+   },
+   "measure": [
+    "hz",
+    "pitch"
+   ],
+   "record": [
+    "length",
+    "hz"
+   ],
+   "challenge": {
+    "en": "Tune the string to 220 Hz.",
+    "ja": "げんを 220 Hz に あわせよう。"
+   }
+  }
+ },
+ "explain": {
+  "en": "What is sound?",
+  "ja": "おとって なに？",
+  "aims": [
+   {
+    "id": "vibration",
+    "en": "Sound is something shaking",
+    "ja": "おとは ものが ふるえること",
+    "keys": [
+     [
+      "shake",
+      "shakes",
+      "shaking",
+      "vibrate",
+      "vibrates",
+      "vibration",
+      "vibrating",
+      "wobble"
+     ]
+    ]
+   },
+   {
+    "id": "loud",
+    "en": "A bigger shake is a louder sound",
+    "ja": "大きく ふるえると 大きい おと",
+    "keys": [
+     [
+      "big",
+      "bigger",
+      "hard",
+      "harder",
+      "more"
+     ],
+     [
+      "loud",
+      "louder",
+      "volume"
+     ]
+    ]
+   },
+   {
+    "id": "pitch",
+    "en": "A faster shake is a higher note; short strings shake faster",
+    "ja": "はやく ふるえると たかい おと、みじかい げんは はやい",
+    "keys": [
+     [
+      "fast",
+      "faster",
+      "quick",
+      "short",
+      "shorter",
+      "tight",
+      "tighter",
+      "thin"
+     ],
+     [
+      "high",
+      "higher",
+      "pitch",
+      "note"
+     ]
+    ]
+   }
+  ]
+ },
+ "classPlot": {
+  "x": "length",
+  "y": "hz",
+  "xLabel": {
+   "en": "String length (cm)",
+   "ja": "げんの ながさ（cm）"
+  },
+  "yLabel": {
+   "en": "Frequency (Hz)",
+   "ja": "しんどうすう（Hz）"
+  }
+ },
+ "real": {
+  "en": "Stretch a rubber band over a box and pluck it; shorten it with your finger.",
+  "ja": "はこに ゴムを かけて はじこう。ゆびで みじかく しても はじこう。",
+  "kit": [
+   "a rubber band",
+   "a box"
+  ]
+ },
+ "standards": {
+  "jp": [
+   "小3 光と音の性質（音）",
+   "中1 音の性質"
+  ],
+  "ngss": [
+   "1-PS4-1",
+   "MS-PS4-1"
+  ],
+  "cambridge": [
+   "Science enquiry"
+  ],
+  "pisa": [
+   "explain",
+   "interpret"
+  ]
+ },
+ "powers": {
+  "predict": 1,
+  "measure": 1,
+  "data": 1,
+  "explain": 1,
+  "build": 1
+ },
+ "ui": {
+  "labels": {
+   "shake": {
+    "en": "How much it shakes",
+    "ja": "ふるえの 大きさ"
+   },
+   "loud": {
+    "en": "Loudness",
+    "ja": "おとの 大きさ"
+   },
+   "hz": {
+    "en": "Shakes per second (Hz)",
+    "ja": "1びょうの ふるえ（Hz）"
+   },
+   "pitch": {
+    "en": "Pitch",
+    "ja": "おとの たかさ"
+   }
+  },
+  "questions": {
+   "shake": {
+    "en": "How much will the string shake?",
+    "ja": "げんは どれくらい ふるえる？"
+   },
+   "pitch": {
+    "en": "Higher or lower than the 60 cm string?",
+    "ja": "60 cm の げんより たかい？ ひくい？"
+   },
+   "hz": {
+    "en": "How many shakes per second?",
+    "ja": "1びょうに なんかい ふるえる？"
+   }
+  },
+  "choices": {
+   "shake": {
+    "big": {
+     "en": "A big shake",
+     "ja": "大きく"
+    },
+    "small": {
+     "en": "A small shake",
+     "ja": "小さく"
+    }
+   },
+   "loud": {
+    "louder": {
+     "en": "Loud",
+     "ja": "大きい"
+    },
+    "softer": {
+     "en": "Soft",
+     "ja": "小さい"
+    }
+   },
+   "pitch": {
+    "higher": {
+     "en": "Higher",
+     "ja": "たかい"
+    },
+    "lower": {
+     "en": "Lower",
+     "ja": "ひくい"
+    },
+    "same": {
+     "en": "Same",
+     "ja": "おなじ"
+    }
+   }
+  },
+  "paramChoices": {
+   "pluck": {
+    "soft": {
+     "en": "Soft pluck",
+     "ja": "そっと"
+    },
+    "hard": {
+     "en": "Hard pluck",
+     "ja": "つよく"
+    }
+   },
+   "tension": {
+    "loose": {
+     "en": "Loose",
+     "ja": "ゆるい"
+    },
+    "medium": {
+     "en": "Medium",
+     "ja": "ふつう"
+    },
+    "tight": {
+     "en": "Tight",
+     "ja": "きつい"
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,251 @@
+{
+ "id": "life.medaka",
+ "region": "life",
+ "station": "medaka-tank",
+ "title": {
+  "en": "The Medaka Tank",
+  "ja": "メダカの すいそう"
+ },
+ "sim": "medaka",
+ "grade": "小5",
+ "unit": "メダカのたんじょう",
+ "intro": {
+  "en": "Medaka eggs hatch in about ten days at 25°C. Colder water, slower. Too cold or too hot and they never hatch.",
+  "ja": "メダカの たまごは 25°C で やく10日で かえる。つめたい みずだと おそい。さむすぎても あつすぎても かえらない。"
+ },
+ "params": {
+  "tempC": {
+   "min": 10,
+   "max": 40,
+   "step": 5,
+   "unit": "°C",
+   "en": "Water temperature",
+   "ja": "すいおん"
+  }
+ },
+ "levels": {
+  "explore": {
+   "ages": "4-7",
+   "predict": {
+    "kind": "choice",
+    "field": "bucket",
+    "choices": [
+     "under-9",
+     "9-12",
+     "over-12",
+     "never"
+    ]
+   },
+   "measure": [
+    "hatches",
+    "days"
+   ]
+  },
+  "investigate": {
+   "ages": "8-11",
+   "predict": {
+    "kind": "number",
+    "field": "days",
+    "unit": "days",
+    "tolerance": 0.1
+   },
+   "measure": [
+    "days"
+   ],
+   "record": [
+    "tempC",
+    "days"
+   ]
+  },
+  "engineer": {
+   "ages": "12-15",
+   "predict": {
+    "kind": "number",
+    "field": "days",
+    "unit": "days",
+    "tolerance": 0.05
+   },
+   "measure": [
+    "days",
+    "hatches"
+   ],
+   "record": [
+    "tempC",
+    "days"
+   ],
+   "challenge": {
+    "en": "Find the temperature that hatches them in a week.",
+    "ja": "1しゅうかんで かえる すいおんを さがそう。"
+   }
+  }
+ },
+ "explain": {
+  "en": "What decides when the eggs hatch?",
+  "ja": "たまごが かえる 日を きめるのは？",
+  "aims": [
+   {
+    "id": "warm-fast",
+    "en": "Warmer water, faster",
+    "ja": "あたたかいと はやい",
+    "keys": [
+     [
+      "warm",
+      "warmer",
+      "hot",
+      "temperature",
+      "25"
+     ],
+     [
+      "fast",
+      "faster",
+      "sooner",
+      "quick",
+      "quicker",
+      "fewer days",
+      "less"
+     ]
+    ]
+   },
+   {
+    "id": "too",
+    "en": "Too cold or too hot kills them",
+    "ja": "さむすぎ・あつすぎは だめ",
+    "keys": [
+     [
+      "too cold",
+      "too hot",
+      "cold",
+      "freezing",
+      "hot"
+     ],
+     [
+      "never",
+      "die",
+      "dies",
+      "dead",
+      "not hatch",
+      "won't",
+      "doesn't",
+      "does not"
+     ]
+    ]
+   },
+   {
+    "id": "inside",
+    "en": "The baby grows inside the egg on its yolk",
+    "ja": "たまごの なかで らんおうを つかって そだつ",
+    "keys": [
+     [
+      "inside",
+      "egg",
+      "yolk",
+      "grow",
+      "grows",
+      "growing",
+      "eyes",
+      "heart"
+     ]
+    ]
+   }
+  ]
+ },
+ "classPlot": {
+  "x": "tempC",
+  "y": "days",
+  "xLabel": {
+   "en": "Water temperature (°C)",
+   "ja": "すいおん（°C）"
+  },
+  "yLabel": {
+   "en": "Days to hatch",
+   "ja": "かえるまでの 日"
+  }
+ },
+ "real": {
+  "en": "Keep medaka eggs in a jar on the windowsill and look every day with a hand lens.",
+  "ja": "メダカの たまごを びんに 入れて まどべに。まいにち むしめがねで 見よう。",
+  "kit": [
+   "medaka eggs",
+   "a jar",
+   "a hand lens"
+  ]
+ },
+ "standards": {
+  "jp": [
+   "小5 動物の誕生"
+  ],
+  "ngss": [
+   "3-LS1-1"
+  ],
+  "cambridge": [
+   "Science enquiry"
+  ],
+  "pisa": [
+   "explain",
+   "interpret"
+  ]
+ },
+ "powers": {
+  "predict": 1,
+  "measure": 1,
+  "data": 1,
+  "explain": 1,
+  "build": 1
+ },
+ "ui": {
+  "labels": {
+   "hatches": {
+    "en": "Hatches?",
+    "ja": "かえる？"
+   },
+   "days": {
+    "en": "Days to hatch",
+    "ja": "かえるまでの 日"
+   },
+   "bucket": {
+    "en": "When?",
+    "ja": "いつ？"
+   }
+  },
+  "questions": {
+   "bucket": {
+    "en": "When will the eggs hatch?",
+    "ja": "たまごは いつ かえる？"
+   },
+   "days": {
+    "en": "How many days until they hatch?",
+    "ja": "なんにちで かえる？"
+   }
+  },
+  "choices": {
+   "hatches": {
+    "yes": {
+     "en": "Yes",
+     "ja": "はい"
+    },
+    "no": {
+     "en": "No",
+     "ja": "いいえ"
+    }
+   },
+   "bucket": {
+    "under-9": {
+     "en": "Under 9 days",
+     "ja": "9日 みまん"
+    },
+    "9-12": {
+     "en": "9 to 12 days",
+     "ja": "9〜12日"
+    },
+    "over-12": {
+     "en": "Over 12 days",
+     "ja": "12日 いじょう"
+    },
+    "never": {
+     "en": "Never",
+     "ja": "かえらない"
+    }
+   }
+  }
+ }
+}

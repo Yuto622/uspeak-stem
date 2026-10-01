@@ -1,0 +1,333 @@
+{
+ "id": "life.germination",
+ "region": "life",
+ "station": "seed-tray",
+ "title": {
+  "en": "The Seed Tray",
+  "ja": "たねの トレー"
+ },
+ "sim": "germination",
+ "grade": "小5",
+ "unit": "植物の発芽と成長",
+ "intro": {
+  "en": "Bean seeds on cotton. Give water or not, air or not, warm or cold, light or dark. Which seeds sprout? Which thing did not matter?",
+  "ja": "だっしめんの 上の インゲンマメ。みず あり・なし、くうき あり・なし、あたたかい・さむい、あかるい・くらい。はつがするのは？ かんけいなかったのは？"
+ },
+ "params": {
+  "water": {
+   "choices": [
+    "yes",
+    "no"
+   ],
+   "en": "Water",
+   "ja": "みず"
+  },
+  "air": {
+   "choices": [
+    "yes",
+    "no"
+   ],
+   "en": "Air",
+   "ja": "くうき"
+  },
+  "tempC": {
+   "min": 0,
+   "max": 40,
+   "step": 5,
+   "unit": "°C",
+   "en": "Temperature",
+   "ja": "おんど"
+  },
+  "light": {
+   "choices": [
+    "light",
+    "dark"
+   ],
+   "en": "Light",
+   "ja": "ひかり"
+  }
+ },
+ "levels": {
+  "explore": {
+   "ages": "4-7",
+   "fixed": {
+    "tempC": 20,
+    "air": "yes",
+    "light": "light"
+   },
+   "predict": {
+    "kind": "choice",
+    "field": "germinates",
+    "choices": [
+     "yes",
+     "no"
+    ]
+   },
+   "measure": [
+    "germinates",
+    "missing"
+   ]
+  },
+  "investigate": {
+   "ages": "8-11",
+   "fixed": {
+    "water": "yes",
+    "air": "yes"
+   },
+   "predict": {
+    "kind": "choice",
+    "field": "germinates",
+    "choices": [
+     "yes",
+     "no"
+    ]
+   },
+   "measure": [
+    "germinates",
+    "days"
+   ],
+   "record": [
+    "tempC",
+    "days"
+   ]
+  },
+  "engineer": {
+   "ages": "12-15",
+   "fixed": {
+    "water": "yes",
+    "air": "yes",
+    "light": "dark"
+   },
+   "predict": {
+    "kind": "number",
+    "field": "days",
+    "unit": "days",
+    "tolerance": 0.1
+   },
+   "measure": [
+    "germinates",
+    "days",
+    "lightMatters"
+   ],
+   "record": [
+    "tempC",
+    "days"
+   ],
+   "challenge": {
+    "en": "Prove that light is not needed, with one pair of trays.",
+    "ja": "トレー 1くみで、ひかりは いらないと しめそう。"
+   }
+  }
+ },
+ "explain": {
+  "en": "What does a seed need to sprout?",
+  "ja": "たねが はつがするには なにが いる？",
+  "aims": [
+   {
+    "id": "three",
+    "en": "Water, air and the right warmth",
+    "ja": "みず・くうき・てきおん",
+    "keys": [
+     [
+      "water"
+     ],
+     [
+      "air",
+      "oxygen"
+     ],
+     [
+      "warm",
+      "warmth",
+      "temperature",
+      "heat"
+     ]
+    ]
+   },
+   {
+    "id": "light-no",
+    "en": "Light is not needed",
+    "ja": "ひかりは いらない",
+    "keys": [
+     [
+      "light",
+      "sun",
+      "dark"
+     ],
+     [
+      "not",
+      "no",
+      "doesn't",
+      "does not",
+      "without",
+      "even"
+     ]
+    ]
+   },
+   {
+    "id": "fair",
+    "en": "Change one thing at a time to be fair",
+    "ja": "1つだけ かえて くらべる",
+    "keys": [
+     [
+      "one",
+      "only",
+      "same",
+      "fair",
+      "control",
+      "compare",
+      "change"
+     ]
+    ]
+   }
+  ]
+ },
+ "classPlot": {
+  "x": "tempC",
+  "y": "days",
+  "xLabel": {
+   "en": "Temperature (°C)",
+   "ja": "おんど（°C）"
+  },
+  "yLabel": {
+   "en": "Days to sprout",
+   "ja": "はつがまでの 日"
+  }
+ },
+ "real": {
+  "en": "Three cups of beans on wet cotton: one on the windowsill, one in a dark cupboard, one in the fridge.",
+  "ja": "ぬれた だっしめんの 上の まめを 3つ：まどべ・くらい たな・れいぞうこ。",
+  "kit": [
+   "bean seeds",
+   "cotton wool",
+   "three cups"
+  ]
+ },
+ "standards": {
+  "jp": [
+   "小5 植物の発芽、成長、結実"
+  ],
+  "ngss": [
+   "3-LS1-1"
+  ],
+  "cambridge": [
+   "Science enquiry"
+  ],
+  "pisa": [
+   "explain",
+   "interpret"
+  ]
+ },
+ "powers": {
+  "predict": 1,
+  "measure": 1,
+  "data": 1,
+  "explain": 1,
+  "build": 1
+ },
+ "ui": {
+  "labels": {
+   "germinates": {
+    "en": "Sprouts?",
+    "ja": "はつがする？"
+   },
+   "missing": {
+    "en": "What was missing",
+    "ja": "たりなかった もの"
+   },
+   "days": {
+    "en": "Days to sprout",
+    "ja": "はつがまでの 日"
+   },
+   "lightMatters": {
+    "en": "Does light matter?",
+    "ja": "ひかりは かんけいある？"
+   }
+  },
+  "questions": {
+   "germinates": {
+    "en": "Will the seed sprout?",
+    "ja": "たねは はつがする？"
+   },
+   "days": {
+    "en": "How many days until it sprouts?",
+    "ja": "なんにちで はつがする？"
+   }
+  },
+  "choices": {
+   "germinates": {
+    "yes": {
+     "en": "Yes",
+     "ja": "はい"
+    },
+    "no": {
+     "en": "No",
+     "ja": "いいえ"
+    }
+   },
+   "lightMatters": {
+    "yes": {
+     "en": "Yes",
+     "ja": "はい"
+    },
+    "no": {
+     "en": "No",
+     "ja": "いいえ"
+    }
+   },
+   "missing": {
+    "none": {
+     "en": "Nothing, it had all it needed",
+     "ja": "なにも（ぜんぶ そろっていた）"
+    },
+    "water": {
+     "en": "Water",
+     "ja": "みず"
+    },
+    "air": {
+     "en": "Air",
+     "ja": "くうき"
+    },
+    "cold": {
+     "en": "Warmth, too cold",
+     "ja": "あたたかさ（さむすぎ）"
+    },
+    "hot": {
+     "en": "Too hot",
+     "ja": "あつすぎ"
+    }
+   }
+  },
+  "paramChoices": {
+   "water": {
+    "yes": {
+     "en": "Watered",
+     "ja": "みずを やる"
+    },
+    "no": {
+     "en": "Dry",
+     "ja": "みず なし"
+    }
+   },
+   "air": {
+    "yes": {
+     "en": "In the air",
+     "ja": "くうきに ふれる"
+    },
+    "no": {
+     "en": "Under water",
+     "ja": "みずに しずめる"
+    }
+   },
+   "light": {
+    "light": {
+     "en": "In the light",
+     "ja": "あかるい ところ"
+    },
+    "dark": {
+     "en": "In the dark",
+     "ja": "くらい ところ"
+    }
+   }
+  }
+ }
+}

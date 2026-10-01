@@ -1,0 +1,265 @@
+{
+ "id": "atoms.electrolysis",
+ "region": "atoms",
+ "station": "split-tank",
+ "title": {
+  "en": "The Split Tank",
+  "ja": "でんきぶんかいの そうち"
+ },
+ "sim": "electrolysis",
+ "grade": "中2",
+ "unit": "水の電気分解",
+ "intro": {
+  "en": "Run a current through water. Gas collects at both electrodes, twice as much at the minus side. Hydrogen pops with a flame; oxygen makes a glowing splint flare.",
+  "ja": "みずに でんりゅうを ながそう。りょうほうの でんきょくに きたいが たまり、マイナスがわは 2ばい。すいそは ほのおで ポン、さんそは ひを ぱっと もやす。"
+ },
+ "params": {
+  "current": {
+   "min": 0.2,
+   "max": 1,
+   "step": 0.1,
+   "unit": "A",
+   "en": "Current",
+   "ja": "でんりゅう"
+  },
+  "minutes": {
+   "min": 1,
+   "max": 10,
+   "step": 1,
+   "unit": "min",
+   "en": "Minutes",
+   "ja": "ふん"
+  }
+ },
+ "levels": {
+  "explore": {
+   "ages": "4-7",
+   "fixed": {
+    "current": 0.5,
+    "minutes": 5
+   },
+   "predict": {
+    "kind": "choice",
+    "field": "more",
+    "choices": [
+     "hydrogen",
+     "oxygen",
+     "same"
+    ]
+   },
+   "measure": [
+    "more",
+    "h2ml"
+   ]
+  },
+  "investigate": {
+   "ages": "8-11",
+   "predict": {
+    "kind": "number",
+    "field": "h2ml",
+    "unit": "mL",
+    "tolerance": 0.1
+   },
+   "measure": [
+    "h2ml",
+    "o2ml"
+   ],
+   "record": [
+    "minutes",
+    "h2ml"
+   ]
+  },
+  "engineer": {
+   "ages": "12-15",
+   "predict": {
+    "kind": "number",
+    "field": "o2ml",
+    "unit": "mL",
+    "tolerance": 0.1
+   },
+   "measure": [
+    "h2ml",
+    "o2ml",
+    "ratio"
+   ],
+   "record": [
+    "current",
+    "h2ml"
+   ],
+   "challenge": {
+    "en": "Collect exactly 20 mL of hydrogen.",
+    "ja": "すいそを ちょうど 20 mL あつめよう。"
+   }
+  }
+ },
+ "explain": {
+  "en": "What is water made of?",
+  "ja": "みずは なにで できている？",
+  "aims": [
+   {
+    "id": "two-gases",
+    "en": "Water splits into hydrogen and oxygen",
+    "ja": "みずは すいそと さんそに わかれる",
+    "keys": [
+     [
+      "hydrogen"
+     ],
+     [
+      "oxygen"
+     ]
+    ]
+   },
+   {
+    "id": "ratio",
+    "en": "Twice as much hydrogen as oxygen",
+    "ja": "すいそは さんその 2ばい",
+    "keys": [
+     [
+      "twice",
+      "double",
+      "2:1",
+      "two times",
+      "two to one",
+      "more hydrogen"
+     ]
+    ]
+   },
+   {
+    "id": "electricity",
+    "en": "Electricity pulls the molecule apart",
+    "ja": "でんきが 分子を ひきはなす",
+    "keys": [
+     [
+      "electric",
+      "electricity",
+      "current",
+      "volt",
+      "volts",
+      "battery"
+     ],
+     [
+      "split",
+      "splits",
+      "apart",
+      "break",
+      "breaks",
+      "separate",
+      "separates",
+      "pull",
+      "pulls"
+     ]
+    ]
+   }
+  ]
+ },
+ "classPlot": {
+  "x": "minutes",
+  "y": "h2ml",
+  "xLabel": {
+   "en": "Minutes",
+   "ja": "ふん"
+  },
+  "yLabel": {
+   "en": "Hydrogen (mL)",
+   "ja": "すいそ（mL）"
+  }
+ },
+ "real": {
+  "en": "With an adult: two pencils in salty water on a 9 V battery; watch the bubbles on each.",
+  "ja": "大人と：しおみずに えんぴつ 2本、9 V でんちに つないで、あわを 見よう。",
+  "kit": [
+   "an adult",
+   "two pencils",
+   "a 9 V battery",
+   "salt water"
+  ]
+ },
+ "standards": {
+  "jp": [
+   "中2 化学変化と原子・分子（分解）"
+  ],
+  "ngss": [
+   "MS-PS1-2"
+  ],
+  "cambridge": [
+   "Science enquiry"
+  ],
+  "pisa": [
+   "explain",
+   "interpret"
+  ]
+ },
+ "powers": {
+  "predict": 1,
+  "measure": 1,
+  "data": 1,
+  "explain": 1,
+  "build": 1
+ },
+ "ui": {
+  "labels": {
+   "more": {
+    "en": "Which gas is more?",
+    "ja": "おおい きたい"
+   },
+   "h2ml": {
+    "en": "Hydrogen (mL)",
+    "ja": "すいそ（mL）"
+   },
+   "o2ml": {
+    "en": "Oxygen (mL)",
+    "ja": "さんそ（mL）"
+   },
+   "ratio": {
+    "en": "Hydrogen : oxygen",
+    "ja": "すいそ：さんそ"
+   },
+   "cathodeGas": {
+    "en": "At the − electrode",
+    "ja": "マイナスがわの きたい"
+   }
+  },
+  "questions": {
+   "more": {
+    "en": "Which gas will there be more of?",
+    "ja": "どっちの きたいが おおい？"
+   },
+   "h2ml": {
+    "en": "How many mL of hydrogen?",
+    "ja": "すいそは なん mL？"
+   },
+   "o2ml": {
+    "en": "How many mL of oxygen?",
+    "ja": "さんそは なん mL？"
+   }
+  },
+  "choices": {
+   "more": {
+    "hydrogen": {
+     "en": "Hydrogen",
+     "ja": "すいそ"
+    },
+    "oxygen": {
+     "en": "Oxygen",
+     "ja": "さんそ"
+    },
+    "same": {
+     "en": "The same",
+     "ja": "おなじ"
+    }
+   },
+   "ratio": {
+    "2:1": {
+     "en": "2 : 1",
+     "ja": "2：1"
+    }
+   },
+   "cathodeGas": {
+    "hydrogen": {
+     "en": "Hydrogen",
+     "ja": "すいそ"
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,289 @@
+{
+ "id": "body.genetics",
+ "region": "body",
+ "station": "pea-garden",
+ "title": {
+  "en": "The Pea Garden",
+  "ja": "エンドウの はたけ"
+ },
+ "sim": "genetics",
+ "grade": "中3",
+ "unit": "遺伝の規則性",
+ "intro": {
+  "en": "Mendel's peas. Round is dominant over wrinkled. Cross two plants and count a hundred seeds: the ratio tells you the hidden genes.",
+  "ja": "メンデルの エンドウ。まるは しわに たいして ゆうせい。2つを かけあわせて たねを 100こ かぞえよう。ひは かくれた いでんしを おしえてくれる。"
+ },
+ "params": {
+  "cross": {
+   "choices": [
+    "RR-rr",
+    "Rr-Rr",
+    "Rr-rr",
+    "rr-rr"
+   ],
+   "en": "Cross",
+   "ja": "かけあわせ"
+  },
+  "seeds": {
+   "choices": [
+    "20",
+    "100",
+    "400"
+   ],
+   "en": "Seeds counted",
+   "ja": "かぞえる たね"
+  }
+ },
+ "levels": {
+  "explore": {
+   "ages": "4-7",
+   "fixed": {
+    "seeds": "100"
+   },
+   "predict": {
+    "kind": "choice",
+    "field": "ratio",
+    "choices": [
+     "all-round",
+     "3:1",
+     "1:1",
+     "all-wrinkled"
+    ]
+   },
+   "measure": [
+    "ratio",
+    "round"
+   ]
+  },
+  "investigate": {
+   "ages": "8-11",
+   "predict": {
+    "kind": "number",
+    "field": "roundPct",
+    "unit": "%",
+    "tolerance": 0.15
+   },
+   "measure": [
+    "round",
+    "wrinkled",
+    "roundPct"
+   ],
+   "record": [
+    "expectedRound",
+    "round"
+   ]
+  },
+  "engineer": {
+   "ages": "12-15",
+   "predict": {
+    "kind": "number",
+    "field": "round",
+    "unit": "",
+    "tolerance": 0.1
+   },
+   "measure": [
+    "round",
+    "wrinkled",
+    "roundPct"
+   ],
+   "record": [
+    "expectedRound",
+    "round"
+   ],
+   "challenge": {
+    "en": "Explain why 20 seeds gives a rougher ratio than 400.",
+    "ja": "20こより 400この ほうが ひが きれいに なる りゆうを いおう。"
+   }
+  }
+ },
+ "explain": {
+  "en": "Why do wrinkled peas come back in the grandchildren?",
+  "ja": "どうして まごの だいで しわが もどってくる？",
+  "aims": [
+   {
+    "id": "dominant",
+    "en": "Round hides wrinkled: it is dominant",
+    "ja": "まるは しわを かくす（ゆうせい）",
+    "keys": [
+     [
+      "dominant",
+      "hide",
+      "hides",
+      "hidden",
+      "mask",
+      "masks",
+      "stronger",
+      "wins"
+     ]
+    ]
+   },
+   {
+    "id": "two-copies",
+    "en": "Each plant carries two copies and passes on one",
+    "ja": "それぞれ 2つ もっていて 1つを わたす",
+    "keys": [
+     [
+      "two",
+      "pair",
+      "copies",
+      "copy",
+      "one from each",
+      "half",
+      "passes",
+      "pass",
+      "inherit",
+      "inherits"
+     ]
+    ]
+   },
+   {
+    "id": "ratio",
+    "en": "Hybrid × hybrid gives about 3 to 1",
+    "ja": "ざっしゅ どうしで やく 3：1",
+    "keys": [
+     [
+      "3:1",
+      "three to one",
+      "3 to 1",
+      "quarter",
+      "25",
+      "75"
+     ]
+    ]
+   }
+  ]
+ },
+ "classPlot": {
+  "x": "expectedRound",
+  "y": "round",
+  "xLabel": {
+   "en": "Expected round seeds",
+   "ja": "まるの よそう"
+  },
+  "yLabel": {
+   "en": "Round seeds counted",
+   "ja": "かぞえた まる"
+  }
+ },
+ "real": {
+  "en": "Look at a bag of dried peas: are any wrinkled?",
+  "ja": "かんそう エンドウの ふくろを 見よう。しわのは ある？",
+  "kit": [
+   "dried peas"
+  ]
+ },
+ "standards": {
+  "jp": [
+   "中3 生命の連続性（遺伝）"
+  ],
+  "ngss": [
+   "MS-LS3-2"
+  ],
+  "cambridge": [
+   "Science enquiry"
+  ],
+  "pisa": [
+   "explain",
+   "interpret"
+  ]
+ },
+ "powers": {
+  "predict": 1,
+  "measure": 1,
+  "data": 1,
+  "explain": 1,
+  "build": 1
+ },
+ "ui": {
+  "labels": {
+   "ratio": {
+    "en": "Round : wrinkled",
+    "ja": "まる：しわ"
+   },
+   "round": {
+    "en": "Round seeds",
+    "ja": "まるい たね"
+   },
+   "wrinkled": {
+    "en": "Wrinkled seeds",
+    "ja": "しわの たね"
+   },
+   "roundPct": {
+    "en": "Round (%)",
+    "ja": "まるの わりあい（%）"
+   },
+   "expectedRound": {
+    "en": "Expected round",
+    "ja": "まるの よそう"
+   }
+  },
+  "questions": {
+   "ratio": {
+    "en": "What ratio of round to wrinkled will you get?",
+    "ja": "まると しわの ひは？"
+   },
+   "roundPct": {
+    "en": "What percent will be round?",
+    "ja": "まるは なん %？"
+   },
+   "round": {
+    "en": "How many round seeds out of the count?",
+    "ja": "まるい たねは なんこ？"
+   }
+  },
+  "choices": {
+   "ratio": {
+    "all-round": {
+     "en": "All round",
+     "ja": "ぜんぶ まる"
+    },
+    "3:1": {
+     "en": "About 3 : 1",
+     "ja": "やく 3：1"
+    },
+    "1:1": {
+     "en": "About 1 : 1",
+     "ja": "やく 1：1"
+    },
+    "all-wrinkled": {
+     "en": "All wrinkled",
+     "ja": "ぜんぶ しわ"
+    }
+   }
+  },
+  "paramChoices": {
+   "cross": {
+    "RR-rr": {
+     "en": "Pure round × pure wrinkled",
+     "ja": "まる（RR）× しわ（rr）"
+    },
+    "Rr-Rr": {
+     "en": "Hybrid × hybrid",
+     "ja": "ざっしゅ（Rr）× ざっしゅ（Rr）"
+    },
+    "Rr-rr": {
+     "en": "Hybrid × pure wrinkled",
+     "ja": "ざっしゅ（Rr）× しわ（rr）"
+    },
+    "rr-rr": {
+     "en": "Wrinkled × wrinkled",
+     "ja": "しわ（rr）× しわ（rr）"
+    }
+   },
+   "seeds": {
+    "20": {
+     "en": "20 seeds",
+     "ja": "20こ"
+    },
+    "100": {
+     "en": "100 seeds",
+     "ja": "100こ"
+    },
+    "400": {
+     "en": "400 seeds",
+     "ja": "400こ"
+    }
+   }
+  }
+ }
+}
