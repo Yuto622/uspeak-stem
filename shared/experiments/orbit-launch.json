@@ -1,0 +1,55 @@
+{
+  "id": "cosmos.orbit.launch",
+  "region": "cosmos",
+  "station": "launch-pad",
+  "title": { "en": "The Launch Pad", "ja": "うちあげだい" },
+  "sim": "gravity",
+  "intro": {
+    "en": "Throw a ball sideways from a tall tower. Throw it slowly and it falls. Throw it fast enough and it never lands.",
+    "ja": "たかい とうから、ボールを よこに なげよう。ゆっくり なげると おちる。はやく なげると、おちてこない。"
+  },
+  "params": {
+    "body": { "choices": ["earth", "moon", "mars"], "en": "Which world", "ja": "どの ほし" },
+    "altitude": { "min": 200, "max": 2000, "step": 100, "unit": "km", "en": "Height", "ja": "たかさ" },
+    "speed": { "min": 1, "max": 12, "step": 0.1, "unit": "km/s", "en": "Speed", "ja": "はやさ" }
+  },
+  "levels": {
+    "explore": {
+      "ages": "4-7",
+      "fixed": { "body": "earth", "altitude": 400 },
+      "predict": { "kind": "choice", "field": "outcome", "choices": ["crash", "orbit", "escape"] },
+      "measure": ["outcome"]
+    },
+    "investigate": {
+      "ages": "8-11",
+      "fixed": { "body": "earth" },
+      "predict": { "kind": "choice", "field": "outcome", "choices": ["crash", "orbit", "escape"] },
+      "measure": ["outcome", "period"],
+      "record": ["speed", "period"]
+    },
+    "engineer": {
+      "ages": "12-15",
+      "predict": { "kind": "number", "field": "period", "unit": "min", "tolerance": 0.05 },
+      "measure": ["outcome", "period", "apoapsis"],
+      "record": ["speed", "period"],
+      "challenge": { "en": "Find the speed that gives one orbit every 90 minutes.", "ja": "90ぷんで 1しゅう する はやさを さがそう。", "target": { "field": "period", "value": 90, "tolerance": 0.05 } }
+    }
+  },
+  "explain": {
+    "en": "Why does a fast ball go around instead of falling?",
+    "ja": "どうして はやい ボールは おちないで まわるの？",
+    "aims": [
+      { "id": "gravity-pulls", "en": "Gravity keeps pulling it down", "ja": "じゅうりょくが ずっと したに ひっぱる", "keys": [["gravity", "pull", "pulls"]] },
+      { "id": "falls-around", "en": "It falls, but the ground curves away", "ja": "おちているけど、じめんが まるいから とどかない", "keys": [["fall", "falls", "falling"], ["curve", "curves", "round", "away", "miss", "misses"]] },
+      { "id": "speed-matters", "en": "Faster means a bigger orbit, too fast means it escapes", "ja": "はやいほど 大きく まわる。はやすぎると とんでいく", "keys": [["fast", "faster", "speed", "slow"], ["bigger", "larger", "escape", "escapes", "away", "orbit"]] }
+    ]
+  },
+  "classPlot": { "x": "speed", "y": "period", "xLabel": { "en": "Speed (km/s)", "ja": "はやさ（km/s）" }, "yLabel": { "en": "Minutes per orbit", "ja": "1しゅうの ふん" } },
+  "real": {
+    "en": "Tie a ball to a string and swing it. What happens if you let go?",
+    "ja": "ボールに ひもを つけて まわそう。はなすと どうなる？",
+    "kit": ["a ball", "string"]
+  },
+  "standards": { "jp": ["中3 地球と宇宙", "中3 運動とエネルギー"], "ngss": ["MS-ESS1-2", "MS-PS2-2", "HS-ESS1-4"], "cambridge": ["Forces and Energy"], "pisa": ["explain", "interpret"] },
+  "powers": { "predict": 1, "measure": 1, "data": 1, "explain": 1, "build": 1 }
+}

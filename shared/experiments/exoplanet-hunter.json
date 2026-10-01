@@ -1,0 +1,59 @@
+{
+  "id": "cosmos.exoplanet.hunter",
+  "region": "cosmos",
+  "station": "observatory",
+  "title": { "en": "Exoplanet Hunter", "ja": "けいがいわくせい ハンター" },
+  "sim": "transit",
+  "intro": {
+    "en": "A telescope watches a star for weeks. When a planet passes in front, the star dims a tiny bit. Find the dips.",
+    "ja": "ぼうえんきょうで ほしを なんしゅうかん 見つづける。わくせいが まえを とおると、ほしが ちょっと くらくなる。くらくなる ところを さがそう。"
+  },
+  "params": {
+    "target": { "choices": ["trappist-1b", "hd-209458-b", "kepler-10b", "wasp-12b"], "en": "Which star", "ja": "どの ほし" }
+  },
+  "targets": {
+    "trappist-1b": { "en": "TRAPPIST-1 b", "ja": "トラピスト1 b", "periodDays": 1.51, "depth": 0.0073, "durationHours": 0.6, "starRadiusSolar": 0.1192, "starMassSolar": 0.0898, "noise": 0.0008, "note": { "en": "A tiny red star with seven rocky planets. This is the innermost.", "ja": "ちいさな あかい ほし。いわの わくせいが 7つ。いちばん うちがわ。" } },
+    "hd-209458-b": { "en": "HD 209458 b", "ja": "HD 209458 b", "periodDays": 3.52, "depth": 0.0146, "durationHours": 3.1, "starRadiusSolar": 1.2, "starMassSolar": 1.15, "noise": 0.0004, "note": { "en": "The first exoplanet ever seen crossing its star (1999).", "ja": "ほしの まえを とおるのが はじめて 見つかった わくせい（1999年）。" } },
+    "kepler-10b": { "en": "Kepler-10 b", "ja": "ケプラー10 b", "periodDays": 0.837, "depth": 0.00015, "durationHours": 1.8, "starRadiusSolar": 1.06, "starMassSolar": 0.91, "noise": 0.00005, "note": { "en": "Kepler's first rocky planet. A year lasts 20 hours.", "ja": "ケプラーが 見つけた はじめての いわの わくせい。1ねんが 20じかん。" } },
+    "wasp-12b": { "en": "WASP-12 b", "ja": "WASP-12 b", "periodDays": 1.09, "depth": 0.014, "durationHours": 3.0, "starRadiusSolar": 1.6, "starMassSolar": 1.4, "noise": 0.0006, "note": { "en": "So close to its star that it is being pulled apart.", "ja": "ほしに ちかすぎて、ひきさかれている。" } }
+  },
+  "levels": {
+    "explore": {
+      "ages": "4-7",
+      "fixed": { "target": "hd-209458-b" },
+      "predict": { "kind": "choice", "field": "dips", "choices": ["0", "1-3", "4-9", "10+"] },
+      "measure": ["dips"]
+    },
+    "investigate": {
+      "ages": "8-11",
+      "predict": { "kind": "number", "field": "periodDays", "unit": "days", "tolerance": 0.1 },
+      "measure": ["dips", "periodDays"],
+      "record": ["target", "periodDays", "depth"]
+    },
+    "engineer": {
+      "ages": "12-15",
+      "predict": { "kind": "number", "field": "planetRadiusEarths", "unit": "Earths", "tolerance": 0.15 },
+      "measure": ["dips", "periodDays", "depth", "planetRadiusEarths", "orbitAU"],
+      "record": ["target", "periodDays", "depth"],
+      "challenge": { "en": "From the dip depth and the star's size, work out how big the planet is in Earths.", "ja": "くらくなる ふかさと ほしの 大きさから、わくせいが ちきゅうの なんばいか もとめよう。" }
+    }
+  },
+  "explain": {
+    "en": "How do you know there is a planet, if you cannot see it?",
+    "ja": "見えないのに、どうして わくせいが あると わかるの？",
+    "aims": [
+      { "id": "blocks-light", "en": "The planet blocks a little of the star's light", "ja": "わくせいが ほしの ひかりを すこし さえぎる", "keys": [["block", "blocks", "cover", "covers", "front", "hide", "hides", "dim", "dims", "dark", "darker"]] },
+      { "id": "repeats", "en": "The dip comes back again and again at the same gap", "ja": "おなじ あいだで なんども くらくなる", "keys": [["again", "repeat", "repeats", "every", "same", "regular"]] },
+      { "id": "size", "en": "A bigger planet makes a deeper dip", "ja": "大きい わくせいほど ふかく くらくなる", "keys": [["big", "bigger", "large", "larger", "size"], ["deep", "deeper", "more", "dip"]] }
+    ]
+  },
+  "classPlot": { "x": "periodDays", "y": "depth", "xLabel": { "en": "Days between dips", "ja": "くらくなる あいだ（日）" }, "yLabel": { "en": "How deep the dip is", "ja": "くらくなる ふかさ" } },
+  "real": {
+    "en": "Hold a small ball in front of a lamp and walk it across. Does the room get darker?",
+    "ja": "ランプの まえで ちいさな ボールを よこに うごかそう。へやは くらくなる？",
+    "kit": ["a lamp", "a small ball"],
+    "citizen": { "en": "Real curves from TESS are waiting at Planet Hunters TESS (with a grown-up).", "ja": "TESS の ほんものの データは Planet Hunters TESS に あるよ（おとなと いっしょに）。", "url": "https://www.zooniverse.org/projects/nora-dot-eisner/planet-hunters-tess" }
+  },
+  "standards": { "jp": ["中3 地球と宇宙", "中1 光"], "ngss": ["MS-ESS1-3", "HS-ESS1-4", "MS-PS4-2"], "cambridge": ["Earth in Space", "Light"], "pisa": ["interpret", "evaluate"] },
+  "powers": { "predict": 1, "measure": 1, "data": 2, "explain": 1, "build": 1 }
+}

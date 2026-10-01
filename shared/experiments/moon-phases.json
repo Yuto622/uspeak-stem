@@ -1,0 +1,50 @@
+{
+  "id": "cosmos.moon.phases",
+  "region": "cosmos",
+  "station": "phase-hill",
+  "title": { "en": "The Phase Hill", "ja": "つきの みちかけの おか" },
+  "sim": "moon",
+  "intro": {
+    "en": "Put the Moon where you like around the Earth. Before you look, say what shape we will see tonight.",
+    "ja": "つきを ちきゅうの まわりの すきな ところに おこう。見る まえに、こんや どんな かたちに 見えるか いおう。"
+  },
+  "params": {
+    "angle": { "min": 0, "max": 345, "step": 15, "unit": "°", "en": "Where the Moon is", "ja": "つきの ばしょ" }
+  },
+  "levels": {
+    "explore": {
+      "ages": "4-7",
+      "predict": { "kind": "choice", "field": "phase", "choices": ["new", "first-quarter", "full", "last-quarter"] },
+      "measure": ["phase"]
+    },
+    "investigate": {
+      "ages": "8-11",
+      "predict": { "kind": "choice", "field": "phase", "choices": ["new", "waxing-crescent", "first-quarter", "waxing-gibbous", "full", "waning-gibbous", "last-quarter", "waning-crescent"] },
+      "measure": ["phase", "lit"],
+      "record": ["angle", "lit"]
+    },
+    "engineer": {
+      "ages": "12-15",
+      "predict": { "kind": "number", "field": "lit", "unit": "%", "tolerance": 0.08 },
+      "measure": ["phase", "lit", "side"],
+      "record": ["angle", "lit"]
+    }
+  },
+  "explain": {
+    "en": "Why does the Moon look like that from the Earth?",
+    "ja": "どうして ちきゅうから 見ると、つきは その かたちに 見えるの？",
+    "aims": [
+      { "id": "sun-lights", "en": "The Sun lights one half of the Moon", "ja": "たいようが つきの はんぶんを てらす", "keys": [["sun"], ["light", "lights", "lit", "shine", "shines", "bright"]] },
+      { "id": "we-see-part", "en": "We see part of the lit half from the Earth", "ja": "ちきゅうから 見える ぶぶんが かわる", "keys": [["see", "look", "view"], ["earth", "us", "we"]] },
+      { "id": "moon-moves", "en": "The Moon goes around the Earth, so the part changes", "ja": "つきが まわるから、見える ぶぶんが かわる", "keys": [["around", "orbit", "goes", "moves"], ["change", "different", "part"]] }
+    ]
+  },
+  "classPlot": { "x": "angle", "y": "lit", "xLabel": { "en": "Where the Moon is (°)", "ja": "つきの ばしょ（°）" }, "yLabel": { "en": "How much is lit", "ja": "ひかっている わりあい" } },
+  "real": {
+    "en": "Tonight, look at the Moon. Which phase is it? Enter what you saw.",
+    "ja": "こんや、つきを 見よう。どの かたち？ 見たものを 入れてね。",
+    "kit": ["a ball", "a lamp", "a dark room"]
+  },
+  "standards": { "jp": ["小4 月と星", "小6 月と太陽"], "ngss": ["1-ESS1-1", "MS-ESS1-1"], "cambridge": ["Earth in Space"], "pisa": ["explain"] },
+  "powers": { "predict": 1, "measure": 1, "data": 1, "explain": 1, "build": 0 }
+}
