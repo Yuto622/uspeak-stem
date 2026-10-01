@@ -9,7 +9,8 @@ import { EXPERIMENT_BY_ID, freeParams, sanitizeParams, POWERS } from '/shared/ex
 import { gravity, moon } from '/shared/sim/index.js';
 import * as chem from '/shared/sim/chem.js';
 import { dipsBucket } from '/shared/sim/run.js';
-import { drawOrbit, drawMoon, drawLightCurve, drawClass, drawPowers, drawSolubility, drawAcidBase, drawCandle } from './draw.js';
+import { drawClass, drawPowers } from './draw.js';
+import { createStage } from './stage.js';
 import { ask } from './net.js';
 
 const $ = (s, r = document) => r.querySelector(s);
@@ -32,20 +33,17 @@ export function createPanels({ net, toast, me, onDone = () => {} }) {
     for (const id of ['params', 'predict', 'measure', 'explain', 'real']) $(`#lab-${id}`).hidden = true;
   }
 
+  let stage = null;
   function drawView() {
-    const canvas = $('#lab-canvas'); const { exp, params, result } = state;
-    if (exp.sim === 'gravity') drawOrbit(canvas, { body: gravity.BODIES[params.body], altitude: params.altitude, trail: result?.trail, outcome: result?.outcome });
-    else if (exp.sim === 'moon') drawMoon(canvas, { angle: params.angle, result });
-    else if (exp.sim === 'transit') drawLightCurve(canvas, { curve: result?.curve, dips: result ? findDipsForDrawing(result) : null });
-    else if (exp.sim === 'solubility') drawSolubility(canvas, { solute: chem.SOLUTES[params.solute], table: chem.SOLUTES[params.solute].table, tempC: params.tempC, grams: params.grams, result });
-    else if (exp.sim === 'acidbase') drawAcidBase(canvas, { liquid: chem.LIQUIDS[params.liquid], indicator: chem.INDICATORS[params.indicator], result, colorHex: chem.COLOR_HEX });
-    else if (exp.sim === 'candle') drawCandle(canvas, { litres: params.litres, candles: params.candles, o2: params.o2, result });
+    const { exp, params, result } = state;
+    if (!stage) stage = createStage($('#lab-canvas'));
+    stage.show({ exp, params, result });
+    $('#lab-replay').hidden = !result;
     const ro = $('#lab-readout');
     if (!result) { ro.innerHTML = ''; return; }
     const lv = exp.levels[state.level];
     ro.innerHTML = lv.measure.map((f) => `<b>${esc(labelFor(f))}: ${esc(showValue(f, result[f]))}</b>`).join('');
   }
-  function findDipsForDrawing(result) { return null; } // the server marks nothing; the child finds the dips
 
   function labelFor(f) {
     const L = {
@@ -216,8 +214,11 @@ export function createPanels({ net, toast, me, onDone = () => {} }) {
     $('#lab-next').hidden = false; $('#lab-next').innerHTML = both(UI.next);
     $('#lab-next').onclick = () => { setStep('predict'); renderPredict(); $('#lab-next').hidden = true; };
     if (!dlg.open) dlg.showModal();
+    stage?.start();
   }
   $('#lab-close').onclick = () => dlg.close();
+  $('#lab-replay').onclick = () => stage?.replay();
+  dlg.addEventListener('close', () => stage?.stop());
   $('#lab-lang').onclick = toggleLang; // the HUD is inert while the modal is open
   onLang(() => { if (state && dlg.open) { drawView(); drawClassPlot(); } });
 
@@ -229,5 +230,5 @@ export function createPanels({ net, toast, me, onDone = () => {} }) {
   }
   $('#powers-close').onclick = () => $('#powers').close();
 
-  return { open, openPowers, get isOpen() { return dlg.open; }, setLevel(l) { if (state) state.level = l; } };
+  return { open, openPowers, get isOpen() { return dlg.open; }, setLevel(l) { if (state) state.level = l; }, get stage() { return stage; } };
 }

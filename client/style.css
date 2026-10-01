@@ -102,7 +102,9 @@ dialog .fine{font-size:12px;color:#7a866c;line-height:1.5;margin-top:14px}dialog
 .steps li{flex:1;text-align:center;font-size:12px;padding:6px 4px;border-radius:8px;background:#f4f4e3;color:#8a8a8a}
 .steps li.done{background:#d7ead9;color:#2f8f5b}.steps li.now{background:#315a40;color:#fffbe9;font-weight:700}
 .lab-body section{margin:10px 0}
-#lab-view{background:#0b1026;border-radius:14px;padding:8px}
+#lab-view{background:#0b1026;border-radius:14px;padding:8px;position:relative}
+.lab-replay{position:absolute;right:16px;top:16px;background:#fffbebf0;border-radius:999px;padding:8px 14px;font-size:12px;font-weight:600;color:#294433}
+.lab-hint{position:absolute;left:16px;top:14px;margin:0!important;font-size:11px;color:#ffffff99!important}
 #lab-canvas{width:100%;height:auto;display:block;border-radius:10px}
 #lab-readout{display:flex;flex-wrap:wrap;gap:8px;padding:8px 4px 2px;color:#fff;font-size:13px}#lab-readout b{background:#ffffff1a;padding:4px 10px;border-radius:999px}
 .param{display:grid;grid-template-columns:1fr 2fr auto;gap:10px;align-items:center;margin:8px 0;font-size:14px}

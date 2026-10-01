@@ -15,7 +15,8 @@
 | `client/island-kit.js` | **英語版 `client/dist/island-kit.js` のコピー**（import 先だけ `vendor/` に変えた）。直すなら英語版と一緒に |
 | `client/island.js` | 2つの島（COSMOS・LAB）を `createIsland` で建てる。空・海・遠くの海岸・カメラ・歩き・他の子 |
 | `client/islands.json` | 島のデータ（英語版の `school.json` と同じ形）。座標の定義元 |
-| `client/app.js` / `panels.js` / `draw.js` / `i18n.js` / `style.css` | 起動・実験の画面・計器の canvas・英日・HUD（英語版 `style.css` の値そのまま） |
+| `client/stage.js` | **実験の 3D の舞台。** 実験（`sim`）ごとに builder が1つ。`show({exp, params, result})` で建て直す。結果は計算しない（描くだけ） |
+| `client/app.js` / `panels.js` / `draw.js` / `i18n.js` / `style.css` | 起動・実験の画面・クラスの散布図と力のレーダー（この2つだけ 2D）・英日・HUD（英語版 `style.css` の値そのまま） |
 
 ## 守ること
 
@@ -28,9 +29,13 @@
 - **島のデータを読む前に描画ループが走る。** `tick()` は `defs.get(current)` が無い間を飛ばす（最初にここで落ちた）。
 - **ダイアログは `showModal()`。** `open` 属性だけだと、固定の `<canvas>` が上に乗ってクリックを吸う（実際に起きた）。
 - 実験を足したら `npm test` が全レベルで回す（`sim.test.mjs` の最後の検査）。
+- **実験の舞台は WebGL で、ダイアログの中にある。** このコンテナのソフトウェア描画では毎フレーム読み戻しが起きて極端に遅い。
+  だから e2e は **DOM の有無で待つ**（`state: 'attached'`）し、クリックは英語版と同じく `press()`（ページの中で `el.click()`）。
+  Playwright の本物のクリックは30秒止まることがある（実際に止まった）。実機の GPU では問題にならない。
+- 舞台の時計は1コマ 0.25 秒まで。遅い端末でも実時間で進む。
 
 ## 検査
 
 - `npm test`：物理が教科書の値と合うか（ISS 92分・静止軸 42,164 km・HD 209458 b の半径）、化学の表、判定、部屋（実ソケット）。16件。
-- `npm run test:e2e`：実ブラウザ 17項目。このコンテナは数 fps しか出ないので、歩きは `stem.walkTo()` でワープさせている。
+- `npm run test:e2e`：実ブラウザ 18項目。このコンテナは数 fps しか出ないので、歩きは `stem.walkTo()` でワープさせている。
   島の看板の文字は `stem.signs()` で読める（英語版の `island.signs` と同じ）。
