@@ -1,0 +1,207 @@
+{
+  "id": "force.lever",
+  "region": "force",
+  "station": "seesaw",
+  "title": {
+    "en": "The Seesaw",
+    "ja": "シーソー"
+  },
+  "sim": "lever",
+  "intro": {
+    "en": "Put a weight on each side of the seesaw. Slide them in or out. Which way does it tip?",
+    "ja": "シーソーの りょうがわに おもりを おこう。うちがわや そとがわに うごかそう。どっちに かたむく？"
+  },
+  "params": {
+    "leftMass": {
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "unit": "kg",
+      "en": "Left weight",
+      "ja": "ひだりの おもさ"
+    },
+    "leftDist": {
+      "min": 0.2,
+      "max": 2,
+      "step": 0.2,
+      "unit": "m",
+      "en": "Left distance",
+      "ja": "ひだりの きょり"
+    },
+    "rightMass": {
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "unit": "kg",
+      "en": "Right weight",
+      "ja": "みぎの おもさ"
+    },
+    "rightDist": {
+      "min": 0.2,
+      "max": 2,
+      "step": 0.2,
+      "unit": "m",
+      "en": "Right distance",
+      "ja": "みぎの きょり"
+    }
+  },
+  "levels": {
+    "explore": {
+      "ages": "4-7",
+      "fixed": {
+        "leftDist": 1,
+        "rightDist": 1
+      },
+      "predict": {
+        "kind": "choice",
+        "field": "tilt",
+        "choices": [
+          "left",
+          "balanced",
+          "right"
+        ]
+      },
+      "measure": [
+        "tilt"
+      ]
+    },
+    "investigate": {
+      "ages": "8-11",
+      "predict": {
+        "kind": "number",
+        "field": "balanceMass",
+        "unit": "kg",
+        "tolerance": 0.1
+      },
+      "measure": [
+        "tilt",
+        "balanceMass"
+      ],
+      "record": [
+        "rightDist",
+        "balanceMass"
+      ]
+    },
+    "engineer": {
+      "ages": "12-15",
+      "predict": {
+        "kind": "number",
+        "field": "advantage",
+        "unit": "×",
+        "tolerance": 0.1
+      },
+      "measure": [
+        "tilt",
+        "balanceMass",
+        "advantage"
+      ],
+      "record": [
+        "rightDist",
+        "balanceMass"
+      ],
+      "challenge": {
+        "en": "Lift 10 kg with 2 kg.",
+        "ja": "2 kg で 10 kg を もちあげよう。"
+      }
+    }
+  },
+  "explain": {
+    "en": "How can a small weight lift a big one?",
+    "ja": "ちいさな おもさで 大きな おもさを もちあげるには？",
+    "aims": [
+      {
+        "id": "distance",
+        "en": "Farther from the middle counts more",
+        "ja": "まんなかから とおいほど きく",
+        "keys": [
+          [
+            "far",
+            "farther",
+            "distance",
+            "away",
+            "end"
+          ],
+          [
+            "more",
+            "stronger",
+            "count",
+            "counts",
+            "lift",
+            "lifts"
+          ]
+        ]
+      },
+      {
+        "id": "balance",
+        "en": "It balances when both sides match",
+        "ja": "りょうがわが おなじだと つりあう",
+        "keys": [
+          [
+            "balance",
+            "balanced",
+            "equal",
+            "same",
+            "match"
+          ]
+        ]
+      },
+      {
+        "id": "times",
+        "en": "Weight times distance",
+        "ja": "おもさ かける きょり",
+        "keys": [
+          [
+            "times",
+            "multiply",
+            "multiplied",
+            "product"
+          ]
+        ]
+      }
+    ]
+  },
+  "classPlot": {
+    "x": "rightDist",
+    "y": "balanceMass",
+    "xLabel": {
+      "en": "Right distance (m)",
+      "ja": "みぎの きょり（m）"
+    },
+    "yLabel": {
+      "en": "kg needed to balance",
+      "ja": "つりあう kg"
+    }
+  },
+  "real": {
+    "en": "A ruler on a pencil, coins on each end. Move the coins and watch.",
+    "ja": "えんぴつの うえに じょうぎ、りょうはしに コイン。コインを うごかして 見よう。",
+    "kit": [
+      "a ruler",
+      "a pencil",
+      "coins"
+    ]
+  },
+  "standards": {
+    "jp": [
+      "小6 てこの規則性"
+    ],
+    "ngss": [
+      "3-PS2-1",
+      "MS-PS2-2"
+    ],
+    "cambridge": [
+      "Forces and motion"
+    ],
+    "pisa": [
+      "explain",
+      "interpret"
+    ]
+  },
+  "powers": {
+    "predict": 1,
+    "measure": 1,
+    "data": 1,
+    "explain": 1,
+    "build": 1
+  }
+}

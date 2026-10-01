@@ -10,7 +10,8 @@
     "start": "node src/index.js",
     "dev": "node --watch src/index.js",
     "test": "node --test test/*.test.mjs",
-    "test:e2e": "node test/e2e/browser-lab.mjs"
+    "test:e2e": "node test/e2e/browser-lab.mjs",
+    "shots": "node test/e2e/shots-islands.mjs"
   },
   "dependencies": {
     "colyseus": "0.15.57",

@@ -9,6 +9,7 @@ import * as THREE from './vendor/three.module.js';
 import { t, onLang } from './i18n.js';
 import { gravity, moon } from '/shared/sim/index.js';
 import * as chem from '/shared/sim/chem.js';
+import { moreBuilders } from './stage-more.js';
 
 const W = 720; const H = 420;
 
@@ -324,6 +325,8 @@ const BUILDERS = {
   },
 };
 
+Object.assign(BUILDERS, moreBuilders({ labelSprite, graph }));
+
 export function createStage(canvas) {
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
   renderer.setPixelRatio(Math.min(devicePixelRatio, 1.25));
@@ -379,6 +382,8 @@ export function createStage(canvas) {
       if (exp.sim === 'solubility') lookAt.set(0.3, -0.4, 0);
       if (exp.sim === 'acidbase') lookAt.set(0, -0.3, 0);
       if (exp.sim === 'candle') lookAt.set(0.3, -0.3, 0);
+      const LOOK = { pendulum: [0, 0.6, 0], ramp: [0, 0, 0], lever: [0, 0, 0], meadow: [0, 0.2, 0], plant: [0, 0.4, 0], heart: [0, 0.4, 0], quake: [0, -0.5, 0], tsunami: [0, -0.8, 0], cloud: [0, 0.6, 0], bridge: [0, -0.2, 0], circuit: [0, 0, 0], gears: [0, 0, 0], dice: [0, 0, 0], pond: [0, -0.8, 0], classify: [0, 0, 0] };
+      if (LOOK[exp.sim]) lookAt.set(...LOOK[exp.sim]);
       clock.getDelta();
       if (!running) { running = true; requestAnimationFrame(frame); }
     },

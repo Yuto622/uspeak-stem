@@ -1,0 +1,209 @@
+{
+  "id": "force.pendulum",
+  "region": "force",
+  "station": "swing-frame",
+  "title": {
+    "en": "The Swing Frame",
+    "ja": "ふりこの わく"
+  },
+  "sim": "pendulum",
+  "intro": {
+    "en": "Pull the pendulum back and let go. Count the swings in thirty seconds. Does a heavier bob swing faster? Does a longer string?",
+    "ja": "ふりこを ひいて はなそう。30びょうで なんかい ゆれる？ おもい ほうが はやい？ ながい ひもは？"
+  },
+  "params": {
+    "length": {
+      "min": 0.2,
+      "max": 2,
+      "step": 0.1,
+      "unit": "m",
+      "en": "String length",
+      "ja": "ひもの ながさ"
+    },
+    "angle": {
+      "min": 10,
+      "max": 30,
+      "step": 5,
+      "unit": "°",
+      "en": "Pull-back angle",
+      "ja": "ひく かくど"
+    },
+    "mass": {
+      "choices": [
+        "light",
+        "heavy"
+      ],
+      "en": "Bob",
+      "ja": "おもり"
+    }
+  },
+  "levels": {
+    "explore": {
+      "ages": "4-7",
+      "fixed": {
+        "angle": 15,
+        "mass": "light"
+      },
+      "predict": {
+        "kind": "choice",
+        "field": "bucket",
+        "choices": [
+          "under-1",
+          "1-2",
+          "over-2"
+        ]
+      },
+      "measure": [
+        "swings"
+      ]
+    },
+    "investigate": {
+      "ages": "8-11",
+      "fixed": {
+        "angle": 15
+      },
+      "predict": {
+        "kind": "number",
+        "field": "period",
+        "unit": "s",
+        "tolerance": 0.1
+      },
+      "measure": [
+        "period",
+        "swings"
+      ],
+      "record": [
+        "length",
+        "period"
+      ]
+    },
+    "engineer": {
+      "ages": "12-15",
+      "predict": {
+        "kind": "number",
+        "field": "swings",
+        "unit": "",
+        "tolerance": 0.1
+      },
+      "measure": [
+        "period",
+        "swings"
+      ],
+      "record": [
+        "length",
+        "period"
+      ],
+      "challenge": {
+        "en": "Find the length that ticks once a second, like a clock.",
+        "ja": "とけいのように 1びょうで 1かい ゆれる ながさを さがそう。"
+      }
+    }
+  },
+  "explain": {
+    "en": "What changes how fast a pendulum swings, and what does not?",
+    "ja": "ふりこの はやさを かえるのは なに？ かえないのは？",
+    "aims": [
+      {
+        "id": "length",
+        "en": "Longer string, slower swing",
+        "ja": "ひもが ながいと ゆっくり",
+        "keys": [
+          [
+            "long",
+            "longer",
+            "length",
+            "short",
+            "shorter"
+          ],
+          [
+            "slow",
+            "slower",
+            "fast",
+            "faster",
+            "time",
+            "period"
+          ]
+        ]
+      },
+      {
+        "id": "mass-no",
+        "en": "The weight does not change it",
+        "ja": "おもさは かんけいない",
+        "keys": [
+          [
+            "weight",
+            "heavy",
+            "heavier",
+            "mass",
+            "light"
+          ],
+          [
+            "not",
+            "same",
+            "doesn't",
+            "does not",
+            "no"
+          ]
+        ]
+      },
+      {
+        "id": "gravity",
+        "en": "Gravity pulls it back to the middle",
+        "ja": "じゅうりょくが まんなかに もどす",
+        "keys": [
+          [
+            "gravity",
+            "pull",
+            "pulls",
+            "back",
+            "middle"
+          ]
+        ]
+      }
+    ]
+  },
+  "classPlot": {
+    "x": "length",
+    "y": "period",
+    "xLabel": {
+      "en": "String length (m)",
+      "ja": "ひもの ながさ（m）"
+    },
+    "yLabel": {
+      "en": "Seconds per swing",
+      "ja": "1かいの びょう"
+    }
+  },
+  "real": {
+    "en": "Tie a key to a string. Time ten swings for a short string and a long one.",
+    "ja": "かぎに ひもを つけよう。みじかい ひもと ながい ひもで、10かいの じかんを はかろう。",
+    "kit": [
+      "string",
+      "a key",
+      "a timer"
+    ]
+  },
+  "standards": {
+    "jp": [
+      "小5 ふりこの運動"
+    ],
+    "ngss": [
+      "3-PS2-1",
+      "MS-PS2-2"
+    ],
+    "cambridge": [
+      "Forces and motion"
+    ],
+    "pisa": [
+      "explain",
+      "interpret"
+    ]
+  },
+  "powers": {
+    "predict": 1,
+    "measure": 1,
+    "data": 1,
+    "explain": 1,
+    "build": 1
+  }
+}

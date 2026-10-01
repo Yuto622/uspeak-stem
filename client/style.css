@@ -52,6 +52,7 @@ html[data-lang=ja] .location{letter-spacing:0}
 .dot{height:5px;width:5px;background:#4d794c;border-radius:50%}
 .scenery-controls{display:grid;grid-template-columns:1fr;gap:6px}
 .scenery-controls button{background:#fcfae9e8;border:1px solid #fff8;backdrop-filter:blur(12px);border-radius:9px;padding:10px 6px;font-size:12px;color:#405a43;box-shadow:0 4px 20px #19372b1a}
+.time-pill{background:#fcfae9e8;border:1px solid #fff8;border-radius:9px;padding:9px 6px;font-size:12px;color:#405a43;text-align:center}
 .flight-button{background:#2e5a46!important;color:#fffbe9!important;font-weight:700;padding:14px 10px!important;font-size:13px!important}
 .powers-button{background:#1e3f4e!important;color:#fffbe9!important;font-weight:700;padding:14px 10px!important;font-size:13px!important}
 

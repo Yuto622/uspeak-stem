@@ -1,0 +1,206 @@
+{
+  "id": "maker.gears",
+  "region": "maker",
+  "station": "gear-mill",
+  "title": {
+    "en": "The Gear Mill",
+    "ja": "はぐるまの こや"
+  },
+  "sim": "gears",
+  "intro": {
+    "en": "Two gears mesh. Turn the first and watch the second. Big to small spins faster; small to big spins slower but stronger.",
+    "ja": "はぐるまが 2つ かみあう。1つめを まわして 2つめを 見よう。大きいから ちいさいへは はやく、ちいさいから 大きいへは おそいけど つよい。"
+  },
+  "params": {
+    "driverTeeth": {
+      "min": 8,
+      "max": 40,
+      "step": 4,
+      "unit": "teeth",
+      "en": "First gear",
+      "ja": "1つめの は"
+    },
+    "drivenTeeth": {
+      "min": 8,
+      "max": 40,
+      "step": 4,
+      "unit": "teeth",
+      "en": "Second gear",
+      "ja": "2つめの は"
+    },
+    "rpm": {
+      "min": 10,
+      "max": 120,
+      "step": 10,
+      "unit": "rpm",
+      "en": "Turning speed",
+      "ja": "まわす はやさ"
+    }
+  },
+  "levels": {
+    "explore": {
+      "ages": "4-7",
+      "fixed": {
+        "rpm": 60
+      },
+      "predict": {
+        "kind": "choice",
+        "field": "faster",
+        "choices": [
+          "faster",
+          "same",
+          "slower"
+        ]
+      },
+      "measure": [
+        "faster",
+        "direction"
+      ]
+    },
+    "investigate": {
+      "ages": "8-11",
+      "predict": {
+        "kind": "number",
+        "field": "outRpm",
+        "unit": "rpm",
+        "tolerance": 0.1
+      },
+      "measure": [
+        "outRpm",
+        "faster",
+        "direction"
+      ],
+      "record": [
+        "drivenTeeth",
+        "outRpm"
+      ]
+    },
+    "engineer": {
+      "ages": "12-15",
+      "predict": {
+        "kind": "number",
+        "field": "torqueRatio",
+        "unit": "×",
+        "tolerance": 0.1
+      },
+      "measure": [
+        "outRpm",
+        "torqueRatio",
+        "direction"
+      ],
+      "record": [
+        "drivenTeeth",
+        "outRpm"
+      ],
+      "challenge": {
+        "en": "Make the second gear turn exactly 3 times as fast.",
+        "ja": "2つめを ちょうど 3ばい はやく まわそう。"
+      }
+    }
+  },
+  "explain": {
+    "en": "What do the teeth decide?",
+    "ja": "はの かずは なにを きめる？",
+    "aims": [
+      {
+        "id": "teeth-ratio",
+        "en": "Fewer teeth on the second gear, faster it turns",
+        "ja": "2つめの はが すくないほど はやい",
+        "keys": [
+          [
+            "teeth",
+            "tooth",
+            "small",
+            "smaller",
+            "big",
+            "bigger",
+            "fewer",
+            "more"
+          ],
+          [
+            "fast",
+            "faster",
+            "slow",
+            "slower",
+            "speed",
+            "turn",
+            "turns"
+          ]
+        ]
+      },
+      {
+        "id": "opposite",
+        "en": "Meshed gears turn opposite ways",
+        "ja": "かみあった はぐるまは ぎゃくに まわる",
+        "keys": [
+          [
+            "opposite",
+            "other way",
+            "reverse",
+            "backwards",
+            "direction"
+          ]
+        ]
+      },
+      {
+        "id": "trade",
+        "en": "Faster means weaker; slower means stronger",
+        "ja": "はやいと よわく、おそいと つよい",
+        "keys": [
+          [
+            "strong",
+            "stronger",
+            "weak",
+            "weaker",
+            "force",
+            "torque",
+            "power"
+          ]
+        ]
+      }
+    ]
+  },
+  "classPlot": {
+    "x": "drivenTeeth",
+    "y": "outRpm",
+    "xLabel": {
+      "en": "Teeth on the second gear",
+      "ja": "2つめの はの かず"
+    },
+    "yLabel": {
+      "en": "Second gear speed (rpm)",
+      "ja": "2つめの はやさ（rpm）"
+    }
+  },
+  "real": {
+    "en": "Look at the gears of a bicycle. Count the teeth front and back.",
+    "ja": "じてんしゃの はぐるまを 見よう。まえと うしろの はを かぞえて。",
+    "kit": [
+      "a bicycle"
+    ]
+  },
+  "standards": {
+    "jp": [
+      "技術・家庭（機械）",
+      "中3 仕事とエネルギー"
+    ],
+    "ngss": [
+      "3-5-ETS1-2",
+      "MS-PS3-2"
+    ],
+    "cambridge": [
+      "Forces and motion"
+    ],
+    "pisa": [
+      "explain",
+      "interpret"
+    ]
+  },
+  "powers": {
+    "predict": 1,
+    "measure": 1,
+    "data": 1,
+    "explain": 1,
+    "build": 1
+  }
+}

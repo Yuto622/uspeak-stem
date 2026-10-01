@@ -1,0 +1,182 @@
+{
+  "id": "force.ramp",
+  "region": "force",
+  "station": "slide-ramp",
+  "title": {
+    "en": "The Slide Ramp",
+    "ja": "すべりだい"
+  },
+  "sim": "ramp",
+  "intro": {
+    "en": "A box on a ramp. Make the ramp steeper or change what it is made of. Will it slide? How fast at the bottom?",
+    "ja": "さかの うえの はこ。さかを きゅうに したり、ざいりょうを かえたり。すべる？ したでは どれくらい はやい？"
+  },
+  "params": {
+    "angle": {
+      "min": 5,
+      "max": 45,
+      "step": 5,
+      "unit": "°",
+      "en": "Ramp angle",
+      "ja": "さかの かくど"
+    },
+    "surface": {
+      "choices": [
+        "ice",
+        "wood",
+        "rubber"
+      ],
+      "en": "Surface",
+      "ja": "さかの ざいりょう"
+    }
+  },
+  "levels": {
+    "explore": {
+      "ages": "4-7",
+      "fixed": {
+        "surface": "wood"
+      },
+      "predict": {
+        "kind": "choice",
+        "field": "moves",
+        "choices": [
+          "stays",
+          "slides"
+        ]
+      },
+      "measure": [
+        "moves"
+      ]
+    },
+    "investigate": {
+      "ages": "8-11",
+      "predict": {
+        "kind": "number",
+        "field": "speed",
+        "unit": "m/s",
+        "tolerance": 0.15
+      },
+      "measure": [
+        "moves",
+        "speed"
+      ],
+      "record": [
+        "angle",
+        "speed"
+      ]
+    },
+    "engineer": {
+      "ages": "12-15",
+      "predict": {
+        "kind": "number",
+        "field": "accel",
+        "unit": "m/s²",
+        "tolerance": 0.1
+      },
+      "measure": [
+        "accel",
+        "speed",
+        "time"
+      ],
+      "record": [
+        "angle",
+        "speed"
+      ]
+    }
+  },
+  "explain": {
+    "en": "Why does the box sometimes stay still, and what makes it go faster?",
+    "ja": "どうして はこは とまったまま のことが あるの？ はやく なるのは なぜ？",
+    "aims": [
+      {
+        "id": "friction",
+        "en": "Friction holds it until the slope is steep enough",
+        "ja": "まさつが とめている。さかが きゅうに なると うごく",
+        "keys": [
+          [
+            "friction",
+            "rough",
+            "grip",
+            "sticky",
+            "rubber"
+          ]
+        ]
+      },
+      {
+        "id": "steeper",
+        "en": "A steeper ramp, a faster slide",
+        "ja": "さかが きゅうなほど はやい",
+        "keys": [
+          [
+            "steep",
+            "steeper",
+            "angle",
+            "slope"
+          ],
+          [
+            "fast",
+            "faster",
+            "speed",
+            "quick"
+          ]
+        ]
+      },
+      {
+        "id": "gravity",
+        "en": "Gravity pulls it down the slope",
+        "ja": "じゅうりょくが さかに そって ひっぱる",
+        "keys": [
+          [
+            "gravity",
+            "pull",
+            "pulls",
+            "down"
+          ]
+        ]
+      }
+    ]
+  },
+  "classPlot": {
+    "x": "angle",
+    "y": "speed",
+    "xLabel": {
+      "en": "Ramp angle (°)",
+      "ja": "さかの かくど（°）"
+    },
+    "yLabel": {
+      "en": "Speed at the bottom (m/s)",
+      "ja": "したでの はやさ（m/s）"
+    }
+  },
+  "real": {
+    "en": "Slide an eraser down a book. Raise the book until it just starts to move.",
+    "ja": "ほんの うえで けしゴムを すべらせよう。うごきはじめるまで ほんを もちあげて。",
+    "kit": [
+      "a book",
+      "an eraser"
+    ]
+  },
+  "standards": {
+    "jp": [
+      "小3 風とゴムの力",
+      "中3 運動とエネルギー"
+    ],
+    "ngss": [
+      "3-PS2-1",
+      "MS-PS2-2"
+    ],
+    "cambridge": [
+      "Forces and motion"
+    ],
+    "pisa": [
+      "explain"
+    ]
+  },
+  "powers": {
+    "predict": 1,
+    "measure": 1,
+    "data": 1,
+    "explain": 1,
+    "build": 1
+  }
+}

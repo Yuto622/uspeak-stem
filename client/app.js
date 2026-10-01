@@ -4,6 +4,7 @@ import { createWorld } from './island.js';
 import { connect } from './net.js';
 import { createPanels } from './panels.js';
 import { EXPERIMENT_BY_ID, REGIONS } from '/shared/experiments/index.js';
+import { phaseAt } from './world-clock.js';
 
 const $ = (s) => document.querySelector(s);
 let toastTimer = 0;
@@ -42,7 +43,7 @@ function renderLocation() {
   document.title = `U-Speak STEM — ${d.en}`;
 }
 function renderTravel() {
-  $('#travel-list').innerHTML = REGIONS.map((r) => { const d = islandsData.islands.find((x) => x.id === r.id); return `<button data-travel="${r.id}" class="${world.current === r.id ? 'here' : ''}"><span>${r.id === 'cosmos' ? '🚀' : '🧪'}</span><div><strong>${esc(r.en)} · ${esc(r.ja)}</strong><small>${d.spots.map((s) => s.en).join(' · ')}</small></div></button>`; }).join('');
+  $('#travel-list').innerHTML = REGIONS.map((r) => { const d = islandsData.islands.find((x) => x.id === r.id); return `<button data-travel="${r.id}" class="${world.current === r.id ? 'here' : ''}"><span>${r.icon || '✦'}</span><div><strong>${esc(r.en)} · ${esc(r.ja)}</strong><small>${d.spots.map((s) => s.en).join(' · ')}</small></div></button>`; }).join('');
   for (const b of $('#travel-list').querySelectorAll('[data-travel]')) b.onclick = () => { $('#travel').close(); if (b.dataset.travel !== world.current) { world.travel(b.dataset.travel); toast({ en: `Welcome to ${world.island.en}.`, ja: `${world.island.name}へ ようこそ。` }); } };
 }
 
@@ -100,6 +101,8 @@ $('#lobby-go').onclick = async () => {
   const openTravel = () => { renderTravel(); $('#travel').showModal(); };
   $('#flight-button').onclick = openTravel; $('#hb-map').onclick = openTravel; $('#travel-close').onclick = () => $('#travel').close();
   $('#hb-home').onclick = () => world.travel(world.current);
+  // the world's clock, in the rail
+  setInterval(() => { const p = phaseAt(); $('#time-pill').innerHTML = `${p.phase.mark} <b class="en">${p.phase.en}</b><i class="ja">${p.phase.ja}</i> <span>${Math.floor(p.left / 60)}:${String(Math.floor(p.left % 60)).padStart(2, '0')}</span>`; }, 1000);
   // minimap
   const mapCtx = $('#map').getContext('2d');
   setInterval(() => { world.drawMap(mapCtx); }, 120);

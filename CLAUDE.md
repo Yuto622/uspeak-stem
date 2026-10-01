@@ -7,15 +7,17 @@
 
 | 場所 | 中身 |
 |---|---|
-| `shared/sim/` | 物理と化学。**純粋関数だけ。** ブラウザとサーバーが同じファイルを読む。`run.js` が実験 → 測定の1本の入口。`chem.js` は溶解度・pH と指示薬・ろうそく |
-| `shared/experiments/` | 実験の定義（JSON、6本）と読み込み・検証（`index.js`）。**答えは書かない**（物理が出す）。`REGIONS` が島の一覧 |
+| `shared/sim/` | 物理と化学。**純粋関数だけ。** ブラウザとサーバーが同じファイルを読む。`run.js` が実験 → 測定の1本の入口（21の sim）。`gravity/moon/transit`・`chem`・`force`（ふりこ・さか・てこ）・`life`（ウサギとキツネ・まめ・心拍）・`earth`（地震波・つなみ・露点）・`maker`（はり・オーム・歯車）・`data`（サイコロ・標識再捕獲・k-NN） |
+| `shared/experiments/` | 実験の定義（JSON、21本）と読み込み・検証（`index.js`）。**答えは書かない**（物理が出す）。`REGIONS` が島の一覧 |
 | `server/src/lab/judge.js` | 判定：予想・測定（再計算して比較）・英語の説明（aims）・5つの力 |
 | `server/src/rooms/LabRoom.js` | 1クラス1部屋。**予想 → 結果** の順番を部屋が強制する |
 | `server/src/lab/records.js` | クラスごとの JSON と追記ログ（保護者レポートの元） |
 | `client/island-kit.js` | **英語版 `client/dist/island-kit.js` のコピー**（import 先だけ `vendor/` に変えた）。直すなら英語版と一緒に |
-| `client/island.js` | 2つの島（COSMOS・LAB）を `createIsland` で建てる。空・海・遠くの海岸・カメラ・歩き・他の子 |
+| `client/island.js` | 世界：空・海・遠くの海岸・雲・カメラ・歩き・他の子・昼夜（`setNight`）。島は `islands-build.js` の `BUILDERS[id]` で建てる |
+| `client/islands-build.js` | 7つの島の `build` 関数（島ごとに建物と道具）と `animateIslands`（月・ふりこ・シーソー・歯車・雲が動く） |
+| `client/world-clock.js` | 世界の時計。英語版と同じ 705 秒の1日。`phaseAt()` は壁時計の純粋関数（サーバー不要で全員同じ空） |
 | `client/islands.json` | 島のデータ（英語版の `school.json` と同じ形）。座標の定義元 |
-| `client/stage.js` | **実験の 3D の舞台。** 実験（`sim`）ごとに builder が1つ。`show({exp, params, result})` で建て直す。結果は計算しない（描くだけ） |
+| `client/stage.js` | **実験の 3D の舞台。** 実験（`sim`）ごとに builder が1つ。`show({exp, params, result})` で建て直す。結果は計算しない（描くだけ）。最初の6本はここ、残り15本は `stage-more.js`（`moreBuilders`） |
 | `client/app.js` / `panels.js` / `draw.js` / `i18n.js` / `style.css` | 起動・実験の画面・クラスの散布図と力のレーダー（この2つだけ 2D）・英日・HUD（英語版 `style.css` の値そのまま） |
 
 ## 守ること
@@ -33,9 +35,11 @@
   だから e2e は **DOM の有無で待つ**（`state: 'attached'`）し、クリックは英語版と同じく `press()`（ページの中で `el.click()`）。
   Playwright の本物のクリックは30秒止まることがある（実際に止まった）。実機の GPU では問題にならない。
 - 舞台の時計は1コマ 0.25 秒まで。遅い端末でも実時間で進む。
+- **同じ名前の測定項目が島ごとに別の意味になることがある**（`period` は軌道では分、ふりこでは秒。`bucket`・`faster` も）。
+  `panels.js` の `SIM_LABELS` / `SIM_QUESTIONS` に sim ごとの言葉を置く。共通の表に同じキーを2回書くと後ろが勝って静かに壊れる（実際に起きた）。
 
 ## 検査
 
-- `npm test`：物理が教科書の値と合うか（ISS 92分・静止軸 42,164 km・HD 209458 b の半径）、化学の表、判定、部屋（実ソケット）。16件。
-- `npm run test:e2e`：実ブラウザ 18項目。このコンテナは数 fps しか出ないので、歩きは `stem.walkTo()` でワープさせている。
+- `npm test`：物理が教科書の値と合うか（ISS 92分・静止軸 42,164 km・HD 209458 b の半径）、化学の表、力・生命・地球・工作・データ（`sims2.test.mjs`）、判定、部屋（実ソケット）。21件。
+- `npm run test:e2e`：実ブラウザ 35項目（COSMOS と LAB の全工程、残り5島の15の実験を1つずつ）。このコンテナは数 fps しか出ないので、歩きは `stem.walkTo()` でワープさせている。
   島の看板の文字は `stem.signs()` で読める（英語版の `island.signs` と同じ）。

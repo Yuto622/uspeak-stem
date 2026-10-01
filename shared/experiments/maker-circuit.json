@@ -1,0 +1,216 @@
+{
+  "id": "maker.circuit",
+  "region": "maker",
+  "station": "circuit-shed",
+  "title": {
+    "en": "The Circuit Shed",
+    "ja": "かいろの こや"
+  },
+  "sim": "circuit",
+  "intro": {
+    "en": "A battery, a resistor, a bulb. Turn up the volts or change the resistor and see how bright it gets — or whether it blows.",
+    "ja": "でんち・ていこう・でんきゅう。でんあつを あげたり ていこうを かえたりして、あかるさを 見よう。きれちゃう かも。"
+  },
+  "params": {
+    "volts": {
+      "min": 1.5,
+      "max": 12,
+      "step": 1.5,
+      "unit": "V",
+      "en": "Battery",
+      "ja": "でんち"
+    },
+    "resistance": {
+      "choices": [
+        "10",
+        "47",
+        "100",
+        "220",
+        "470",
+        "1000"
+      ],
+      "en": "Resistor (Ω)",
+      "ja": "ていこう（Ω）"
+    },
+    "bulbs": {
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "unit": "",
+      "en": "Bulbs in a row",
+      "ja": "でんきゅうの かず"
+    }
+  },
+  "levels": {
+    "explore": {
+      "ages": "4-7",
+      "fixed": {
+        "resistance": "100",
+        "bulbs": 1
+      },
+      "predict": {
+        "kind": "choice",
+        "field": "brightness",
+        "choices": [
+          "off",
+          "dim",
+          "bright",
+          "blown"
+        ]
+      },
+      "measure": [
+        "brightness"
+      ]
+    },
+    "investigate": {
+      "ages": "8-11",
+      "predict": {
+        "kind": "number",
+        "field": "mA",
+        "unit": "mA",
+        "tolerance": 0.15
+      },
+      "measure": [
+        "mA",
+        "brightness"
+      ],
+      "record": [
+        "volts",
+        "mA"
+      ]
+    },
+    "engineer": {
+      "ages": "12-15",
+      "predict": {
+        "kind": "number",
+        "field": "forTwenty",
+        "unit": "Ω",
+        "tolerance": 0.15
+      },
+      "measure": [
+        "mA",
+        "brightness",
+        "watts",
+        "forTwenty"
+      ],
+      "record": [
+        "volts",
+        "mA"
+      ],
+      "challenge": {
+        "en": "Choose the resistor that gives exactly 20 mA at 9 V.",
+        "ja": "9 V で ちょうど 20 mA になる ていこうを えらぼう。"
+      }
+    }
+  },
+  "explain": {
+    "en": "What decides how much current flows?",
+    "ja": "ながれる でんりゅうの 大きさは なにで きまる？",
+    "aims": [
+      {
+        "id": "volts-push",
+        "en": "More volts push more current",
+        "ja": "でんあつが 大きいと でんりゅうが 大きい",
+        "keys": [
+          [
+            "volt",
+            "volts",
+            "voltage",
+            "battery",
+            "push",
+            "pushes"
+          ],
+          [
+            "more",
+            "current",
+            "flow",
+            "flows",
+            "bigger",
+            "stronger"
+          ]
+        ]
+      },
+      {
+        "id": "resist",
+        "en": "Resistance holds the current back",
+        "ja": "ていこうが でんりゅうを おさえる",
+        "keys": [
+          [
+            "resist",
+            "resistance",
+            "resistor",
+            "hold",
+            "holds",
+            "back",
+            "less",
+            "smaller",
+            "slow"
+          ]
+        ]
+      },
+      {
+        "id": "series",
+        "en": "Bulbs in a row share the current and get dimmer",
+        "ja": "でんきゅうを つなげると くらくなる",
+        "keys": [
+          [
+            "row",
+            "series",
+            "share",
+            "shares",
+            "dim",
+            "dimmer",
+            "each",
+            "two",
+            "three"
+          ]
+        ]
+      }
+    ]
+  },
+  "classPlot": {
+    "x": "volts",
+    "y": "mA",
+    "xLabel": {
+      "en": "Volts",
+      "ja": "でんあつ（V）"
+    },
+    "yLabel": {
+      "en": "Current (mA)",
+      "ja": "でんりゅう（mA）"
+    }
+  },
+  "real": {
+    "en": "One battery, one bulb, two wires. Add a second bulb in the same loop.",
+    "ja": "でんち 1こ、でんきゅう 1こ、どうせん 2ほん。おなじ わに でんきゅうを もう 1こ。",
+    "kit": [
+      "a battery",
+      "a bulb",
+      "wires"
+    ]
+  },
+  "standards": {
+    "jp": [
+      "小4 電気の働き",
+      "中2 電流とその利用"
+    ],
+    "ngss": [
+      "4-PS3-2",
+      "MS-PS2-3"
+    ],
+    "cambridge": [
+      "Electricity"
+    ],
+    "pisa": [
+      "explain",
+      "interpret"
+    ]
+  },
+  "powers": {
+    "predict": 1,
+    "measure": 1,
+    "data": 1,
+    "explain": 1,
+    "build": 1
+  }
+}

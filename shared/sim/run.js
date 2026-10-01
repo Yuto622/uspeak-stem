@@ -8,6 +8,11 @@ import * as gravity from './gravity.js';
 import * as moon from './moon.js';
 import * as transit from './transit.js';
 import * as chem from './chem.js';
+import * as force from './force.js';
+import * as life from './life.js';
+import * as earth from './earth.js';
+import * as maker from './maker.js';
+import * as data from './data.js';
 import { seedOf } from './rng.js';
 
 export function runExperiment(exp, params, { seed = 0 } = {}) {
@@ -60,6 +65,21 @@ export function runExperiment(exp, params, { seed = 0 } = {}) {
       const base = chem.candle({ litres: 1, o2: chem.O2_AIR, candles: 1 }).seconds;
       return { ...r, longer: r.seconds > base ? 'longer' : 'shorter' };
     }
+    case 'pendulum': return force.pendulum({ length: params.length, angle: params.angle });
+    case 'ramp': return force.ramp({ angle: params.angle, surface: params.surface });
+    case 'lever': return force.lever(params);
+    case 'meadow': return life.meadow({ rabbits: params.rabbits, foxes: params.foxes, grass: params.grass });
+    case 'plant': return life.plant({ water: params.water, light: params.light, tempC: params.tempC });
+    case 'heart': return life.heart({ activity: params.activity, minutes: params.minutes, age: params.age });
+    case 'quake': return earth.quake({ distance: params.distance, magnitude: params.magnitude });
+    case 'tsunami': return earth.tsunami({ depth: params.depth, distance: params.distance });
+    case 'cloud': return earth.cloud({ tempC: params.tempC, humidity: params.humidity });
+    case 'bridge': return maker.bridge({ span: params.span, material: params.material, thickness: params.thickness, load: params.load });
+    case 'circuit': return maker.circuit({ volts: params.volts, resistance: Number(params.resistance), bulbs: params.bulbs });
+    case 'gears': return maker.gears({ driverTeeth: params.driverTeeth, drivenTeeth: params.drivenTeeth, rpm: params.rpm });
+    case 'dice': { const r = data.dice({ count: params.count, rolls: Number(params.rolls), seed: seedOf(`${exp.id}|${seed}`) }); return { ...r, rolls: Number(params.rolls) }; }
+    case 'pond': return data.pond({ marked: params.marked, caught: params.caught, seed: seedOf(`${exp.id}|${seed}`) });
+    case 'classify': return data.classify({ weight: params.weight, color: params.color, k: Number(params.k), seed: seedOf(`${exp.id}|${seed}`) });
     default:
       throw new Error(`unknown sim ${exp.sim}`);
   }
@@ -68,7 +88,7 @@ export function runExperiment(exp, params, { seed = 0 } = {}) {
 // The measurements without the bulky drawing data (trail, curve). What the room stores
 // and what the judge compares.
 export function measurementsOnly(result) {
-  const { trail, curve, ...rest } = result;
+  const { trail, curve, trace, hist, train, near, ...rest } = result;
   return rest;
 }
 

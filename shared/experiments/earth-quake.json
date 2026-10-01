@@ -1,0 +1,197 @@
+{
+  "id": "earth.quake",
+  "region": "earth",
+  "station": "seismo-house",
+  "title": {
+    "en": "The Seismograph House",
+    "ja": "じしんけいの いえ"
+  },
+  "sim": "quake",
+  "intro": {
+    "en": "An earthquake starts far away. Two waves race toward you: a fast gentle one, and a slower one that shakes. The gap between them is your warning.",
+    "ja": "とおくで じしんが おきた。2つの なみが やってくる。はやくて やさしい なみと、おそくて ゆれる なみ。その あいだが けいほうの じかん。"
+  },
+  "params": {
+    "distance": {
+      "min": 10,
+      "max": 300,
+      "step": 10,
+      "unit": "km",
+      "en": "Distance to the epicenter",
+      "ja": "しんげんまでの きょり"
+    },
+    "magnitude": {
+      "min": 3,
+      "max": 8,
+      "step": 0.5,
+      "unit": "M",
+      "en": "Magnitude",
+      "ja": "マグニチュード"
+    }
+  },
+  "levels": {
+    "explore": {
+      "ages": "4-7",
+      "fixed": {
+        "magnitude": 5
+      },
+      "predict": {
+        "kind": "choice",
+        "field": "first",
+        "choices": [
+          "P",
+          "S"
+        ]
+      },
+      "measure": [
+        "first",
+        "gap"
+      ]
+    },
+    "investigate": {
+      "ages": "8-11",
+      "fixed": {
+        "magnitude": 5
+      },
+      "predict": {
+        "kind": "number",
+        "field": "gap",
+        "unit": "s",
+        "tolerance": 0.15
+      },
+      "measure": [
+        "pSeconds",
+        "sSeconds",
+        "gap"
+      ],
+      "record": [
+        "distance",
+        "gap"
+      ]
+    },
+    "engineer": {
+      "ages": "12-15",
+      "predict": {
+        "kind": "number",
+        "field": "warning",
+        "unit": "s",
+        "tolerance": 0.2
+      },
+      "measure": [
+        "gap",
+        "warning",
+        "shaking",
+        "distanceFromGap"
+      ],
+      "record": [
+        "distance",
+        "gap"
+      ],
+      "challenge": {
+        "en": "Work out how far the epicenter is from the gap alone, like the early-warning system does.",
+        "ja": "あいだの びょうすうだけから しんげんまでの きょりを もとめよう。きんきゅうじしんそくほうと おなじ。"
+      }
+    }
+  },
+  "explain": {
+    "en": "How can a phone warn you before the shaking arrives?",
+    "ja": "どうして ゆれる まえに スマホが しらせられるの？",
+    "aims": [
+      {
+        "id": "two-waves",
+        "en": "There are two waves and the P wave is faster",
+        "ja": "なみは 2つあって P なみの ほうが はやい",
+        "keys": [
+          [
+            "two",
+            "p wave",
+            "p-wave",
+            "first",
+            "faster",
+            "fast"
+          ]
+        ]
+      },
+      {
+        "id": "gap",
+        "en": "The farther away, the bigger the gap",
+        "ja": "とおいほど あいだが ながい",
+        "keys": [
+          [
+            "far",
+            "farther",
+            "distance",
+            "away"
+          ],
+          [
+            "gap",
+            "longer",
+            "bigger",
+            "more",
+            "time",
+            "seconds"
+          ]
+        ]
+      },
+      {
+        "id": "warning",
+        "en": "The gap is the time to get under a desk",
+        "ja": "その あいだに つくえの したへ",
+        "keys": [
+          [
+            "warning",
+            "warn",
+            "desk",
+            "safe",
+            "hide",
+            "protect",
+            "time"
+          ]
+        ]
+      }
+    ]
+  },
+  "classPlot": {
+    "x": "distance",
+    "y": "gap",
+    "xLabel": {
+      "en": "Distance to the epicenter (km)",
+      "ja": "しんげんまでの きょり（km）"
+    },
+    "yLabel": {
+      "en": "Seconds between P and S",
+      "ja": "P と S の あいだ（びょう）"
+    }
+  },
+  "real": {
+    "en": "Next drill: count the seconds between the alert and the shaking.",
+    "ja": "つぎの くんれんで：けいほうから ゆれるまでの びょうを かぞえよう。",
+    "kit": [
+      "a timer"
+    ]
+  },
+  "standards": {
+    "jp": [
+      "中1 大地の変化（地震）",
+      "防災教育"
+    ],
+    "ngss": [
+      "4-ESS3-2",
+      "MS-ESS3-2"
+    ],
+    "cambridge": [
+      "Earth and Space"
+    ],
+    "pisa": [
+      "interpret",
+      "evaluate"
+    ]
+  },
+  "powers": {
+    "predict": 1,
+    "measure": 1,
+    "data": 2,
+    "explain": 1,
+    "build": 1
+  }
+}

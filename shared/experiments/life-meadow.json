@@ -1,0 +1,202 @@
+{
+  "id": "life.meadow",
+  "region": "life",
+  "station": "rabbit-meadow",
+  "title": {
+    "en": "The Rabbit Meadow",
+    "ja": "ウサギの はらっぱ"
+  },
+  "sim": "meadow",
+  "intro": {
+    "en": "Rabbits eat grass. Foxes eat rabbits. Start with some of each and watch 120 days go by.",
+    "ja": "ウサギは くさを たべる。キツネは ウサギを たべる。すうを きめて、120日を 見よう。"
+  },
+  "params": {
+    "rabbits": {
+      "min": 10,
+      "max": 200,
+      "step": 10,
+      "unit": "",
+      "en": "Rabbits at the start",
+      "ja": "さいしょの ウサギ"
+    },
+    "foxes": {
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "",
+      "en": "Foxes at the start",
+      "ja": "さいしょの キツネ"
+    },
+    "grass": {
+      "choices": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "en": "Grass",
+      "ja": "くさ"
+    }
+  },
+  "levels": {
+    "explore": {
+      "ages": "4-7",
+      "fixed": {
+        "grass": "medium",
+        "foxes": 10
+      },
+      "predict": {
+        "kind": "choice",
+        "field": "fate",
+        "choices": [
+          "both-live",
+          "foxes-die",
+          "rabbits-die",
+          "both-die"
+        ]
+      },
+      "measure": [
+        "fate"
+      ]
+    },
+    "investigate": {
+      "ages": "8-11",
+      "predict": {
+        "kind": "number",
+        "field": "rabbitPeak",
+        "unit": "",
+        "tolerance": 0.3
+      },
+      "measure": [
+        "fate",
+        "rabbitPeak",
+        "foxPeak"
+      ],
+      "record": [
+        "foxes",
+        "rabbitPeak"
+      ]
+    },
+    "engineer": {
+      "ages": "12-15",
+      "predict": {
+        "kind": "number",
+        "field": "cycles",
+        "unit": "",
+        "tolerance": 0.34
+      },
+      "measure": [
+        "fate",
+        "rabbitPeak",
+        "foxPeak",
+        "cycles"
+      ],
+      "record": [
+        "foxes",
+        "rabbitPeak"
+      ]
+    }
+  },
+  "explain": {
+    "en": "Why do the numbers go up and down instead of staying still?",
+    "ja": "どうして かずは ふえたり へったり するの？",
+    "aims": [
+      {
+        "id": "eat",
+        "en": "Foxes eat rabbits, rabbits eat grass",
+        "ja": "キツネは ウサギを、ウサギは くさを たべる",
+        "keys": [
+          [
+            "eat",
+            "eats",
+            "food",
+            "hunt",
+            "hunts"
+          ]
+        ]
+      },
+      {
+        "id": "cycle",
+        "en": "More rabbits, then more foxes, then fewer rabbits",
+        "ja": "ウサギが ふえると キツネが ふえ、ウサギが へる",
+        "keys": [
+          [
+            "more",
+            "fewer",
+            "less",
+            "increase",
+            "decrease",
+            "grow",
+            "drop"
+          ],
+          [
+            "then",
+            "after",
+            "so",
+            "because"
+          ]
+        ]
+      },
+      {
+        "id": "balance",
+        "en": "They keep each other in check",
+        "ja": "おたがいの かずを おさえあう",
+        "keys": [
+          [
+            "balance",
+            "check",
+            "control",
+            "depend",
+            "depends",
+            "cycle",
+            "wave",
+            "again"
+          ]
+        ]
+      }
+    ]
+  },
+  "classPlot": {
+    "x": "foxes",
+    "y": "rabbitPeak",
+    "xLabel": {
+      "en": "Foxes at the start",
+      "ja": "さいしょの キツネ"
+    },
+    "yLabel": {
+      "en": "Most rabbits at once",
+      "ja": "いちばん おおいときの ウサギ"
+    }
+  },
+  "real": {
+    "en": "Count the birds in your garden for a week. Do the numbers change?",
+    "ja": "にわの とりを 1しゅうかん かぞえよう。かずは かわる？",
+    "kit": [
+      "a notebook"
+    ]
+  },
+  "standards": {
+    "jp": [
+      "小6 生物と環境",
+      "中3 生物と環境"
+    ],
+    "ngss": [
+      "5-LS2-1",
+      "MS-LS2-2"
+    ],
+    "cambridge": [
+      "Living things in their environment"
+    ],
+    "pisa": [
+      "explain",
+      "interpret"
+    ]
+  },
+  "powers": {
+    "predict": 1,
+    "measure": 1,
+    "data": 2,
+    "explain": 1,
+    "build": 0
+  }
+}

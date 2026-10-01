@@ -1,0 +1,222 @@
+{
+  "id": "maker.bridge",
+  "region": "maker",
+  "station": "bridge-yard",
+  "title": {
+    "en": "The Bridge Yard",
+    "ja": "はしの こうば"
+  },
+  "sim": "bridge",
+  "intro": {
+    "en": "Lay a plank across a gap and load the middle. Does it sag? Does it break? Change the span, the thickness, the material.",
+    "ja": "すきまに いたを わたして、まんなかに おもりを のせよう。たわむ？ おれる？ ながさ・あつさ・ざいりょうを かえてみよう。"
+  },
+  "params": {
+    "span": {
+      "min": 1,
+      "max": 5,
+      "step": 0.5,
+      "unit": "m",
+      "en": "Span",
+      "ja": "ながさ"
+    },
+    "material": {
+      "choices": [
+        "wood",
+        "steel",
+        "plastic"
+      ],
+      "en": "Material",
+      "ja": "ざいりょう"
+    },
+    "thickness": {
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "unit": "cm",
+      "en": "Thickness",
+      "ja": "あつさ"
+    },
+    "load": {
+      "min": 10,
+      "max": 500,
+      "step": 10,
+      "unit": "kg",
+      "en": "Load",
+      "ja": "おもさ"
+    }
+  },
+  "levels": {
+    "explore": {
+      "ages": "4-7",
+      "fixed": {
+        "span": 2,
+        "thickness": 3,
+        "material": "wood"
+      },
+      "predict": {
+        "kind": "choice",
+        "field": "holds",
+        "choices": [
+          "holds",
+          "breaks"
+        ]
+      },
+      "measure": [
+        "holds"
+      ]
+    },
+    "investigate": {
+      "ages": "8-11",
+      "fixed": {
+        "material": "wood"
+      },
+      "predict": {
+        "kind": "number",
+        "field": "sagMm",
+        "unit": "mm",
+        "tolerance": 0.25
+      },
+      "measure": [
+        "sagMm",
+        "holds"
+      ],
+      "record": [
+        "load",
+        "sagMm"
+      ]
+    },
+    "engineer": {
+      "ages": "12-15",
+      "predict": {
+        "kind": "number",
+        "field": "maxLoad",
+        "unit": "kg",
+        "tolerance": 0.2
+      },
+      "measure": [
+        "sagMm",
+        "holds",
+        "maxLoad",
+        "stressMPa"
+      ],
+      "record": [
+        "load",
+        "sagMm"
+      ],
+      "challenge": {
+        "en": "Hold 200 kg over 3 m with the thinnest plank you can.",
+        "ja": "3 m で 200 kg を、いちばん うすい いたで ささえよう。"
+      }
+    }
+  },
+  "explain": {
+    "en": "What makes a bridge strong?",
+    "ja": "はしを つよくするのは なに？",
+    "aims": [
+      {
+        "id": "thick",
+        "en": "Thicker is much stiffer",
+        "ja": "あついほど ずっと かたい",
+        "keys": [
+          [
+            "thick",
+            "thicker",
+            "thickness",
+            "deep",
+            "deeper"
+          ],
+          [
+            "stiff",
+            "stiffer",
+            "strong",
+            "stronger",
+            "less",
+            "sag",
+            "bend"
+          ]
+        ]
+      },
+      {
+        "id": "span",
+        "en": "A longer span sags more",
+        "ja": "ながいほど たわむ",
+        "keys": [
+          [
+            "long",
+            "longer",
+            "span",
+            "length"
+          ],
+          [
+            "sag",
+            "sags",
+            "bend",
+            "bends",
+            "more",
+            "weak",
+            "weaker"
+          ]
+        ]
+      },
+      {
+        "id": "material",
+        "en": "Steel bends less than wood or plastic",
+        "ja": "はがねは きや プラスチックより まがらない",
+        "keys": [
+          [
+            "steel",
+            "wood",
+            "plastic",
+            "material",
+            "metal"
+          ]
+        ]
+      }
+    ]
+  },
+  "classPlot": {
+    "x": "load",
+    "y": "sagMm",
+    "xLabel": {
+      "en": "Load (kg)",
+      "ja": "おもさ（kg）"
+    },
+    "yLabel": {
+      "en": "Sag (mm)",
+      "ja": "たわみ（mm）"
+    }
+  },
+  "real": {
+    "en": "A ruler between two books. Press the middle. Now stand the ruler on its edge and press again.",
+    "ja": "2さつの ほんに じょうぎを わたす。まんなかを おす。つぎは じょうぎを たてて おしてみよう。",
+    "kit": [
+      "a ruler",
+      "two books"
+    ]
+  },
+  "standards": {
+    "jp": [
+      "中1 力と圧力",
+      "技術・家庭"
+    ],
+    "ngss": [
+      "3-5-ETS1-3",
+      "MS-ETS1-4"
+    ],
+    "cambridge": [
+      "Forces and motion"
+    ],
+    "pisa": [
+      "evaluate",
+      "interpret"
+    ]
+  },
+  "powers": {
+    "predict": 1,
+    "measure": 1,
+    "data": 1,
+    "explain": 1,
+    "build": 2
+  }
+}

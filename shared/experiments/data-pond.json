@@ -1,0 +1,194 @@
+{
+  "id": "data.pond",
+  "region": "data",
+  "station": "counting-pond",
+  "title": {
+    "en": "The Counting Pond",
+    "ja": "かぞえる いけ"
+  },
+  "sim": "pond",
+  "intro": {
+    "en": "How many fish are in the pond? You cannot see them all. Mark some, let them go, catch again and count the marked ones.",
+    "ja": "いけに さかなは なんびき？ ぜんぶは 見えない。なんびきかに しるしを つけて、はなして、また つかまえて、しるしを かぞえよう。"
+  },
+  "params": {
+    "marked": {
+      "min": 10,
+      "max": 60,
+      "step": 10,
+      "unit": "fish",
+      "en": "Fish you mark",
+      "ja": "しるしを つける かず"
+    },
+    "caught": {
+      "min": 10,
+      "max": 60,
+      "step": 10,
+      "unit": "fish",
+      "en": "Fish you catch again",
+      "ja": "また つかまえる かず"
+    }
+  },
+  "levels": {
+    "explore": {
+      "ages": "4-7",
+      "fixed": {
+        "marked": 30,
+        "caught": 30
+      },
+      "predict": {
+        "kind": "choice",
+        "field": "bucket",
+        "choices": [
+          "under-150",
+          "over-150"
+        ]
+      },
+      "measure": [
+        "recaptured",
+        "truth"
+      ]
+    },
+    "investigate": {
+      "ages": "8-11",
+      "predict": {
+        "kind": "number",
+        "field": "truth",
+        "unit": "fish",
+        "tolerance": 0.3
+      },
+      "measure": [
+        "recaptured",
+        "estimate",
+        "truth"
+      ],
+      "record": [
+        "caught",
+        "error"
+      ]
+    },
+    "engineer": {
+      "ages": "12-15",
+      "predict": {
+        "kind": "number",
+        "field": "truth",
+        "unit": "fish",
+        "tolerance": 0.2
+      },
+      "measure": [
+        "recaptured",
+        "estimate",
+        "truth",
+        "error"
+      ],
+      "record": [
+        "caught",
+        "error"
+      ],
+      "challenge": {
+        "en": "Get the error under 10% by choosing how many to mark and catch.",
+        "ja": "しるしと つかまえる かずを えらんで、ごさを 10% より ちいさく。"
+      }
+    }
+  },
+  "explain": {
+    "en": "How can you count something you cannot see?",
+    "ja": "見えないものを どうやって かぞえる？",
+    "aims": [
+      {
+        "id": "sample",
+        "en": "Catch a sample instead of everything",
+        "ja": "ぜんぶじゃなく いちぶを つかまえる",
+        "keys": [
+          [
+            "sample",
+            "some",
+            "part",
+            "few",
+            "not all"
+          ]
+        ]
+      },
+      {
+        "id": "ratio",
+        "en": "The share of marked fish in the catch is the share in the pond",
+        "ja": "つかまえた なかの しるしの わりあいが、いけ ぜんたいの わりあい",
+        "keys": [
+          [
+            "share",
+            "ratio",
+            "fraction",
+            "proportion",
+            "percent",
+            "same",
+            "out of"
+          ]
+        ]
+      },
+      {
+        "id": "bigger-sample",
+        "en": "A bigger sample gives a closer answer",
+        "ja": "たくさん つかまえるほど ちかい こたえ",
+        "keys": [
+          [
+            "bigger",
+            "more",
+            "larger",
+            "many"
+          ],
+          [
+            "close",
+            "closer",
+            "accurate",
+            "better",
+            "exact",
+            "error"
+          ]
+        ]
+      }
+    ]
+  },
+  "classPlot": {
+    "x": "caught",
+    "y": "error",
+    "xLabel": {
+      "en": "Fish caught the second time",
+      "ja": "2かいめに つかまえた かず"
+    },
+    "yLabel": {
+      "en": "Error (%)",
+      "ja": "ごさ（%）"
+    }
+  },
+  "real": {
+    "en": "Count the beans in a jar the same way: mark 20, mix, scoop a handful.",
+    "ja": "びんの まめを おなじ やりかたで：20こに しるし、まぜて、ひとつかみ。",
+    "kit": [
+      "a jar of beans",
+      "a marker"
+    ]
+  },
+  "standards": {
+    "jp": [
+      "小6 データの活用",
+      "中1 資料の活用"
+    ],
+    "ngss": [
+      "MS-LS2-1"
+    ],
+    "cambridge": [
+      "Statistics and probability"
+    ],
+    "pisa": [
+      "interpret",
+      "evaluate"
+    ]
+  },
+  "powers": {
+    "predict": 1,
+    "measure": 1,
+    "data": 2,
+    "explain": 1,
+    "build": 1
+  }
+}

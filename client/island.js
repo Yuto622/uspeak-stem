@@ -8,6 +8,8 @@
 import * as THREE from './vendor/three.module.js';
 import { createIsland, NEAR_DISTANCE, shade } from './island-kit.js';
 import { t, onLang } from './i18n.js';
+import { BUILDERS, animateIslands } from './islands-build.js';
+import { phaseAt } from './world-clock.js';
 
 const SPEED = 9;
 const CAMERA = { yaw: 0.55, pitch: 0.04, zoom: 32 };
@@ -45,103 +47,46 @@ export function createWorld(canvas) {
   scene.add(sun); scene.add(sun.target);
 
   // Open water, and the far coast of stepped islands and slow clouds the English world has.
-  const water = new THREE.Mesh(new THREE.PlaneGeometry(700, 700), new THREE.MeshStandardMaterial({ color: 0x64b9c0, metalness: 0.32, roughness: 0.24, transparent: true, opacity: 0.9 }));
-  water.rotation.x = -Math.PI / 2; water.position.y = -1.55; water.receiveShadow = true; scene.add(water);
+  const water = new THREE.Mesh(new THREE.PlaneGeometry(1400, 1400), new THREE.MeshStandardMaterial({ color: 0x64b9c0, metalness: 0.32, roughness: 0.24, transparent: true, opacity: 0.9 }));
+  water.rotation.x = -Math.PI / 2; water.position.set(200, -1.55, 60); water.receiveShadow = true; scene.add(water);
   const boxGeo = new THREE.BoxGeometry(1, 1, 1);
   const box = (x, y, z, w, h, d, color, parent = scene) => { const m = new THREE.Mesh(boxGeo, new THREE.MeshStandardMaterial({ color, roughness: 0.85 })); m.position.set(x, y, z); m.scale.set(w, h, d); parent.add(m); return m; };
   let s = 7;
   const rand = () => ((s = (s * 16807) % 2147483647) - 1) / 2147483646;
   // Far enough into the haze to read as a coast, not as blocks in the sky.
-  for (let i = 0; i < 22; i++) { const x = -160 + i * 20; const z = -150 - rand() * 40; const h = 5 + rand() * 10; box(x, -4, z, 18, h, 14, 0x9fb5ad); box(x, h / 2 - 3, z, 14, 2, 11, 0x9cb09e); box(x + 1, h / 2 - 1, z, 8, 3, 8, 0xa9b9a7); }
+  for (let i = 0; i < 40; i++) { const x = -160 + i * 20; const z = -150 - rand() * 40; const h = 5 + rand() * 10; box(x, -4, z, 18, h, 14, 0x9fb5ad); box(x, h / 2 - 3, z, 14, 2, 11, 0x9cb09e); box(x + 1, h / 2 - 1, z, 8, 3, 8, 0xa9b9a7); }
   const clouds = [];
-  for (let i = 0; i < 14; i++) { const g = new THREE.Group(); g.position.set((rand() - 0.5) * 260 + 60, 28 + rand() * 18, -30 - rand() * 50); scene.add(g); for (let j = 0; j < 5; j++) box(j * 3, rand() * 1.1, rand() * 2, 5, 1.2, 3.5, 0xedf0df, g); clouds.push(g); }
+  for (let i = 0; i < 30; i++) { const g = new THREE.Group(); g.position.set((rand() - 0.5) * 600 + 200, 28 + rand() * 18, -30 - rand() * 50 + (i % 2 ? 160 : 0)); scene.add(g); for (let j = 0; j < 5; j++) box(j * 3, rand() * 1.1, rand() * 2, 5, 1.2, 3.5, 0xedf0df, g); clouds.push(g); }
 
   // The islands.
   const islands = new Map();
   const defs = new Map();
+  let lastNight = -1;
+  const skyMoon = new THREE.Mesh(new THREE.SphereGeometry(6, 20, 16), new THREE.MeshBasicMaterial({ color: 0xdfe6f5 })); skyMoon.visible = false; scene.add(skyMoon);
+  const nightHorizon = new THREE.Color(0.065, 0.13, 0.21); const nightZenith = new THREE.Color(0.008, 0.022, 0.07);
+  function setNight(n) {
+    const col = skyGeo.attributes.color;
+    for (let i = 0; i < skyGeo.attributes.position.count; i++) {
+      const y = skyGeo.attributes.position.getY(i) / 280;
+      const c = horizon.clone().lerp(nightHorizon, n).lerp(zenith.clone().lerp(nightZenith, n), Math.pow(Math.max(y, 0), 0.48));
+      col.setXYZ(i, c.r, c.g, c.b);
+    }
+    col.needsUpdate = true;
+    hemi.intensity = 1.5 - 0.92 * n; hemi.color.setHex(0xd6e9f1).lerp(new THREE.Color(0x6086bc), n); hemi.groundColor.setHex(0x7b794c).lerp(new THREE.Color(0x233747), n);
+    sun.intensity = 3.4 - 2.7 * n; sun.color.setHex(0xffd19b).lerp(new THREE.Color(0x9ebfea), n);
+    scene.fog.color.setHex(0xd3b99b).lerp(new THREE.Color(0x0b1026), n);
+    water.material.color.setHex(0x64b9c0).lerp(new THREE.Color(0x15304a), n);
+    skyMoon.visible = n > 0.3;
+    for (const [, isl] of islands) isl.setNight(n);
+    for (const fn of listeners.night) fn(n);
+  }
   function define(data) {
     defs.set(data.id, data);
-    const island = createIsland({ scene, seed: data.id === 'cosmos' ? 20250910 : 30414159, build: data.id === 'cosmos' ? buildCosmos : buildLab });
+    const seeds = { cosmos: 20250910, lab: 30414159, force: 41421356, life: 27182818, earth: 16180339, maker: 12345679, data: 73205080 };
+    const island = createIsland({ scene, seed: seeds[data.id] || 7, build: (k) => BUILDERS[data.id]?.(k) });
     island.receive(data);
     island.show(true);
     islands.set(data.id, island);
-  }
-
-  // COSMOS: a hill with the Moon over it, a launch pad with a rocket, an observatory.
-  function buildCosmos({ island, B, D, house, path, resident, door, scatter, lamp, flowers, bench, fence, bunting, obstacles, rand: r }) {
-    for (const sp of island.spots) path(sp.path.x, sp.path.z, sp.x, sp.z + 4.2);
-    path(0, 19, 0, 12);
-    const [hill, pad, obs] = island.spots;
-    // Phase Hill: a grassy mound, a model Earth on a post and a Moon that circles it.
-    for (let i = 0; i < 4; i++) D(hill.x, 0.3 + i * 0.5, hill.z - 3, 9 - i * 1.8, 0.5, 7 - i * 1.4, i % 2 ? 0x8fb061 : 0x9cbb6a);
-    D(hill.x, 3.2, hill.z - 3, 0.3, 2.4, 0.3, 0x6f5b3e);
-    B(hill.x, 4.6, hill.z - 3, 1.3, 1.3, 1.3, 0x3f7fd0);
-    const moon = B(hill.x + 3, 5.2, hill.z - 3, 0.7, 0.7, 0.7, 0xe6e2d6);
-    moon.userData.orbit = { cx: hill.x, cz: hill.z - 3, r: 3.2 };
-    obstacles.push({ x: hill.x, z: hill.z - 3, w: 4, d: 3 });
-    house(hill.x, hill.z - 10, 5, 4.5, 0xe8dcc0, 0x6b8fb8, { en: hill.en, ja: hill.name });
-    // Launch Pad: a concrete apron, a gantry and a rocket.
-    D(pad.x, 0.3, pad.z - 4, 9, 0.3, 9, 0x8a8f99);
-    D(pad.x, 0.5, pad.z - 4, 7.5, 0.2, 7.5, 0x9aa0aa);
-    D(pad.x + 2.4, 4.8, pad.z - 4, 1.0, 9, 1.0, 0xc9cdd6);
-    D(pad.x + 1.4, 7.5, pad.z - 4, 1.6, 0.3, 0.6, 0xc9cdd6);
-    D(pad.x, 2.4, pad.z - 4, 1.4, 4, 1.4, 0xf2f2f2);
-    D(pad.x, 5.2, pad.z - 4, 1.0, 1.6, 1.0, 0xf2f2f2);
-    D(pad.x, 6.4, pad.z - 4, 0.6, 0.9, 0.6, 0xd04030);
-    for (const [fx, fz] of [[-1, 0], [1, 0], [0, -1], [0, 1]]) D(pad.x + fx * 0.9, 0.9, pad.z - 4 + fz * 0.9, fx ? 0.8 : 0.3, 1.2, fz ? 0.8 : 0.3, 0xd04030);
-    obstacles.push({ x: pad.x, z: pad.z - 4, w: 4, d: 4 });
-    fence(pad.x - 6, pad.z - 9.5, 9); bunting(pad.x - 6, pad.z + 1, pad.x + 6, pad.z + 1, 4);
-    house(pad.x - 11, pad.z - 2, 5, 4.5, 0xe3e9f0, 0x5c8583, { en: 'Mission Control', ja: 'かんせいしつ' });
-    // Observatory: a round tower with a dome and a telescope.
-    for (let i = 0; i < 6; i++) D(obs.x, 0.5 + i, obs.z - 4, 6.4 - (i > 4 ? 0.6 : 0), 1, 6.4 - (i > 4 ? 0.6 : 0), i % 2 ? 0xe8e2d0 : 0xdcd4c0);
-    for (let i = 0; i < 4; i++) D(obs.x, 6.6 + i * 0.7, obs.z - 4, 6.2 - i * 1.4, 0.7, 6.2 - i * 1.4, 0xb9c6d6);
-    D(obs.x + 0.8, 8.6, obs.z - 4.4, 0.8, 0.8, 3.2, 0x334455);
-    D(obs.x, 1.5, obs.z - 0.9, 1.4, 2.6, 0.3, 0x50412f);
-    obstacles.push({ x: obs.x, z: obs.z - 4, w: 3.6, d: 3.6 });
-    for (const sx of [-5, 5]) lamp(obs.x + sx, obs.z + 1);
-    for (const sp of island.spots) resident(sp);
-    for (const [x, z] of [[-8, 6], [8, 6], [-24, 6], [24, 6]]) flowers(x, z, 0xf0d98a);
-    bench(-5, 14, Math.PI); bench(5, 14, Math.PI);
-    scatter(island, 100);
-    island._moon = moon;
-  }
-
-  // LAB: a long timber workshop, a shelf of coloured bottles and a stone hearth.
-  function buildLab({ island, B, D, house, path, resident, scatter, lamp, flowers, bench, crate, barrel, fence, obstacles }) {
-    for (const sp of island.spots) path(sp.path.x, sp.path.z, sp.x, sp.z + 4.2);
-    path(0, 19, 0, 12);
-    const [bench_, shelf, corner] = island.spots;
-    // Dissolving Bench: a workbench under an awning with beakers of coloured water.
-    D(bench_.x, 1.0, bench_.z - 4, 7, 0.3, 2.4, 0xa58c62);
-    for (const sx of [-3.2, 3.2]) for (const sz of [-1, 1]) D(bench_.x + sx, 0.5, bench_.z - 4 + sz, 0.3, 1, 0.3, 0x7b6647);
-    const waters = [0x7fd1ff, 0xd9c4ff, 0xf6f1c8, 0xa9f0d1];
-    waters.forEach((c, i) => { D(bench_.x - 2.4 + i * 1.6, 1.6, bench_.z - 4, 0.7, 0.9, 0.7, 0xe8f2f5); D(bench_.x - 2.4 + i * 1.6, 1.45, bench_.z - 4, 0.6, 0.5, 0.6, c); });
-    for (const sx of [-3.6, 3.6]) D(bench_.x + sx, 2.6, bench_.z - 5.2, 0.25, 3.2, 0.25, 0x6f5b3e);
-    D(bench_.x, 4.2, bench_.z - 4.4, 8.4, 0.2, 3.6, 0xb86e46);
-    obstacles.push({ x: bench_.x, z: bench_.z - 4, w: 3.8, d: 1.6 });
-    house(bench_.x, bench_.z - 11, 6, 5, 0xf0e6cc, 0xb86e46, { en: bench_.en, ja: bench_.name });
-    // Indicator Shelf: a tall cabinet of bottles in indicator colours.
-    D(shelf.x, 2.0, shelf.z - 4, 7, 4, 1.4, 0x8a6a45);
-    const tints = [0xd9433a, 0xe98ab0, 0x7a4ea8, 0x3a6fd0, 0x3f9a52, 0xe4c239];
-    for (let row = 0; row < 3; row++) for (let i = 0; i < 6; i++) D(shelf.x - 2.5 + i, 0.9 + row * 1.2, shelf.z - 3.2, 0.5, 0.8, 0.5, tints[(i + row) % 6]);
-    D(shelf.x, 4.1, shelf.z - 4, 7.4, 0.2, 1.8, 0x6d543a);
-    obstacles.push({ x: shelf.x, z: shelf.z - 4, w: 3.7, d: 0.9 });
-    house(shelf.x - 11, shelf.z - 2, 5.5, 4.5, 0xdde6d2, 0x5c8583, { en: 'Stockroom', ja: 'やくひんしつ' });
-    crate(shelf.x + 6, shelf.z - 3); barrel(shelf.x + 7.4, shelf.z - 3);
-    // Burning Corner: a stone hearth with a candle under a glass jar.
-    D(corner.x, 0.4, corner.z - 4, 5, 0.6, 5, 0x9a9585);
-    for (let i = 0; i < 8; i++) { const a = (i / 8) * Math.PI * 2; D(corner.x + Math.cos(a) * 2, 0.9, corner.z - 4 + Math.sin(a) * 2, 0.6, 0.5, 0.6, 0x8c917c); }
-    D(corner.x, 1.2, corner.z - 4, 0.4, 1.0, 0.4, 0xfff4d7);
-    D(corner.x, 1.9, corner.z - 4, 0.3, 0.4, 0.3, 0xffc66a, 2.2);
-    D(corner.x, 1.7, corner.z - 4, 1.6, 2.2, 1.6, 0xd8ecf2);
-    obstacles.push({ x: corner.x, z: corner.z - 4, w: 2.6, d: 2.6 });
-    fence(corner.x - 4, corner.z - 8, 6);
-    house(corner.x, corner.z - 11, 5, 4.5, 0xe6d8c8, 0x8e795f, { en: corner.en, ja: corner.name });
-    for (const sp of island.spots) resident(sp);
-    for (const sx of [-5, 5]) lamp(sx, 10);
-    for (const [x, z] of [[-9, 6], [9, 6], [-24, 8], [24, 8]]) flowers(x, z, 0xe89bb0);
-    bench(-5, 14, Math.PI); bench(5, 14, Math.PI);
-    scatter(island, 100);
   }
 
   // People: the same voxel villager the islands use, for me and for everyone else.
@@ -187,7 +132,7 @@ export function createWorld(canvas) {
   }
 
   let frozen = false; let nearSpot = null;
-  const listeners = { near: [], move: [], island: [] };
+  const listeners = { near: [], move: [], island: [], night: [] };
   const clock = new THREE.Clock(); let lastSent = 0;
   function resize() { renderer.setSize(innerWidth, innerHeight, false); camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); }
   addEventListener('resize', resize); resize();
@@ -216,8 +161,10 @@ export function createWorld(canvas) {
       }
     }
     for (const [, isl] of islands) isl.update(time, me);
-    const cm = islands.get('cosmos')?._moon;
-    if (cm) { const o = cm.userData.orbit; cm.position.x = o.cx + Math.cos(time * 0.6) * o.r; cm.position.z = o.cz + Math.sin(time * 0.6) * o.r; }
+    animateIslands(islands, time);
+    // the world's clock: the same sky for every child, without the server
+    const night = phaseAt().night;
+    if (Math.abs(night - lastNight) > 0.002) { lastNight = night; setNight(night); }
     for (const c of clouds) c.position.x += dt * 0.6;
     const near = island?.nearest(me)?.spot || null;
     if (near !== nearSpot) { nearSpot = near; for (const fn of listeners.near) fn(near); }
@@ -227,7 +174,7 @@ export function createWorld(canvas) {
     const target = new THREE.Vector3(me.position.x + Math.sin(yaw) * dist, h, me.position.z + Math.cos(yaw) * dist);
     camera.position.lerp(target, 0.12);
     camera.lookAt(me.position.x, me.position.y + 1.6, me.position.z);
-    sky.position.copy(camera.position);
+    sky.position.copy(camera.position); skyMoon.position.set(camera.position.x - 90, 70, camera.position.z - 120);
     renderer.render(scene, camera);
     requestAnimationFrame(tick);
   }
@@ -247,6 +194,7 @@ export function createWorld(canvas) {
     onNear(fn) { listeners.near.push(fn); },
     onMove(fn) { listeners.move.push(fn); },
     onIsland(fn) { listeners.island.push(fn); },
+    onNight(fn) { listeners.night.push(fn); },
     freeze(v) { frozen = v; keys.clear(); },
     travel,
     get current() { return current; },

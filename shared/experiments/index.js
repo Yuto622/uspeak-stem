@@ -13,6 +13,21 @@ import exoplanetHunter from './exoplanet-hunter.json' with { type: 'json' };
 import solubility from './solubility.json' with { type: 'json' };
 import acidBase from './acid-base.json' with { type: 'json' };
 import candle from './candle.json' with { type: 'json' };
+import forcePendulum from './force-pendulum.json' with { type: 'json' };
+import forceRamp from './force-ramp.json' with { type: 'json' };
+import forceLever from './force-lever.json' with { type: 'json' };
+import lifeMeadow from './life-meadow.json' with { type: 'json' };
+import lifePlant from './life-plant.json' with { type: 'json' };
+import lifeHeart from './life-heart.json' with { type: 'json' };
+import earthQuake from './earth-quake.json' with { type: 'json' };
+import earthTsunami from './earth-tsunami.json' with { type: 'json' };
+import earthCloud from './earth-cloud.json' with { type: 'json' };
+import makerBridge from './maker-bridge.json' with { type: 'json' };
+import makerCircuit from './maker-circuit.json' with { type: 'json' };
+import makerGears from './maker-gears.json' with { type: 'json' };
+import dataDice from './data-dice.json' with { type: 'json' };
+import dataPond from './data-pond.json' with { type: 'json' };
+import dataClassify from './data-classify.json' with { type: 'json' };
 
 export const LEVELS = ['explore', 'investigate', 'engineer'];
 export const POWERS = [
@@ -22,7 +37,7 @@ export const POWERS = [
   { id: 'explain', en: 'Explain', ja: 'せつめいする' },
   { id: 'build', en: 'Build', ja: 'つくる' },
 ];
-const SIMS = new Set(['moon', 'gravity', 'transit', 'solubility', 'acidbase', 'candle']);
+const SIMS = new Set(['moon', 'gravity', 'transit', 'solubility', 'acidbase', 'candle', 'pendulum', 'ramp', 'lever', 'meadow', 'plant', 'heart', 'quake', 'tsunami', 'cloud', 'bridge', 'circuit', 'gears', 'dice', 'pond', 'classify']);
 
 function check(e) {
   const bad = (why) => { throw new Error(`experiment ${e?.id || '?'}: ${why}`); };
@@ -54,10 +69,15 @@ function check(e) {
   return e;
 }
 
-export const EXPERIMENTS = [moonPhases, orbitLaunch, exoplanetHunter, solubility, acidBase, candle].map(check);
+export const EXPERIMENTS = [moonPhases, orbitLaunch, exoplanetHunter, solubility, acidBase, candle, forcePendulum, forceRamp, forceLever, lifeMeadow, lifePlant, lifeHeart, earthQuake, earthTsunami, earthCloud, makerBridge, makerCircuit, makerGears, dataDice, dataPond, dataClassify].map(check);
 export const REGIONS = [
-  { id: 'cosmos', en: 'COSMOS', ja: 'そらの しま' },
-  { id: 'lab', en: 'LAB', ja: 'かがくの しま' },
+  { id: 'cosmos', en: 'COSMOS', ja: 'そらの しま', icon: '🚀' },
+  { id: 'lab', en: 'LAB', ja: 'かがくの しま', icon: '🧪' },
+  { id: 'force', en: 'FORCE', ja: 'ちからの しま', icon: '🎢' },
+  { id: 'life', en: 'LIFE', ja: 'いのちの しま', icon: '🌱' },
+  { id: 'earth', en: 'EARTH', ja: 'ちきゅうの しま', icon: '🌋' },
+  { id: 'maker', en: 'MAKER', ja: 'つくる しま', icon: '🔧' },
+  { id: 'data', en: 'DATA', ja: 'データの しま', icon: '🎲' },
 ];
 export const EXPERIMENT_BY_ID = Object.fromEntries(EXPERIMENTS.map((e) => [e.id, e]));
 

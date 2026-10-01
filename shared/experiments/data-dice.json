@@ -1,0 +1,193 @@
+{
+  "id": "data.dice",
+  "region": "data",
+  "station": "dice-table",
+  "title": {
+    "en": "The Dice Table",
+    "ja": "サイコロの テーブル"
+  },
+  "sim": "dice",
+  "intro": {
+    "en": "Roll dice many times and pile up the results. Some totals come up far more often than others. Which, and why?",
+    "ja": "サイコロを なんかいも ふって、けっかを つみあげよう。よく 出る ごうけいが ある。どれ？ なぜ？"
+  },
+  "params": {
+    "count": {
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "unit": "dice",
+      "en": "How many dice",
+      "ja": "サイコロの かず"
+    },
+    "rolls": {
+      "choices": [
+        "10",
+        "100",
+        "1000"
+      ],
+      "en": "How many rolls",
+      "ja": "なんかい ふる"
+    }
+  },
+  "levels": {
+    "explore": {
+      "ages": "4-7",
+      "fixed": {
+        "count": 2,
+        "rolls": "100"
+      },
+      "predict": {
+        "kind": "choice",
+        "field": "mode",
+        "choices": [
+          "2",
+          "7",
+          "12"
+        ]
+      },
+      "measure": [
+        "mode"
+      ]
+    },
+    "investigate": {
+      "ages": "8-11",
+      "predict": {
+        "kind": "number",
+        "field": "mean",
+        "unit": "",
+        "tolerance": 0.1
+      },
+      "measure": [
+        "mode",
+        "mean"
+      ],
+      "record": [
+        "rolls",
+        "mean"
+      ]
+    },
+    "engineer": {
+      "ages": "12-15",
+      "fixed": {
+        "count": 2
+      },
+      "predict": {
+        "kind": "number",
+        "field": "sevenPercent",
+        "unit": "%",
+        "tolerance": 0.25
+      },
+      "measure": [
+        "mode",
+        "mean",
+        "sevenPercent"
+      ],
+      "record": [
+        "rolls",
+        "sevenPercent"
+      ],
+      "challenge": {
+        "en": "Predict the share of sevens before rolling, from counting the ways to make 7.",
+        "ja": "7を つくる くみあわせを かぞえて、7の わりあいを ふる まえに いおう。"
+      }
+    }
+  },
+  "explain": {
+    "en": "Why does 7 win with two dice?",
+    "ja": "どうして サイコロ 2つだと 7が いちばん 出るの？",
+    "aims": [
+      {
+        "id": "ways",
+        "en": "There are more ways to make 7 than 2 or 12",
+        "ja": "7を つくる くみあわせが いちばん おおい",
+        "keys": [
+          [
+            "ways",
+            "combinations",
+            "combination",
+            "pairs",
+            "more"
+          ]
+        ]
+      },
+      {
+        "id": "more-rolls",
+        "en": "More rolls make the pile smoother",
+        "ja": "たくさん ふるほど かたちが なめらかに",
+        "keys": [
+          [
+            "more rolls",
+            "many",
+            "lots",
+            "smoother",
+            "closer",
+            "even",
+            "average",
+            "hundred",
+            "thousand"
+          ]
+        ]
+      },
+      {
+        "id": "chance",
+        "en": "You cannot know one roll, but you can know the pattern",
+        "ja": "1かいは わからないけど、かたちは わかる",
+        "keys": [
+          [
+            "chance",
+            "random",
+            "luck",
+            "pattern",
+            "likely",
+            "probability",
+            "predict"
+          ]
+        ]
+      }
+    ]
+  },
+  "classPlot": {
+    "x": "rolls",
+    "y": "mean",
+    "xLabel": {
+      "en": "Rolls",
+      "ja": "ふった かいすう"
+    },
+    "yLabel": {
+      "en": "Average total",
+      "ja": "ごうけいの へいきん"
+    }
+  },
+  "real": {
+    "en": "Roll two dice 36 times and tally the totals.",
+    "ja": "サイコロ 2つを 36かい ふって、ごうけいを せいの字で かぞえよう。",
+    "kit": [
+      "two dice",
+      "paper"
+    ]
+  },
+  "standards": {
+    "jp": [
+      "小6 データの活用",
+      "中2 確率"
+    ],
+    "ngss": [
+      "MS-ETS1-4"
+    ],
+    "cambridge": [
+      "Statistics and probability"
+    ],
+    "pisa": [
+      "interpret",
+      "evaluate"
+    ]
+  },
+  "powers": {
+    "predict": 1,
+    "measure": 1,
+    "data": 2,
+    "explain": 1,
+    "build": 0
+  }
+}

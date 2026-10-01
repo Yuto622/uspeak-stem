@@ -1,0 +1,201 @@
+{
+  "id": "data.classify",
+  "region": "data",
+  "station": "sorting-machine",
+  "title": {
+    "en": "The Sorting Machine",
+    "ja": "しわけ マシン"
+  },
+  "sim": "classify",
+  "intro": {
+    "en": "A machine that has seen forty fruits and their labels. Give it a new one — weight and colour — and it decides: apple or orange? It is looking at its nearest neighbours.",
+    "ja": "40この くだものと なまえを 見た マシン。あたらしい 1こ（おもさと いろ）を わたすと、りんごか みかんか きめる。いちばん にている ものを 見ている。"
+  },
+  "params": {
+    "weight": {
+      "min": 100,
+      "max": 250,
+      "step": 10,
+      "unit": "g",
+      "en": "Weight",
+      "ja": "おもさ"
+    },
+    "color": {
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "unit": "",
+      "en": "Colour (0 green … 1 orange)",
+      "ja": "いろ（0 みどり … 1 オレンジ）"
+    },
+    "k": {
+      "choices": [
+        "1",
+        "3",
+        "5",
+        "9"
+      ],
+      "en": "Neighbours to ask",
+      "ja": "きく かず（k）"
+    }
+  },
+  "levels": {
+    "explore": {
+      "ages": "4-7",
+      "fixed": {
+        "k": "5"
+      },
+      "predict": {
+        "kind": "choice",
+        "field": "label",
+        "choices": [
+          "apple",
+          "orange"
+        ]
+      },
+      "measure": [
+        "label"
+      ]
+    },
+    "investigate": {
+      "ages": "8-11",
+      "predict": {
+        "kind": "number",
+        "field": "confidence",
+        "unit": "%",
+        "tolerance": 0.25
+      },
+      "measure": [
+        "label",
+        "confidence"
+      ],
+      "record": [
+        "weight",
+        "confidence"
+      ]
+    },
+    "engineer": {
+      "ages": "12-15",
+      "predict": {
+        "kind": "number",
+        "field": "accuracy",
+        "unit": "%",
+        "tolerance": 0.1
+      },
+      "measure": [
+        "label",
+        "confidence",
+        "accuracy"
+      ],
+      "record": [
+        "weight",
+        "confidence"
+      ],
+      "challenge": {
+        "en": "Find the k that gets the most right. Is bigger always better?",
+        "ja": "いちばん あたる k を さがそう。大きいほど いい？"
+      }
+    }
+  },
+  "explain": {
+    "en": "How does the machine decide, and when is it unsure?",
+    "ja": "マシンは どうやって きめる？ いつ まよう？",
+    "aims": [
+      {
+        "id": "nearest",
+        "en": "It looks at the most similar fruits it already knows",
+        "ja": "にている くだものを 見て きめる",
+        "keys": [
+          [
+            "near",
+            "nearest",
+            "similar",
+            "close",
+            "closest",
+            "like",
+            "neighbour",
+            "neighbor",
+            "neighbours",
+            "neighbors"
+          ]
+        ]
+      },
+      {
+        "id": "vote",
+        "en": "The neighbours vote",
+        "ja": "にている ものの たすうけつ",
+        "keys": [
+          [
+            "vote",
+            "votes",
+            "majority",
+            "most",
+            "count",
+            "counts"
+          ]
+        ]
+      },
+      {
+        "id": "unsure",
+        "en": "Between the groups it is unsure",
+        "ja": "グループの あいだでは まよう",
+        "keys": [
+          [
+            "unsure",
+            "between",
+            "middle",
+            "confused",
+            "half",
+            "mixed",
+            "hard",
+            "difficult",
+            "wrong"
+          ]
+        ]
+      }
+    ]
+  },
+  "classPlot": {
+    "x": "weight",
+    "y": "confidence",
+    "xLabel": {
+      "en": "Weight (g)",
+      "ja": "おもさ（g）"
+    },
+    "yLabel": {
+      "en": "How sure (%)",
+      "ja": "どれくらい たしか（%）"
+    }
+  },
+  "real": {
+    "en": "Sort real fruit by weight and colour. Which ones would fool the machine?",
+    "ja": "ほんものの くだものを おもさと いろで わけよう。マシンが まちがえそうなのは どれ？",
+    "kit": [
+      "fruit",
+      "a kitchen scale"
+    ]
+  },
+  "standards": {
+    "jp": [
+      "小6 データの活用",
+      "情報活用能力（AI）"
+    ],
+    "ngss": [
+      "MS-ETS1-4"
+    ],
+    "cambridge": [
+      "Statistics and probability"
+    ],
+    "pisa": [
+      "evaluate",
+      "interpret"
+    ]
+  },
+  "powers": {
+    "predict": 1,
+    "measure": 1,
+    "data": 2,
+    "explain": 1,
+    "build": 2
+  }
+}

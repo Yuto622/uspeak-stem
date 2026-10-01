@@ -1,0 +1,208 @@
+{
+  "id": "life.plant",
+  "region": "life",
+  "station": "windowsill",
+  "title": {
+    "en": "The Windowsill",
+    "ja": "まどべ"
+  },
+  "sim": "plant",
+  "intro": {
+    "en": "A bean seedling for two weeks. Give it water, light and warmth — or not — and measure how tall it grows.",
+    "ja": "まめの めを 2しゅうかん そだてる。みず・ひかり・あたたかさを あげて、どれだけ のびるか はかろう。"
+  },
+  "params": {
+    "water": {
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "cups/day",
+      "en": "Water",
+      "ja": "みず"
+    },
+    "light": {
+      "choices": [
+        "dark",
+        "window",
+        "sun"
+      ],
+      "en": "Light",
+      "ja": "ひかり"
+    },
+    "tempC": {
+      "min": 5,
+      "max": 35,
+      "step": 5,
+      "unit": "°C",
+      "en": "Temperature",
+      "ja": "おんど"
+    }
+  },
+  "levels": {
+    "explore": {
+      "ages": "4-7",
+      "fixed": {
+        "light": "window",
+        "tempC": 20
+      },
+      "predict": {
+        "kind": "choice",
+        "field": "alive",
+        "choices": [
+          "grows",
+          "wilts"
+        ]
+      },
+      "measure": [
+        "alive"
+      ]
+    },
+    "investigate": {
+      "ages": "8-11",
+      "predict": {
+        "kind": "number",
+        "field": "height",
+        "unit": "cm",
+        "tolerance": 0.25
+      },
+      "measure": [
+        "alive",
+        "height",
+        "leaves"
+      ],
+      "record": [
+        "water",
+        "height"
+      ]
+    },
+    "engineer": {
+      "ages": "12-15",
+      "predict": {
+        "kind": "number",
+        "field": "height",
+        "unit": "cm",
+        "tolerance": 0.15
+      },
+      "measure": [
+        "alive",
+        "height",
+        "leaves",
+        "color"
+      ],
+      "record": [
+        "water",
+        "height"
+      ],
+      "challenge": {
+        "en": "Find the water that grows the tallest plant — more is not always better.",
+        "ja": "いちばん たかく そだつ みずの りょうを さがそう。おおければ いい わけじゃない。"
+      }
+    }
+  },
+  "explain": {
+    "en": "What does a plant need, and what happens with too much?",
+    "ja": "しょくぶつには なにが いる？ おおすぎると どうなる？",
+    "aims": [
+      {
+        "id": "needs",
+        "en": "Plants need water, light and warmth",
+        "ja": "しょくぶつには みず・ひかり・あたたかさが いる",
+        "keys": [
+          [
+            "water",
+            "light",
+            "sun",
+            "warm",
+            "warmth",
+            "heat"
+          ],
+          [
+            "need",
+            "needs",
+            "grow",
+            "grows"
+          ]
+        ]
+      },
+      {
+        "id": "too-much",
+        "en": "Too much water drowns the roots",
+        "ja": "みずが おおすぎると ねが くさる",
+        "keys": [
+          [
+            "too much",
+            "drown",
+            "drowns",
+            "rot",
+            "rots",
+            "much"
+          ]
+        ]
+      },
+      {
+        "id": "light-food",
+        "en": "Light is how the plant makes its food",
+        "ja": "ひかりで しょくぶつは ようぶんを つくる",
+        "keys": [
+          [
+            "light",
+            "sun"
+          ],
+          [
+            "food",
+            "energy",
+            "make",
+            "makes",
+            "photosynthesis",
+            "green"
+          ]
+        ]
+      }
+    ]
+  },
+  "classPlot": {
+    "x": "water",
+    "y": "height",
+    "xLabel": {
+      "en": "Water (cups a day)",
+      "ja": "みず（1日の カップ）"
+    },
+    "yLabel": {
+      "en": "Height after 14 days (cm)",
+      "ja": "14日めの たかさ（cm）"
+    }
+  },
+  "real": {
+    "en": "Grow a bean in a cup. Measure it every day for two weeks.",
+    "ja": "コップで まめを そだてよう。2しゅうかん まいにち はかろう。",
+    "kit": [
+      "a bean",
+      "a cup",
+      "cotton wool"
+    ]
+  },
+  "standards": {
+    "jp": [
+      "小3 植物の育ち方",
+      "小5 植物の発芽と成長"
+    ],
+    "ngss": [
+      "2-LS2-1",
+      "5-LS1-1"
+    ],
+    "cambridge": [
+      "Plants"
+    ],
+    "pisa": [
+      "explain",
+      "interpret"
+    ]
+  },
+  "powers": {
+    "predict": 1,
+    "measure": 1,
+    "data": 1,
+    "explain": 1,
+    "build": 0
+  }
+}

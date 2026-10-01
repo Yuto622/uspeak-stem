@@ -1,0 +1,196 @@
+{
+  "id": "earth.tsunami",
+  "region": "earth",
+  "station": "harbour-wall",
+  "title": {
+    "en": "The Harbour Wall",
+    "ja": "みなとの かべ"
+  },
+  "sim": "tsunami",
+  "intro": {
+    "en": "A tsunami crosses the ocean. In deep water it is fast and low; near the shore it slows and rises. When does it reach the harbour?",
+    "ja": "つなみが うみを わたる。ふかい うみでは はやくて ひくい。きしに ちかづくと おそくなって たかくなる。みなとには いつ つく？"
+  },
+  "params": {
+    "depth": {
+      "min": 50,
+      "max": 5000,
+      "step": 50,
+      "unit": "m",
+      "en": "Ocean depth",
+      "ja": "うみの ふかさ"
+    },
+    "distance": {
+      "min": 100,
+      "max": 3000,
+      "step": 100,
+      "unit": "km",
+      "en": "Distance from the quake",
+      "ja": "じしんからの きょり"
+    }
+  },
+  "levels": {
+    "explore": {
+      "ages": "4-7",
+      "fixed": {
+        "distance": 1000
+      },
+      "predict": {
+        "kind": "choice",
+        "field": "deeper",
+        "choices": [
+          "deep-faster",
+          "shallow-slower"
+        ]
+      },
+      "measure": [
+        "deeper",
+        "speedKmh"
+      ]
+    },
+    "investigate": {
+      "ages": "8-11",
+      "predict": {
+        "kind": "number",
+        "field": "speedKmh",
+        "unit": "km/h",
+        "tolerance": 0.15
+      },
+      "measure": [
+        "speedKmh",
+        "minutes",
+        "height"
+      ],
+      "record": [
+        "depth",
+        "speedKmh"
+      ]
+    },
+    "engineer": {
+      "ages": "12-15",
+      "predict": {
+        "kind": "number",
+        "field": "minutes",
+        "unit": "min",
+        "tolerance": 0.15
+      },
+      "measure": [
+        "speedKmh",
+        "minutes",
+        "height"
+      ],
+      "record": [
+        "depth",
+        "speedKmh"
+      ]
+    }
+  },
+  "explain": {
+    "en": "Why is a tsunami fast in the deep sea and tall at the shore?",
+    "ja": "どうして つなみは ふかい うみで はやく、きしで たかいの？",
+    "aims": [
+      {
+        "id": "deep-fast",
+        "en": "Deeper water, faster wave",
+        "ja": "ふかいほど はやい",
+        "keys": [
+          [
+            "deep",
+            "deeper",
+            "depth"
+          ],
+          [
+            "fast",
+            "faster",
+            "speed",
+            "quick"
+          ]
+        ]
+      },
+      {
+        "id": "shallow-tall",
+        "en": "It slows and piles up near the shore",
+        "ja": "きしで おそくなって つみあがる",
+        "keys": [
+          [
+            "shore",
+            "shallow",
+            "coast",
+            "land",
+            "beach"
+          ],
+          [
+            "slow",
+            "slows",
+            "tall",
+            "taller",
+            "high",
+            "higher",
+            "rise",
+            "rises",
+            "pile"
+          ]
+        ]
+      },
+      {
+        "id": "go-high",
+        "en": "Go to high ground as soon as the ground shakes",
+        "ja": "ゆれたら すぐ たかい ところへ",
+        "keys": [
+          [
+            "high ground",
+            "hill",
+            "uphill",
+            "high",
+            "run",
+            "evacuate",
+            "away"
+          ]
+        ]
+      }
+    ]
+  },
+  "classPlot": {
+    "x": "depth",
+    "y": "speedKmh",
+    "xLabel": {
+      "en": "Ocean depth (m)",
+      "ja": "うみの ふかさ（m）"
+    },
+    "yLabel": {
+      "en": "Speed (km/h)",
+      "ja": "はやさ（km/h）"
+    }
+  },
+  "real": {
+    "en": "In the bath, push a wave along the shallow end and the deep end. Which is faster?",
+    "ja": "おふろで、あさい ほうと ふかい ほうに なみを おして。どっちが はやい？",
+    "kit": [
+      "a bath"
+    ]
+  },
+  "standards": {
+    "jp": [
+      "中1 大地の変化",
+      "防災教育"
+    ],
+    "ngss": [
+      "4-ESS3-2",
+      "MS-ESS3-2"
+    ],
+    "cambridge": [
+      "Earth and Space"
+    ],
+    "pisa": [
+      "interpret",
+      "evaluate"
+    ]
+  },
+  "powers": {
+    "predict": 1,
+    "measure": 1,
+    "data": 1,
+    "explain": 1,
+    "build": 0
+  }
+}

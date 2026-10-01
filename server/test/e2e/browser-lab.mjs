@@ -114,6 +114,41 @@ try {
   const signs = await a.evaluate(() => globalThis.stem.signs());
   ok(signs.includes('COSMOS') && signs.includes('LAB') && signs.includes('Launch Pad'), `island signs baked: ${signs.length}`);
   await press(a, '#lab-close');
+  // The five new islands: every station opens, every explore run draws a live 3D scene,
+  // and the server answers a prediction with a verdict. One child, fifteen stations.
+  const tour = [
+    ['force', ['swing-frame', 'slide-ramp', 'seesaw']], ['life', ['rabbit-meadow', 'windowsill', 'track']],
+    ['earth', ['seismo-house', 'harbour-wall', 'weather-tower']], ['maker', ['bridge-yard', 'circuit-shed', 'gear-mill']],
+    ['data', ['dice-table', 'counting-pond', 'sorting-machine']],
+  ];
+  await press(tch, '#teacher [data-level=explore]');
+  await a.waitForFunction(() => globalThis.stem.me.level === 'explore');
+  await b.close(); // one child is enough for the tour, and lighter on the software renderer
+  let stations = 0;
+  for (const [isl, spots] of tour) {
+    await a.evaluate((id) => globalThis.stem.travel(id), isl);
+    await a.waitForFunction((id) => globalThis.stem.world.current === id, isl);
+    for (const sp of spots) {
+      const en = await a.evaluate((id) => globalThis.stem.world.island.spots.find((s) => s.id === id).en, sp);
+      await a.evaluate((id) => globalThis.stem.walkTo(id), sp);
+      await a.waitForFunction((name) => !document.querySelector('#near').hidden && document.querySelector('#interact-text').textContent.includes(name), en, { timeout: 60000 });
+      await press(a, '#interact');
+      await a.waitForSelector('#lab[open]', { state: 'attached', timeout: 60000 });
+      const live = await a.evaluate(() => globalThis.stem.panels.stage.active && document.querySelector('#lab-readout').textContent === '');
+      await press(a, '#lab-next');
+      await a.waitForSelector('[data-choice]', { state: 'attached', timeout: 60000 });
+      await press(a, '[data-choice]');
+      await press(a, '#predict-lock');
+      await a.waitForSelector('#lab-readout .verdict', { state: 'attached', timeout: 60000 });
+      const verdict = await a.evaluate(() => document.querySelector('#lab-readout .verdict').textContent.trim());
+      ok(live && verdict.length > 0, `${isl} / ${en}: 3D scene live, server verdict "${verdict.slice(0, 24)}"`);
+      stations += 1;
+      await press(a, '#lab-close');
+      await a.waitForFunction(() => !document.querySelector('#lab').open);
+    }
+  }
+  ok(stations === 15, 'all fifteen new stations ran');
+  ok(await a.evaluate(() => /Day|Dusk|Night|Dawn/.test(document.querySelector('#time-pill').textContent)), 'the world clock shows in the rail');
   await a.screenshot({ path: path.join(here, 'lab.png') });
 } catch (e) {
   console.log('FAIL', e.message); fails++;

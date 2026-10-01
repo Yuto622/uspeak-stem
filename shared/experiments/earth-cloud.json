@@ -1,0 +1,196 @@
+{
+  "id": "earth.cloud",
+  "region": "earth",
+  "station": "weather-tower",
+  "title": {
+    "en": "The Weather Tower",
+    "ja": "てんきの とう"
+  },
+  "sim": "cloud",
+  "intro": {
+    "en": "Warm, damp air rises and cools. At some height it cannot hold its water, and a cloud is born. How high?",
+    "ja": "あたたかくて しめった くうきが あがって ひえる。ある たかさで みずを かかえきれなくなり、くもが うまれる。どの たかさ？"
+  },
+  "params": {
+    "tempC": {
+      "min": 0,
+      "max": 35,
+      "step": 1,
+      "unit": "°C",
+      "en": "Air temperature",
+      "ja": "くうきの おんど"
+    },
+    "humidity": {
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "en": "Humidity",
+      "ja": "しつど"
+    }
+  },
+  "levels": {
+    "explore": {
+      "ages": "4-7",
+      "predict": {
+        "kind": "choice",
+        "field": "forms",
+        "choices": [
+          "cloud",
+          "clear"
+        ]
+      },
+      "measure": [
+        "forms",
+        "cloudBase"
+      ]
+    },
+    "investigate": {
+      "ages": "8-11",
+      "predict": {
+        "kind": "number",
+        "field": "cloudBase",
+        "unit": "m",
+        "tolerance": 0.2
+      },
+      "measure": [
+        "dewPoint",
+        "cloudBase",
+        "forms"
+      ],
+      "record": [
+        "humidity",
+        "cloudBase"
+      ]
+    },
+    "engineer": {
+      "ages": "12-15",
+      "predict": {
+        "kind": "number",
+        "field": "dewPoint",
+        "unit": "°C",
+        "tolerance": 0.15
+      },
+      "measure": [
+        "dewPoint",
+        "cloudBase",
+        "rain"
+      ],
+      "record": [
+        "humidity",
+        "cloudBase"
+      ]
+    }
+  },
+  "explain": {
+    "en": "Where do clouds come from?",
+    "ja": "くもは どこから くるの？",
+    "aims": [
+      {
+        "id": "rise-cool",
+        "en": "Warm air rises and cools",
+        "ja": "あたたかい くうきは あがって ひえる",
+        "keys": [
+          [
+            "rise",
+            "rises",
+            "up",
+            "cool",
+            "cools",
+            "cold",
+            "colder"
+          ]
+        ]
+      },
+      {
+        "id": "condense",
+        "en": "Cold air cannot hold as much water, so it turns to drops",
+        "ja": "つめたい くうきは みずを かかえきれず、つぶに なる",
+        "keys": [
+          [
+            "water",
+            "vapour",
+            "vapor",
+            "steam",
+            "moisture",
+            "damp",
+            "humid"
+          ],
+          [
+            "drop",
+            "drops",
+            "condense",
+            "condenses",
+            "liquid",
+            "cloud",
+            "form",
+            "forms"
+          ]
+        ]
+      },
+      {
+        "id": "humid-low",
+        "en": "Damper air makes a lower cloud",
+        "ja": "しめった くうきほど くもが ひくい",
+        "keys": [
+          [
+            "humid",
+            "humidity",
+            "damp",
+            "wet",
+            "dry"
+          ],
+          [
+            "low",
+            "lower",
+            "high",
+            "higher",
+            "height"
+          ]
+        ]
+      }
+    ]
+  },
+  "classPlot": {
+    "x": "humidity",
+    "y": "cloudBase",
+    "xLabel": {
+      "en": "Humidity (%)",
+      "ja": "しつど（%）"
+    },
+    "yLabel": {
+      "en": "Cloud base (m)",
+      "ja": "くもの そこの たかさ（m）"
+    }
+  },
+  "real": {
+    "en": "Breathe on a cold window. Where did the water come from?",
+    "ja": "つめたい まどに いきを ふきかけよう。みずは どこから きた？",
+    "kit": [
+      "a cold window"
+    ]
+  },
+  "standards": {
+    "jp": [
+      "小4 天気と気温",
+      "中2 天気の変化"
+    ],
+    "ngss": [
+      "3-ESS2-1",
+      "MS-ESS2-4"
+    ],
+    "cambridge": [
+      "Earth and Space"
+    ],
+    "pisa": [
+      "explain"
+    ]
+  },
+  "powers": {
+    "predict": 1,
+    "measure": 1,
+    "data": 1,
+    "explain": 1,
+    "build": 0
+  }
+}
