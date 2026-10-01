@@ -1,0 +1,52 @@
+# Fly.io: Tokyo, always on, HTTPS/WSS only. Same shape as uspeak-multiplayer.
+# First deploy:
+#   fly launch --copy-config --no-deploy
+#   fly volumes create uspeak_stem_data --region nrt --size 1
+#   fly secrets set TEACHER_KEY=<a long random key — never paste it in chat>
+#   fly deploy
+app = "uspeak-stem"
+primary_region = "nrt"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  NODE_ENV = "production"
+  PORT = "2568"
+  MAX_CLASS_SIZE = "30"
+  # Must match this app's public URL.
+  CORS_ORIGINS = "https://uspeak-stem.fly.dev"
+
+[http_service]
+  internal_port = 2568
+  force_https = true
+  auto_stop_machines = false
+  auto_start_machines = true
+  min_machines_running = 1
+  processes = ["app"]
+
+  [http_service.concurrency]
+    type = "connections"
+    soft_limit = 400
+    hard_limit = 500
+
+  [[http_service.checks]]
+    grace_period = "10s"
+    interval = "15s"
+    method = "GET"
+    timeout = "5s"
+    path = "/healthz"
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "1gb"
+  cpu_kind = "shared"
+  cpus = 1
+
+[deploy]
+  strategy = "immediate"
+
+[mounts]
+  # Class records (powers, trial logs) survive deploys only with this volume.
+  source = "uspeak_stem_data"
+  destination = "/app/server/data"
